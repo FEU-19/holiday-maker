@@ -15,7 +15,7 @@ ReactDOM.render( <
   <
   AppRouter / >
   <
-  /HelmetProvider> <
-  /BrowserRouter>,
+  /HelmetProvider> < /
+  BrowserRouter > ,
   document.getElementById("root")
 );
