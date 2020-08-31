@@ -1,6 +1,6 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import Main from "./components/views/Main";
+import Main from "./views/Main";
 
 // To add more routes use format as below and add to the routes array
 const routes = [{ path: "/", component: Main }];
