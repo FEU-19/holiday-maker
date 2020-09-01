@@ -1,9 +1,10 @@
 ## Filstruktur
 ### Components
 - common
-	- Komponenter som återanvänds ska finnas här 
+	- Katalog för komponenter som återanvänds
 - components
-	- Komponenter som tillhör en **view** ska finnas i en subkatalog av samma namn
+	- Katalog för komponenter som tillhör en **view**
+	- Komponenterna ska sparas i en subkatalog med samma namn som **view**
 
 ### View
 - Katalog för vyerna
