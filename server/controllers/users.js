@@ -1,31 +1,79 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
 
+exports.createLogin = async (req, res) => {
+  const {
+    email,
+    password
+  } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).end();
+  }
+
+  try {
+    let user = await User.findOne({
+      email,
+    });
+
+    if (!user) {
+      return res.status(400).json({
+        error: [{
+          msg: "Invalid Credentials",
+        }]
+      });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      return res.status(400).json({
+        error: [{
+          msg: "Invalid Credentials",
+        }]
+      });
+    }
+
+    res.send("ok");
+
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+}
+
 exports.create = async (req, res) => {
-  const { 
-    email, 
-    first_name, 
-    surname, 
-    street, 
-    zip_code, 
-    city, 
-    country, 
-    phone_number, 
+  const {
+    email,
+    first_name,
+    surname,
+    street,
+    zip_code,
+    city,
+    country,
+    phone_number,
     social_security_number,
-    password, 
-    confirm_password } = req.body;
+    password,
+    confirm_password
+  } = req.body;
 
   if (!email || !password) {
     return res.status(400).json({
-      error: [{ msg: "Please fill all of the existing fields" }],
+      error: [{
+        msg: "Please fill all of the existing fields"
+      }],
     });
   }
 
   try {
-    let user = await User.findOne({ email });
+    let user = await User.findOne({
+      email
+    });
     if (user) {
       return res.status(400).json({
-        error: [{ msg: "User already exists" }],
+        error: [{
+          msg: "User already exists"
+        }],
       });
     }
 
@@ -54,6 +102,8 @@ exports.create = async (req, res) => {
     res.status(500).send("Server error");
   }
 };
+
+
 
 exports.read = (req, res) => {
   res.send("OK");
