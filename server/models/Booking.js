@@ -3,7 +3,7 @@ const User = require("./User");
 const Room = require("./Room");
 
 const bookingSchema = mongoose.Schema({
-  user: [User],
+  user: { User },
   adults: Number,
   children: Number,
   hotel: String,

@@ -1,5 +1,6 @@
 const Booking = require("../models/Booking");
 const User = require("../models/User");
+const bookingNrGenerator = require("../utils/bookingNrGenerator");
 
 exports.create = (req, res) => {
   // Anta application/json
@@ -17,6 +18,8 @@ exports.create = (req, res) => {
     .then((user) => {
       const data = req.body;
       data.user = user;
+      const { foreName, lastName, postCode } = data.user;
+      data.bookingNumber = bookingNrGenerator(foreName, lastName, postCode, 5);
       const booking = new Booking(data);
       booking.save();
       return res.status(201).json(booking);
