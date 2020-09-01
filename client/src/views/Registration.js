@@ -21,8 +21,9 @@ const Registration = () => {
   function handleInput(e) {
     const { value } = e.target;
     const { name } = e.target;
-    setNewUser({ ...newUser, [name]: value });
+    setNewUser({ ...newUser, [name]: value.trimStart() });
   }
+
 
   function handleInputReset() {
     setNewUser({
@@ -37,6 +38,8 @@ const Registration = () => {
       social_security_number: "",
     });
   }
+
+
 
   function handlePostUser() {
     const url = "";
@@ -53,13 +56,17 @@ const Registration = () => {
       });
   }
 
-  function handleSubmit() {
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log(e);
     console.log("From submit form ", newUser);
     handlePostUser();
   }
 
+
+
   return (
-    <form autoComplete="off">
+    <form autoComplete="off" onSubmit={(e) => handleSubmit(e)}>
             {/* className={classes.root} noValidate */}
             
       <TextField
@@ -69,6 +76,7 @@ const Registration = () => {
         name="email"
         value={newUser.email}
         onChange={handleInput}
+        // required
       />
             
       <TextField
@@ -78,6 +86,9 @@ const Registration = () => {
         name="password"
         value={newUser.password}
         onChange={handleInput}
+        // required
+        minlength="1"
+        maxlength="12"
       />
             
       <TextField
@@ -87,6 +98,9 @@ const Registration = () => {
         name="first_name"
         value={newUser.first_name}
         onChange={handleInput}
+        // required
+        minlength="1"
+        maxlength="30"
       />
             
       <TextField
@@ -96,6 +110,9 @@ const Registration = () => {
         name="surname"
         value={newUser.surname}
         onChange={handleInput}
+        // required
+        minlength="1"
+        maxlength="12"
       />
             
       <TextField
@@ -105,6 +122,9 @@ const Registration = () => {
         name="street"
         value={newUser.street}
         onChange={handleInput}
+        // required
+        minlength="1"
+        maxlength="20"
       />
             
       <TextField
@@ -114,6 +134,9 @@ const Registration = () => {
         name="zip_code"
         value={newUser.zip_code}
         onChange={handleInput}
+        // required
+        minlength="1"
+        maxlength="10"
       />
             
       <TextField
@@ -123,6 +146,9 @@ const Registration = () => {
         name="city"
         value={newUser.city}
         onChange={handleInput}
+        // required
+        minlength="1"
+        maxlength="30"
       />
             
       <TextField
@@ -132,6 +158,9 @@ const Registration = () => {
         name="country"
         value={newUser.country}
         onChange={handleInput}
+        // required
+        minlength="1"
+        maxlength="30"
       />
             
       <TextField
@@ -141,6 +170,9 @@ const Registration = () => {
         name="phone_number"
         value={newUser.phone_number}
         onChange={handleInput}
+        // required
+        minlength="1" //10
+        maxlength="15" 
       />
             
       <TextField
@@ -150,8 +182,11 @@ const Registration = () => {
         name="social_security_number"
         value={newUser.social_security_number}
         onChange={handleInput}
+        // required
+        minlength="1" //8
+        maxlength="12"
       />
-      <Button variant="contained" color="primary" onClick={handleSubmit}>
+      <Button type='submit' variant="contained" color="primary" >
         Register
       </Button>
           
