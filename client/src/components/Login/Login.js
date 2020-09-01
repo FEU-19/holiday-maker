@@ -35,6 +35,7 @@ const Login = () => {
     <div>
       <form className="login__Main" onSubmit={onSubmit}>
         <TextField
+          required
           name="email"
           id="email"
           label="email"
@@ -43,6 +44,7 @@ const Login = () => {
           onChange={onChangeUser}
         />
         <TextField
+          required
           name="password"
           id="password"
           label="password"
