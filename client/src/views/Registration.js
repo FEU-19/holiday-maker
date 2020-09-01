@@ -21,6 +21,7 @@ const Registration = () => {
     phone_number: "",
     social_security_number: "",
     password: "",
+    confirm_password: "",
   });
 
   function handleInput(e) {
@@ -42,11 +43,29 @@ const Registration = () => {
       phone_number: "",
       social_security_number: "",
       password: "",
+      confirm_passwrod: "",
     });
   }
 
+  function comparePassword(){
+
+    if(newUser.confirm_password === newUser.password){
+      handlePostUser();
+    } else {
+      setShowMsg(true);
+        setWhatMsgToShow(3);
+
+
+        setTimeout(() => {
+          setShowMsg(false);
+        }, 2500);
+      }
+    }
+  
+
   function handlePostUser() {
     const url = "";
+
     axios
       .post(`${url}register`, newUser)
       .then((res) => {
@@ -70,7 +89,7 @@ const Registration = () => {
         // if(){
         //   setWhatMsgToShow(2);
         // } else {
-        //   setWhatMsgToShow(3);
+        //   setWhatMsgToShow(4);
         // }
 
 
@@ -87,7 +106,8 @@ const Registration = () => {
     console.log(e);
     console.log("From submit form ", newUser);
     setAnchorEl(e.currentTarget);
-    handlePostUser();
+    comparePassword();
+    // handlePostUser();
   }
 
   const open = Boolean(anchorEl);
@@ -103,6 +123,9 @@ const Registration = () => {
     msg = <Typography >Account was created.</Typography>;
   }  else if (whatMsgToShow === 2) {
     msg = <Typography>Account with this email already exists.</Typography>
+  }
+  else if (whatMsgToShow === 3) {
+    msg = <Typography>Password doesn´t match.</Typography>
   }
   else {
     msg = <Typography>Something went wrong.. try again later.</Typography>
@@ -133,10 +156,22 @@ const Registration = () => {
         minLength="1"
         maxLength="12"
       />
+
+      <TextField
+        id="password"
+        label="Confirm Password"
+        type="password"
+        name="confirm_password"
+        value={newUser.confirm_password}
+        onChange={handleInput}
+        // required
+        minLength="1"
+        maxLength="12"
+      />
             
       <TextField
         id="first_name"
-        label="First name="
+        label="First name"
         type="text"
         name="first_name"
         value={newUser.first_name}
