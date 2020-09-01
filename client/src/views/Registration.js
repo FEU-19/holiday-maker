@@ -48,6 +48,8 @@ const Registration = () => {
       })
       .catch((err) => {
         console.log(err);
+        // account finns redan
+        // ALLA övriga fel 'Prova igen sendare du har inte gjor något fel'
       });
   }
 
