@@ -1,9 +1,10 @@
-const express = require('express');
-const dotenv = require('dotenv');
-const connectDB = require('./config/db');
+const express = require("express");
+const dotenv = require("dotenv");
+const connectDB = require("./config/db");
+const { routers } = require("./routes/index");
 
 // Load config
-dotenv.config({ path: './config/config.env' });
+dotenv.config({ path: "./config/config.env" });
 
 // Db connection
 connectDB();
@@ -12,6 +13,8 @@ const app = express();
 
 // Body parser
 app.use(express.json());
+
+routers.forEach((router) => app.use("/api/", router));
 
 const PORT = process.env.PORT || 5000;
 
