@@ -3,6 +3,7 @@ import { styled } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Popover from '@material-ui/core/Popover';
+import Typography from '@material-ui/core/Typography';
 import axios from "axios";
 
 const Registration = () => {
@@ -85,21 +86,26 @@ const Registration = () => {
     e.preventDefault();
     console.log(e);
     console.log("From submit form ", newUser);
-    //setAnchorEl(event.currentTarget);
+    setAnchorEl(e.currentTarget);
     handlePostUser();
   }
 
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
 
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   let msg;
   if(whatMsgToShow === 1){
-    msg = <p>Account was created.</p>;
+    
+    msg = <Typography >Account was created.</Typography>;
   }  else if (whatMsgToShow === 2) {
-    msg = <p>Account with this email already exists.</p>
+    msg = <Typography>Account with this email already exists.</Typography>
   }
   else {
-    msg = <p>Something went wrong.. try again later.</p>
+    msg = <Typography>Something went wrong.. try again later.</Typography>
   }
 
   return (
@@ -230,7 +236,7 @@ const Registration = () => {
 
 
 
-      {/* <Popover
+       <Popover
         id={id}
         open={open}
         anchorEl={anchorEl}
@@ -244,9 +250,9 @@ const Registration = () => {
           horizontal: 'center',
         }}
       >
-        <Typography >{msg}</Typography>
+        {msg}
         {/* className={classes.typography} */}
-      {/* </Popover> */} 
+       </Popover> 
           
     </form>
   );
