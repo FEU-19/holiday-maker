@@ -24,18 +24,19 @@ const StyledModal = styled.div`
   border-radius: 1rem;
 `;
 
-const Icon = styled(CloseIcon)`
+const CancelIcon = styled(CloseIcon)`
   position: absolute;
   right: 0.5rem;
   top: 0.5rem;
   color: grey;
 `;
 
-const Modal = () => {
+// the parent component need to define onClose function and pass here
+const Modal = ({ onClose }) => {
   return ReactDOM.createPortal(
     <ModalCtn>
       <StyledModal>
-        <Icon />
+        <CancelIcon onClick={onClose} />
       </StyledModal>
     </ModalCtn>,
     document.body
