@@ -45,11 +45,11 @@ const Registration = () => {
   }
 
   function handlePostUser() {
-    const url = "";
+    const url = "/api/";
     axios
-      .post(`${url}register`, newUser)
+      .post(`http://localhost:3002/api/register `, newUser)
       .then((res) => {
-        console(res);
+        console.log(res);
         handleInputReset();
         setShowMsg(true);
         setWhatMsgToShow(1);
@@ -227,27 +227,6 @@ const Registration = () => {
         Register
       </Button>
 
-
-
-
-      {/* <Popover
-        id={id}
-        open={open}
-        anchorEl={anchorEl}
-        onClose={handleClose}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'center',
-        }}
-      >
-        <Typography >{msg}</Typography>
-        {/* className={classes.typography} */}
-      {/* </Popover> */} 
-          
     </form>
   );
 };
