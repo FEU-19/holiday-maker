@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { styled } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 
 const Registration = () => {
   const [input, setInput] = useState(null);
@@ -15,11 +16,32 @@ const Registration = () => {
     phone_number: "",
     social_security_number: "",
   });
+
+
+
   function handleInput(e) {
     const { value } = e.target;
     const { name } = e.target;
     setNewUser({ ...newUser, [name]: value });
-    console.log(newUser);
+
+  }
+
+  function handleSubmit() {
+    console.log("From submit form ", newUser);
+    // newUser ska till server -> POST
+    // efter ok från server
+    setNewUser({
+      email: "",
+      first_name: "",
+      surname: "",
+      street: "",
+      zip_code: "",
+      city: "",
+      country: "",
+      phone_number: "",
+      social_security_number: "",
+    });
+    
   }
   return (
     <form autoComplete="off">
@@ -114,6 +136,9 @@ const Registration = () => {
         value={newUser.social_security_number}
         onChange={handleInput}
       />
+      <Button variant="contained" color="primary" onClick={handleSubmit}>
+        Register
+      </Button>
           
     </form>
   );
