@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import { styled } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import Popover from '@material-ui/core/Popover';
 import axios from "axios";
 
 const Registration = () => {
-  const [input, setInput] = useState(null);
+  const [showMsg, setShowMsg] = useState(true);
+  const [whatMsgToShow, setWhatMsgToShow] = useState(1);
+  const [anchorEl, setAnchorEl] = React.useState(null);
   const [newUser, setNewUser] = useState({
     email: "",
     first_name: "",
@@ -16,6 +19,7 @@ const Registration = () => {
     country: "",
     phone_number: "",
     social_security_number: "",
+    password: "",
   });
 
   function handleInput(e) {
@@ -36,10 +40,9 @@ const Registration = () => {
       country: "",
       phone_number: "",
       social_security_number: "",
+      password: "",
     });
   }
-
-
 
   function handlePostUser() {
     const url = "";
@@ -48,11 +51,33 @@ const Registration = () => {
       .then((res) => {
         console(res);
         handleInputReset();
+        setShowMsg(true);
+        setWhatMsgToShow(1);
+
+
+        setTimeout(() => {
+          setShowMsg(false);
+        }, 2500);
       })
       .catch((err) => {
         console.log(err);
         // account finns redan
-        // ALLA övriga fel 'Prova igen sendare du har inte gjor något fel'
+        setWhatMsgToShow(2);
+
+
+        // // Beroende på vilken felmeddelande vi får ska vi ändra till 2:a eller 3:
+        // if(){
+        //   setWhatMsgToShow(2);
+        // } else {
+        //   setWhatMsgToShow(3);
+        // }
+
+
+        setShowMsg(true);  
+        setTimeout(() => {
+          setShowMsg(false);
+        }, 2500);
+
       });
   }
 
@@ -60,10 +85,22 @@ const Registration = () => {
     e.preventDefault();
     console.log(e);
     console.log("From submit form ", newUser);
+    //setAnchorEl(event.currentTarget);
     handlePostUser();
   }
 
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
 
+  let msg;
+  if(whatMsgToShow === 1){
+    msg = <p>Account was created.</p>;
+  }  else if (whatMsgToShow === 2) {
+    msg = <p>Account with this email already exists.</p>
+  }
+  else {
+    msg = <p>Something went wrong.. try again later.</p>
+  }
 
   return (
     <form autoComplete="off" onSubmit={(e) => handleSubmit(e)}>
@@ -87,8 +124,8 @@ const Registration = () => {
         value={newUser.password}
         onChange={handleInput}
         // required
-        minlength="1"
-        maxlength="12"
+        minLength="1"
+        maxLength="12"
       />
             
       <TextField
@@ -99,8 +136,8 @@ const Registration = () => {
         value={newUser.first_name}
         onChange={handleInput}
         // required
-        minlength="1"
-        maxlength="30"
+        minLength="1"
+        maxLength="30"
       />
             
       <TextField
@@ -111,8 +148,8 @@ const Registration = () => {
         value={newUser.surname}
         onChange={handleInput}
         // required
-        minlength="1"
-        maxlength="12"
+        minLength="1"
+        maxLength="12"
       />
             
       <TextField
@@ -123,8 +160,8 @@ const Registration = () => {
         value={newUser.street}
         onChange={handleInput}
         // required
-        minlength="1"
-        maxlength="20"
+        minLength="1"
+        maxLength="20"
       />
             
       <TextField
@@ -135,8 +172,8 @@ const Registration = () => {
         value={newUser.zip_code}
         onChange={handleInput}
         // required
-        minlength="1"
-        maxlength="10"
+        minLength="1"
+        maxLength="10"
       />
             
       <TextField
@@ -147,8 +184,8 @@ const Registration = () => {
         value={newUser.city}
         onChange={handleInput}
         // required
-        minlength="1"
-        maxlength="30"
+        minLength="1"
+        maxLength="30"
       />
             
       <TextField
@@ -159,8 +196,8 @@ const Registration = () => {
         value={newUser.country}
         onChange={handleInput}
         // required
-        minlength="1"
-        maxlength="30"
+        minLength="1"
+        maxLength="30"
       />
             
       <TextField
@@ -171,8 +208,8 @@ const Registration = () => {
         value={newUser.phone_number}
         onChange={handleInput}
         // required
-        minlength="1" //10
-        maxlength="15" 
+        minLength="1" //10
+        maxLength="15" 
       />
             
       <TextField
@@ -183,12 +220,33 @@ const Registration = () => {
         value={newUser.social_security_number}
         onChange={handleInput}
         // required
-        minlength="1" //8
-        maxlength="12"
+        minLength="1" //8
+        maxLength="12"
       />
       <Button type='submit' variant="contained" color="primary" >
         Register
       </Button>
+
+
+
+
+      {/* <Popover
+        id={id}
+        open={open}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'center',
+        }}
+      >
+        <Typography >{msg}</Typography>
+        {/* className={classes.typography} */}
+      {/* </Popover> */} 
           
     </form>
   );
