@@ -21,7 +21,6 @@ const Login = () => {
         if(res.status === 201){
           // return <Redirect to="/" />;
           // window.history.go(-1)
-          
         }
       })
       .catch(err => {
