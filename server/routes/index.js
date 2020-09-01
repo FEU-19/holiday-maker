@@ -2,4 +2,6 @@ const residentsRouter = require("./residents");
 const ordersRouter = require("./orders");
 const usersRouter = require("./users");
 
-module.export = [residentsRouter, ordersRouter, usersRouter];
+module.exports = {
+  routers: [residentsRouter, ordersRouter, usersRouter]
+};
