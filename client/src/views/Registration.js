@@ -8,7 +8,7 @@ import axios from "axios";
 
 const Registration = () => {
   const [showMsg, setShowMsg] = useState(true);
-  const [whatMsgToShow, setWhatMsgToShow] = useState(1);
+  const [whatMsgToShow, setWhatMsgToShow] = useState(0);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [newUser, setNewUser] = useState({
     email: "",
@@ -53,7 +53,7 @@ const Registration = () => {
       handlePostUser();
     } else {
       setShowMsg(true);
-        setWhatMsgToShow(3);
+        setWhatMsgToShow(4);
 
 
         setTimeout(() => {
@@ -89,7 +89,7 @@ const Registration = () => {
         // if(){
         //   setWhatMsgToShow(2);
         // } else {
-        //   setWhatMsgToShow(4);
+        //   setWhatMsgToShow(5); // denna siffran ska alltid vara högst
         // }
 
 
@@ -106,9 +106,35 @@ const Registration = () => {
     console.log(e);
     console.log("From submit form ", newUser);
     setAnchorEl(e.currentTarget);
-    comparePassword();
-    // handlePostUser();
-  }
+
+    let test;
+    
+    for(let item of Object.values(newUser)){
+      console.log(item);
+      if(item === ''){
+        test = false;
+      } else {
+        test = true;
+      }
+    }
+
+
+
+      if(!test){
+        setShowMsg(true);
+        setWhatMsgToShow(3);
+
+        setTimeout(() => {
+          setShowMsg(false);
+        }, 2500);
+      }
+      else {
+        comparePassword();
+      }
+      
+    } 
+
+  
 
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
@@ -119,16 +145,18 @@ const Registration = () => {
 
   let msg;
   if(whatMsgToShow === 1){
-    
     msg = <Typography >Account was created.</Typography>;
   }  else if (whatMsgToShow === 2) {
     msg = <Typography>Account with this email already exists.</Typography>
   }
   else if (whatMsgToShow === 3) {
+    msg = <Typography>Fields can´t be empty.</Typography>
+  }
+  else if (whatMsgToShow === 4) {
     msg = <Typography>Password doesn´t match.</Typography>
   }
   else {
-    msg = <Typography>Something went wrong.. try again later.</Typography>
+    msg = <Typography>Something went wrong. try again later.</Typography>
   }
 
   return (
