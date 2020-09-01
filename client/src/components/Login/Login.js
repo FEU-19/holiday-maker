@@ -16,13 +16,21 @@ const Login = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     if (user) {
-      axios.post("/api/login", { user }).then((res) => {
+      axios.post("/api/login", { user })
+      .then((res) => {
         if(res.status === 201){
-          return <Redirect to="/" />;
+          // return <Redirect to="/" />;
+          // window.history.go(-1)
+          
         }
+      })
+      .catch(err => {
+        window.history.go(-1)
+        console.log("Error message" + err)
       });
     }
   };
+  
 
   return (
     <div>
