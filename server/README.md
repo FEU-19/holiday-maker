@@ -1,6 +1,6 @@
 # Filstruktur
 ### Models
-- Mongoose Schemas
+- Katalog för mongoose schemas
 
 ### Routes
 - API endpoints enligt CRUD
@@ -12,7 +12,7 @@
 - index.js exporterar routes till server/server.js där de sedan monteras
 
 ### Controllers
-- Här skrivs funktionen för våra endpoints
+- Katalog för express funktionerna till våra endpoints
 
 ### Config
 - konfigurationer

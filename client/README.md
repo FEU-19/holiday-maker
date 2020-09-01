@@ -6,7 +6,7 @@
 	- Komponenter som tillhör en **view** ska finnas i en subkatalog av samma namn
 
 ### View
-- Moderkomponenter för de olika vyerna
+- Katalog för vyerna
 
 ### utils
 - generiska funktioner
