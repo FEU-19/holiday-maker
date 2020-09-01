@@ -3,8 +3,8 @@ function randomLetter(n) {
   for (let i = 0; i < 25; i += 1) {
     arr[i] = i + 97;
   }
-  let string = "";
 
+  let string = "";
   for (let i = 0; i < n; i += 1) {
     string += String.fromCharCode(arr[Math.ceil(Math.random() * arr.length)]);
   }
@@ -33,9 +33,7 @@ function bookingNrGenerator(name, lastname, postnumber, lengthOfParts) {
     part2 += randomLetter(lengthOfParts - part2.lengthOfParts);
   }
   const part3 = postnumber.toString().slice(0, lengthOfParts);
-
   str += part1 + part2 + part3;
-
   return shuffle(str.split(""));
 }
 

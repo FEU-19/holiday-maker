@@ -8,7 +8,7 @@ const bookingSchema = mongoose.Schema({
   children: Number,
   hotel: String,
   room: [Room],
-  bookingdates: {
+  bookingDates: {
     start: String,
     end: String,
   },
