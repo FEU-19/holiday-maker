@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { styled } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import axios from "axios";
 
 const Registration = () => {
   const [input, setInput] = useState(null);
@@ -17,19 +18,13 @@ const Registration = () => {
     social_security_number: "",
   });
 
-
-
   function handleInput(e) {
     const { value } = e.target;
     const { name } = e.target;
     setNewUser({ ...newUser, [name]: value });
-
   }
 
-  function handleSubmit() {
-    console.log("From submit form ", newUser);
-    // newUser ska till server -> POST
-    // efter ok från server
+  function handleInputReset() {
     setNewUser({
       email: "",
       first_name: "",
@@ -41,8 +36,26 @@ const Registration = () => {
       phone_number: "",
       social_security_number: "",
     });
-    
   }
+
+  function handlePostUser() {
+    const url = "";
+    axios
+      .post(`${url}register`, newUser)
+      .then((res) => {
+        console(res);
+        handleInputReset();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function handleSubmit() {
+    console.log("From submit form ", newUser);
+    handlePostUser();
+  }
+
   return (
     <form autoComplete="off">
             {/* className={classes.root} noValidate */}
