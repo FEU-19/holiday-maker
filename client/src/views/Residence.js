@@ -1,8 +1,9 @@
 import React from "react";
 import data from "../components/Residence/residents.json";
-import HotelInformation from "../components/Residence/HotelInformation";
+import ResidenceInformation from "../components/Residence/ResidenceInformation";
 const hotel = data[0];
 
+// Hotel ID will come as props from search team, but not yet implemented
 const Residence = () => {
   console.log(data);
 
@@ -10,7 +11,7 @@ const Residence = () => {
   return <div>
       <h1>{hotel.name}</h1>
 
-      <HotelInformation info={hotel}/>
+      <ResidenceInformation info={hotel}/>
     </div>;
 };
 
