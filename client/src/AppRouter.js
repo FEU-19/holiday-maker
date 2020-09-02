@@ -1,11 +1,14 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import Main from "./views/Main";
+import Checkout from "./views/Checkout";
 import Residence from "./views/Residence/Residence";
+
 
 // To add more routes use format as below and add to the routes array
 const routes = [
   { path: "/", component: Main },
+  { path: "/checkout", component: Checkout },
   { path: "/residence/:id", component: Residence },
 ];
 
