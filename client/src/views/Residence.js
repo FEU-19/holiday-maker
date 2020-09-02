@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
+import HotelCarousel from '../components/Residence/HotelCarousel.js';
 
 const Residence = () => {
-  return <div>Residence</div>;
+  return (
+    <HotelCarousel/>
+  );
 };
 
 export default Residence;
