@@ -36,10 +36,12 @@ const Container = styled.div`
 `;
 
 const SearchContainer = () => {
+  const [residentData, setResidentData] = useState([{}]);
+
   useEffect(() => {
     axios.get('http://localhost:8080/api/residents/')
       .then((res) => {
-        console.log(res);
+        setResidentData(res.data);
       })
       .catch((err) => {
         console.error(err);
