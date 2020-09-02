@@ -37,13 +37,13 @@ const Container = styled.div`
 
 const SearchContainer = () => {
   useEffect(() => {
-    axios.get('https://localhost:8080/api/residents')
+    axios.get('http://localhost:8080/api/residents/')
       .then((res) => {
         console.log(res);
       })
       .catch((err) => {
         console.error(err);
-      })
+      });
     }, []);
 
   return (
