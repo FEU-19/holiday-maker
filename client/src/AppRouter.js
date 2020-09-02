@@ -8,6 +8,7 @@ import Registration from "./views/Registration";
 const routes = [
   { path: "/", component: Main },
   { path: "/registration", component: Registration },
+  { path: "/login", component: Login}
 ];
 
 function AppRouter() {

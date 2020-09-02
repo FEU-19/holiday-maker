@@ -2,11 +2,23 @@ import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import { Redirect } from "react-router-dom";
+import styled from "styled-components"
 import axios from "axios";
+
+const Container = styled.div`
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+    form{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+`
 
 const Login = () => {
   const [user, setUser] = useState({ email: "", password: "" });
-
   const onChangeUser = (e) => {
     const { value } = e.target;
     const { name } = e.target;
@@ -30,9 +42,8 @@ const Login = () => {
     }
   };
   
-
   return (
-    <div>
+    <Container>
       <form className="login__Main" onSubmit={onSubmit}>
         <TextField
           required
@@ -54,7 +65,7 @@ const Login = () => {
         />
         <Button type="submit">Login</Button>
       </form>
-    </div>
+    </Container>
   );
 };
 
