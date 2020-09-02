@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -7,7 +7,7 @@ const Container = styled.div`
   height: auto;
   display: flex;
   justify-content: center;
-  
+
   form {
     display: flex;
     flex-direction: column;
@@ -31,19 +31,28 @@ const Container = styled.div`
     border: 2px solid black;
     width: 85%;
     height: 20px;
-
   }
-`
+`;
 
 const SearchContainer = () => {
+  useEffect(() => {
+    axios.get('https://localhost:8080/api/residents')
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+    }, []);
+
   return (
     <Container>
-        <form action="">
-          <div className="search__top"></div>
-          <div className="search__bottom"></div>
-        </form>
+      <form action="">
+        <div className="search__top"></div>
+        <div className="search__bottom"></div>
+      </form>
     </Container>
-  )
+  );
 };
 
 export default SearchContainer;
