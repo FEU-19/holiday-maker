@@ -25,7 +25,7 @@ export default function DatePicker() {
   };
 
   return (
-    <form noValidate>
+    <React.Fragment>
       <p>Från</p>
       <TextField
         name="start"
@@ -44,6 +44,6 @@ export default function DatePicker() {
         defaultValue={oneWeekAhead}
         onChange={handleDate}
       />
-    </form>
+    </React.Fragment>
   );
 }
