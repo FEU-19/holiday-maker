@@ -21,7 +21,7 @@ app.use(express.json());
 
 app.use(cors());
 
-app.use(cookieParser())
+app.use(cookieParser());
 
 routers.forEach((router) => app.use("/api/", router));
 

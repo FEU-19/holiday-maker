@@ -28,15 +28,18 @@ const Login = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     if (user) {
-      axios.post("/api/login", { user })
+      axios.post("http://localhost:3002/api/login", { user }, /*{ headers: {
+        Cookie: "cookie1=value; cookie2=value; cookie3=value;"
+    }}*/)
       .then((res) => {
+        console.log(res);
         if(res.status === 201){
           // return <Redirect to="/" />;
           // window.history.go(-1)
         }
       })
       .catch(err => {
-        window.history.go(-1)
+        //window.history.go(-1)
         console.log("Error message" + err)
       });
     }
