@@ -1,3 +1,5 @@
+const HOTELS = require("../config/constants");
+
 // POST
 exports.create = (_req, res) => {
   res.send("OK");
@@ -5,5 +7,5 @@ exports.create = (_req, res) => {
 
 // GET
 exports.read = (_req, res) => {
-  res.send("OK");
+  res.json(HOTELS);
 };
