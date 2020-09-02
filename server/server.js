@@ -1,11 +1,15 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const cookieParser = require('cookie-parser');
 const connectDB = require("./config/db");
 const { routers } = require("./routes/index");
 
+
 // Load config
 dotenv.config({ path: "./config/config.env" });
+
+
 
 // Db connection
 connectDB();
@@ -16,6 +20,8 @@ const app = express();
 app.use(express.json());
 
 app.use(cors());
+
+app.use(cookieParser())
 
 routers.forEach((router) => app.use("/api/", router));
 

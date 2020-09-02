@@ -2,6 +2,8 @@ const bcrypt = require("bcrypt");
 const User = require("../models/User");
 
 exports.createLogin = async (req, res) => {
+  console.log(req.cookie);
+
   const {
     email,
     password
@@ -34,7 +36,14 @@ exports.createLogin = async (req, res) => {
       });
     }
 
-    res.send("ok");
+    
+
+    res
+      .status(200)
+      .cookie("access_token", "Bearer" + token, {
+        expires: new Date(Date.now() + 8 * 3600000),
+      })
+      .send("ok");
 
   } catch (err) {
     console.error(err.message);
@@ -102,8 +111,6 @@ exports.create = async (req, res) => {
     res.status(500).send("Server error");
   }
 };
-
-
 
 exports.read = (req, res) => {
   res.send("OK");
