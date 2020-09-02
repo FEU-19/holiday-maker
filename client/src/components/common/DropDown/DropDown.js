@@ -1,22 +1,21 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
-import FormGroup from '@material-ui/core/FormGroup';
+import FormControl from '@material-ui/core/FormControl';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import Box from '@material-ui/core/Box';
 
 
 const useStyles = makeStyles((theme) => ({
-    formGroup: {
+    formControl: {
         margin: theme.spacing(1),
-        minWidth: 120,
-        width: '200px'
+        minWidth: 120
     },
     selectEmpty: {
         marginTop: theme.spacing(2),
     },
     dropdownBox: {
-        
+        width: '200px'
     }
 }));
 
@@ -46,11 +45,12 @@ const DropDown = () => {
 
 
     return (
-        <FormGroup 
-            className={classes.formGroup}
+        <Box 
+            className={classes.dropdownBox}
             display="flex"
             flexDirection="column"
         >
+            <FormControl className={classes.formControl}>
                 <InputLabel htmlFor="native-simple">
                     № rooms
                 </InputLabel>
@@ -63,12 +63,12 @@ const DropDown = () => {
                         return <option value={v} key={v}>{v}</option>
                     })}
                 </NativeSelect>
+            </FormControl>
             {
             extraBedArr.length < 0
-            ?   
-                <>
+            ?   <FormControl className={classes.formControl}>
                     <InputLabel htmlFor="native-simple">
-                        Extra beds
+                    Extra beds
                     </InputLabel>
                     <NativeSelect
                         value={state}
@@ -79,14 +79,14 @@ const DropDown = () => {
                             return <option value={v} key={v}>{v}</option>
                         })}
                     </NativeSelect>
-                </>
-            :   <>
+                </FormControl>
+            :   <FormControl className={classes.formControl} >
                     <InputLabel htmlFor="name-native-disabled" disabled>Extra beds</InputLabel>
                     <NativeSelect disabled>
                     </NativeSelect>
-                </>
+                </FormControl>
         }
-        </FormGroup>
+        </Box>
         
     )    
 }
