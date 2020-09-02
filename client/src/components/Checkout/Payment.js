@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, Profiler } from "react";
 
 import Cleave from "cleave.js/react";
 
+import Modal from "../common/Modal/Modal";
+
 import "./Payment.css";
 import Country_DropdownList from "./Country_DropdownList";
+
+import DoneIcon from "@material-ui/icons/Done";
+import CancelIcon from "@material-ui/icons/Cancel";
 
 function Payment() {
   const [firstName, setFirstName] = useState("");
@@ -19,6 +24,10 @@ function Payment() {
   const [expire, setExpire] = useState("");
   const [cvc, setCvc] = useState("");
   const [type, setType] = useState("");
+
+  // Check if payment confirmed
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
+  const [paymentFail, setPaymentFail] = useState(false);
 
   function onCreditCardTypeChanged(type) {
     setType(type);
@@ -199,6 +208,23 @@ function Payment() {
           Finish & Pay
         </button>
       </div>
+      <Modal>
+        {paymentSuccess && (
+          <div className="modal__container">
+            <DoneIcon className="doneIcon" />
+            <h1>Thank you!</h1>
+            <h2>for booking with Holiday Maker.</h2>
+            <p>Booking confirmation has been sent to your email.</p>
+          </div>
+        )}
+        {paymentFail && (
+          <div className="modal__container">
+            <CancelIcon className="cancelIcon" />
+            <h1>Error!</h1>
+            <h3>Your payment hasn't been confirmed, please try again.</h3>
+          </div>
+        )}
+      </Modal>
     </div>
   );
 }
