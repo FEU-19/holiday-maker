@@ -6,7 +6,6 @@ const bookingSchema = mongoose.Schema({
   user: { User },
   adults: Number,
   children: Number,
-  extraBeds: Number,
   hotel: String,
   room: [Room],
   bookingDates: {

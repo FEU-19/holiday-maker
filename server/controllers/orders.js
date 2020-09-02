@@ -49,10 +49,20 @@ exports.create = (req, res) => {
       Hotel.rooms.find({ _id: { $in: roomIds } }).then((result) => {
         const rooms2 = result.data;
         rooms2.forEach((x) => x.occupiedDates.push(req.body.bookingDates));
-        return Hotel.rooms.updateMany(rooms2).where({ _id: { $in: roomIds } });
+        // Then update these subdocs.
+        return Hotel.rooms
+          .updateMany(rooms2)
+          .where({ _id: { $in: roomIds } })
+          .then((response) => {
+            if (!response) {
+              return res.status(500).send({ error: "Internal error." });
+            }
+            return res.status(201).json(response);
+          })
+          .catch((err) => {
+            res.status(500).send({ error: err.message });
+          });
       });
-
-      // Then update these subdocs.s
 
       // Update that hotel.
       Hotel.updateOne(hotel).then((result) => {
