@@ -1,6 +1,6 @@
 import React from "react";
 import data from "../components/Residence/residents.json";
-import HotelInformation from "../components/Residence/HotelInformation";
+import ResidenceInformation from "../components/Residence/ResidenceInformation";
 import RoomCard from "../components/Residence/RoomCard";
 const hotel = data[0];
 const rooms = data[0].rooms;
