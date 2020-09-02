@@ -32,9 +32,9 @@ const CancelIcon = styled(CloseIcon)`
 `;
 
 // the parent component need to define onClose function and pass here
-const Modal = ({ onClose, children }) => {
+const Modal = ({ onClose, children, showModal }) => {
   return ReactDOM.createPortal(
-    <ModalCtn>
+    <ModalCtn style={showModal ? { display: "block" } : { display: "none" }}>
       <StyledModal>
         <CancelIcon onClick={onClose} />
         {children}
