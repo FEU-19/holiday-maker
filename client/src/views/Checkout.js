@@ -1,7 +1,8 @@
 import React from "react";
+import Payment from "../components/Checkout/Payment";
 
 const Checkout = () => {
-  return <div>Checkout</div>;
+  return <Payment />;
 };
 
 export default Checkout;
