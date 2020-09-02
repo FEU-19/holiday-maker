@@ -1,14 +1,37 @@
 import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
-import { Card } from "@material-ui/core";
-const useStyle = makeStyles(() => ({
+import { Card, CardHeader, CardMedia, CardContent, Typography } from "@material-ui/core";
 
+const useStyle = makeStyles(() => ({
+    card: {
+        maxWidth: 345,
+    },
+    media: {
+        height: 0,
+        paddingTop: '56.25%',
+    },
 }))
-const RoomType = () => {
+
+const RoomType = ({roomType}) => {
     const classes = useStyle();
+    console.log(roomType);
+
     
     return (
-        <Card>
+        <Card className = {classes.card}>
+            <CardHeader className = {classes.header}
+                        title = {roomType.type}/>
+            <CardMedia className = {classes.media}
+                        title = {roomType.type}
+                        image = {roomType.images[0]}
+                        />
+            <CardContent>
+                <Typography variant = "body2" color ="textSecondary" component = "p">
+                    {roomType.size}
+                    {roomType.information}
+                </Typography>
+
+            </CardContent>
 
         </Card>
     )

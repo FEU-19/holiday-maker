@@ -32,7 +32,7 @@ const RoomCard = ({roomsInfo}) => {
 
     return (
         <Card className = {classes.card}>
-            <RoomType/>
+            <RoomType roomType = {roomInfo}/>
             <CardContent className = {classes.content}>
                 <Typography className = {classes.title}>
                     Options
