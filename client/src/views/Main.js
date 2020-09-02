@@ -2,6 +2,8 @@ import React from "react";
 import styled from 'styled-components';
 
 import SearchContainer from '../components/Main/SearchContainer/SearchContainer'
+import ContentContainer from '../components/Main/ContentContainer/ContentContainer'
+
 
 // stor bokstav på variabler i styled components
 const Container = styled.main`
@@ -16,7 +18,7 @@ const Main = () => {
   return (
       <Container>
         <SearchContainer />
-
+        <ContentContainer />
       </Container>
   )
 };
