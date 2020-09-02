@@ -1,7 +1,7 @@
 import React from "react";
 import data from "../components/Residence/residents.json";
 import ResidenceInformation from "../components/Residence/ResidenceInformation";
-const hotel = data[0];
+const hotel = data[5];
 
 // Hotel ID will come as props from search team, but not yet implemented
 const Residence = () => {
