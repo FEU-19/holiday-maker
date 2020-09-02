@@ -1,6 +1,9 @@
 import React from "react";
 
-const HotelInformation = ({info}) => {
+
+
+
+const ResidenceInformation = ({info}) => {
 
   // Style variables
   const boxContainer = {
@@ -46,4 +49,4 @@ const HotelInformation = ({info}) => {
     </div>;
 };
 
-export default HotelInformation;
+export default ResidenceInformation;
