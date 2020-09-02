@@ -34,12 +34,13 @@ exports.createLogin = async (req, res) => {
         }]
       });
     }
+
     res.status(200)
-    /*res.cookie("access_token", "Bearer" + user.id, {
+    res.cookie("access_token", "Bearer" + user.id, {
       expires: new Date(Date.now() + 8 * 3600000),
-      httpOnly: true
-    }) */
+    })
     res.send("fungerar")
+
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");

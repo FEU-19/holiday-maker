@@ -28,9 +28,16 @@ const Login = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     if (user) {
-      axios.post("http://localhost:3002/api/login", { user }, /*{ headers: {
-        Cookie: "cookie1=value; cookie2=value; cookie3=value;"
-    }}*/)
+      const instance = axios.create({
+        withCredentials: true,
+      })
+
+      const options = {
+        xsrfCookieName: 'XSRF-TOKEN',
+        xsrfHeaderName: 'X-XSRF-TOKEN',
+      };
+
+      instance.post("http://localhost:3002/api/login/", {user}, options)
       .then((res) => {
         console.log(res);
         if(res.status === 201){
