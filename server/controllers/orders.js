@@ -49,7 +49,7 @@ exports.create = (req, res) => {
       Hotel.rooms.find({ _id: { $in: roomIds } }).then((result) => {
         const rooms2 = result.data;
         rooms2.forEach((x) => x.occupiedDates.push(req.body.bookingDates));
-        return Hotel.rooms.updateMany().where({ _id: { $in: roomIds } }).set;
+        return Hotel.rooms.updateMany(rooms2).where({ _id: { $in: roomIds } });
       });
 
       // Then update these subdocs.s
