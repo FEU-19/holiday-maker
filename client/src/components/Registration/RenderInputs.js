@@ -2,8 +2,7 @@ import React from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
-const RenderInputs = ({handleSubmit, newUser, handleInput}) => {
-
+const RenderInputs = ({ handleSubmit, newUser, handleInput }) => {
   return (
     <form autoComplete="off" onSubmit={(e) => handleSubmit(e)}>
             {/* className={classes.root} noValidate */}
@@ -29,7 +28,6 @@ const RenderInputs = ({handleSubmit, newUser, handleInput}) => {
         minLength="1"
         maxLength="12"
       />
-
       <TextField
         id="password"
         label="Confirm Password"
@@ -122,8 +120,8 @@ const RenderInputs = ({handleSubmit, newUser, handleInput}) => {
         value={newUser.phone_number}
         onChange={handleInput}
         // required
-        minLength="1" //10
-        maxLength="15" 
+        minLength="1" // 10
+        maxLength="15"
       />
             
       <TextField
@@ -134,10 +132,10 @@ const RenderInputs = ({handleSubmit, newUser, handleInput}) => {
         value={newUser.social_security_number}
         onChange={handleInput}
         // required
-        minLength="1" //8
+        minLength="1" // 8
         maxLength="12"
       />
-      <Button type='submit' variant="contained" color="primary" >
+      <Button type="submit" variant="contained" color="primary">
         Register
       </Button>
     </form>

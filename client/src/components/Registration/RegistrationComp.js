@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import RenderInputs from './RenderInputs';
-import RenderMsg from './RenderMsg';
-
 import axios from "axios";
+import RenderInputs from "./RenderInputs";
+import RenderMsg from "./RenderMsg";
 
 const RegistrationComp = () => {
   const [showMsg, setShowMsg] = useState(true);
@@ -44,21 +43,19 @@ const RegistrationComp = () => {
     });
   }
 
-  function comparePassword(){
-
-    if(newUser.confirm_password === newUser.password){
+  function comparePassword() {
+    if (newUser.confirm_password === newUser.password) {
       handlePostUser();
     } else {
       setShowMsg(true);
-        setWhatMsgToShow(4);
+      setWhatMsgToShow(4);
 
-
-        setTimeout(() => {
-          setShowMsg(false);
-        }, 2500);
-      }
+      setTimeout(() => {
+        setShowMsg(false);
+      }, 2500);
     }
-  
+  }
+
   function handlePostUser() {
     const url = "";
 
@@ -84,11 +81,10 @@ const RegistrationComp = () => {
         // } else {
         //   setWhatMsgToShow(5); // denna siffran ska alltid vara högst
         // }
-        setShowMsg(true);  
+        setShowMsg(true);
         setTimeout(() => {
           setShowMsg(false);
         }, 2500);
-
       });
   }
 
@@ -99,36 +95,42 @@ const RegistrationComp = () => {
     setAnchorEl(e.currentTarget);
 
     let fieldsEmpty;
-    for(let item of Object.values(newUser)){
+    for (const item of Object.values(newUser)) {
       console.log(item);
-      if(item === ''){
+      if (item === "") {
         fieldsEmpty = false;
       } else {
         fieldsEmpty = true;
       }
     }
 
-      if(!fieldsEmpty){
-        setShowMsg(true);
-        setWhatMsgToShow(3);
+    if (!fieldsEmpty) {
+      setShowMsg(true);
+      setWhatMsgToShow(3);
 
-        setTimeout(() => {
-          setShowMsg(false);
-        }, 2500);
-      }
-      else {
-        comparePassword();
-      }
-      
-    } 
-    const handleClose = () => {
-      setAnchorEl(null);
-    };
+      setTimeout(() => {
+        setShowMsg(false);
+      }, 2500);
+    } else {
+      comparePassword();
+    }
+  }
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <div>
-    <RenderInputs handleSubmit= {handleSubmit} newUser={newUser} handleInput={handleInput}/>
-    <RenderMsg  whatMsgToShow={whatMsgToShow} handleClose={handleClose} anchorEl={anchorEl} />  
+      <RenderInputs
+        handleSubmit={handleSubmit}
+        newUser={newUser}
+        handleInput={handleInput}
+      />
+      <RenderMsg
+        whatMsgToShow={whatMsgToShow}
+        handleClose={handleClose}
+        anchorEl={anchorEl}
+      />
     </div>
   );
 };
