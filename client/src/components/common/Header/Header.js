@@ -1,7 +1,10 @@
 import React from "react";
+import LoginButton from "./LoginButton";
 
 const Header = () => {
-  return <header>Header</header>;
+  return <header>
+      <LoginButton />
+  </header>;
 };
 
 export default Header;

@@ -1,5 +1,6 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
+import Login from "./views/Login";
 import Main from "./views/Main";
 import Registration from "./views/Registration";
 
@@ -7,6 +8,7 @@ import Registration from "./views/Registration";
 const routes = [
   { path: "/", component: Main },
   { path: "/registration", component: Registration },
+  { path: "/login", component: Login}
 ];
 
 function AppRouter() {
