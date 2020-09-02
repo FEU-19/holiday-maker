@@ -29,6 +29,9 @@ function Payment() {
   const [paymentSuccess, setPaymentSuccess] = useState(false);
   const [paymentFail, setPaymentFail] = useState(false);
 
+  // Close modal
+  const [showModal, setShowModal] = useState(false);
+
   function onCreditCardTypeChanged(type) {
     setType(type);
   }
@@ -204,11 +207,15 @@ function Payment() {
             </tr>
           </table>
         </form>
-        <button className="payBtn" type="submit">
+        <button
+          onClick={() => setShowModal(true)}
+          className="payBtn"
+          type="submit"
+        >
           Finish & Pay
         </button>
       </div>
-      <Modal>
+      <Modal onClose={() => setShowModal(false)} showModal={showModal}>
         {paymentSuccess && (
           <div className="modal__container">
             <DoneIcon className="doneIcon" />
