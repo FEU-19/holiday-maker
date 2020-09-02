@@ -9,7 +9,7 @@ function AppRouter() {
   return (
     <Switch>
       {routes.map(({ path, component }) => (
-        <Route exact path={path} component={component} />
+        <Route exact path={path} key={path + component} component={component} />
       ))}
     </Switch>
   );
