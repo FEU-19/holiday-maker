@@ -48,6 +48,7 @@ const ResidenceInformation = ({info}) => {
         <div className="residence__residenceInformation__boxContainer__aboutContent" style={infoContent}>
           {info.restaurant && <p style={textReset}>Restaurant</p>}
           {info.pool && <p style={textReset}>Pool</p>}
+          {info.nightEntertainment && <p style={textReset}>Night Entertainment</p>}
         </div>
       </div>
       <div className="residence__residenceInformation__boxContainer__familyContainer" style={infoContainer}>
