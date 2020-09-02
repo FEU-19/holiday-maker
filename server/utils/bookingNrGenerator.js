@@ -1,14 +1,19 @@
 function randomLetter(n) {
-  const arr = [];
-  for (let i = 0; i < 25; i += 1) {
-    arr[i] = i + 97;
-  }
-
   let string = "";
+  const characters = "abcdefghijklmnopqrstuvwxyz";
+  const charactersLength = characters.length;
   for (let i = 0; i < n; i += 1) {
-    string += String.fromCharCode(arr[Math.ceil(Math.random() * arr.length)]);
+    string += characters.charAt(Math.floor(Math.random() * charactersLength));
   }
   return string;
+}
+
+function randomNumberToString(n) {
+  let randomN = "";
+  for (let i = 0; i < n; i += 1) {
+    randomN += Math.floor(Math.random() * 10).toString();
+  }
+  return randomN;
 }
 
 function shuffle(array) {
@@ -25,14 +30,20 @@ function shuffle(array) {
 function bookingNrGenerator(name, lastname, postnumber, lengthOfParts) {
   let str = "";
   let part1 = name.slice(0, lengthOfParts);
-  if (part1.lengthOfParts < lengthOfParts) {
-    part1 += randomLetter(lengthOfParts - part1.lengthOfParts);
+  if (part1.length < lengthOfParts) {
+    part1 += randomLetter(lengthOfParts - part1.length);
   }
+
   let part2 = lastname.slice(0, lengthOfParts);
-  if (part2.lengthOfParts < lengthOfParts) {
-    part2 += randomLetter(lengthOfParts - part2.lengthOfParts);
+  if (part2.length < lengthOfParts) {
+    part2 += randomLetter(lengthOfParts - part2.length);
   }
-  const part3 = postnumber.toString().slice(0, lengthOfParts);
+
+  let part3 = postnumber.toString().slice(0, lengthOfParts);
+  if (part3.length < lengthOfParts) {
+    part3 += randomNumberToString(lengthOfParts - part3.length);
+  }
+
   str += part1 + part2 + part3;
   return shuffle(str.split(""));
 }

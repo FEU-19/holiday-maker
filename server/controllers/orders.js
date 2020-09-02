@@ -6,9 +6,6 @@ const User = require("../models/User");
 const bookingNrGenerator = require("../utils/bookingNrGenerator");
 
 exports.create = (req, res) => {
-  // Anta application/json
-  // Lägg in bookingDate i hotell.occupiedDates.
-  // ID kommer sparas i cookie.
   const Id = req.cookies.userId;
 
   User.findById(Id)
@@ -21,25 +18,51 @@ exports.create = (req, res) => {
     .then((user) => {
       const data = req.body;
       data.user = user;
-      const { foreName, lastName, postCode } = data.user;
-      data.bookingNumber = bookingNrGenerator(foreName, lastName, postCode, 5);
+      const { first_name, surname, zip_code } = data.user;
+      data.bookingNumber = bookingNrGenerator(first_name, surname, zip_code, 6);
       const booking = new Booking(data);
       booking.save();
 
       return Hotel.find({ name: data.hotel });
-      // {"roomNr" : { $in : [1, 2, ,3, 5]}} use this logic.
     })
     .then((response) => {
-      const hotel = response.data.data;
-      const roomIdx = [];
-      // If many rooms are booked these roomsnumbers.
+      const hotel = response.data;
       const rooms = req.body.room;
-      rooms.forEach((x) => roomIdx.push(x.nr));
+      // If many rooms are booked these roomsnumbers.
 
       // Update rooms on specific hotels
+      const roomNr = {};
+      rooms.forEach((x) => {
+        roomNr[x.nr] = x.nr;
+      });
+      for (rooms of hotel.rooms) {
+        if (rooms.nr in roomNr) {
+          hotel.rooms.occupiedDates = req.body.bookingDates;
+        }
+      }
 
+      // Alternative solution - if works, is better!
+      const roomIds = [];
+      rooms.forEach((x) => {
+        roomIds.push(x._id);
+      });
+      Hotel.rooms.find({ _id: { $in: roomIds } }).then((result) => {
+        const rooms2 = result.data;
+        rooms2.forEach((x) => x.occupiedDates.push(req.body.bookingDates));
+        return Hotel.rooms.updateMany().where({ _id: { $in: roomIds } }).set;
+      });
+
+      // Then update these subdocs.s
+
+      // Update that hotel.
+      Hotel.updateOne(hotel).then((result) => {
+        if (!result)
+          return res
+            .status(500)
+            .send({ error: "Server error. Try again later." });
+        return res.status(201).json(result);
+      });
       // Specific method to update nested values?
-      return res.status(201).json();
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });
