@@ -10,10 +10,9 @@ const hotelSchema = new mongoose.Schema({
   nightEntertainment: Boolean,
   kidsClub: Boolean,
   restaurant: Boolean,
-  review: Number,
+  rating: Number,
   rooms: [Room],
 });
 
-const Hotel = mongoose.model("hotel", hotelSchema);
-
-module.export = Hotel;
+const Hotel = mongoose.model("residence", hotelSchema);
+module.exports = Hotel;
