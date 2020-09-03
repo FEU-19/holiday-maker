@@ -24,6 +24,16 @@ const Login = () => {
   const [open, setOpen] = useState(false);
   const [errorMsg, setErrorMsg] = useState(0)
  
+
+  const options = {
+    xsrfCookieName: 'XSRF-TOKEN',
+    xsrfHeaderName: 'X-XSRF-TOKEN',
+  };
+
+  const instance = axios.create({
+    withCredentials: true,
+  })
+
   const onChangeUser = (e) => {
     const { value } = e.target;
     const { name } = e.target;
@@ -33,15 +43,8 @@ const Login = () => {
   const onSubmit = (e) => {
     e.preventDefault();  
     if (user) {
-      const instance = axios.create({
-        withCredentials: true,
-      })
 
-      const options = {
-        xsrfCookieName: 'XSRF-TOKEN',
-        xsrfHeaderName: 'X-XSRF-TOKEN',
-      };
-
+      
       instance.post("http://localhost:3002/api/login/", {user}, options)
       .then((res) => {
         console.log(res);
@@ -69,6 +72,19 @@ const Login = () => {
   };
 
  
+  const onClick = (e) =>{
+    e.preventDefault();
+    let cookie = document.cookie;
+    let userId = cookie.split('=Bearer')[1];
+    instance.post("http://localhost:3002/api/logout/", {userId}, options)
+      .then((res) =>{
+        console.log('working');
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+  
   return (
     <Container>
       <form className="login__Main" onSubmit={(e) => onSubmit(e)}>
@@ -96,8 +112,7 @@ const Login = () => {
 
       </SimpleDialog> : null}
       </form>
-      <br />
-     
+      
     </Container>
 
   );
