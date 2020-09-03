@@ -7,6 +7,7 @@ import SelectAmountOfChildren from './SelectAmountOfChildren';
 import { Button } from '@material-ui/core';
 
 import DatePicker from './DatePicker';
+import SelectAmountOfAdults from './SelectAmountOfAdults';
 
 // Filter functions
 import adultChildToBedFilter from '../../../utils/adultChildToBedFilter.js';
@@ -57,7 +58,8 @@ const SearchContainer = () => {
           <SelectAmountOfChildren />
 
           <DatePicker />
-          <Button 
+          <SelectAmountOfAdults />
+          <Button
             type="submit"
             variant="contained"
             color="primary"
