@@ -19,6 +19,16 @@ const Container = styled.div`
 
 const Login = () => {
   const [user, setUser] = useState({ email: "", password: "" });
+
+  const options = {
+    xsrfCookieName: 'XSRF-TOKEN',
+    xsrfHeaderName: 'X-XSRF-TOKEN',
+  };
+
+  const instance = axios.create({
+    withCredentials: true,
+  })
+
   const onChangeUser = (e) => {
     const { value } = e.target;
     const { name } = e.target;
@@ -28,15 +38,8 @@ const Login = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     if (user) {
-      const instance = axios.create({
-        withCredentials: true,
-      })
 
-      const options = {
-        xsrfCookieName: 'XSRF-TOKEN',
-        xsrfHeaderName: 'X-XSRF-TOKEN',
-      };
-
+      
       instance.post("http://localhost:3002/api/login/", {user}, options)
       .then((res) => {
         console.log(res);
@@ -51,6 +54,19 @@ const Login = () => {
       });
     }
   };
+
+  const onClick = (e) =>{
+    e.preventDefault();
+    let cookie = document.cookie;
+    let userId = cookie.split('=Bearer')[1];
+    instance.post("http://localhost:3002/api/logout/", {userId}, options)
+      .then((res) =>{
+        console.log('working');
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
   
   return (
     <Container>
@@ -75,6 +91,7 @@ const Login = () => {
         />
         <Button type="submit">Login</Button>
       </form>
+      
     </Container>
   );
 };

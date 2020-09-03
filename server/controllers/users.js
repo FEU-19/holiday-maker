@@ -1,8 +1,13 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
 
-exports.createLogin = async (req, res) => {
+exports.createLogout = async (req, res) =>{
+  let userId = req.body.userId;
 
+  res.clearCookie("access_token", "Bearer" + userId).end();
+}
+
+exports.createLogin = async (req, res) => {
   const {
     email,
     password
