@@ -7,16 +7,13 @@ const RenderMsg = ({ whatMsgToShow, handleClose, anchorEl }) => {
   const id = open ? "simple-popover" : undefined;
 
   let msg;
-  if (whatMsgToShow === 1) {
-    msg = <Typography>Account was created.</Typography>;
-  } else if (whatMsgToShow === 2) {
-    msg = <Typography>Account with this email already exists.</Typography>;
-  } else if (whatMsgToShow === 3) {
+
+  if (whatMsgToShow === 3) {
     msg = <Typography>Fields can´t be empty.</Typography>;
   } else if (whatMsgToShow === 4) {
     msg = <Typography>Password doesn't match.</Typography>;
   } else {
-    msg = <Typography>Something went wrong. try again later.</Typography>;
+    msg = <Typography>{whatMsgToShow}</Typography>;
   }
 
   return (

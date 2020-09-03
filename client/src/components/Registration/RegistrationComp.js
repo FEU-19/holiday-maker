@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Redirect } from "react-router-dom";
 import RenderInputs from "./RenderInputs";
 import RenderMsg from "./RenderMsg";
 
 const RegistrationComp = () => {
-  const [showMsg, setShowMsg] = useState(true);
+  const [showMsg, setShowMsg] = useState(false);
   const [whatMsgToShow, setWhatMsgToShow] = useState(0);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [newUser, setNewUser] = useState({
@@ -39,7 +40,7 @@ const RegistrationComp = () => {
       phone_number: "",
       social_security_number: "",
       password: "",
-      confirm_passwrod: "",
+      confirm_password: "",
     });
   }
 
@@ -49,54 +50,46 @@ const RegistrationComp = () => {
     } else {
       setShowMsg(true);
       setWhatMsgToShow(4);
-
-      setTimeout(() => {
-        setShowMsg(false);
-      }, 2500);
     }
   }
 
   function handlePostUser() {
-    const url = "";
+    console.log("the user i will POST ", newUser);
 
     axios
       .post(`http://localhost:3002/api/register`, newUser)
       .then((res) => {
         console.log(res);
-        handleInputReset();
+        console.log("RESP is: ", res);
+        console.log("res.data.msg ", res.data.msg);
+        // handleInputReset();
         setShowMsg(true);
-        setWhatMsgToShow(1);
+        setWhatMsgToShow(res.data.msg);
 
-        setTimeout(() => {
-          setShowMsg(false);
-        }, 2500);
+        // setTimeout(() => {
+        //   // setShowMsg(false);
+        //   // setWhatMsgToShow(0);
+        //   console.log('You will be Login');
+        //   return <Redirect to="/login" />;
+        // }, 2500);
       })
       .catch((err) => {
-        console.log(err);
-        // account finns redan
-        setWhatMsgToShow(2);
-        // // Beroende på vilken felmeddelande vi får ska vi ändra till 2:a eller 3:
-        // if(){
-        //   setWhatMsgToShow(2);
-        // } else {
-        //   setWhatMsgToShow(5); // denna siffran ska alltid vara högst
-        // }
+        const error = err.response.data.error[0].msg;
+        console.log("ERROR is ", err.response);
+        console.log(error);
+        console.log(err.response.status);
+
+        setWhatMsgToShow(error);
         setShowMsg(true);
-        setTimeout(() => {
-          setShowMsg(false);
-        }, 2500);
       });
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(e);
-    console.log("From submit form ", newUser);
     setAnchorEl(e.currentTarget);
 
     let fieldsEmpty;
     for (const item of Object.values(newUser)) {
-      console.log(item);
       if (item === "") {
         fieldsEmpty = false;
       } else {
@@ -107,16 +100,13 @@ const RegistrationComp = () => {
     if (!fieldsEmpty) {
       setShowMsg(true);
       setWhatMsgToShow(3);
-
-      setTimeout(() => {
-        setShowMsg(false);
-      }, 2500);
     } else {
       comparePassword();
     }
   }
   const handleClose = () => {
     setAnchorEl(null);
+    setWhatMsgToShow(0);
   };
 
   return (
