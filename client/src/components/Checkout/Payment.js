@@ -1,17 +1,54 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 
-import Cleave from "cleave.js/react";
+import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
 
 import Modal from "../common/Modal/Modal";
 
-import "./Payment.css";
+// import "./Payment.css";
 import Country_DropdownList from "./Country_DropdownList";
 
 import DoneIcon from "@material-ui/icons/Done";
 import CancelIcon from "@material-ui/icons/Cancel";
 
+import {
+  PaymentPage,
+  PaymentContainer,
+  H1,
+  HR,
+  CarNumContainer,
+  CardNum,
+  InfoForm,
+  PayForm,
+  InputContainer,
+  RadioBtn__Container,
+  RadioBtn__ContainerDiv,
+  RadioBtn__ContainerInput,
+  ImgContainer,
+  IMG,
+  Table,
+  EXP_CVC_Container,
+  EXP_CVC_Div,
+  EXP_CVC_Input,
+  PayBtn,
+} from "./PaymentStyles";
+import TextInput from "./TextInput";
+
 function Payment() {
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      "& > *": {
+        margin: theme.spacing(1),
+        width: "25ch",
+      },
+    },
+  }));
+
+  const classes = useStyles();
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -34,179 +71,161 @@ function Payment() {
   // Close modal
   const [showModal, setShowModal] = useState(false);
 
+  const [radioValue, setRadioValue] = useState("");
+
   function onCreditCardTypeChanged(type) {
     setType(type);
   }
 
-  const controlCloseModal = (status) => {
-    setShowModal(false);
-    // if payment is sucessful redirect to booking details page
-    status ? setRedirect(true) : setRedirect(false);
+  const handleRadio = (event) => {
+    setRadioValue(event.target.value);
   };
 
-  if (redirect) {
-    // url needs to change to booking details page
-    return <Redirect to="/" />;
-  }
-
   return (
-    <div className="payment">
-      <div className="payment__container">
-        <h1>Payment</h1>
-        <form className="info__form">
-          <div className="input__container">
-            <p>First name</p>
-            <input
-              type="text"
-              name="firstName"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-            />
-          </div>
-          <div className="input__container">
-            <p>Last name</p>
-            <input
-              type="text"
-              name="lastName"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-            />
-          </div>
-          <div className="input__container">
-            <p>E-mail</p>
-            <input
-              type="text"
-              name="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div className="input__container">
-            <p>Phone number</p>
-            <input
-              type="text"
-              name="text"
-              value={phoneNum}
-              onChange={(e) => setPhoneNum(e.target.value)}
-            />
-          </div>
-        </form>
+    <PaymentPage className={classes.root} noValidate autoComplete="off">
+      <PaymentContainer>
+        <H1>Payment</H1>
+        <InfoForm>
+          <TextInput
+            label="First name"
+            onchange={(e) => setFirstName(e.target.value)}
+            value={firstName}
+          />
+          <TextInput
+            label="Last name"
+            onchange={(e) => setLastName(e.target.value)}
+            value={lastName}
+          />
+          <TextInput
+            label="E-mail name"
+            onchange={(e) => setEmail(e.target.value)}
+            value={email}
+          />
+          <TextInput
+            label="Phone number"
+            onchange={(e) => setPhoneNum(e.target.value)}
+            value={phoneNum}
+          />
+        </InfoForm>
         <br />
-        <hr />
+        <HR />
 
-        <form className="info__form">
-          <div className="input__container">
-            <p>Country</p>
+        <InfoForm>
+          <InputContainer>
             <Country_DropdownList />
-          </div>
-          <div className="input__container">
-            <p>City</p>
-            <input
-              type="text"
-              name="city"
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
-            />
-          </div>
-          <div className="input__container">
-            <p>Zip code</p>
-            <input
-              type="text"
-              name="zipCode"
-              value={zipcode}
-              onChange={(e) => setZipCode(e.target.value)}
-            />
-          </div>
-          <div className="input__container">
-            <p>Adress</p>
-            <input
-              type="text"
-              name="adress"
-              value={adress}
-              onChange={(e) => setAdress(e.target.value)}
-            />
-          </div>
-        </form>
+          </InputContainer>
+
+          <TextInput
+            label="City"
+            onchange={(e) => setCity(e.target.value)}
+            value={city}
+          />
+          <TextInput
+            label="Zip code"
+            onchange={(e) => setZipCode(e.target.value)}
+            value={zipcode}
+          />
+          <TextInput
+            label="Adress"
+            onchange={(e) => setAdress(e.target.value)}
+            value={adress}
+          />
+        </InfoForm>
 
         <br />
-        <hr />
+        <HR />
 
-        <form className="pay__form">
-          <table>
+        <PayForm>
+          <Table>
             <tr>
-              <div className="radioBtn__container">
-                <div>
-                  <input type="radio" name="payMethod" value="paypal" />
-                  <label htmlFor="paypal">Paypal</label>
-                </div>
-                <img
+              <RadioBtn__Container>
+                <RadioBtn__ContainerDiv>
+                  <RadioGroup
+                    aria-label="gender"
+                    name="gender1"
+                    value={radioValue}
+                    onChange={handleRadio}
+                  >
+                    <RadioBtn__ContainerInput
+                      value="paypal"
+                      control={<Radio />}
+                      label="Paypal"
+                    />
+                  </RadioGroup>
+                </RadioBtn__ContainerDiv>
+                <IMG
                   src="https://lh3.googleusercontent.com/proxy/hYI0iYfNDK-dSz7htxguC_OsAmSt14QuNq5xD8RG9Mjm_aPmkRxxQ9DCpQJDhRkIn7ij51IyYTZpH2srbAP6H_snJBVXrQfWtg7Hb8SP6zJl5LgtNuQ"
                   alt="paypal logo"
                 />
-              </div>
+              </RadioBtn__Container>
             </tr>
 
             <tr>
-              <div className="radioBtn__container">
-                <div>
-                  <input
-                    type="radio"
-                    name="payMethod"
-                    value="debit/creditCard"
-                  />
-                  <label htmlFor="paypal">Debit/credit card</label>
-                </div>
-                <div className="img__conatiner">
-                  <img
+              <RadioBtn__Container>
+                <RadioBtn__ContainerDiv>
+                  <RadioGroup
+                    aria-label="gender"
+                    name="gender1"
+                    value={radioValue}
+                    onChange={handleRadio}
+                  >
+                    <RadioBtn__ContainerInput
+                      value="Debit/credit card"
+                      control={<Radio />}
+                      label="Debit/credit card"
+                    />
+                  </RadioGroup>
+                </RadioBtn__ContainerDiv>
+                <ImgContainer>
+                  <IMG
                     src="https://cdn.iconscout.com/icon/free/png-512/visa-3-226460.png"
                     alt="visa logo"
                   />
-                  <img
+                  <IMG
                     src="https://cdn.freebiesupply.com/logos/large/2x/mastercard-6-logo-png-transparent.png"
                     alt="mastercard logo"
                   />
-                  <img
+                  <IMG
                     src="https://cdn0.iconfinder.com/data/icons/credit-8/512/21_credit-512.png"
                     alt="maestro logo"
                   />
-                  <img
+                  <IMG
                     src="https://paymentweek.com/wp-content/uploads/2015/10/American-Express-copy.png"
                     alt="american-express logo"
                   />
-                </div>
-              </div>
+                </ImgContainer>
+              </RadioBtn__Container>
             </tr>
 
             <tr>
-              <div className="cardNum__container">
+              <CarNumContainer>
                 <p>Card number</p>
-                <Cleave
+                <CardNum
                   placeholder="0000 0000 0000 0000"
                   options={{
                     creditCard: true,
                     onCreditCardTypeChanged,
                   }}
                   onChange={(e) => setCardNum(e)}
-                  className="cardNum"
                 />
-              </div>
+              </CarNumContainer>
             </tr>
 
             <tr>
-              <div className="exp-cvc__container">
-                <div>
+              <EXP_CVC_Container className="exp-cvc__container">
+                <EXP_CVC_Div>
                   <p>Expire</p>
-                  <Cleave
+                  <EXP_CVC_Input
                     placeholder="MM/YY"
                     options={{ date: true, datePattern: ["m", "d"] }}
                     onChange={setExpire}
                     className="exp-cvc__input"
                   />
-                </div>
+                </EXP_CVC_Div>
 
-                <div>
+                <EXP_CVC_Div>
                   <p>CVC</p>
-                  <Cleave
+                  <EXP_CVC_Input
                     placeholder="CVV"
                     options={{
                       blocks: [3],
@@ -215,23 +234,20 @@ function Payment() {
                     onChange={setCvc}
                     className="exp-cvc__input"
                   />
-                </div>
-              </div>
+                </EXP_CVC_Div>
+              </EXP_CVC_Container>
             </tr>
-          </table>
-        </form>
-        <button
+          </Table>
+        </PayForm>
+        <PayBtn
           onClick={() => setShowModal(true)}
           className="payBtn"
           type="submit"
         >
           Finish & Pay
-        </button>
-      </div>
-      <Modal
-        onClose={() => controlCloseModal(paymentSuccess)}
-        showModal={showModal}
-      >
+        </PayBtn>
+      </PaymentContainer>
+      <Modal onClose={() => setShowModal(false)} showModal={showModal}>
         {paymentSuccess && (
           <div className="modal__container">
             <DoneIcon className="doneIcon" />
@@ -248,7 +264,7 @@ function Payment() {
           </div>
         )}
       </Modal>
-    </div>
+    </PaymentPage>
   );
 }
 
