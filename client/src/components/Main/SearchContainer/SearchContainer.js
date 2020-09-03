@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import axios from "axios";
 import Grid from '@material-ui/core/Grid';
 
-
+//Functions
+import adultChildToBedFilter from '../../../utils/adultChildToBedFilter.js';
 
 const Container = styled.div`
 border: 2px solid red;
