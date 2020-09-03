@@ -11,6 +11,7 @@ const SpecHotel = () => {
     axios
       .get("http://localhost:4000/api/residents/5f4e2b500ae3bf21d48b09f2")
       .then((response) => {
+        console.log(response);
         setHotel(response.data.data);
       });
   }, []);

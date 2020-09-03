@@ -4,13 +4,13 @@ import KeyboardArrowLeftIcon from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
 import { useGrid } from "./styles";
 
-const images = [
-  "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.ajorifSUT7IuwtVpeJJrogHaFE%26pid%3DApi&f=1",
-  "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.DAPu4smgcBr_VoXN_agCQgHaFj%26pid%3DApi&f=1",
-  "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP._apAl_KumMvX7l6POqdAPAHaEW%26pid%3DApi&f=1",
-];
+// const images = [
+//   "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.ajorifSUT7IuwtVpeJJrogHaFE%26pid%3DApi&f=1",
+//   "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.DAPu4smgcBr_VoXN_agCQgHaFj%26pid%3DApi&f=1",
+//   "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP._apAl_KumMvX7l6POqdAPAHaEW%26pid%3DApi&f=1",
+// ];
 
-const Carousel = ({ openModal, setOpenModal }) => {
+const Carousel = ({ openModal, setOpenModal, images }) => {
   const [current, setCurrent] = useState(0);
   const style = useGrid();
 
