@@ -6,6 +6,7 @@ import { Button } from '@material-ui/core';
 
 
 import DatePicker from './DatePicker';
+import SelectAmountOfAdults from './SelectAmountOfAdults';
 
 const Container = styled.div`
 border: 2px solid red;
@@ -41,7 +42,8 @@ const SearchContainer = () => {
           justify="space-around"
         >
           <DatePicker />
-          <Button 
+          <SelectAmountOfAdults />
+          <Button
             type="submit"
             variant="contained"
             color="primary"
