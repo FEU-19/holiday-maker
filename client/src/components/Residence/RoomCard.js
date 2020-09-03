@@ -44,7 +44,7 @@ const useStyle = makeStyles(() => ({
 const RoomCard = ({roomsInfo}) => {
     const classes = useStyle();
     const roomInfo = roomsInfo[0];
-    console.log();
+    console.log(roomsInfo);
 
     return (
         <Card className = {classes.card}>
