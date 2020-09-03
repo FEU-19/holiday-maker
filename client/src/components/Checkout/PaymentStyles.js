@@ -1,8 +1,9 @@
 import Cleave from "cleave.js/react";
 
 import styled from "styled-components";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 
-const Payment = styled.div`
+const PaymentPage = styled.div`
   max-width: 1000px;
   margin: 0 auto;
   padding: 0;
@@ -75,7 +76,7 @@ const RadioBtn__ContainerDiv = styled.div`
   font-size: 18px;
 `;
 
-const RadioBtn__ContainerInput = styled.input`
+const RadioBtn__ContainerInput = styled(FormControlLabel)`
   height: 20px;
   width: 20px;
   margin-right: 15px;
@@ -126,7 +127,7 @@ const PayBtn = styled.button`
 `;
 
 export {
-  Payment,
+  PaymentPage,
   PaymentContainer,
   H1,
   HR,

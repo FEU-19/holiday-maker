@@ -1,5 +1,10 @@
 import React, { useState, Profiler } from "react";
 
+import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+
 import Cleave from "cleave.js/react";
 
 import Modal from "../common/Modal/Modal";
@@ -11,7 +16,7 @@ import DoneIcon from "@material-ui/icons/Done";
 import CancelIcon from "@material-ui/icons/Cancel";
 
 import {
-  Payment,
+  PaymentPage,
   PaymentContainer,
   H1,
   HR,
@@ -33,6 +38,17 @@ import {
 } from "./PaymentStyles";
 
 function Payment() {
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      "& > *": {
+        margin: theme.spacing(1),
+        width: "25ch",
+      },
+    },
+  }));
+
+  const classes = useStyles();
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -59,20 +75,19 @@ function Payment() {
   }
 
   return (
-    <Payment className={classes.root} noValidate autoComplete="off">
-      <div className="payment__container">
-        <h1>Payment</h1>
-        <form className="info__form">
-          <div className="input__container">
-            <p>First name</p>
-            <input
-              type="text"
-              name="firstName"
+    <PaymentPage className={classes.root} noValidate autoComplete="off">
+      <PaymentContainer>
+        <H1>Payment</H1>
+        <InfoForm>
+          <InputContainer>
+            <TextField
+              id="standard-basic"
+              label="First name"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
             />
-          </div>
-          <div className="input__container">
+          </InputContainer>
+          <InputContainer>
             <p>Last name</p>
             <input
               type="text"
@@ -80,35 +95,33 @@ function Payment() {
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
             />
-          </div>
-          <div className="input__container">
-            <p>E-mail</p>
-            <input
-              type="text"
-              name="email"
+          </InputContainer>
+          <InputContainer>
+            <TextField
+              id="standard-basic"
+              label="E-mail"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-          </div>
-          <div className="input__container">
-            <p>Phone number</p>
-            <input
-              type="text"
-              name="text"
+          </InputContainer>
+          <InputContainer>
+            <TextField
+              id="standard-basic"
+              label="Phone number"
               value={phoneNum}
               onChange={(e) => setPhoneNum(e.target.value)}
             />
-          </div>
-        </form>
+          </InputContainer>
+        </InfoForm>
         <br />
-        <hr />
+        <HR />
 
         <form className="info__form">
-          <div className="input__container">
+          <InputContainer>
             <p>Country</p>
             <Country_DropdownList />
-          </div>
-          <div className="input__container">
+          </InputContainer>
+          <InputContainer>
             <p>City</p>
             <input
               type="text"
@@ -116,8 +129,8 @@ function Payment() {
               value={city}
               onChange={(e) => setCity(e.target.value)}
             />
-          </div>
-          <div className="input__container">
+          </InputContainer>
+          <InputContainer>
             <p>Zip code</p>
             <input
               type="text"
@@ -125,8 +138,8 @@ function Payment() {
               value={zipcode}
               onChange={(e) => setZipCode(e.target.value)}
             />
-          </div>
-          <div className="input__container">
+          </InputContainer>
+          <InputContainer>
             <p>Adress</p>
             <input
               type="text"
@@ -134,7 +147,7 @@ function Payment() {
               value={adress}
               onChange={(e) => setAdress(e.target.value)}
             />
-          </div>
+          </InputContainer>
         </form>
 
         <br />
@@ -236,7 +249,7 @@ function Payment() {
         >
           Finish & Pay
         </button>
-      </div>
+      </PaymentContainer>
       <Modal onClose={() => setShowModal(false)} showModal={showModal}>
         {paymentSuccess && (
           <div className="modal__container">
@@ -254,7 +267,7 @@ function Payment() {
           </div>
         )}
       </Modal>
-    </Payment>
+    </PaymentPage>
   );
 }
 
