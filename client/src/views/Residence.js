@@ -12,7 +12,7 @@ const Residence = () => {
 
 
   useEffect(() => {
-    axios.get("http://localhost:8080/api/residents/5f4e2b510ae3bf21d48b0aaf")
+    axios.get("http://localhost:8080/api/residents/:5f4e2b510ae3bf21d48b0aaf")
       .then(response => {
         updateData(response.data.data);
       })
