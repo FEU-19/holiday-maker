@@ -9,7 +9,7 @@ import DropDown from "./components/common/DropDown/DropDown";
 // To add more routes use format as below and add to the routes array
 const routes = [
   { path: "/", component: Main },
-  { path: "/checkout", component: Checkout },
+  { path: "/checkout/", component: Checkout },
   { path: "/residence/:id", component: SpecHotel },
   { path: "/dropdown/:id", component: DropDown },
 ];
