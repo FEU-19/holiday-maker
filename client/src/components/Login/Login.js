@@ -26,6 +26,8 @@ const Login = () => {
   const [errorMsg, setErrorMsg] = useState(0)
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
+  const [buttonTarget, setButtonTarget] = useState(null)
+  console.log(buttonTarget)
 
   const onChangeUser = (e) => {
     const { value } = e.target;
@@ -34,11 +36,14 @@ const Login = () => {
   };
 
   const onSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault();   
+    setButtonTarget()
+    
     if (user) {
       axios.post("/api/login", { user })
       .then((res) => {
         if(res.status === 201){
+          setButtonTarget(null)
           // return <Redirect to="/" />;
           // window.history.go(-1)
         }
@@ -49,6 +54,8 @@ const Login = () => {
         //setShowErrorMsg(true)
         setErrorMsg( "hej")
         console.log("hej,hej")
+        console.log(buttonTarget)
+        setAnchorEl(buttonTarget)
       });
     }
   };
@@ -59,7 +66,7 @@ const Login = () => {
 
   return (
     <Container>
-      <form className="login__Main" onSubmit={onSubmit}>
+      <form className="login__Main" onSubmit={(e) => onSubmit(e)}>
         <TextField
           required
           name="email"
