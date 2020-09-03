@@ -5,6 +5,7 @@ const Main = () => {
 
   return <div>Index Page
     
+    <Residence />
   </div>;
 };
 
