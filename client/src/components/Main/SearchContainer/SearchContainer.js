@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import axios from "axios";
 import Grid from '@material-ui/core/Grid';
 
-
+import SelectCity from './SelectCity';
 
 const Container = styled.div`
 border: 2px solid red;
@@ -33,7 +33,7 @@ const SearchContainer = () => {
           container
           justify="space-around"
         >
-          TOP
+          <SelectCity residentData={residentData} />
         </Grid>
         <Grid
           className="search-bottom"
