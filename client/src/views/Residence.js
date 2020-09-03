@@ -1,11 +1,9 @@
 import React, {useEffect, useState} from "react";
 import data from "../components/Residence/residents.json";
 import ResidenceInformation from "../components/Residence/ResidenceInformation";
-import GeneralInformation from "../components/Residence/GeneralInformation";
-import axios from "axios";
-const hotel = data[5];
-
-
+import RoomCard from "../components/Residence/RoomCard";
+const hotel = data[0];
+const rooms = data[0].rooms;
 
 // Hotel ID will come as props from search team, but not yet implemented
 const Residence = () => {
@@ -21,15 +19,16 @@ const Residence = () => {
   console.log(data);
 
 
-  return (
+  return <div>
     <div>
       <h1>{hotel.name}</h1>
 
       <ResidenceInformation info={hotel}/>
-
-      <GeneralInformation info={hotel} />
+    </div>;
+    <div>
+    <RoomCard roomsInfo = {rooms}/>
     </div>
-  );
+  </div>
 };
 
 export default Residence;
