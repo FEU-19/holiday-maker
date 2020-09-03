@@ -4,6 +4,7 @@ import axios from "axios";
 import Grid from '@material-ui/core/Grid';
 import SelectAmountOfChildren from './SelectAmountOfChildren';
 
+import SelectCity from './SelectCity';
 import { Button } from '@material-ui/core';
 
 import DatePicker from './DatePicker';
@@ -12,6 +13,7 @@ import SelectAmountOfAdults from './SelectAmountOfAdults';
 // Filter functions
 import adultChildToBedFilter from '../../../utils/adultChildToBedFilter.js';
 import filterCity from '../../../utils/filterCity';
+
 
 const Container = styled.div`
 border: 2px solid red;
@@ -54,6 +56,8 @@ const SearchContainer = () => {
           container
           justify="space-around"
         >
+          <SelectCity residentData={residentData} />
+
           
           <SelectAmountOfChildren />
 
