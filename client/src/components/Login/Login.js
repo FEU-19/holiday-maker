@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import { Redirect } from "react-router-dom";
 import styled from "styled-components"
 import axios from "axios";
-import Popover  from "@material-ui/core/Popover";
-import Typography from "@material-ui/core/Typography"
+import SimpleDialog from '@material-ui/core/Dialog';
+
+
 
 const Container = styled.div`
   height: 100vh;
@@ -21,14 +21,9 @@ const Container = styled.div`
 
 const Login = () => {
   const [user, setUser] = useState({ email: "", password: "" });
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  //const [showErrorMsg, setShowErrorMsg] = useState(false)
+  const [open, setOpen] = useState(false);
   const [errorMsg, setErrorMsg] = useState(0)
-  const open = Boolean(anchorEl);
-  const id = open ? "simple-popover" : undefined;
-  const [buttonTarget, setButtonTarget] = useState(null)
-  console.log(buttonTarget)
-
+ 
   const onChangeUser = (e) => {
     const { value } = e.target;
     const { name } = e.target;
@@ -36,9 +31,7 @@ const Login = () => {
   };
 
   const onSubmit = (e) => {
-    e.preventDefault();   
-    setButtonTarget()
-    
+    e.preventDefault();  
     if (user) {
       const instance = axios.create({
         withCredentials: true,
@@ -53,27 +46,29 @@ const Login = () => {
       .then((res) => {
         console.log(res);
         if(res.status === 201){
-          setButtonTarget(null)
+          console.log(user)
           // return <Redirect to="/" />;
           // window.history.go(-1)
         }
       })
       .catch(err => {
         //window.history.go(-1)
-        console.log("Error message" + err)
+        console.log("Error message" + err.response.data.error[0].msg)
         //setShowErrorMsg(true)
-        setErrorMsg( "hej")
-        console.log("hej,hej")
-        console.log(buttonTarget)
-        setAnchorEl(buttonTarget)
+        setOpen(true);
+        setErrorMsg("Oops något blev fel");
+
       });
     }
   };
-   const handleClose = (e) => {
-    setAnchorEl(null);
-   } 
-      
 
+  const handleClose = () => {
+    //setAnchorEl(null);
+    setOpen(false)
+    //setErrorMsg(value);
+  };
+
+ 
   return (
     <Container>
       <form className="login__Main" onSubmit={(e) => onSubmit(e)}>
@@ -95,24 +90,14 @@ const Login = () => {
           value={user.password}
           onChange={onChangeUser}
         />
-        <Button type="submit">Login</Button>
+        <Button type="submit">Login</Button> 
+        {open ? <SimpleDialog  selectedvalue={errorMsg} open={open} onClose={handleClose} > 
+          {errorMsg}
+
+      </SimpleDialog> : null}
       </form>
-      <Popover
-        id={id}
-        open={open}
-        anchorEl={anchorEl}
-        onClose={handleClose}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "center",
-        }}
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "center",
-        }}
-        >
-        <Typography>{errorMsg}</Typography>
-      </Popover>
+      <br />
+     
     </Container>
 
   );
