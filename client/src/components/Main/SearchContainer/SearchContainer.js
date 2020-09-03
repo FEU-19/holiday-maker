@@ -4,10 +4,8 @@ import axios from "axios";
 import Grid from '@material-ui/core/Grid';
 import { Button } from '@material-ui/core';
 
-import DatePicker from './DatePicker';
 
-// Filter functions
-import adultChildToBedFilter from '../../../utils/adultChildToBedFilter.js';
+import DatePicker from './DatePicker';
 
 const Container = styled.div`
 border: 2px solid red;
