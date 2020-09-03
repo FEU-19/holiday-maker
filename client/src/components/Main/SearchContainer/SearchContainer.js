@@ -8,6 +8,7 @@ import DatePicker from './DatePicker';
 
 // Filter functions
 import adultChildToBedFilter from '../../../utils/adultChildToBedFilter.js';
+import filterCity from '../../../utils/filterCity';
 
 const Container = styled.div`
 border: 2px solid red;
@@ -18,6 +19,7 @@ justify-content: center;
 
 const SearchContainer = () => {
   const [residentData, setResidentData] = useState([{}]);
+  const [filteredData, setFilteredData] = useState([]);
 
   useEffect(() => {
     axios.get('http://localhost:8080/api/residents/')
@@ -29,9 +31,16 @@ const SearchContainer = () => {
     });
   }, []);
 
+  // whenever filterData changes console.log() runs on the filt
+  useEffect(() => {
+    console.log(filteredData);
+  }, [filteredData])
+
   function onSubmit(e) {
     e.preventDefault();
-    console.log('clicked');
+
+    // second argument is placeholder for userInput about the specific city.
+    setFilteredData(filterCity(residentData, 'Manila'));
   }
 
   return (
