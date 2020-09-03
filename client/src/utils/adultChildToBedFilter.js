@@ -3,15 +3,11 @@ const adultChildToBedFilter  = (adult, child, arr) => {
   let newArr = arr;
 
   for (let [i, hotel] of newArr.entries()) {
-    for (let [j, room] of hotel.rooms.entries()) {
-      if (room.beds.$numberInt < num) {
-       newArr[i].rooms = newArr[i].rooms.filter((room) => room.beds.$numberInt >= num)
-      }
-    }
+    newArr[i].rooms = newArr[i].rooms.filter((room) => room.beds.$numberInt >= num);
   }
 
   return newArr;
-};
+}
 
 export default adultChildToBedFilter;
 
