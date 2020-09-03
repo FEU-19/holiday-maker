@@ -6,6 +6,7 @@ import WifiIcon from '@material-ui/icons/Wifi';
 import DirectionsCar from "@material-ui/icons/DirectionsCar";
 
 import RoomType from "./RoomType";
+import RoomPrice from "./RoomPrice";
 
 
 const useStyle = makeStyles(() => ({
@@ -32,7 +33,7 @@ const RoomCard = ({roomsInfo}) => {
 
     return (
         <Card className = {classes.card}>
-            <RoomType/>
+            <RoomType roomType = {roomInfo}/>
             <CardContent className = {classes.content}>
                 <Typography className = {classes.title}>
                     Options
@@ -53,7 +54,7 @@ const RoomCard = ({roomsInfo}) => {
                         Free parking
                     </Typography>
                 </Grid>
-                <Typography> 
+                <Typography component = "span"> 
                     {roomInfo.extraBed && <p>Extra Bed: {roomInfo.extraBed}</p>}  
                     {roomInfo["all-inclusive"] && <p>All Inclusive: {roomInfo["all-inclusive"]}</p>} 
                     {roomInfo["full-board"] && <p>Full board: {roomInfo["full-board"]}</p>}
@@ -61,8 +62,7 @@ const RoomCard = ({roomsInfo}) => {
                     {roomInfo["self-catring"] && <p>Self catering: {roomInfo["self-catring"]}</p>}
                 </Typography>
             </CardContent>
-                
-            
+                <RoomPrice roomType = {roomInfo} />
         </Card>
     )
 }

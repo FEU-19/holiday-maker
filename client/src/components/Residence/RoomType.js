@@ -16,6 +16,7 @@ const RoomType = ({roomType}) => {
     const classes = useStyle();
     console.log(roomType);
 
+
     
     return (
         <Card className = {classes.card}>
