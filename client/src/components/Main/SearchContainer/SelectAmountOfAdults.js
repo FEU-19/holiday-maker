@@ -6,11 +6,13 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 
 const SelectAmountOfAdults = () => {
-  const [amountOfAdultsadults, setAmountOfAdults] = React.useState('');
+  const [amountOfAdultsadults, setAmountOfAdults] = React.useState(1);
 
   const handleChange = (e) => {
     setAmountOfAdults(e.target.value);
   };
+
+  console.log(amountOfAdultsadults);
 
   return (
     <>
