@@ -71,7 +71,6 @@ const Login = () => {
     //setErrorMsg(value);
   };
 
- 
   const onClick = (e) =>{
     e.preventDefault();
     let cookie = document.cookie;
