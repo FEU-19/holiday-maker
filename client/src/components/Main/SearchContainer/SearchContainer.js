@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
 import axios from "axios";
 import Grid from '@material-ui/core/Grid';
-
-
+import SelectAmountOfChildren from './SelectAmountOfChildren';
 
 const Container = styled.div`
 border: 2px solid red;
@@ -33,14 +32,15 @@ const SearchContainer = () => {
           container
           justify="space-around"
         >
-          TOP
+          
+          <SelectAmountOfChildren />
         </Grid>
         <Grid
           className="search-bottom"
           container
           justify="space-around"
         >
-            BOTTOM
+            
           </Grid>
         </form>
       </Container>
