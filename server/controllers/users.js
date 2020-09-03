@@ -8,7 +8,11 @@ exports.createLogin = async (req, res) => {
     password
   } = req.body.user;
   if (!email || !password) {
-    return res.status(400).end();
+    return res.status(400).json({
+      error: [{
+        msg: "Invalid Credentials",
+      }]
+    });
   }
 
   try {
