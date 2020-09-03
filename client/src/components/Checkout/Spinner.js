@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import styled from "styled-components";
-import CloseIcon from "@material-ui/icons/Close";
 
 const ModalCtn = styled.div`
   width: 100vw;
@@ -12,10 +11,27 @@ const ModalCtn = styled.div`
   background-color: rgba(51,51,51,0.6);
 `;
 
+const AnimatedSpinner = styled.div`
+  width: 10rem;
+  height: 10rem;
+  display: inline-block;
+  border: 3px solid rgba(0, 255, 127, 0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  margin-bottom: 10rem;
+  animation: 1s spin infinite ease-in-out;
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+`;
+
 const StyledModal = styled.div`
   width: 30rem;
   height: 20rem;
   position: absolute;
+  text-align: center;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -24,24 +40,17 @@ const StyledModal = styled.div`
   border-radius: 1rem;
 `;
 
-const CancelIcon = styled(CloseIcon)`
-  position: absolute;
-  right: 0.5rem;
-  top: 0.5rem;
-  color: grey;
-`;
-
-// the parent component need to define onClose function and pass here
-const Modal = ({ onClose, children, showModal }) => {
+const Spinner = () => {
   return ReactDOM.createPortal(
-    <ModalCtn style={showModal ? { display: "block" } : { display: "none" }}>
+    <ModalCtn>
       <StyledModal>
-        <CancelIcon onClick={onClose} />
-        {children}
+        <h3>Vänligen vänta tills betalning genomförs.</h3>
+        <p>Refresha inte sidan.</p>
+        <AnimatedSpinner />
       </StyledModal>
     </ModalCtn>,
     document.body
   );
 };
 
-export default Modal;
+export default Spinner;

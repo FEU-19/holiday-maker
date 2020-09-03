@@ -15,6 +15,9 @@ export const useGrid = makeStyles((grid) => ({
     paddingTop: 70,
     outline: 0,
   },
+  center: {
+    backgroundColor: "#fcba03",
+  },
 }));
 
 export const useTheme = createMuiTheme((theme) => ({

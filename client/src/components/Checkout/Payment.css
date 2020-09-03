@@ -120,3 +120,31 @@ tr > div {
   margin: 40px 0;
   cursor: pointer;
 }
+
+.modal__container {
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+.modal__container p {
+  font-size: 18px;
+}
+
+.doneIcon {
+  margin-top: 10%;
+  background-color: green;
+  color: #fff;
+  border-radius: 50%;
+  height: 40px !important;
+  width: 40px !important;
+}
+
+.cancelIcon {
+  margin-top: 10%;
+  background-color: red;
+  color: #fff;
+  border-radius: 50%;
+  height: 40px !important;
+  width: 40px !important;
+}
