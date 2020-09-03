@@ -13,19 +13,14 @@ const SelectDropDown = styled(Select)`
 
 
 const SelectCity = ({ residentData }) => {
-    const [city, setCity] = useState();
+    const [city, setCity] = useState("");
 
     const handleChange = (e) => {
         setCity(e.target.value);
     }
 
-    console.log('CHOSEN CITY --->', city);
-
-
-    const mapCities = residentData.map((city) => {
-        console.log(city.city);
-        
-        return <MenuItem key={city._id} value={city.city} onChange={handleChange}>{city.city}</MenuItem>
+    const mapCities = residentData.map((city, i) => {
+        return <MenuItem key={city + i} value={city.city} onChange={handleChange}>{city.city}</MenuItem>
     })
 
     return (
@@ -37,7 +32,6 @@ const SelectCity = ({ residentData }) => {
                 id="selectcity"
                 onChange={handleChange}
             >
-                <MenuItem disabled>City</MenuItem>
                 {mapCities}
             </SelectDropDown>
         </>
@@ -46,11 +40,3 @@ const SelectCity = ({ residentData }) => {
 
 export default SelectCity;
 
-
-
-
-
-{/*                 <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
- */}
