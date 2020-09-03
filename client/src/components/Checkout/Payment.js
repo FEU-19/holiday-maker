@@ -10,6 +10,28 @@ import Country_DropdownList from "./Country_DropdownList";
 import DoneIcon from "@material-ui/icons/Done";
 import CancelIcon from "@material-ui/icons/Cancel";
 
+import {
+  Payment,
+  PaymentContainer,
+  H1,
+  HR,
+  CarNumContainer,
+  CardNum,
+  InfoForm,
+  PayForm,
+  InputContainer,
+  RadioBtn__Container,
+  RadioBtn__ContainerDiv,
+  RadioBtn__ContainerInput,
+  ImgContainer,
+  IMG,
+  Table,
+  EXP_CVC_Container,
+  EXP_CVC_Div,
+  EXP_CVC_Input,
+  PayBtn,
+} from "./PaymentStyles";
+
 function Payment() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -37,7 +59,7 @@ function Payment() {
   }
 
   return (
-    <div className="payment">
+    <Payment className={classes.root} noValidate autoComplete="off">
       <div className="payment__container">
         <h1>Payment</h1>
         <form className="info__form">
@@ -232,7 +254,7 @@ function Payment() {
           </div>
         )}
       </Modal>
-    </div>
+    </Payment>
   );
 }
 
