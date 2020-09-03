@@ -5,10 +5,14 @@ import { Card, CardHeader, CardMedia, CardContent, Typography } from "@material-
 const useStyle = makeStyles(() => ({
     card: {
         maxWidth: 345,
+        minWidth: 316,
+        margin: 10,
+        backgroundColor: "rgb(234, 234, 234)",
     },
     media: {
         height: 0,
         paddingTop: '56.25%',
+        margin: 20,
     },
 }))
 

@@ -8,7 +8,14 @@ import { Card, CardHeader, CardMedia, CardContent, Typography } from "@material-
 const useStyle = makeStyles(() => ({
     card: {
         maxWidth: 345,
+        margin: 10,
+        backgroundColor: "rgb(234, 234, 234)",
     },
+    text: {
+        margin: 20,
+        fontSize: 16,
+        fontWeight: "bolder",
+    }
 }))
 
 const RoomPrice = ({roomType}) => {
@@ -22,7 +29,7 @@ const RoomPrice = ({roomType}) => {
                 Today's Price including taxes and fees
             </Typography>
             <CardHeader className = {classes.header}
-                        title = {roomType.price} />
+                        title = {roomType.price}/>
             
 
         </Card>
