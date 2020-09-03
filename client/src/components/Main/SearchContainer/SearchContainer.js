@@ -25,15 +25,21 @@ const SearchContainer = () => {
     });
   }, []);
 
+  function onSubmit(e) {
+    e.preventDefault();
+    console.log('clicked');
+  }
+
   return (
     <Container>
-      <form action="">
+      <form onSubmit={onSubmit}>
         <Grid
           className="search-top"
           container
           justify="space-around"
         >
           <DatePicker />
+          <input type="submit" />
         </Grid>
         <Grid
           className="search-bottom"
