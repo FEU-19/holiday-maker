@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
 import axios from "axios";
 import Grid from '@material-ui/core/Grid';
+import { Button } from '@material-ui/core';
 
 import DatePicker from './DatePicker';
 
@@ -25,15 +26,28 @@ const SearchContainer = () => {
     });
   }, []);
 
+  function onSubmit(e) {
+    e.preventDefault();
+    console.log('clicked');
+  }
+
   return (
     <Container>
-      <form action="">
+      <form onSubmit={onSubmit}>
         <Grid
           className="search-top"
           container
           justify="space-around"
         >
           <DatePicker />
+          <Button 
+            type="submit"
+            variant="contained"
+            color="primary"
+            placeholder="Submit"
+          >
+            Submit
+          </Button>
         </Grid>
         <Grid
           className="search-bottom"
