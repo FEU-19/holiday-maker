@@ -4,7 +4,7 @@ import axios from "axios";
 import Grid from '@material-ui/core/Grid';
 import { Button } from '@material-ui/core';
 
-
+import filterCity from '../../../utils/filterCity';
 import DatePicker from './DatePicker';
 
 const Container = styled.div`
@@ -16,6 +16,7 @@ justify-content: center;
 
 const SearchContainer = () => {
   const [residentData, setResidentData] = useState([{}]);
+  const [filteredData, setFilteredData] = useState([]);
 
   useEffect(() => {
     axios.get('http://localhost:8080/api/residents/')
@@ -27,9 +28,16 @@ const SearchContainer = () => {
     });
   }, []);
 
+  // whenever filterData changes console.log() runs on the filt
+  useEffect(() => {
+    console.log(filteredData);
+  }, [filteredData])
+
   function onSubmit(e) {
     e.preventDefault();
-    console.log('clicked');
+
+    // second argument is placeholder for userInput about the specific city.
+    setFilteredData(filterCity(residentData, 'Manila'));
   }
 
   return (
