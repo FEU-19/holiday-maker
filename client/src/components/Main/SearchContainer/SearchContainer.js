@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
 import axios from "axios";
 import Grid from '@material-ui/core/Grid';
+import { Button } from '@material-ui/core';
 
 import DatePicker from './DatePicker';
 
@@ -39,7 +40,14 @@ const SearchContainer = () => {
           justify="space-around"
         >
           <DatePicker />
-          <input type="submit" />
+          <Button 
+            type="submit"
+            variant="contained"
+            color="primary"
+            placeholder="Submit"
+          >
+            Submit
+          </Button>
         </Grid>
         <Grid
           className="search-bottom"
