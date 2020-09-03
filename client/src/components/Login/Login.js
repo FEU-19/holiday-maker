@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import { Redirect } from "react-router-dom";
 import styled from "styled-components"
 import axios from "axios";
+import SimpleDialog from '@material-ui/core/Dialog';
+
+
 
 const Container = styled.div`
   height: 100vh;
@@ -19,6 +21,19 @@ const Container = styled.div`
 
 const Login = () => {
   const [user, setUser] = useState({ email: "", password: "" });
+  const [open, setOpen] = useState(false);
+  const [errorMsg, setErrorMsg] = useState(0)
+ 
+
+  const options = {
+    xsrfCookieName: 'XSRF-TOKEN',
+    xsrfHeaderName: 'X-XSRF-TOKEN',
+  };
+
+  const instance = axios.create({
+    withCredentials: true,
+  })
+
   const onChangeUser = (e) => {
     const { value } = e.target;
     const { name } = e.target;
@@ -26,35 +41,52 @@ const Login = () => {
   };
 
   const onSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault();  
     if (user) {
-      const instance = axios.create({
-        withCredentials: true,
-      })
 
-      const options = {
-        xsrfCookieName: 'XSRF-TOKEN',
-        xsrfHeaderName: 'X-XSRF-TOKEN',
-      };
-
+      
       instance.post("http://localhost:3002/api/login/", {user}, options)
       .then((res) => {
         console.log(res);
         if(res.status === 201){
+          console.log(user)
           // return <Redirect to="/" />;
           // window.history.go(-1)
         }
       })
       .catch(err => {
         //window.history.go(-1)
-        console.log("Error message" + err)
+        console.log("Error message" + err.response.data.error[0].msg)
+        //setShowErrorMsg(true)
+        setOpen(true);
+        setErrorMsg("Oops något blev fel");
+
       });
     }
   };
+
+  const handleClose = () => {
+    //setAnchorEl(null);
+    setOpen(false)
+    //setErrorMsg(value);
+  };
+
+  const onClick = (e) =>{
+    e.preventDefault();
+    let cookie = document.cookie;
+    let userId = cookie.split('=Bearer')[1];
+    instance.post("http://localhost:3002/api/logout/", {userId}, options)
+      .then((res) =>{
+        console.log('working');
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
   
   return (
     <Container>
-      <form className="login__Main" onSubmit={onSubmit}>
+      <form className="login__Main" onSubmit={(e) => onSubmit(e)}>
         <TextField
           required
           name="email"
@@ -73,9 +105,15 @@ const Login = () => {
           value={user.password}
           onChange={onChangeUser}
         />
-        <Button type="submit">Login</Button>
+        <Button type="submit">Login</Button> 
+        {open ? <SimpleDialog  selectedvalue={errorMsg} open={open} onClose={handleClose} > 
+          {errorMsg}
+
+      </SimpleDialog> : null}
       </form>
+      
     </Container>
+
   );
 };
 
