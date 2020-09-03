@@ -48,23 +48,19 @@ const RegistrationComp = () => {
     if (newUser.confirm_password === newUser.password) {
       handlePostUser();
     } else {
+      setWhatMsgToShow(2);
       setShowMsg(true);
-      setWhatMsgToShow(4);
     }
   }
 
   function handlePostUser() {
-    console.log("the user i will POST ", newUser);
-
     axios
       .post(`http://localhost:3002/api/register`, newUser)
       .then((res) => {
-        console.log(res);
         console.log("RESP is: ", res);
-        console.log("res.data.msg ", res.data.msg);
-        // handleInputReset();
-        setShowMsg(true);
+        handleInputReset();
         setWhatMsgToShow(res.data.msg);
+        setShowMsg(true);
 
         // setTimeout(() => {
         //   // setShowMsg(false);
@@ -74,12 +70,10 @@ const RegistrationComp = () => {
         // }, 2500);
       })
       .catch((err) => {
-        const error = err.response.data.error[0].msg;
+        const errorMsg = err.response.data.error[0].msg;
         console.log("ERROR is ", err.response);
-        console.log(error);
-        console.log(err.response.status);
 
-        setWhatMsgToShow(error);
+        setWhatMsgToShow(errorMsg);
         setShowMsg(true);
       });
   }
@@ -88,19 +82,17 @@ const RegistrationComp = () => {
     e.preventDefault();
     setAnchorEl(e.currentTarget);
 
-    let fieldsEmpty;
+    let fieldsEmpty = false;
     for (const item of Object.values(newUser)) {
-      if (item === "") {
-        fieldsEmpty = false;
-      } else {
-        fieldsEmpty = true;
+      if (item.length === 0) {
+        setWhatMsgToShow(1);
+        setShowMsg(true);
+        return;
       }
+      fieldsEmpty = true;
     }
 
-    if (!fieldsEmpty) {
-      setShowMsg(true);
-      setWhatMsgToShow(3);
-    } else {
+    if (fieldsEmpty) {
       comparePassword();
     }
   }

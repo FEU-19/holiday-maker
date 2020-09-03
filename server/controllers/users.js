@@ -77,7 +77,7 @@ exports.create = async (req, res) => {
     if (user) {
       return res.status(400).json({
         error: [{
-          msg: "User already exists"
+          msg: "Account with this email already exists"
         }],
       });
     }
@@ -100,7 +100,7 @@ exports.create = async (req, res) => {
 
     await user.save();
     res.status(201).json({
-      msg: "success registration",
+      msg: "Account was created",
     });
   } catch (err) {
     console.error(err.message);

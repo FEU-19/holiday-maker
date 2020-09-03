@@ -8,9 +8,9 @@ const RenderMsg = ({ whatMsgToShow, handleClose, anchorEl }) => {
 
   let msg;
 
-  if (whatMsgToShow === 3) {
+  if (whatMsgToShow === 1) {
     msg = <Typography>Fields can´t be empty.</Typography>;
-  } else if (whatMsgToShow === 4) {
+  } else if (whatMsgToShow === 2) {
     msg = <Typography>Password doesn't match.</Typography>;
   } else {
     msg = <Typography>{whatMsgToShow}</Typography>;
@@ -18,6 +18,7 @@ const RenderMsg = ({ whatMsgToShow, handleClose, anchorEl }) => {
 
   return (
     <Popover
+    // className={classes.typography} 
       id={id}
       open={open}
       anchorEl={anchorEl}
@@ -32,7 +33,6 @@ const RenderMsg = ({ whatMsgToShow, handleClose, anchorEl }) => {
       }}
     >
       {msg}
-      {/* className={classes.typography} */}
     </Popover>
   );
 };
