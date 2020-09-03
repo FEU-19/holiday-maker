@@ -13,6 +13,8 @@ const useStyle = makeStyles(() => ({
     card: {
         position: "relative",
         display: "flex",
+        flexWrap: "nowrap",
+        justifyContent: "space-between",
         marginBottom: 20,
     },
     title: {
