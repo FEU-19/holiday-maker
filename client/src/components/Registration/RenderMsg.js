@@ -14,7 +14,7 @@ const RenderMsg = ({ whatMsgToShow, handleClose, anchorEl }) => {
   } else if (whatMsgToShow === 3) {
     msg = <Typography>Fields can´t be empty.</Typography>;
   } else if (whatMsgToShow === 4) {
-    msg = <Typography>Password doesn´t match.</Typography>;
+    msg = <Typography>Password doesn't match.</Typography>;
   } else {
     msg = <Typography>Something went wrong. try again later.</Typography>;
   }

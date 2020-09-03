@@ -60,9 +60,9 @@ const RegistrationComp = () => {
     const url = "";
 
     axios
-      .post(`${url}register`, newUser)
+      .post(`http://localhost:3002/api/register`, newUser)
       .then((res) => {
-        console(res);
+        console.log(res);
         handleInputReset();
         setShowMsg(true);
         setWhatMsgToShow(1);

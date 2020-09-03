@@ -2,11 +2,11 @@ const bcrypt = require("bcrypt");
 const User = require("../models/User");
 
 exports.createLogin = async (req, res) => {
+
   const {
     email,
     password
-  } = req.body;
-
+  } = req.body.user;
   if (!email || !password) {
     return res.status(400).end();
   }
@@ -15,6 +15,7 @@ exports.createLogin = async (req, res) => {
     let user = await User.findOne({
       email,
     });
+    console.log(user);
 
     if (!user) {
       return res.status(400).json({
@@ -34,7 +35,11 @@ exports.createLogin = async (req, res) => {
       });
     }
 
-    res.send("ok");
+    res.status(200)
+    res.cookie("access_token", "Bearer" + user.id, {
+      expires: new Date(Date.now() + 8 * 3600000),
+    })
+    res.send("fungerar")
 
   } catch (err) {
     console.error(err.message);
@@ -102,8 +107,6 @@ exports.create = async (req, res) => {
     res.status(500).send("Server error");
   }
 };
-
-
 
 exports.read = (req, res) => {
   res.send("OK");

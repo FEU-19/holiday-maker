@@ -40,8 +40,18 @@ const Login = () => {
     setButtonTarget()
     
     if (user) {
-      axios.post("/api/login", { user })
+      const instance = axios.create({
+        withCredentials: true,
+      })
+
+      const options = {
+        xsrfCookieName: 'XSRF-TOKEN',
+        xsrfHeaderName: 'X-XSRF-TOKEN',
+      };
+
+      instance.post("http://localhost:3002/api/login/", {user}, options)
       .then((res) => {
+        console.log(res);
         if(res.status === 201){
           setButtonTarget(null)
           // return <Redirect to="/" />;
