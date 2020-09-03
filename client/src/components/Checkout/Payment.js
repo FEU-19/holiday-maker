@@ -34,6 +34,7 @@ import {
   EXP_CVC_Input,
   PayBtn,
 } from "./PaymentStyles";
+import TextInput from "./TextInput";
 
 function Payment() {
   const useStyles = makeStyles((theme) => ({
@@ -83,38 +84,26 @@ function Payment() {
       <PaymentContainer>
         <H1>Payment</H1>
         <InfoForm>
-          <InputContainer>
-            <TextField
-              id="standard-basic"
-              label="First name"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-            />
-          </InputContainer>
-          <InputContainer>
-            <TextField
-              id="standard-basic"
-              label="Last name"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-            />
-          </InputContainer>
-          <InputContainer>
-            <TextField
-              id="standard-basic"
-              label="E-mail"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </InputContainer>
-          <InputContainer>
-            <TextField
-              id="standard-basic"
-              label="Phone number"
-              value={phoneNum}
-              onChange={(e) => setPhoneNum(e.target.value)}
-            />
-          </InputContainer>
+          <TextInput
+            label="First name"
+            onchange={(e) => setFirstName(e.target.value)}
+            value={firstName}
+          />
+          <TextInput
+            label="Last name"
+            onchange={(e) => setLastName(e.target.value)}
+            value={lastName}
+          />
+          <TextInput
+            label="E-mail name"
+            onchange={(e) => setEmail(e.target.value)}
+            value={email}
+          />
+          <TextInput
+            label="Phone number"
+            onchange={(e) => setPhoneNum(e.target.value)}
+            value={phoneNum}
+          />
         </InfoForm>
         <br />
         <HR />
@@ -123,30 +112,22 @@ function Payment() {
           <InputContainer>
             <Country_DropdownList />
           </InputContainer>
-          <InputContainer>
-            <TextField
-              id="standard-basic"
-              label="City"
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
-            />
-          </InputContainer>
-          <InputContainer>
-            <TextField
-              id="standard-basic"
-              label="Zip code"
-              value={zipcode}
-              onChange={(e) => setZipCode(e.target.value)}
-            />
-          </InputContainer>
-          <InputContainer>
-            <TextField
-              id="standard-basic"
-              label="Adress"
-              value={adress}
-              onChange={(e) => setAdress(e.target.value)}
-            />
-          </InputContainer>
+
+          <TextInput
+            label="City"
+            onchange={(e) => setCity(e.target.value)}
+            value={city}
+          />
+          <TextInput
+            label="Zip code"
+            onchange={(e) => setZipCode(e.target.value)}
+            value={zipcode}
+          />
+          <TextInput
+            label="Adress"
+            onchange={(e) => setAdress(e.target.value)}
+            value={adress}
+          />
         </InfoForm>
 
         <br />
