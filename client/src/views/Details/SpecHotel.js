@@ -13,7 +13,6 @@ const SpecHotel = () => {
     axios
       .get("http://localhost:4000/api/residents/5f4e2b500ae3bf21d48b09f2")
       .then((response) => {
-        console.log(response.data.data);
         setHotel(response.data.data);
       });
   }, []);
@@ -28,13 +27,7 @@ const SpecHotel = () => {
           alignContent="stretch"
           alignItems="center"
         >
-          <Grid
-            item
-            xs={4}
-            direction="column"
-            alignContent="center"
-            justify="center"
-          >
+          <Grid item xs={4}>
             <h1>Hotel Info</h1>
             <p>City: {hotel.city}</p>
             <p>Hotel name: {hotel.name}</p>
@@ -49,20 +42,13 @@ const SpecHotel = () => {
             <p>Rating: {hotel.rating}</p>
           </Grid>
           <Divider orientation="vertical" flexItem />
-          <Grid
-            item
-            xs={4}
-            direction="column"
-            justify="center"
-            alignItems="center"
-            className={grid.center}
-          >
+          <Grid item xs={4} className={grid.center}>
             <p>
               Our rooms have full-, half-board, all-inclusive or self-catering
             </p>
           </Grid>
           <Divider orientation="vertical" flexItem />
-          <Grid item xs={3} direction="column">
+          <Grid item xs={3}>
             {hotel.rooms ? (
               <img
                 src={getImage(hotel)}

@@ -9,8 +9,6 @@ const Details = ({ room }) => {
   const [openModal, setOpenModal] = useState(false);
   const grid = useGrid();
 
-  console.log(room);
-
   return (
     <ThemeProvider theme={useTheme}>
       <Paper>
@@ -21,7 +19,7 @@ const Details = ({ room }) => {
           alignContent="stretch"
           className={grid.rule}
         >
-          <Grid item xs={3} className={grid.section} direction="column">
+          <Grid item xs={3} className={grid.section}>
             <Carousel
               openModal={openModal}
               setOpenModal={setOpenModal}
@@ -35,21 +33,15 @@ const Details = ({ room }) => {
             />
           </Grid>
           <Divider orientation="vertical" flexItem />
-          <Grid
-            item
-            xs={5}
-            className={grid.section}
-            direction="column"
-            align="center"
-          >
+          <Grid item xs={5} className={grid.section}>
             <BookingForm />
           </Grid>
           <Divider orientation="vertical" flexItem />
-          <Grid item xs={2} className={grid.section} direction="column">
+          <Grid item xs={2} className={grid.section}>
             PRIS
           </Grid>
           <Divider orientation="vertical" flexItem />
-          <Grid item xs className={grid.section} direction="column">
+          <Grid item xs className={grid.section}>
             <Button>Boka</Button>
           </Grid>
         </Grid>
