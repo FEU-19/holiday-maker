@@ -2,8 +2,11 @@ import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
 import axios from "axios";
 import Grid from '@material-ui/core/Grid';
+import { Button } from '@material-ui/core';
 
-//Functions
+import DatePicker from './DatePicker';
+
+// Filter functions
 import adultChildToBedFilter from '../../../utils/adultChildToBedFilter.js';
 
 const Container = styled.div`
@@ -26,15 +29,28 @@ const SearchContainer = () => {
     });
   }, []);
 
+  function onSubmit(e) {
+    e.preventDefault();
+    console.log('clicked');
+  }
+
   return (
     <Container>
-      <form action="">
+      <form onSubmit={onSubmit}>
         <Grid
           className="search-top"
           container
           justify="space-around"
         >
-          TOP
+          <DatePicker />
+          <Button 
+            type="submit"
+            variant="contained"
+            color="primary"
+            placeholder="Submit"
+          >
+            Submit
+          </Button>
         </Grid>
         <Grid
           className="search-bottom"
