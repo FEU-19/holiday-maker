@@ -40,8 +40,9 @@ const SearchContainer = () => {
           container
           justify="space-around"
         >
-          <DatePicker />
-          <Button 
+          <DatePicker
+          residentData={residentData} />
+          <Button
             type="submit"
             variant="contained"
             color="primary"
