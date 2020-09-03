@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import CheckIcon from '@material-ui/icons/Check';
 
 // Style variables
 const boxContainer = {
@@ -44,63 +45,30 @@ const defaultText = {
   fontStyle: "italic"
 }
 
+const check = {
+  fontSize: "15px",
+  transform: "translateY(3px)",
+}
+
 
 
 const ResidenceInformation = ({info}) => {
-  const [roomInfo, updateRoomInfo] = useState({});
-
-  useEffect(() => {
-   const roomAmount = info.rooms.length;
-   const roomTypesObject = findRoomTypes();
-
-   const roomTypes = Object.keys(roomTypesObject);
-
-
-
-   const roomInfoObject = {
-     numberOfRooms: roomAmount,
-     roomsOfTypes: roomTypesObject,
-     roomTypes: roomTypes,
-   };
-
-   updateRoomInfo(roomInfoObject);
-
-  }, [] );
-
-  function findRoomTypes(){
-    const roomTypesObject = info.rooms.reduce(
-    (acc, cur) => {
-        if (acc[cur.type]) {
-            acc[cur.type] += 1;
-        } else {
-          acc[cur.type] = 1;
-        }
-        return acc;
-      }, {}
-    );
-
-
-    console.log(roomTypesObject);
-    return roomTypesObject;
-  }
-
-  console.log(roomInfo);
-
   return (
     <div className="residence__residenceInformation__boxContainer" style={boxContainer}>
       <div className="residence__residenceInformation__boxContainer__aboutContainer" style={infoContainer}>
         <h3 style={textReset}>About</h3>
         <div className="residence__residenceInformation__boxContainer__aboutContent" style={infoContent}>
-          {info.restaurant && <p style={textReset}>Restaurant</p>}
-          {info.pool && <p style={textReset}>Pool</p>}
-          {info.nightEntertainment && <p style={textReset}>Night Entertainment</p>}
+          {/*<p style={textReset}>{info.rooms.length} Rooms</p>*/}
+          {info.restaurant && <p style={textReset}><CheckIcon style={check}/> Restaurant</p>}
+          {info.pool && <p style={textReset}><CheckIcon style={check}/> Pool</p>}
+          {info.nightEntertainment && <p style={textReset}><CheckIcon style={check}/> Night Entertainment</p>}
           {!info.restaurant && !info.pool && !info.nightEntertainment && <p style={defaultText}>Please contact the residence for more information.</p>}
         </div>
       </div>
       <div className="residence__residenceInformation__boxContainer__familyContainer" style={infoContainer}>
         <h3 style={textReset}>For Family</h3>
         <div className="residence__residenceInformation__boxContainer__familyContent" style={infoContent}>
-          {info.kidsClub && <p style={textReset}>Kids Club</p>}
+          {info.kidsClub && <p style={textReset}><CheckIcon style={check}/> Kids Club</p>}
           {!info.kidsClub && <p style={defaultText}>Please contact the residence for more information.</p>}
         </div>
       </div>
