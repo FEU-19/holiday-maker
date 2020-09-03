@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 // Style variables
 const boxContainer = {
@@ -47,6 +47,45 @@ const defaultText = {
 
 
 const ResidenceInformation = ({info}) => {
+  const [roomInfo, updateRoomInfo] = useState({});
+
+  useEffect(() => {
+   const roomAmount = info.rooms.length;
+   const roomTypesObject = findRoomTypes();
+
+   const roomTypes = Object.keys(roomTypesObject);
+
+
+
+   const roomInfoObject = {
+     numberOfRooms: roomAmount,
+     roomsOfTypes: roomTypesObject,
+     roomTypes: roomTypes,
+   };
+
+   updateRoomInfo(roomInfoObject);
+
+  }, [] );
+
+  function findRoomTypes(){
+    const roomTypesObject = info.rooms.reduce(
+    (acc, cur) => {
+        if (acc[cur.type]) {
+            acc[cur.type] += 1;
+        } else {
+          acc[cur.type] = 1;
+        }
+        return acc;
+      }, {}
+    );
+
+
+    console.log(roomTypesObject);
+    return roomTypesObject;
+  }
+
+  console.log(roomInfo);
+
   return (
     <div className="residence__residenceInformation__boxContainer" style={boxContainer}>
       <div className="residence__residenceInformation__boxContainer__aboutContainer" style={infoContainer}>
