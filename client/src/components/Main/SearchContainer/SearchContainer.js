@@ -1,59 +1,50 @@
 import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
 import axios from "axios";
+import Grid from '@material-ui/core/Grid';
+
+
 
 const Container = styled.div`
-  border: 2px solid red;
-  width: 90vw;
-  height: auto;
-  display: flex;
-  justify-content: center;
-
-  form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 2px solid green;
-    width: 95%;
-    height: 20px;
-  }
-
-  .search__top {
-    display: flex;
-    flex-direction: column;
-    border: 2px solid black;
-    width: 85%;
-    height: 20px;
-  }
-
-  .search__bottom {
-    display: flex;
-    flex-direction: column;
-    border: 2px solid black;
-    width: 85%;
-    height: 20px;
-  }
+border: 2px solid red;
+width: 90vw;
+display: flex;
+justify-content: center;
 `;
 
 const SearchContainer = () => {
+  const [residentData, setResidentData] = useState([{}]);
+
   useEffect(() => {
     axios.get('http://localhost:8080/api/residents/')
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-    }, []);
+    .then((res) => {
+      setResidentData(res.data);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+  }, []);
 
   return (
     <Container>
       <form action="">
-        <div className="search__top"></div>
-        <div className="search__bottom"></div>
-      </form>
-    </Container>
-  );
-};
+        <Grid
+          className="search-top"
+          container
+          justify="space-around"
+        >
+          TOP
+        </Grid>
+        <Grid
+          className="search-bottom"
+          container
+          justify="space-around"
+        >
+            BOTTOM
+          </Grid>
+        </form>
+      </Container>
+    );
+  };
 
-export default SearchContainer;
+  export default SearchContainer;
