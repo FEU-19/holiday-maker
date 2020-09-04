@@ -4,8 +4,8 @@ import { Redirect } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/core/styles";
 
-import Modal from "../common/Modal/Modal";
-
+// import Modal from "../common/Modal/Modal";
+import { Modal, Button, Box } from "@material-ui/core";
 import DoneIcon from "@material-ui/icons/Done";
 import CancelIcon from "@material-ui/icons/Cancel";
 
@@ -125,25 +125,25 @@ function Payment() {
           Finish & Pay
         </PayBtn>
       </PaymentContainer>
-      <Modal
-        onClose={() => controlCloseModal(paymentSuccess)}
-        showModal={showModal}
-      >
-        {paymentSuccess && (
-          <div className="modal__container">
-            <DoneIcon className="doneIcon" />
-            <h1>Thank you!</h1>
-            <h2>for booking with Holiday Maker.</h2>
-            <p>Booking confirmation has been sent to your email.</p>
-          </div>
-        )}
-        {!paymentSuccess && (
-          <div className="modal__container">
-            <CancelIcon className="cancelIcon" />
-            <h1>Error!</h1>
-            <h3>Your payment hasn't been confirmed, please try again.</h3>
-          </div>
-        )}
+
+      <Modal onClose={() => controlCloseModal(paymentSuccess)} open={showModal}>
+        <Box>
+          {paymentSuccess && (
+            <div className="modal__container">
+              <DoneIcon className="doneIcon" />
+              <h1>Thank you!</h1>
+              <h2>for booking with Holiday Maker.</h2>
+              <p>Booking confirmation has been sent to your email.</p>
+            </div>
+          )}
+          {!paymentSuccess && (
+            <div className="modal__container">
+              <CancelIcon className="cancelIcon" />
+              <h1>Error!</h1>
+              <h3>Your payment hasn't been confirmed, please try again.</h3>
+            </div>
+          )}
+        </Box>
       </Modal>
     </PaymentPage>
   );
