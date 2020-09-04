@@ -5,6 +5,8 @@ import Grid from '@material-ui/core/Grid';
 import SelectAmountOfChildren from './SelectAmountOfChildren';
 
 import SelectCity from './SelectCity';
+import CheckboxEveningEntmt from './CheckboxEveningEntmt';
+
 import { Button } from '@material-ui/core';
 
 import DatePicker from './DatePicker';
@@ -14,6 +16,10 @@ import CheckboxKidsClub from './CheckboxKidsClub';
 // Filter functions
 import adultChildToBedFilter from '../../../utils/adultChildToBedFilter.js';
 import filterCity from '../../../utils/filterCity';
+import filterKidsClub from '../../../utils/filterKidsClub'
+import filterNightEntertainment from '../../../utils/filterNightEntertainment';
+import filterPool from '../../../utils/filterPool';
+import filterRestaurant from '../../../utils/filterRestaurant';
 
 
 const Container = styled.div`
@@ -37,7 +43,7 @@ const SearchContainer = () => {
     });
   }, []);
 
-  // whenever filterData changes console.log() runs on the filt
+  // whenever filterData changes console.log() runs.
   useEffect(() => {
     console.log(filteredData);
   }, [filteredData])
@@ -45,8 +51,26 @@ const SearchContainer = () => {
   function onSubmit(e) {
     e.preventDefault();
 
-    // second argument is placeholder for userInput about the specific city.
-    setFilteredData(filterCity(residentData, 'Manila'));
+    // An example of how to handle our filter functions
+    // Updated task "created func which shows the filtered hotel obj"
+    new Promise((resolve, reject) => {
+      let c = [...residentData];
+
+      c = filterCity(c, 'Manila');
+      c = filterPool(c, true);
+      c = filterNightEntertainment(c, false);
+      c = filterKidsClub(c, 'default');
+      c = filterRestaurant(c, 'default');
+
+      resolve(c);
+    })
+    .then((res) => {
+      setFilteredData(res);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+    
   }
 
   return (
@@ -75,7 +99,11 @@ const SearchContainer = () => {
           container
           justify="space-around"
         >
+
           <CheckboxKidsClub />
+          <CheckboxEveningEntmt />
+            
+
           </Grid>
         </form>
       </Container>
