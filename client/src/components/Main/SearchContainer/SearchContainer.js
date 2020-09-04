@@ -40,6 +40,7 @@ const SearchContainer = () => {
           container
           justify="space-around"
         >
+          
           <DatePicker
           residentData={residentData} />
           <Button
