@@ -2,9 +2,10 @@
 // 
 // Filter out hotels which does not match userInput
 
-export default function filterCity(city, userInput) {
-  let x = city.filter((hotel) => {
+export default function filterCity(data, userInput) {
+  if (!userInput) return data;
+
+  return data.filter((hotel) => {
     return hotel.city.toLowerCase() === userInput.toLowerCase();
-  })
-  return x;
+  });
 };
