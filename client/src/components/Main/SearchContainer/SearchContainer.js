@@ -42,7 +42,7 @@ const SearchContainer = () => {
     });
   }, []);
 
-  // whenever filterData changes console.log() runs on the filt
+  // whenever filterData changes console.log() runs.
   useEffect(() => {
     console.log(filteredData);
   }, [filteredData])
@@ -50,18 +50,25 @@ const SearchContainer = () => {
   function onSubmit(e) {
     e.preventDefault();
 
-    // second argument is placeholder for userInput about the specific city.
-    // setFilteredData(filterCity(residentData, 'Manila'));
-
+    // An example of how to handle our filter functions
+    // Updated task "created func which shows the filtered hotel obj"
     new Promise((resolve, reject) => {
-      setFilteredData(filterCity(residentData, 'Manila'));
-      setFilteredData(filterPool(residentData, true));
-      
-      resolve();
+      let c = [...residentData];
+
+      c = filterCity(c, 'Manila');
+      c = filterPool(c, true);
+      c = filterNightEntertainment(c, false);
+      c = filterKidsClub(c, 'default');
+      c = filterRestaurant(c, 'default');
+
+      resolve(c);
     })
-    .then(() => {
-      console.log(filteredData)
+    .then((res) => {
+      setFilteredData(res);
     })
+    .catch((err) => {
+      console.error(err);
+    });
     
   }
 
