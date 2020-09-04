@@ -15,4 +15,5 @@ const hotelSchema = new mongoose.Schema({
 });
 
 const Hotel = mongoose.model("residence", hotelSchema);
+
 module.exports = Hotel;

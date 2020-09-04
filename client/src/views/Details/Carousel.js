@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Modal, Button, Box } from "@material-ui/core";
 import KeyboardArrowLeftIcon from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
-import { useGrid } from "./styles";
+import { useStyle } from "./styles";
 
 // const images = [
 //   "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.ajorifSUT7IuwtVpeJJrogHaFE%26pid%3DApi&f=1",
@@ -12,7 +12,7 @@ import { useGrid } from "./styles";
 
 const Carousel = ({ openModal, setOpenModal, images }) => {
   const [current, setCurrent] = useState(0);
-  const style = useGrid();
+  const style = useStyle();
 
   const handleClick = (direction) => {
     if (direction < 0) {
