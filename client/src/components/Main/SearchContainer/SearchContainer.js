@@ -51,7 +51,18 @@ const SearchContainer = () => {
     e.preventDefault();
 
     // second argument is placeholder for userInput about the specific city.
-    setFilteredData(filterCity(residentData, 'Manila'));
+    // setFilteredData(filterCity(residentData, 'Manila'));
+
+    new Promise((resolve, reject) => {
+      setFilteredData(filterCity(residentData, 'Manila'));
+      setFilteredData(filterPool(residentData, true));
+      
+      resolve();
+    })
+    .then(() => {
+      console.log(filteredData)
+    })
+    
   }
 
   return (
