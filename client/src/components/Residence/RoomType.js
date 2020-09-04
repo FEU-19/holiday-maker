@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import ModalDialogButton from './ModalDialogButton'
 import {
  Card,
  CardHeader,
@@ -48,5 +49,26 @@ const RoomType = ({ roomType }) => {
   </Card>
  );
 };
+
+    
+    return (
+        <Card className = {classes.card}>
+            <CardHeader className = {classes.header}
+                        title = {roomType.type}/>
+            <CardMedia className = {classes.media}
+                        title = {roomType.type}
+                        image = {roomType.images[0]}
+                        />
+            <CardContent>
+                <Typography variant = "body2" color ="textSecondary" component = "p">
+                    {roomType.size}
+                    {roomType.information}
+                </Typography>
+                <ModalDialogButton/>
+            </CardContent>
+
+        </Card>
+    )
+}
 
 export default RoomType;
