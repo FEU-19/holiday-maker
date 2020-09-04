@@ -4,7 +4,6 @@ import Button from "@material-ui/core/Button";
 import styled from 'styled-components';
 
 const Container = styled.div`
-  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -46,10 +45,10 @@ const RenderInputs = ({ handleSubmit, newUser, handleInput }) => {
         />
               
         <TextField
-          id="last_name"
+          id="surname"
           label="Last name"
           type="text"
-          name="last_name"
+          name="surname"
           value={newUser.surname}
           onChange={handleInput}
           // required

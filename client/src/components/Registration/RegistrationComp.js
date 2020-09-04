@@ -3,7 +3,7 @@ import axios from "axios";
 import RenderInputs from "./RenderInputs";
 import RenderMsg from "./RenderMsg";
 
-const RegistrationComp = () => {
+const RegistrationComp = (props) => {
   const [showMsg, setShowMsg] = useState(true);
   const [whatMsgToShow, setWhatMsgToShow] = useState(0);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -66,7 +66,7 @@ const RegistrationComp = () => {
         handleInputReset();
         setShowMsg(true);
         setWhatMsgToShow(1);
-
+        props.setValue(0);
         setTimeout(() => {
           setShowMsg(false);
         }, 2500);
