@@ -27,7 +27,7 @@ const HR = styled.hr`
   margin: 50px 0;
 `;
 
-const CarNumContainer = styled.div`
+const CarNumContainer = styled.td`
   display: flex;
   justify-content: space-around;
   padding: 5px 80px;
@@ -60,7 +60,7 @@ const InputContainer = styled.div`
   display: inline-block;
 `;
 
-const RadioBtn__Container = styled.div`
+const RadioBtn__Container = styled.td`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -98,7 +98,7 @@ const Table = styled.table`
   border-collapse: collapse;
 `;
 
-const EXP_CVC_Container = styled.div`
+const EXP_CVC_Container = styled.td`
   display: flex;
 `;
 
