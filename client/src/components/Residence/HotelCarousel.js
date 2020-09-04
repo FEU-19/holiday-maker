@@ -10,7 +10,7 @@ const HotelCarousel = () =>{
     useEffect(()=>{
         updateImages(data[0].rooms[0].images)
     },[])
-    console.log(currentPicIndex)
+   
 
     return(
         <>
