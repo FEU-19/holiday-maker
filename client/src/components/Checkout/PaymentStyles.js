@@ -2,6 +2,7 @@ import Cleave from "cleave.js/react";
 
 import styled from "styled-components";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import { makeStyles } from "@material-ui/core/styles";
 
 const PaymentPage = styled.div`
   max-width: 1000px;
@@ -147,3 +148,48 @@ export {
   EXP_CVC_Input,
   PayBtn,
 };
+
+// Modal style
+export const ModalStyle = makeStyles(() => ({
+  constainer: {
+    position: "relative",
+  },
+  content: {
+    width: "30rem",
+    height: "20rem",
+    backgroundColor: "white",
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
+    borderRadius: "5px",
+  },
+  closeBtn: {
+    width: "2rem",
+    height: "2rem",
+    position: "absolute",
+    right: "0.1rem",
+    top: "0.1rem",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "transparent",
+    border: "none",
+  },
+  closeIcon: {
+    color: "grey",
+  },
+  errorIcon: {
+    color: "red",
+    fontSize: "3rem",
+  },
+  checkIcon: {
+    color: "green",
+    fontSize: "3rem",
+  },
+}));

@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-
 import { Redirect } from "react-router-dom";
-
+import CheckIcon from "@material-ui/icons/CheckCircle";
+import ErrorIcon from "@material-ui/icons/Error";
+import CloseIcon from "@material-ui/icons/Close";
+import { ModalStyle } from "./PaymentStyles";
+import { Modal, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-
-// import Modal from "../common/Modal/Modal";
-import { Modal, Button, Box } from "@material-ui/core";
-import DoneIcon from "@material-ui/icons/Done";
-import CancelIcon from "@material-ui/icons/Cancel";
 
 import {
   PaymentPage,
@@ -33,6 +31,7 @@ function Payment() {
   }));
 
   const classes = useStyles();
+  const modalStyle = ModalStyle();
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -43,12 +42,12 @@ function Payment() {
   const [adress, setAdress] = useState("");
 
   // Check if payment confirmed
-  const [paymentSuccess, setPaymentSuccess] = useState(false);
+  const [paymentSuccess, setPaymentSuccess] = useState(true);
 
   const [redirect, setRedirect] = useState(false);
 
   // Close modal
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(true);
 
   const controlCloseModal = (status) => {
     setShowModal(false);
@@ -127,10 +126,16 @@ function Payment() {
       </PaymentContainer>
 
       <Modal onClose={() => controlCloseModal(paymentSuccess)} open={showModal}>
-        <Box>
+        <Box className={modalStyle.content}>
+          <button className={modalStyle.closeBtn}>
+            <CloseIcon
+              className={modalStyle.closeIcon}
+              onClick={() => controlCloseModal(paymentSuccess)}
+            />
+          </button>
           {paymentSuccess && (
             <div className="modal__container">
-              <DoneIcon className="doneIcon" />
+              <CheckIcon className={modalStyle.checkIcon} />
               <h1>Thank you!</h1>
               <h2>for booking with Holiday Maker.</h2>
               <p>Booking confirmation has been sent to your email.</p>
@@ -138,7 +143,7 @@ function Payment() {
           )}
           {!paymentSuccess && (
             <div className="modal__container">
-              <CancelIcon className="cancelIcon" />
+              <ErrorIcon className={modalStyle.errorIcon} />
               <h1>Error!</h1>
               <h3>Your payment hasn't been confirmed, please try again.</h3>
             </div>
