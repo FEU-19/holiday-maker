@@ -12,6 +12,7 @@ import SelectAmountOfAdults from './SelectAmountOfAdults';
 
 // Filter functions
 import adultChildToBedFilter from '../../../utils/adultChildToBedFilter.js';
+import filterKidsClub from '../../../utils/filterKidsClub'
 import filterCity from '../../../utils/filterCity';
 
 
