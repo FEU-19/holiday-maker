@@ -30,7 +30,7 @@ const HR = styled.hr`
 const CarNumContainer = styled.td`
   display: flex;
   justify-content: space-around;
-  padding: 5px 80px;
+  padding: 10px 80px;
   border: 1px solid;
 `;
 
@@ -60,35 +60,13 @@ const InputContainer = styled.div`
   display: inline-block;
 `;
 
-const RadioBtn__Container = styled.td`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 5px 25px;
-  border: 1px solid;
-`;
-
-const RadioBtn__ContainerDiv = styled.div`
-  flex: 1;
-  text-align: left;
-  display: flex;
-  align-items: center;
-  font-size: 18px;
-`;
-
-const RadioBtn__ContainerInput = styled(FormControlLabel)`
-  height: 20px;
-  width: 20px;
-  margin-right: 15px;
-`;
-
 const ImgContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
+  height: 50px;
+  width: 50px;
 `;
 
 const IMG = styled.img`
-  height: 50px;
+  height: 100%;
   object-fit: contain;
   margin-left: 5px;
 `;
@@ -100,14 +78,15 @@ const Table = styled.table`
 
 const EXP_CVC_Container = styled.td`
   display: flex;
+  text-align: center;
+  padding: 10px 80px;
+  border: 1px solid;
 `;
 
 const EXP_CVC_Div = styled.div`
   display: flex;
   flex: 1;
-  justify-content: space-around;
-  padding: 5px 10px;
-  border: 1px solid;
+  justify-content: space-between;
 `;
 
 const EXP_CVC_Input = styled(Cleave)`
@@ -136,9 +115,6 @@ export {
   InfoForm,
   PayForm,
   InputContainer,
-  RadioBtn__Container,
-  RadioBtn__ContainerDiv,
-  RadioBtn__ContainerInput,
   ImgContainer,
   IMG,
   Table,
