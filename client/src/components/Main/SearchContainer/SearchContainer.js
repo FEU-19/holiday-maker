@@ -5,6 +5,8 @@ import Grid from '@material-ui/core/Grid';
 import SelectAmountOfChildren from './SelectAmountOfChildren';
 
 import SelectCity from './SelectCity';
+import CheckboxEveningEntmt from './CheckboxEveningEntmt';
+
 import { Button } from '@material-ui/core';
 
 import DatePicker from './DatePicker';
@@ -77,6 +79,7 @@ const SearchContainer = () => {
           container
           justify="space-around"
         >
+        <CheckboxEveningEntmt />
             
           </Grid>
         </form>
