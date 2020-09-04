@@ -2,7 +2,6 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import Main from "./views/Main";
 import Checkout from "./views/Checkout";
-
 import SpecHotel from "./views/Details/SpecHotel";
 import DropDown from "./components/common/DropDown/DropDown";
 
