@@ -1,3 +1,3 @@
-export default function filterNightEntertainment(data) {
-  return data.filter(hotel => hotel.nightEntertainment === true);
+export default function filterNightEntertainment(data, userInput) {
+  return data.filter(hotel => hotel.nightEntertainment === userInput);
 }

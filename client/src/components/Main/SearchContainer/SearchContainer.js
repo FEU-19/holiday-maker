@@ -14,9 +14,11 @@ import SelectAmountOfAdults from './SelectAmountOfAdults';
 
 // Filter functions
 import adultChildToBedFilter from '../../../utils/adultChildToBedFilter.js';
+import filterCity from '../../../utils/filterCity';
 import filterKidsClub from '../../../utils/filterKidsClub'
 import filterNightEntertainment from '../../../utils/filterNightEntertainment';
-import filterCity from '../../../utils/filterCity';
+import filterPool from '../../../utils/filterPool';
+import filterRestaurant from '../../../utils/filterRestaurant';
 
 
 const Container = styled.div`

@@ -1,3 +1,3 @@
-export default function filterKidsClub(data) {
-  return data.filter(hotel => hotel.kidsClub === true);
+export default function filterKidsClub(data, userInput) {
+  return data.filter(hotel => hotel.kidsClub === userInput);
 }
