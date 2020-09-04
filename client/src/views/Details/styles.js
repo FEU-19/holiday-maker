@@ -1,6 +1,7 @@
 import { makeStyles, createMuiTheme } from "@material-ui/core/styles";
+import { green } from "@material-ui/core/colors";
 
-export const useGrid = makeStyles((grid) => ({
+export const useStyle = makeStyles((style) => ({
   root: {
     flexGrow: 1,
   },
@@ -18,11 +19,19 @@ export const useGrid = makeStyles((grid) => ({
   center: {
     backgroundColor: "#fcba03",
   },
-}));
-
-export const useTheme = createMuiTheme((theme) => ({
-  palette: {
-    Primary: "black",
-    Secondary: "orange",
+  sticky: {
+    width: "100%",
+    height: 50,
+    position: "sticky",
+    bottom: 0,
+    margin: 0,
   },
 }));
+
+export const Theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: green[500],
+    },
+  },
+});

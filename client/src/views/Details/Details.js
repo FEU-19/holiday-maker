@@ -1,52 +1,57 @@
 import React, { useState } from "react";
-import { Grid, Paper, Divider, Button } from "@material-ui/core";
-import { ThemeProvider } from "@material-ui/core/styles";
-import { useGrid, useTheme } from "./styles";
+import { Grid, Paper, Divider, Button, Checkbox } from "@material-ui/core";
+
+import { useStyle } from "./styles";
 import Carousel from "./Carousel";
 import BookingForm from "./BookingForm";
 
 const Details = ({ room }) => {
   const [openModal, setOpenModal] = useState(false);
-  const grid = useGrid();
+  const [value, setValue] = React.useState("");
+
+  const style = useStyle();
 
   return (
-    <ThemeProvider theme={useTheme}>
-      <Paper>
-        <Grid
-          container
-          spacing={2}
-          justify="center"
-          alignContent="stretch"
-          className={grid.rule}
-        >
-          <Grid item xs={3} className={grid.section}>
-            <Carousel
-              openModal={openModal}
-              setOpenModal={setOpenModal}
-              images={room.images}
-            />
-            <img
-              src={room.images[0]}
-              onClick={() => setOpenModal(true)}
-              style={{ width: "85%", height: "30%" }}
-              alt="A room"
-            />
-          </Grid>
-          <Divider orientation="vertical" flexItem />
-          <Grid item xs={5} className={grid.section}>
-            <BookingForm />
-          </Grid>
-          <Divider orientation="vertical" flexItem />
-          <Grid item xs={2} className={grid.section}>
-            PRIS
-          </Grid>
-          <Divider orientation="vertical" flexItem />
-          <Grid item xs className={grid.section}>
-            <Button>Boka</Button>
-          </Grid>
+    <Paper>
+      <Grid
+        container
+        spacing={2}
+        justify="center"
+        alignContent="stretch"
+        className={style.rule}
+      >
+        <Grid item xs={3} className={style.section}>
+          <Carousel
+            openModal={openModal}
+            setOpenModal={setOpenModal}
+            images={room.images}
+          />
+          <img
+            src={room.images[0]}
+            onClick={() => setOpenModal(true)}
+            style={{ width: "85%", height: "30%" }}
+            alt="A room"
+          />
+          <p>Type: {room.type}</p>
+          <p>Size: {room.size}</p>
+          <p>Beds: {room.beds}</p>
+          <p>Room-Number: {room.roomNumber}</p>
         </Grid>
-      </Paper>
-    </ThemeProvider>
+        <Divider orientation="vertical" flexItem />
+        <Grid item xs={5} className={style.section}>
+          <BookingForm room={room} value={value} setValue={setValue} />
+        </Grid>
+        <Divider orientation="vertical" flexItem />
+        <Grid item xs={2} className={style.section}>
+          <p>Price: {room.price} Pecetas</p>
+          <p> Extra: {value} Pecetas</p>
+        </Grid>
+        <Divider orientation="vertical" flexItem />
+        <Grid item xs className={style.section}>
+          <Checkbox />
+        </Grid>
+      </Grid>
+    </Paper>
   );
 };
 

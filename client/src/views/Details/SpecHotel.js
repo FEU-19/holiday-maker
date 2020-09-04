@@ -1,24 +1,26 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Details from "./Details";
-import { Grid, Paper, Divider } from "@material-ui/core";
-import { useGrid } from "./styles";
+import { useParams } from "react-router-dom";
+import { Grid, Paper, Divider, Button, ThemeProvider } from "@material-ui/core";
+
+import { useStyle, Theme } from "./styles";
 import { getImage } from "../../utils/getImage";
 
 const SpecHotel = () => {
+  const { id } = useParams();
+
   const [hotel, setHotel] = useState({});
-  const grid = useGrid();
+  const style = useStyle();
 
   useEffect(() => {
-    axios
-      .get("http://localhost:4000/api/residents/5f4e2b500ae3bf21d48b09f2")
-      .then((response) => {
-        setHotel(response.data.data);
-      });
+    axios.get(`http://localhost:4000/api/residents/${id}`).then((response) => {
+      setHotel(response.data.data);
+    });
   }, []);
 
   return (
-    <div>
+    <ThemeProvider theme={Theme}>
       <Paper>
         <Grid
           container
@@ -42,7 +44,7 @@ const SpecHotel = () => {
             <p>Rating: {hotel.rating}</p>
           </Grid>
           <Divider orientation="vertical" flexItem />
-          <Grid item xs={4} className={grid.center}>
+          <Grid item xs={4} className={style.center}>
             <p>
               Our rooms have full-, half-board, all-inclusive or self-catering
             </p>
@@ -67,7 +69,11 @@ const SpecHotel = () => {
       ) : (
         <h1>Loading...</h1>
       )}
-    </div>
+
+      <Button className={style.sticky} color="primary" variant="contained">
+        Checkout
+      </Button>
+    </ThemeProvider>
   );
 };
 
