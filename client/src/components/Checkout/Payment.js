@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 import { Redirect } from "react-router-dom";
 
-
 import { makeStyles } from "@material-ui/core/styles";
 
 import Modal from "../common/Modal/Modal";
@@ -52,10 +51,6 @@ function Payment() {
   // Close modal
   const [showModal, setShowModal] = useState(false);
 
-  function onCreditCardTypeChanged(type) {
-    setType(type);
-  }
-
   const controlCloseModal = (status) => {
     setShowModal(false);
     // if payment is sucessful redirect to booking details page
@@ -66,7 +61,6 @@ function Payment() {
     // url needs to change to booking details page
     return <Redirect to="/" />;
   }
-
 
   return (
     <PaymentPage className={classes.root} noValidate autoComplete="off">
@@ -130,16 +124,12 @@ function Payment() {
           type="submit"
         >
           Finish & Pay
-
         </PayBtn>
       </PaymentContainer>
-        </button>
-      </div>
       <Modal
         onClose={() => controlCloseModal(paymentSuccess)}
         showModal={showModal}
       >
-
         {paymentSuccess && (
           <div className="modal__container">
             <DoneIcon className="doneIcon" />
