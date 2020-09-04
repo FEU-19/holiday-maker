@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 const roomSchema = new mongoose.Schema({
   images: [String],
   type: String,
-  size: String,
   price: Number,
+  size: String,
   extraBed: Number,
   allInclusive: Number,
   halfBoard: Number,
