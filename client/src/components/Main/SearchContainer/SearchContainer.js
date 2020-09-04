@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
 import axios from "axios";
 import Grid from '@material-ui/core/Grid';
-import SelectAmountOfChildren from './SelectAmountOfChildren';
 import { Button } from '@material-ui/core';
 
 // Componets
