@@ -3,7 +3,6 @@ import { Grid, Paper, Divider, Button } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { useGrid, useTheme } from "./styles";
 import Carousel from "./Carousel";
-
 const Residence = () => {
   const [openModal, setOpenModal] = useState(false);
   const grid = useGrid();
@@ -24,9 +23,7 @@ const Residence = () => {
             Stfu
           </Grid>
           <Divider orientation="vertical" flexItem />
-          <Grid item xs={5} className={grid.section}>
-            Stfu
-          </Grid>
+          <Grid item xs={5} className={grid.section}></Grid>
           <Divider orientation="vertical" flexItem />
           <Grid item xs={2} className={grid.section}>
             Stfu

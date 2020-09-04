@@ -1,9 +1,15 @@
 import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 
 import Cleave from "cleave.js/react";
 
+import Modal from "../common/Modal/Modal";
+
 import "./Payment.css";
 import Country_DropdownList from "./Country_DropdownList";
+
+import DoneIcon from "@material-ui/icons/Done";
+import CancelIcon from "@material-ui/icons/Cancel";
 
 function Payment() {
   const [firstName, setFirstName] = useState("");
@@ -20,8 +26,27 @@ function Payment() {
   const [cvc, setCvc] = useState("");
   const [type, setType] = useState("");
 
+  // Check if payment confirmed
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
+
+  const [redirect, setRedirect] = useState(false);
+
+  // Close modal
+  const [showModal, setShowModal] = useState(false);
+
   function onCreditCardTypeChanged(type) {
     setType(type);
+  }
+
+  const controlCloseModal = (status) => {
+    setShowModal(false);
+    // if payment is sucessful redirect to booking details page
+    status ? setRedirect(true) : setRedirect(false);
+  };
+
+  if (redirect) {
+    // url needs to change to booking details page
+    return <Redirect to="/" />;
   }
 
   return (
@@ -195,10 +220,34 @@ function Payment() {
             </tr>
           </table>
         </form>
-        <button className="payBtn" type="submit">
+        <button
+          onClick={() => setShowModal(true)}
+          className="payBtn"
+          type="submit"
+        >
           Finish & Pay
         </button>
       </div>
+      <Modal
+        onClose={() => controlCloseModal(paymentSuccess)}
+        showModal={showModal}
+      >
+        {paymentSuccess && (
+          <div className="modal__container">
+            <DoneIcon className="doneIcon" />
+            <h1>Thank you!</h1>
+            <h2>for booking with Holiday Maker.</h2>
+            <p>Booking confirmation has been sent to your email.</p>
+          </div>
+        )}
+        {!paymentSuccess && (
+          <div className="modal__container">
+            <CancelIcon className="cancelIcon" />
+            <h1>Error!</h1>
+            <h3>Your payment hasn't been confirmed, please try again.</h3>
+          </div>
+        )}
+      </Modal>
     </div>
   );
 }

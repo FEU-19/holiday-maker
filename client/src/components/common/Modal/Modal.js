@@ -7,8 +7,9 @@ const ModalCtn = styled.div`
   width: 100vw;
   height: 100vh;
   position absolute;
-  top: 0;
-  left: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background-color: rgba(51,51,51,0.6);
 `;
 
@@ -32,9 +33,9 @@ const CancelIcon = styled(CloseIcon)`
 `;
 
 // the parent component need to define onClose function and pass here
-const Modal = ({ onClose, children }) => {
+const Modal = ({ onClose, children, showModal }) => {
   return ReactDOM.createPortal(
-    <ModalCtn>
+    <ModalCtn style={showModal ? { display: "block" } : { display: "none" }}>
       <StyledModal>
         <CancelIcon onClick={onClose} />
         {children}
