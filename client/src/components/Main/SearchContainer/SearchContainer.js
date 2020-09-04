@@ -16,6 +16,10 @@ import CheckboxRestaurant from './CheckboxRestaurant';
 import CheckboxPool from './CheckboxPool';
 
 
+
+
+
+
 // Filter functions
 import adultChildToBedFilter from '../../../utils/adultChildToBedFilter.js';
 import filterCity from '../../../utils/filterCity';
@@ -98,10 +102,10 @@ const SearchContainer = () => {
           </Button>
         </Grid>
         <Grid
-         className="search-bottom"
-         container
-         justify="space-around"
-       >
+          className="search-bottom"
+          container
+          justify="space-around"
+        >
          <CheckboxRestaurant />
          <CheckboxKidsClub />
          <CheckboxNightEntertainment />
