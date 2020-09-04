@@ -13,7 +13,7 @@ export const useGrid = makeStyles((grid) => ({
   },
   carousel: {
     paddingTop: 70,
-    outline: 0,
+    outline: "none",
   },
   center: {
     backgroundColor: "#fcba03",
