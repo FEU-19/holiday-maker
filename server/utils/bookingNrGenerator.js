@@ -27,7 +27,7 @@ function shuffle(array) {
   return newArr.join("");
 }
 
-function bookingNrGenerator(name, lastname, postnumber, lengthOfParts) {
+function bookingNrGenerator(name, lastname, lengthOfParts) {
   let str = "";
   let part1 = name.slice(0, lengthOfParts);
   if (part1.length < lengthOfParts) {
@@ -39,7 +39,7 @@ function bookingNrGenerator(name, lastname, postnumber, lengthOfParts) {
     part2 += randomLetter(lengthOfParts - part2.length);
   }
 
-  let part3 = postnumber.toString().slice(0, lengthOfParts);
+  let part3 = Date.now();
   if (part3.length < lengthOfParts) {
     part3 += randomNumberToString(lengthOfParts - part3.length);
   }

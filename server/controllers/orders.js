@@ -1,81 +1,63 @@
-const Booking = require("../models/Booking");
+const Order = require("../models/Order");
 const User = require("../models/User");
-// const Hotel = require("../models/Hotel");
-// const Room = require("../models/Room");
+const Hotel = require("../models/Hotel");
 
 const bookingNrGenerator = require("../utils/bookingNrGenerator");
-
+// {adults: N, children: N, hotel: String, rooms: Array, bookingDates: {start: String, end: String}}
 exports.create = (req, res) => {
-  const Id = req.cookies.userId;
+  // Id will also be a cookie.
+  const Id = req.body.user;
+  const data = req.body;
+  const orderData = {};
 
   User.findById(Id)
     .then((response) => {
-      if (!response)
-        res.status(404).send({ error: "Resource not found, bad ID" });
-      const user = response.data.data;
+      if (!response) {
+        res.status(404).send({ error: "Resource not found, bad ID. SMÖG" });
+      }
+      const user = response;
       return user;
     })
     .then((user) => {
-      const data = req.body;
-      data.user = user;
-      const { first_name, surname, zip_code } = data.user;
-      data.bookingNumber = bookingNrGenerator(first_name, surname, zip_code, 6);
-      const booking = new Booking(data);
-      booking.save();
+      if (!user) return res.status(404).send({ msg: "No user found. LÖG" });
+      // Add data to Order
+      orderData.user = user._id;
+      orderData.timeLog = Date.now();
+      orderData.bookingNumber = bookingNrGenerator(
+        user.first_name,
+        user.surname,
+        6
+      );
+      orderData.room = data.room;
+      orderData.bookingDates = data.bookingDates;
 
-      return Hotel.find({ name: data.hotel });
+      // Add occupiedDates to booked rooms.
+      orderData.room.forEach((room) => {
+        room.occupiedDates.push(data.bookingDates);
+      });
+      const order = new Order(orderData);
+      return order.save();
     })
     .then((response) => {
-      const hotel = response.data;
-      const rooms = req.body.room;
-      // If many rooms are booked these roomsnumbers.
-
-      // Update rooms on specific hotels
-      const roomNr = {};
-      rooms.forEach((x) => {
-        roomNr[x.nr] = x.nr;
-      });
-      for (rooms of hotel.rooms) {
-        if (rooms.nr in roomNr) {
-          hotel.rooms.occupiedDates = req.body.bookingDates;
-        }
+      if (!response) {
+        res.status(404).send({ msg: "Order couldn't be saved. HÖG" });
       }
-
-      // Alternative solution - if works, is better!
+      // Ids to the rooms booked.
       const roomIds = [];
-      rooms.forEach((x) => {
-        roomIds.push(x._id);
+      data.room.forEach((room) => {
+        roomIds.push(room._id);
       });
-      Hotel.rooms.find({ _id: { $in: roomIds } }).then((result) => {
-        const rooms2 = result.data;
-        rooms2.forEach((x) => x.occupiedDates.push(req.body.bookingDates));
-        // Then update these subdocs.
-        return Hotel.rooms
-          .updateMany(rooms2)
-          .where({ _id: { $in: roomIds } })
-          .then((response) => {
-            if (!response) {
-              return res.status(500).send({ error: "Internal error." });
-            }
-            return res.status(201).json(response);
-          })
-          .catch((err) => {
-            res.status(500).send({ error: err.message });
-          });
-      });
-
-      // Update that hotel.
-      Hotel.updateOne(hotel).then((result) => {
-        if (!result)
-          return res
-            .status(500)
-            .send({ error: "Server error. Try again later." });
-        return res.status(201).json(result);
-      });
-      // Specific method to update nested values?
+      return Hotel.room.updateMany().where({ _id: { $in: roomIds } });
+    })
+    .then((response) => {
+      if (!response) {
+        return res.status(404).send({ error: "MÖG" });
+      }
+      console.log(response);
+      return res.status(201).json(orderData);
     })
     .catch((err) => {
-      res.status(500).json({ error: err.message });
+      res.status(500).send({ error: err.message });
     });
 };
 
