@@ -59,22 +59,22 @@ exports.createLogin = async (req, res) => {
 exports.create = async (req, res) => {
   const {
     email,
-    first_name,
+    firstName,
     surname,
     street,
-    zip_code,
+    zipCode,
     city,
     country,
-    phone_number,
-    social_security_number,
+    phoneNumber,
+    socialSecurityNumber,
     password,
-    confirm_password
+    confirmPassword,
   } = req.body;
 
   if (!email || !password) {
     return res.status(400).json({
       error: [{
-        msg: "Please fill all of the existing fields"
+        msg: "Please fill all of the existing fields",
       }],
     });
   }
@@ -86,21 +86,21 @@ exports.create = async (req, res) => {
     if (user) {
       return res.status(400).json({
         error: [{
-          msg: "Account with this email already exists"
+          msg: "User already exists",
         }],
       });
     }
 
     user = new User({
       email,
-      first_name,
+      firstName,
       surname,
       street,
-      zip_code,
+      zipCode,
       city,
       country,
-      phone_number,
-      social_security_number,
+      phoneNumber,
+      socialSecurityNumber,
       password,
     });
 

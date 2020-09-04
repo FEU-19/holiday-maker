@@ -4,22 +4,22 @@ import { Redirect } from "react-router-dom";
 import RenderInputs from "./RenderInputs";
 import RenderMsg from "./RenderMsg";
 
-const RegistrationComp = () => {
-  const [showMsg, setShowMsg] = useState(false);
+const RegistrationComp = (props) => {
+  const [showMsg, setShowMsg] = useState(true);
   const [whatMsgToShow, setWhatMsgToShow] = useState(0);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [newUser, setNewUser] = useState({
     email: "",
-    first_name: "",
+    firstName: "",
     surname: "",
     street: "",
-    zip_code: "",
+    zipCode: "",
     city: "",
     country: "",
-    phone_number: "",
-    social_security_number: "",
+    phoneNumber: "",
+    socialSecurityNumber: "",
     password: "",
-    confirm_password: "",
+    confirmPassword: "",
   });
 
   function handleInput(e) {
@@ -31,21 +31,21 @@ const RegistrationComp = () => {
   function handleInputReset() {
     setNewUser({
       email: "",
-      first_name: "",
+      firstName: "",
       surname: "",
       street: "",
-      zip_code: "",
+      zipCode: "",
       city: "",
       country: "",
-      phone_number: "",
-      social_security_number: "",
+      phoneNumber: "",
+      socialSecurityNumber: "",
       password: "",
-      confirm_password: "",
+      confirmPassword: "",
     });
   }
 
   function comparePassword() {
-    if (newUser.confirm_password === newUser.password) {
+    if (newUser.confirmPassword === newUser.password) {
       handlePostUser();
     } else {
       setWhatMsgToShow(2);
@@ -59,22 +59,11 @@ const RegistrationComp = () => {
       .then((res) => {
         console.log("RESP is: ", res);
         handleInputReset();
-        setWhatMsgToShow(res.data.msg);
-        setShowMsg(true);
-
-        // setTimeout(() => {
-        //   // setShowMsg(false);
-        //   // setWhatMsgToShow(0);
-        //   console.log('You will be Login');
-        //   return <Redirect to="/login" />;
-        // }, 2500);
+        setWhatMsgToShow(1);
+        props.setValue(0);
       })
       .catch((err) => {
-        const errorMsg = err.response.data.error[0].msg;
-        console.log("ERROR is ", err.response);
-
-        setWhatMsgToShow(errorMsg);
-        setShowMsg(true);
+        console.log(err);
       });
   }
 

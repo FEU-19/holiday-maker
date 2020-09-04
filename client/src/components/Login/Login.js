@@ -8,7 +8,6 @@ import SimpleDialog from '@material-ui/core/Dialog';
 
 
 const Container = styled.div`
-  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -16,10 +15,14 @@ const Container = styled.div`
       display: flex;
       align-items: center;
       justify-content: center;
+      flex-direction: column;
+    }
+    .loginBtn{
+      margin-top: 20px;
     }
 `
 
-const Login = () => {
+const Login = (props) => {
   const [user, setUser] = useState({ email: "", password: "" });
   const [open, setOpen] = useState(false);
   const [errorMsg, setErrorMsg] = useState(0)
@@ -48,11 +51,7 @@ const Login = () => {
       instance.post("http://localhost:3002/api/login/", {user}, options)
       .then((res) => {
         console.log(res);
-        if(res.status === 201){
-          console.log(user)
-          // return <Redirect to="/" />;
-          // window.history.go(-1)
-        }
+        props.handleModalClose();
       })
       .catch(err => {
         //window.history.go(-1)
@@ -70,19 +69,6 @@ const Login = () => {
     setOpen(false)
     //setErrorMsg(value);
   };
-
-  const onClick = (e) =>{
-    e.preventDefault();
-    let cookie = document.cookie;
-    let userId = cookie.split('=Bearer')[1];
-    instance.post("http://localhost:3002/api/logout/", {userId}, options)
-      .then((res) =>{
-        console.log('working');
-      })
-      .catch(err => {
-        console.log(err);
-      })
-  }
   
   return (
     <Container>
@@ -105,7 +91,7 @@ const Login = () => {
           value={user.password}
           onChange={onChangeUser}
         />
-        <Button type="submit">Login</Button> 
+        <Button className="loginBtn" type="submit" variant="contained" color="primary">Login</Button> 
         {open ? <SimpleDialog  selectedvalue={errorMsg} open={open} onClose={handleClose} > 
           {errorMsg}
 
