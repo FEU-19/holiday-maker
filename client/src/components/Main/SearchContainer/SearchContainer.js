@@ -2,17 +2,19 @@ import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
 import axios from "axios";
 import Grid from '@material-ui/core/Grid';
-import SelectAmountOfChildren from './SelectAmountOfChildren';
-
-import SelectCity from './SelectCity';
-import CheckboxNightEntertainment from './CheckboxNightEntertainment';
-
 import { Button } from '@material-ui/core';
 
+// Componets
 import DatePicker from './DatePicker';
+import SelectCity from './SelectCity';
+import CheckboxNightEntertainment from './CheckboxNightEntertainment';
+import SelectAmountOfChildren from './SelectAmountOfChildren';
+import ChildrenAgeSelects from './ChildrenAgeSelects.js';
 import SelectAmountOfAdults from './SelectAmountOfAdults';
 import CheckboxKidsClub from './CheckboxKidsClub';
+import CheckboxRestaurant from './CheckboxRestaurant';
 import CheckboxPool from './CheckboxPool';
+
 
 // Filter functions
 import adultChildToBedFilter from '../../../utils/adultChildToBedFilter.js';
@@ -21,7 +23,7 @@ import filterKidsClub from '../../../utils/filterKidsClub'
 import filterNightEntertainment from '../../../utils/filterNightEntertainment';
 import filterPool from '../../../utils/filterPool';
 import filterRestaurant from '../../../utils/filterRestaurant';
-
+import dateFilter from '../../../utils/dateFilter.js';
 
 const Container = styled.div`
 border: 2px solid red;
@@ -96,16 +98,16 @@ const SearchContainer = () => {
           </Button>
         </Grid>
         <Grid
-          className="search-bottom"
-          container
-          justify="space-around"
-        >
+         className="search-bottom"
+         container
+         justify="space-around"
+       >
+         <CheckboxRestaurant />
+         <CheckboxKidsClub />
+         <CheckboxNightEntertainment />
+         <CheckboxPool />
+        </Grid>
 
-          <CheckboxKidsClub />
-          <CheckboxNightEntertainment />
-          <CheckboxPool />
-
-          </Grid>
         </form>
       </Container>
     );
