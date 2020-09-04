@@ -4,7 +4,7 @@ import Main from "./views/Main";
 import Residence from "./views/Residence"
 
 // To add more routes use format as below and add to the routes array
-const routes = [{ path: "/", component: Main },{path: "/residence", component: Residence}];
+const routes = [{ path: "/", component: Main }];
 
 function AppRouter() {
   return (
