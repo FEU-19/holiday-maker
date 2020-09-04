@@ -2,16 +2,17 @@ import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
 import axios from "axios";
 import Grid from '@material-ui/core/Grid';
-import SelectAmountOfChildren from './SelectAmountOfChildren';
-
-import SelectCity from './SelectCity';
-import CheckboxEveningEntmt from './CheckboxEveningEntmt';
-
 import { Button } from '@material-ui/core';
 
+// Componets
 import DatePicker from './DatePicker';
+import SelectCity from './SelectCity';
+import CheckboxEveningEntmt from './CheckboxEveningEntmt';
+import SelectAmountOfChildren from './SelectAmountOfChildren';
+import ChildrenAgeSelects from './ChildrenAgeSelects.js';
 import SelectAmountOfAdults from './SelectAmountOfAdults';
 import CheckboxKidsClub from './CheckboxKidsClub';
+
 
 // Filter functions
 import adultChildToBedFilter from '../../../utils/adultChildToBedFilter.js';
@@ -20,6 +21,7 @@ import filterKidsClub from '../../../utils/filterKidsClub'
 import filterNightEntertainment from '../../../utils/filterNightEntertainment';
 import filterPool from '../../../utils/filterPool';
 import filterRestaurant from '../../../utils/filterRestaurant';
+import dateFilter from '../../../utils/dateFilter.js';
 
 
 const Container = styled.div`
@@ -32,6 +34,7 @@ justify-content: center;
 const SearchContainer = () => {
   const [residentData, setResidentData] = useState([{}]);
   const [filteredData, setFilteredData] = useState([]);
+  const [amountOfChildren, setAmountOfChildren] = useState(0);
 
   useEffect(() => {
     axios.get('http://localhost:8080/api/residents/')
@@ -81,11 +84,15 @@ const SearchContainer = () => {
           container
           justify="space-around"
         >
+          <SelectAmountOfChildren
+            setAmountOfChildren={ setAmountOfChildren }
+            amountOfChildren={ amountOfChildren }
+          />
+          <ChildrenAgeSelects amountOfChildren={ amountOfChildren } />
           <SelectCity residentData={residentData} />
           <DatePicker
           residentData={residentData}/>
           <SelectAmountOfAdults />
-          <SelectAmountOfChildren />
           <Button
             type="submit"
             variant="contained"
@@ -103,8 +110,6 @@ const SearchContainer = () => {
 
           <CheckboxKidsClub />
           <CheckboxEveningEntmt />
-            
-
           </Grid>
         </form>
       </Container>
