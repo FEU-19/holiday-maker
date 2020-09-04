@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 const { routers } = require("./routes/index");
@@ -13,6 +14,7 @@ const app = express();
 
 // Body parser
 app.use(express.json());
+app.use(cors());
 
 routers.forEach((router) => app.use("/api/", router));
 
