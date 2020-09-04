@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
 import axios from "axios";
 import Grid from '@material-ui/core/Grid';
-import SelectAmountOfChildren from './SelectAmountOfChildren';
-
 import { Button } from '@material-ui/core';
 
+// Componets
 import DatePicker from './DatePicker';
+import SelectAmountOfChildren from './SelectAmountOfChildren';
+import ChildrenAgeSelects from './ChildrenAgeSelects.js';
 
 // Filter functions
 import adultChildToBedFilter from '../../../utils/adultChildToBedFilter.js';
@@ -22,6 +23,7 @@ justify-content: center;
 const SearchContainer = () => {
   const [residentData, setResidentData] = useState([{}]);
   const [filteredData, setFilteredData] = useState([]);
+  const [amountOfChildren, setAmountOfChildren] = useState(0);
 
   useEffect(() => {
     axios.get('http://localhost:8080/api/residents/')
@@ -53,11 +55,14 @@ const SearchContainer = () => {
           container
           justify="space-around"
         >
-          
-          <SelectAmountOfChildren />
 
+          <SelectAmountOfChildren
+            setAmountOfChildren={ setAmountOfChildren }
+            amountOfChildren={ amountOfChildren }
+          />
+          <ChildrenAgeSelects amountOfChildren={ amountOfChildren } />
           <DatePicker />
-          <Button 
+          <Button
             type="submit"
             variant="contained"
             color="primary"
@@ -71,7 +76,7 @@ const SearchContainer = () => {
           container
           justify="space-around"
         >
-            
+
           </Grid>
         </form>
       </Container>
