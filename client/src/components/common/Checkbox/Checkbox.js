@@ -1,8 +1,8 @@
 import React from "react";
 import { Checkbox } from "@material-ui/core";
 
-const Checkbox = () => {
+const CheckBox = () => {
   return <Checkbox />;
 };
 
-export default Checkbox;
+export default CheckBox;

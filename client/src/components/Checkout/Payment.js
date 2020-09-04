@@ -1,4 +1,5 @@
-import React, { useState, Profiler } from "react";
+import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 
 import Cleave from "cleave.js/react";
 
@@ -27,13 +28,25 @@ function Payment() {
 
   // Check if payment confirmed
   const [paymentSuccess, setPaymentSuccess] = useState(false);
-  const [paymentFail, setPaymentFail] = useState(false);
+
+  const [redirect, setRedirect] = useState(false);
 
   // Close modal
   const [showModal, setShowModal] = useState(false);
 
   function onCreditCardTypeChanged(type) {
     setType(type);
+  }
+
+  const controlCloseModal = (status) => {
+    setShowModal(false);
+    // if payment is sucessful redirect to booking details page
+    status ? setRedirect(true) : setRedirect(false);
+  };
+
+  if (redirect) {
+    // url needs to change to booking details page
+    return <Redirect to="/" />;
   }
 
   return (
@@ -215,7 +228,10 @@ function Payment() {
           Finish & Pay
         </button>
       </div>
-      <Modal onClose={() => setShowModal(false)} showModal={showModal}>
+      <Modal
+        onClose={() => controlCloseModal(paymentSuccess)}
+        showModal={showModal}
+      >
         {paymentSuccess && (
           <div className="modal__container">
             <DoneIcon className="doneIcon" />
@@ -224,7 +240,7 @@ function Payment() {
             <p>Booking confirmation has been sent to your email.</p>
           </div>
         )}
-        {paymentFail && (
+        {!paymentSuccess && (
           <div className="modal__container">
             <CancelIcon className="cancelIcon" />
             <h1>Error!</h1>
