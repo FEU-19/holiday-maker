@@ -6,7 +6,6 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import Modal from "../common/Modal/Modal";
 
-import Country_ropdownList from "./Country_DropdownList";
 import DoneIcon from "@material-ui/icons/Done";
 import CancelIcon from "@material-ui/icons/Cancel";
 
@@ -21,7 +20,7 @@ import {
 } from "./PaymentStyles";
 import TextInput from "./TextInput";
 import PaymentForm from "./PaymentForm";
-import Country_DropdownList from "./Country_DropdownList";
+import CountryDropdownList from "./CountryDropdownList";
 
 function Payment() {
   const useStyles = makeStyles((theme) => ({
@@ -93,7 +92,7 @@ function Payment() {
 
         <InfoForm>
           <InputContainer>
-            <Country_DropdownList />
+            <CountryDropdownList />
           </InputContainer>
 
           <TextInput
@@ -126,7 +125,6 @@ function Payment() {
           Finish & Pay
         </PayBtn>
       </PaymentContainer>
-
       <Modal
         onClose={() => controlCloseModal(paymentSuccess)}
         showModal={showModal}

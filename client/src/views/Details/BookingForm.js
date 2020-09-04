@@ -23,4 +23,5 @@ const BookingForm = () => {
     </Wrapper>
   );
 };
+
 export default BookingForm;

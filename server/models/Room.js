@@ -15,6 +15,4 @@ const roomSchema = new mongoose.Schema({
   occupiedDates: Array,
 });
 
-const Room = mongoose.model("room", roomSchema);
-
-module.export = Room;
+module.exports = roomSchema;
