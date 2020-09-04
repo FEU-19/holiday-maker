@@ -29,13 +29,14 @@ const useStyle = makeStyles(() => ({
 const RoomPrice = ({ roomType }) => {
  const classes = useStyle();
  console.log(roomType);
+ //const finalPrice = roomType.price + price.extras;
 
  return (
   <Card className={classes.card}>
    <CardHeader
     className={classes.header}
-    title={roomType.price + " SEK"}
-    subheader={"för 1 rum för 1 natt"}
+    title={roomType.price + ":-" + " SEK"}
+    subheader={"for 1 room for 1 night"}
    />
    <Typography className={classes.text} component="p">
     Today's Price including taxes and fees
