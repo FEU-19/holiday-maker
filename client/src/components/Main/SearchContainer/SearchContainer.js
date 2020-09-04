@@ -5,13 +5,14 @@ import Grid from '@material-ui/core/Grid';
 import SelectAmountOfChildren from './SelectAmountOfChildren';
 
 import SelectCity from './SelectCity';
-import CheckboxEveningEntmt from './CheckboxEveningEntmt';
+import CheckboxNightEntertainment from './CheckboxNightEntertainment';
 
 import { Button } from '@material-ui/core';
 
 import DatePicker from './DatePicker';
 import SelectAmountOfAdults from './SelectAmountOfAdults';
 import CheckboxKidsClub from './CheckboxKidsClub';
+import CheckboxPool from './CheckboxPool';
 
 // Filter functions
 import adultChildToBedFilter from '../../../utils/adultChildToBedFilter.js';
@@ -70,7 +71,7 @@ const SearchContainer = () => {
     .catch((err) => {
       console.error(err);
     });
-    
+
   }
 
   return (
@@ -101,8 +102,8 @@ const SearchContainer = () => {
         >
 
           <CheckboxKidsClub />
-          <CheckboxEveningEntmt />
-            
+          <CheckboxNightEntertainment />
+          <CheckboxPool />
 
           </Grid>
         </form>
