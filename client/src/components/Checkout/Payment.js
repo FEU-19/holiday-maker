@@ -42,12 +42,12 @@ function Payment() {
   const [adress, setAdress] = useState("");
 
   // Check if payment confirmed
-  const [paymentSuccess, setPaymentSuccess] = useState(true);
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
 
   const [redirect, setRedirect] = useState(false);
 
   // Close modal
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
 
   const controlCloseModal = (status) => {
     setShowModal(false);
