@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import moment from 'moment';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+
+import dateFilter from '../../../utils/dateFilter'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -15,23 +17,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function DatePicker() {
+export default function DatePicker({residentData}) {
   const classes = useStyles();
-  const [date, setDate] = useState({start: '', end: ''})
-
-
+  const [date, setDate] = useState({start: '2020-06-02T10:30:00.000Z', end: '2020-06-08T10:00:00.000Z'})
 
   function StartDateChange (e) {
     e.persist();
-    setDate(prevState => ({ ...prevState, start: e.target.value}))
+    setDate(prevState => ({ ...prevState, start: e.target.value + ":00.000Z"}))
   }
 
   function EndDateChange (e) {
     e.persist();
-    setDate(prevState => ({ ...prevState, end: e.target.value}))
+    setDate(prevState => ({ ...prevState, end: e.target.value + ":00.000Z"}))
   }
 
-  console.log(date);
   return (
     <form className={classes.container} noValidate>
       <TextField
@@ -39,7 +38,7 @@ export default function DatePicker() {
         label="Start"
         type="datetime-local"
         onChange={StartDateChange}
-        defaultValue="2020-08-01T10:30"
+        defaultValue="2020-06-02T00:00"
         className={classes.textField}
         InputLabelProps={{
           shrink: true,
@@ -50,7 +49,7 @@ export default function DatePicker() {
         label="End"
         type="datetime-local"
         onChange={EndDateChange}
-        defaultValue="2020-08-07T10:30"
+        defaultValue="2020-06-08T00:00"
         className={classes.textField}
         InputLabelProps={{
           shrink: true,

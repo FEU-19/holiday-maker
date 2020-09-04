@@ -6,12 +6,23 @@ import { Button } from '@material-ui/core';
 
 // Componets
 import DatePicker from './DatePicker';
+import SelectCity from './SelectCity';
+import CheckboxEveningEntmt from './CheckboxEveningEntmt';
 import SelectAmountOfChildren from './SelectAmountOfChildren';
 import ChildrenAgeSelects from './ChildrenAgeSelects.js';
+import SelectAmountOfAdults from './SelectAmountOfAdults';
+import CheckboxKidsClub from './CheckboxKidsClub';
+
 
 // Filter functions
 import adultChildToBedFilter from '../../../utils/adultChildToBedFilter.js';
 import filterCity from '../../../utils/filterCity';
+import filterKidsClub from '../../../utils/filterKidsClub'
+import filterNightEntertainment from '../../../utils/filterNightEntertainment';
+import filterPool from '../../../utils/filterPool';
+import filterRestaurant from '../../../utils/filterRestaurant';
+import dateFilter from '../../../utils/dateFilter.js';
+
 
 const Container = styled.div`
 border: 2px solid red;
@@ -35,7 +46,7 @@ const SearchContainer = () => {
     });
   }, []);
 
-  // whenever filterData changes console.log() runs on the filt
+  // whenever filterData changes console.log() runs.
   useEffect(() => {
     console.log(filteredData);
   }, [filteredData])
@@ -43,8 +54,26 @@ const SearchContainer = () => {
   function onSubmit(e) {
     e.preventDefault();
 
-    // second argument is placeholder for userInput about the specific city.
-    setFilteredData(filterCity(residentData, 'Manila'));
+    // An example of how to handle our filter functions
+    // Updated task "created func which shows the filtered hotel obj"
+    new Promise((resolve, reject) => {
+      let c = [...residentData];
+
+      c = filterCity(c, 'Manila');
+      c = filterPool(c, true);
+      c = filterNightEntertainment(c, false);
+      c = filterKidsClub(c, 'default');
+      c = filterRestaurant(c, 'default');
+
+      resolve(c);
+    })
+    .then((res) => {
+      setFilteredData(res);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+    
   }
 
   return (
@@ -55,13 +84,15 @@ const SearchContainer = () => {
           container
           justify="space-around"
         >
-
           <SelectAmountOfChildren
             setAmountOfChildren={ setAmountOfChildren }
             amountOfChildren={ amountOfChildren }
           />
           <ChildrenAgeSelects amountOfChildren={ amountOfChildren } />
-          <DatePicker />
+          <SelectCity residentData={residentData} />
+          <DatePicker
+          residentData={residentData}/>
+          <SelectAmountOfAdults />
           <Button
             type="submit"
             variant="contained"
@@ -77,6 +108,8 @@ const SearchContainer = () => {
           justify="space-around"
         >
 
+          <CheckboxKidsClub />
+          <CheckboxEveningEntmt />
           </Grid>
         </form>
       </Container>
