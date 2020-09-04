@@ -12,6 +12,7 @@ import SelectAmountOfChildren from './SelectAmountOfChildren';
 import ChildrenAgeSelects from './ChildrenAgeSelects.js';
 import SelectAmountOfAdults from './SelectAmountOfAdults';
 import CheckboxKidsClub from './CheckboxKidsClub';
+import CheckboxRestaurant from './CheckboxRestaurant';
 
 
 // Filter functions
@@ -73,7 +74,7 @@ const SearchContainer = () => {
     .catch((err) => {
       console.error(err);
     });
-    
+
   }
 
   return (
@@ -107,7 +108,7 @@ const SearchContainer = () => {
           container
           justify="space-around"
         >
-
+          <CheckboxRestaurant />
           <CheckboxKidsClub />
           <CheckboxEveningEntmt />
           </Grid>
