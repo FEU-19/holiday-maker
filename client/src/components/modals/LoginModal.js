@@ -1,19 +1,15 @@
 import axios from "axios";
 import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import SimpleDialog from '@material-ui/core/Dialog';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
 
 import RegistrationComp from "../Registration/RegistrationComp";
 import LoginComp from "../Login/Login";
@@ -26,6 +22,10 @@ const LoginModal = () =>{
   useEffect(() => {
     setCookie(document.cookie);
   }, [open])
+
+  useEffect(()=>{
+    
+  })
   
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -60,13 +60,6 @@ function a11yProps(index) {
   };
 }
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
-  },
-}));
-
 const handleChange = (event, newValue) => {
   setValue(newValue);
 };
@@ -74,6 +67,11 @@ const handleChange = (event, newValue) => {
 
   const handleModalOpen = () =>{
     setOpen(true);
+  }
+
+  const handleModalRegistration = () =>{
+    setOpen(true);
+    setValue(1);
   }
 
   const handleModalClose = () =>{
@@ -106,9 +104,11 @@ const handleChange = (event, newValue) => {
 
   return(
     <div>
-      {!cookie ? <Button variant="outlined" color="primary" onClick={handleModalOpen}>
-        Login
-      </Button> : <Button variant="outlined" color="primary" onClick={(e) => onLogout(e)}>
+      {!cookie ? 
+      <div>
+        <Button variant="outlined" color="primary" onClick={handleModalOpen}>Login</Button>
+        <Button variant="outlined" color="primary" onClick={handleModalRegistration}>Registration</Button>
+      </div> : <Button variant="outlined" color="primary" onClick={(e) => onLogout(e)}>
         Logout
       </Button>}
       <Dialog open={open} onClose={handleModalClose} aria-labelledby="form-dialog-title">

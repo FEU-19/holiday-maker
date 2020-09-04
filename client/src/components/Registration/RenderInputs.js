@@ -33,13 +33,13 @@ const RenderInputs = ({ handleSubmit, newUser, handleInput }) => {
       <form autoComplete="off" onSubmit={(e) => handleSubmit(e)}>
 
         <TextField
-          id="first_name"
+          id="firstName"
           label="First name"
           type="text"
-          name="first_name"
-          value={newUser.first_name}
+          name="firstName"
+          value={newUser.firstName}
           onChange={handleInput}
-          // required
+          required
           minLength="1"
           maxLength="30"
         />
@@ -51,31 +51,31 @@ const RenderInputs = ({ handleSubmit, newUser, handleInput }) => {
           name="surname"
           value={newUser.surname}
           onChange={handleInput}
-          // required
+          required
           minLength="1"
           maxLength="12"
         />
 
         <TextField
-          id="phone_number"
+          id="phoneNumber"
           label="Phone number"
           type="text"
-          name="phone_number"
-          value={newUser.phone_number}
+          name="phoneNumber"
+          value={newUser.phoneNumber}
           onChange={handleInput}
-          // required
+          required
           minLength="1" // 10
           maxLength="15"
         />
               
         <TextField
-          id="social_security_number"
+          id="socialSecurityNumber"
           label="social security number"
           type="text"
-          name="social_security_number"
-          value={newUser.social_security_number}
+          name="socialSecurityNumber"
+          value={newUser.socialSecurityNumber}
           onChange={handleInput}
-          // required
+          required
           minLength="1" // 8
           maxLength="12"
         />
@@ -87,7 +87,7 @@ const RenderInputs = ({ handleSubmit, newUser, handleInput }) => {
           name="city"
           value={newUser.city}
           onChange={handleInput}
-          // required
+          required
           minLength="1"
           maxLength="30"
         />
@@ -99,7 +99,7 @@ const RenderInputs = ({ handleSubmit, newUser, handleInput }) => {
           name="country"
           value={newUser.country}
           onChange={handleInput}
-          // required
+          required
           minLength="1"
           maxLength="30"
         />
@@ -111,19 +111,19 @@ const RenderInputs = ({ handleSubmit, newUser, handleInput }) => {
           name="street"
           value={newUser.street}
           onChange={handleInput}
-          // required
+          required
           minLength="1"
           maxLength="20"
         />
               
         <TextField
-          id="zip_code"
+          id="zipCode"
           label="Zip code"
           type="text"
-          name="zip_code"
-          value={newUser.zip_code}
+          name="zipCode"
+          value={newUser.zipCode}
           onChange={handleInput}
-          // required
+          required
           minLength="1"
           maxLength="10"
         />
@@ -135,7 +135,7 @@ const RenderInputs = ({ handleSubmit, newUser, handleInput }) => {
           name="email"
           value={newUser.email}
           onChange={handleInput}
-          // required
+          required
         />
 
         <TextField
@@ -145,19 +145,19 @@ const RenderInputs = ({ handleSubmit, newUser, handleInput }) => {
           name="password"
           value={newUser.password}
           onChange={handleInput}
-          // required
+          required
           minLength="1"
           maxLength="12"
         />
 
         <TextField
-          id="confirm_password"
+          id="confirmPassword"
           label="Confirm Password"
           type="password"
-          name="confirm_password"
-          value={newUser.confirm_password}
+          name="confirmPassword"
+          value={newUser.confirmPassword}
           onChange={handleInput}
-          // required
+          required
           minLength="1"
           maxLength="12"
         />

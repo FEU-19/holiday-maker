@@ -9,16 +9,16 @@ const RegistrationComp = (props) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [newUser, setNewUser] = useState({
     email: "",
-    first_name: "",
+    firstName: "",
     surname: "",
     street: "",
-    zip_code: "",
+    zipCode: "",
     city: "",
     country: "",
-    phone_number: "",
-    social_security_number: "",
+    phoneNumber: "",
+    socialSecurityNumber: "",
     password: "",
-    confirm_password: "",
+    confirmPassword: "",
   });
 
   function handleInput(e) {
@@ -30,21 +30,21 @@ const RegistrationComp = (props) => {
   function handleInputReset() {
     setNewUser({
       email: "",
-      first_name: "",
+      firstName: "",
       surname: "",
       street: "",
-      zip_code: "",
+      zipCode: "",
       city: "",
       country: "",
-      phone_number: "",
-      social_security_number: "",
+      phoneNumber: "",
+      socialSecurityNumber: "",
       password: "",
-      confirm_passwrod: "",
+      confirmPassword: "",
     });
   }
 
   function comparePassword() {
-    if (newUser.confirm_password === newUser.password) {
+    if (newUser.confirmPassword === newUser.password) {
       handlePostUser();
     } else {
       setShowMsg(true);
@@ -64,27 +64,11 @@ const RegistrationComp = (props) => {
       .then((res) => {
         console.log(res);
         handleInputReset();
-        setShowMsg(true);
         setWhatMsgToShow(1);
         props.setValue(0);
-        setTimeout(() => {
-          setShowMsg(false);
-        }, 2500);
       })
       .catch((err) => {
         console.log(err);
-        // account finns redan
-        setWhatMsgToShow(2);
-        // // Beroende på vilken felmeddelande vi får ska vi ändra till 2:a eller 3:
-        // if(){
-        //   setWhatMsgToShow(2);
-        // } else {
-        //   setWhatMsgToShow(5); // denna siffran ska alltid vara högst
-        // }
-        setShowMsg(true);
-        setTimeout(() => {
-          setShowMsg(false);
-        }, 2500);
       });
   }
 
