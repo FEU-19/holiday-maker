@@ -82,7 +82,8 @@ const SearchContainer = () => {
           justify="space-around"
         >
           <SelectCity residentData={residentData} />
-          <DatePicker />
+          <DatePicker
+          residentData={residentData}/>
           <SelectAmountOfAdults />
           <SelectAmountOfChildren />
           <Button
