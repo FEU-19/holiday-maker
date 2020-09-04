@@ -6,13 +6,13 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 
 const SelectAmountOfAdults = () => {
-  const [amountOfAdultsadults, setAmountOfAdults] = React.useState(1);
+  const [amountOfAdults, setAmountOfAdults] = React.useState(1);
 
   const handleChange = (e) => {
     setAmountOfAdults(e.target.value);
   };
 
-  console.log(amountOfAdultsadults);
+  console.log(amountOfAdults);
 
   return (
     <>
@@ -21,7 +21,7 @@ const SelectAmountOfAdults = () => {
         aria-label={"Select amount of adults"}
         displayEmpty
         id="selectAmountOfAdults"
-        value={amountOfAdultsadults}
+        value={amountOfAdults}
         onChange={handleChange}
       >
         <MenuItem disabled>Amount of adults</MenuItem>
