@@ -6,16 +6,16 @@ import Radio from "@material-ui/core/Radio";
 import {
   PayForm,
   Table,
-  RadioBtn__Container,
-  RadioBtn__ContainerDiv,
-  RadioBtn__ContainerInput,
+  RadioBtnContainer,
+  RadioBtnContainerDiv,
+  RadioBtnContainerInput,
   ImgContainer,
   IMG,
   CarNumContainer,
   CardNum,
-  EXP_CVC_Container,
-  EXP_CVC_Div,
-  EXP_CVC_Input,
+  EXPCVCContainer,
+  EXPCVCDiv,
+  EXPCVCInput,
 } from "./PaymentStyles";
 
 function PaymentForm({ value }) {
@@ -40,44 +40,44 @@ function PaymentForm({ value }) {
       <Table>
         <tbody>
           <tr>
-            <RadioBtn__Container>
-              <RadioBtn__ContainerDiv>
+            <RadioBtnContainer>
+              <RadioBtnContainerDiv>
                 <RadioGroup
                   aria-label="gender"
                   name="gender1"
                   value={radioValue}
                   onChange={handleRadio}
                 >
-                  <RadioBtn__ContainerInput
+                  <RadioBtnContainerInput
                     value="paypal"
                     control={<Radio />}
                     label="Paypal"
                   />
                 </RadioGroup>
-              </RadioBtn__ContainerDiv>
+              </RadioBtnContainerDiv>
               <IMG
                 src="https://lh3.googleusercontent.com/proxy/hYI0iYfNDK-dSz7htxguC_OsAmSt14QuNq5xD8RG9Mjm_aPmkRxxQ9DCpQJDhRkIn7ij51IyYTZpH2srbAP6H_snJBVXrQfWtg7Hb8SP6zJl5LgtNuQ"
                 alt="paypal logo"
               />
-            </RadioBtn__Container>
+            </RadioBtnContainer>
           </tr>
 
           <tr>
-            <RadioBtn__Container>
-              <RadioBtn__ContainerDiv>
+            <RadioBtnContainer>
+              <RadioBtnContainerDiv>
                 <RadioGroup
                   aria-label="gender"
                   name="gender1"
                   value={radioValue}
                   onChange={handleRadio}
                 >
-                  <RadioBtn__ContainerInput
+                  <RadioBtnContainerInput
                     value="Debit/credit card"
                     control={<Radio />}
                     label="Debit/credit card"
                   />
                 </RadioGroup>
-              </RadioBtn__ContainerDiv>
+              </RadioBtnContainerDiv>
               <ImgContainer>
                 <IMG
                   src="https://cdn.iconscout.com/icon/free/png-512/visa-3-226460.png"
@@ -96,7 +96,7 @@ function PaymentForm({ value }) {
                   alt="american-express logo"
                 />
               </ImgContainer>
-            </RadioBtn__Container>
+            </RadioBtnContainer>
           </tr>
 
           <tr>
@@ -114,30 +114,28 @@ function PaymentForm({ value }) {
           </tr>
 
           <tr>
-            <EXP_CVC_Container className="exp-cvc__container">
-              <EXP_CVC_Div>
+            <EXPCVCContainer>
+              <EXPCVCDiv>
                 <p>Expire</p>
-                <EXP_CVC_Input
+                <EXPCVCInput
                   placeholder="MM/YY"
                   options={{ date: true, datePattern: ["m", "d"] }}
                   onChange={setExpire}
-                  className="exp-cvc__input"
                 />
-              </EXP_CVC_Div>
+              </EXPCVCDiv>
 
-              <EXP_CVC_Div>
+              <EXPCVCDiv>
                 <p>CVC</p>
-                <EXP_CVC_Input
+                <EXPCVCInput
                   placeholder="CVV"
                   options={{
                     blocks: [3],
                     numericOnly: true,
                   }}
                   onChange={setCvc}
-                  className="exp-cvc__input"
                 />
-              </EXP_CVC_Div>
-            </EXP_CVC_Container>
+              </EXPCVCDiv>
+            </EXPCVCContainer>
           </tr>
         </tbody>
       </Table>

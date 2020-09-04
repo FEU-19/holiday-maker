@@ -5,7 +5,7 @@ import { Redirect } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 
 // import Modal from "../common/Modal/Modal";
-import { Modal, Button, Box } from "@material-ui/core";
+import { Modal, Box } from "@material-ui/core";
 import DoneIcon from "@material-ui/icons/Done";
 import CancelIcon from "@material-ui/icons/Cancel";
 

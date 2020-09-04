@@ -60,7 +60,7 @@ const InputContainer = styled.div`
   display: inline-block;
 `;
 
-const RadioBtn__Container = styled.td`
+const RadioBtnContainer = styled.td`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -68,7 +68,7 @@ const RadioBtn__Container = styled.td`
   border: 1px solid;
 `;
 
-const RadioBtn__ContainerDiv = styled.div`
+const RadioBtnContainerDiv = styled.div`
   flex: 1;
   text-align: left;
   display: flex;
@@ -76,7 +76,7 @@ const RadioBtn__ContainerDiv = styled.div`
   font-size: 18px;
 `;
 
-const RadioBtn__ContainerInput = styled(FormControlLabel)`
+const RadioBtnContainerInput = styled(FormControlLabel)`
   height: 20px;
   width: 20px;
   margin-right: 15px;
@@ -98,11 +98,11 @@ const Table = styled.table`
   border-collapse: collapse;
 `;
 
-const EXP_CVC_Container = styled.td`
+const EXPCVCContainer = styled.td`
   display: flex;
 `;
 
-const EXP_CVC_Div = styled.div`
+const EXPCVCDiv = styled.div`
   display: flex;
   flex: 1;
   justify-content: space-around;
@@ -110,7 +110,7 @@ const EXP_CVC_Div = styled.div`
   border: 1px solid;
 `;
 
-const EXP_CVC_Input = styled(Cleave)`
+const EXPCVCInput = styled(Cleave)`
   border: none;
   outline: none;
 `;
@@ -136,14 +136,14 @@ export {
   InfoForm,
   PayForm,
   InputContainer,
-  RadioBtn__Container,
-  RadioBtn__ContainerDiv,
-  RadioBtn__ContainerInput,
+  RadioBtnContainer,
+  RadioBtnContainerDiv,
+  RadioBtnContainerInput,
   ImgContainer,
   IMG,
   Table,
-  EXP_CVC_Container,
-  EXP_CVC_Div,
-  EXP_CVC_Input,
+  EXPCVCContainer,
+  EXPCVCDiv,
+  EXPCVCInput,
   PayBtn,
 };
