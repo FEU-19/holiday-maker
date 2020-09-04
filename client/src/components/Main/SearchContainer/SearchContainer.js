@@ -12,6 +12,7 @@ import { Button } from '@material-ui/core';
 import DatePicker from './DatePicker';
 import SelectAmountOfAdults from './SelectAmountOfAdults';
 import CheckboxKidsClub from './CheckboxKidsClub';
+import CheckboxRestaurant from './CheckboxRestaurant';
 
 // Filter functions
 import adultChildToBedFilter from '../../../utils/adultChildToBedFilter.js';
@@ -70,7 +71,7 @@ const SearchContainer = () => {
     .catch((err) => {
       console.error(err);
     });
-    
+
   }
 
   return (
@@ -99,10 +100,10 @@ const SearchContainer = () => {
           container
           justify="space-around"
         >
-
+          <CheckboxRestaurant />
           <CheckboxKidsClub />
           <CheckboxEveningEntmt />
-            
+
 
           </Grid>
         </form>
