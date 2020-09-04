@@ -9,6 +9,7 @@ import { Button } from '@material-ui/core';
 
 import DatePicker from './DatePicker';
 import SelectAmountOfAdults from './SelectAmountOfAdults';
+import CheckboxKidsClub from './CheckboxKidsClub';
 
 // Filter functions
 import adultChildToBedFilter from '../../../utils/adultChildToBedFilter.js';
@@ -57,12 +58,9 @@ const SearchContainer = () => {
           justify="space-around"
         >
           <SelectCity residentData={residentData} />
-
-          
-          <SelectAmountOfChildren />
-
           <DatePicker />
           <SelectAmountOfAdults />
+          <SelectAmountOfChildren />
           <Button
             type="submit"
             variant="contained"
@@ -77,7 +75,7 @@ const SearchContainer = () => {
           container
           justify="space-around"
         >
-            
+          <CheckboxKidsClub />
           </Grid>
         </form>
       </Container>
