@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 //import data from "../components/Residence/residents.json";
 import ResidenceInformation from "../components/Residence/ResidenceInformation";
 import RoomCard from "../components/Residence/RoomCard";
+import GeneralInformation from "../components/Residence/GeneralInformation";
 import axios from "axios";
 //const hotel = data[0];
 //const rooms = data[0].rooms;
@@ -17,7 +18,7 @@ const Residence = () => {
         updateData(response.data.data);
       })
       .catch(error => {
-        console.error("An error occured while retrieving data from the server");
+        console.error("An error occured while retrieving data from the server", error);
       });
   },[]);
 
@@ -29,6 +30,8 @@ const Residence = () => {
     return(<p>Loading...</p>);
   }
 
+  console.log(data);
+
   return (
     <div>
       <div>
@@ -37,6 +40,9 @@ const Residence = () => {
       </div>
       <div>
         <RoomCard roomsInfo = {data.rooms}/>
+      </div>
+      <div>
+        <GeneralInformation generalInfo={data} />
       </div>
     </div>
   );
