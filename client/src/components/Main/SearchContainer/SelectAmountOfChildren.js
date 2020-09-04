@@ -5,9 +5,7 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 
-const SelectAmountOfChildren = () => {
-  const [amountOfChildren, setAmountOfChildren] = useState("");
-
+const SelectAmountOfChildren = ({setAmountOfChildren, amountOfChildren}) => {
   const handleChange = (e) => {
     setAmountOfChildren(e.target.value);
   };
