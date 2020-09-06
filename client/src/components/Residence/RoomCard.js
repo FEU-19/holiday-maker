@@ -61,6 +61,9 @@ const RoomCard = ({ roomsInfo }) => {
         setValue(event.target.value);
     };
 
+    
+
+
     return (
         <Card className={classes.card}>
             <RoomType roomType={roomInfo} />
@@ -74,7 +77,7 @@ const RoomCard = ({ roomsInfo }) => {
                         <Grid>
                             <Typography item xs={8}>
                                 Free Wifi
-       </Typography>
+                            </Typography>
                         </Grid>
                     </Grid>
                     <Grid className={classes.icons}>
@@ -84,7 +87,7 @@ const RoomCard = ({ roomsInfo }) => {
                         <Grid>
                             <Typography item xs={8}>
                                 Free parking
-       </Typography>
+                            </Typography>
                         </Grid>
                     </Grid>
                     <Grid>
@@ -159,23 +162,6 @@ const RoomCard = ({ roomsInfo }) => {
                         </FormControl>
                     </Grid>
                 </Grid>
-                {/*<Typography component = "span" > 
-                    <Grid className = {classes.options}>
-                        {roomInfo.extraBed && <p>Extra Bed: {roomInfo.extraBed}</p>}
-                    </Grid>
-                    <Grid className = {classes.options}>
-                        {roomInfo["all-inclusive"] && <p>All Inclusive: {roomInfo["all-inclusive"]}</p>}
-                    </Grid>
-                    <Grid className = {classes.options}>
-                        {roomInfo["full-board"] && <p>Full board: {roomInfo["full-board"]}</p>}
-                    </Grid>
-                    <Grid className = {classes.options}>
-                        {roomInfo["half-board"] && <p>Half board: {roomInfo["half-board"]}</p>}
-                    </Grid>
-                    <Grid className = {classes.options}>
-                        {roomInfo["self-catring"] && <p>Self catering: {roomInfo["self-catring"]}</p>}
-                    </Grid>
-                </Typography>*/}
             </CardContent>
             <RoomPrice roomType={roomInfo} />
         </Card>
