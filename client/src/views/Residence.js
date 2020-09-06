@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 //import data from "../components/Residence/residents.json";
 import ResidenceInformation from "../components/Residence/ResidenceInformation";
 import RoomCard from "../components/Residence/RoomCard";
@@ -13,21 +13,21 @@ const Residence = () => {
 
 
   useEffect(() => {
-    axios.get("http://localhost:8080/api/residents/5f4e2b510ae3bf21d48b0aaf")
+    axios.get("http://localhost:8080/api/residents/5f5230fbfd504a310c818546")
       .then(response => {
         updateData(response.data.data);
       })
       .catch(error => {
         console.error("An error occured while retrieving data from the server", error);
       });
-  },[]);
+  }, []);
 
   //console.log(data);
   //console.log(residence.rooms);
 
 
-  if (Object.keys(data).length === 0){
-    return(<p>Loading...</p>);
+  if (Object.keys(data).length === 0) {
+    return (<p>Loading...</p>);
   }
 
   console.log(data);
@@ -36,10 +36,10 @@ const Residence = () => {
     <div>
       <div>
         <h1>{data.name}</h1>
-        <ResidenceInformation info={data}/>
+        <ResidenceInformation info={data} />
       </div>
       <div>
-        <RoomCard roomsInfo = {data.rooms}/>
+        <RoomCard roomsInfo={data.rooms} />
       </div>
       <div>
         <GeneralInformation generalInfo={data} />
