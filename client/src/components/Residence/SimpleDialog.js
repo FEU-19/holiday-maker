@@ -24,7 +24,7 @@ function SimpleDialog({ onClose, open, currentPicIndex, updatePicIndex, images }
         height: 450,
         width: 800,
         flexShrink: 0,
-        transition: 'transform 1s ease-in-out',
+        transition: 'transform 0.4s ease-in-out',
         transform: props => `translateX(-${props.index*800}px)`
       },
        leftbutton: {

@@ -6,15 +6,15 @@ import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 
 const DIV = styled.div`
 display: flex;
-width: 474px;
-height: 303px;
+width: 874px;
+height: 603px;
 overflow:hidden;
 position: relative;
 `;
 const IMG = styled.img`
-width: 474px;
-height: 303px;
-transform: translateX(${props => -props.currentPicIndex*474}px);
+width: 874px;
+height: 603px;
+transform: translateX(${props => -props.currentPicIndex*874}px);
 transition: all 0.4s ease-out;
 `;
 
@@ -60,7 +60,6 @@ const Carousel = ({images,currentPicIndex,updatePicIndex, props}) => {
 
     return(
         <MainDiv>
-                {console.log('props')}
         <DIV>
             {images.map( image =>(
                 <DIVIMG >

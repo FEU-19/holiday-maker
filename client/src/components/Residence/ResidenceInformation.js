@@ -4,10 +4,13 @@ import CheckIcon from '@material-ui/icons/Check';
 // Style variables
 const boxContainer = {
   display: "flex",
-  justifyContent: "center",
+  flexDirection: "row",
+  flexWrap: "nowrap",
+  justifyContent: "space-between",
   alignItems: "center",
-  width: "700px",
-  height: "200px",
+  marginBottom: "20px",
+  //width: "700px",
+  //height: "200px",
 };
 
 const infoContainer = {
@@ -18,8 +21,8 @@ const infoContainer = {
   paddingLeft: "25px",
   paddingTop: "20px",
   paddingBottom: "20px",
-  marginLeft: "5px",
-  marginRight: "5px",
+  //marginLeft: "5px",
+  //marginRight: "5px",
   backgroundColor: "#EAEAEA",
   color: "black",
   borderRadius: "10px",

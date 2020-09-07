@@ -2,12 +2,10 @@ import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 //import data from "../components/Residence/residents.json";
 import ResidenceInformation from "../components/Residence/ResidenceInformation";
-import RoomCard from "../components/Residence/RoomCard";
 import GeneralInformation from "../components/Residence/GeneralInformation";
-import HotelCarousel from '../components/Residence/HotelCarousel'
+import HotelCarousel from "../components/Residence/HotelCarousel";
+import RoomCardMapper from "../components/Residence/RoomCardMapper";
 import axios from "axios";
-//const hotel = data[0];
-//const rooms = data[0].rooms;
 
 const useStyle = makeStyles(() => ({
   article: {
@@ -21,7 +19,7 @@ const useStyle = makeStyles(() => ({
     textAlign: "center",
   },
   info: {
-    
+    padding: "2vw"
   }
 
 }))
@@ -30,46 +28,43 @@ const useStyle = makeStyles(() => ({
 const Residence = () => {
   const classes = useStyle();
   const [data, updateData] = useState({});
-  
 
+ useEffect(() => {
+  axios
+   .get("http://localhost:8080/api/residents/5f5230fbfd504a310c818546")
+   .then((response) => {
+    updateData(response.data.data);
+   })
+   .catch((error) => {
+    console.error(
+     "An error occured while retrieving data from the server",
+     error
+    );
+   });
+ }, []);
 
-  useEffect(() => {
-    axios.get("http://localhost:8080/api/residents/5f5230fbfd504a310c818546")
-      .then(response => {
-        updateData(response.data.data);
-      })
-      .catch(error => {
-        console.error("An error occured while retrieving data from the server", error);
-      });
-  }, []);
-
-  //console.log(data);
-  //console.log(residence.rooms);
-
-
-  if (Object.keys(data).length === 0) {
-    return (<p>Loading...</p>);
-  }
-
-  console.log(data);
+ if (Object.keys(data).length === 0) {
+  return <p>Loading...</p>;
+ }
 
   return (
     <div className = {classes.article}>
       <div className = {classes.titlecontainer}>
         <h1 className = {classes.title}>{data.name}</h1>
-        <HotelCarousel/>
+        <HotelCarousel dataImage = {data}/>
         <div className = {classes.info}>
           <ResidenceInformation info={data} />
         </div>
       </div>
       <div>
-        <RoomCard roomsInfo={data.rooms} />
+        <RoomCardMapper allRooms={data.rooms} />
       </div>
       <div>
         <GeneralInformation generalInfo={data} />
       </div>
     </div>
   );
+
 };
 
 export default Residence;
