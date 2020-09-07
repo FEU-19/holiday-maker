@@ -1,9 +1,8 @@
 const mongoose = require("mongoose");
-const { ObjectId } = require("mongodb");
 const RoomSchema = require("./Room");
 
 const orderSchema = mongoose.Schema({
-  user: ObjectId,
+  userId: String,
   adults: Number,
   children: Number,
   hotel: String,

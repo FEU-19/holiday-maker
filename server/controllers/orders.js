@@ -4,13 +4,54 @@ const Hotel = require("../models/Hotel");
 
 const bookingNrGenerator = require("../utils/bookingNrGenerator");
 // {adults: N, children: N, hotel: String, rooms: Array, bookingDates: {start: String, end: String}}
-exports.create = (req, res) => {
+exports.create = async (req, res) => {
   // Id will also be a cookie.
-  const Id = req.body.user;
+  const Id = req.body.userId;
   const data = req.body;
   const orderData = {};
 
-  User.findById(Id)
+  // -----------------------------------------------------------------------------
+  const user = await User.findById(Id);
+
+  orderData.userId = user._id;
+  orderData.timeLog = Date.now();
+  orderData.bookingNumber = bookingNrGenerator(
+    user.first_name,
+    user.surname,
+    6
+  );
+  orderData.room = data.room;
+  orderData.bookingDates = data.bookingDates;
+  orderData.hotel = data.hotel;
+
+  // Add occupiedDates to booked rooms.
+  orderData.room.forEach((room) => {
+    room.occupiedDates.push(data.bookingDates);
+  });
+  const order = new Order(orderData);
+  order.save((err) => {
+    if (err) res.status(500).send({ error: err.message });
+  });
+
+  const roomNs = [];
+  data.room.forEach((room) => {
+    roomNs.push(room.roomNumber);
+  });
+
+  const hotel = await Hotel.findOne({ name: data.hotel });
+  hotel.rooms.forEach((room) => {
+    if (roomNs.includes(room.roomNumber)) {
+      room.occupiedDates.push(data.bookingDates);
+    }
+  });
+  hotel.save((err, arr) => {
+    if (err) res.status(500).send({ error: err.message });
+    res.status(201).json(orderData);
+  });
+
+  // -----------------------------------------------------------------------------
+
+  /* User.findById(Id)
     .then((response) => {
       if (!response) {
         res.status(404).send({ error: "Resource not found, bad ID. SMÖG" });
@@ -47,7 +88,9 @@ exports.create = (req, res) => {
       data.room.forEach((room) => {
         roomIds.push(room._id);
       });
-      return Hotel.room.updateMany().where({ _id: { $in: roomIds } });
+
+      // Skriv om till att hämta hotel sen modifiera rooms arr.
+      return Hotel.rooms.find().where({ _id: { $in: roomIds } });
     })
     .then((response) => {
       if (!response) {
@@ -58,7 +101,7 @@ exports.create = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({ error: err.message });
-    });
+    }); */
 };
 
 exports.read = (_req, res) => {
