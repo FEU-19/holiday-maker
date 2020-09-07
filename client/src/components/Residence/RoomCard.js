@@ -63,7 +63,7 @@ const RoomCard = ({ roomsInfo }) => {
     };
 
     const {selected} = value;
-
+    console.log("hej hej")
     return (
         <Card className={classes.card}>
             <RoomType roomType={roomInfo} />
