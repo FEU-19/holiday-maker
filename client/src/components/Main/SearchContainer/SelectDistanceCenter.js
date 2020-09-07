@@ -34,10 +34,10 @@ const SelectDistanceCenter = ({distanceCenter, setDistanceCenter}) => {
       >
         <MenuItem disabled>Distance</MenuItem>
         {
-          distanceInterval.map((distance) =>
-            distance === '' 
-            ? <MenuItem value={ distance }>None</MenuItem>
-            : <MenuItem value={ distance }>{ "> " + distance } m</MenuItem>
+          distanceInterval.map((index, distance) =>
+            distance === ''
+            ? <MenuItem value={ distance } key={index}>None</MenuItem>
+            : <MenuItem value={ distance } key={index}>{ "> " + distance } m</MenuItem>
           )
         }
 
