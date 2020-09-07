@@ -12,11 +12,8 @@ import SelectAmountOfChildren from './SelectAmountOfChildren';
 import ChildrenAgeSelects from './ChildrenAgeSelects.js';
 import SelectAmountOfAdults from './SelectAmountOfAdults';
 import CheckboxKidsClub from './CheckboxKidsClub';
-import CheckboxRestaurant from './CheckboxRestaurant';
 import CheckboxPool from './CheckboxPool';
-
-
-
+import CheckboxRestaurant from './CheckboxRestaurant';
 
 
 
@@ -29,6 +26,7 @@ import filterPool from '../../../utils/filterPool';
 import filterRestaurant from '../../../utils/filterRestaurant';
 import dateFilter from '../../../utils/dateFilter.js';
 
+
 const Container = styled.div`
 border: 2px solid red;
 width: 90vw;
@@ -39,6 +37,7 @@ justify-content: center;
 const SearchContainer = () => {
   const [residentData, setResidentData] = useState([{}]);
   const [filteredData, setFilteredData] = useState([]);
+  const [amountOfChildren, setAmountOfChildren] = useState(0);
 
   useEffect(() => {
     axios.get('http://localhost:8080/api/residents/')
@@ -65,7 +64,7 @@ const SearchContainer = () => {
 
       c = filterCity(c, 'Manila');
       c = filterPool(c, true);
-      c = filterNightEntertainment(c, false);
+      c = filterNightEntertainment(c, false);   
       c = filterKidsClub(c, 'default');
       c = filterRestaurant(c, 'default');
 
@@ -88,10 +87,17 @@ const SearchContainer = () => {
           container
           justify="space-around"
         >
+
           <SelectCity residentData={residentData} />
-          <DatePicker />
+          <DatePicker
+          residentData={residentData}/>
           <SelectAmountOfAdults />
-          <SelectAmountOfChildren />
+          <SelectAmountOfChildren
+            setAmountOfChildren={ setAmountOfChildren }
+            amountOfChildren={ amountOfChildren }
+          />
+          <ChildrenAgeSelects amountOfChildren={ amountOfChildren } />
+
           <Button
             type="submit"
             variant="contained"
@@ -106,12 +112,11 @@ const SearchContainer = () => {
           container
           justify="space-around"
         >
-         <CheckboxRestaurant />
-         <CheckboxKidsClub />
-         <CheckboxNightEntertainment />
-         <CheckboxPool />
-        </Grid>
-
+          <CheckboxRestaurant />
+          <CheckboxKidsClub />
+          <CheckboxNightEntertainment />
+          <CheckboxPool />
+         </Grid>
         </form>
       </Container>
     );
