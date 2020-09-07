@@ -19,7 +19,11 @@ const app = express();
 // Body parser
 app.use(express.json());
 
-app.use(cors());
+app.use(cors({
+  credentials: true,
+  origin: "http://localhost:3000",
+  exposedHeaders: ['set-cookie'],
+}));
 
 app.use(cookieParser());
 

@@ -3,22 +3,21 @@ import axios from "axios";
 import RenderInputs from "./RenderInputs";
 import RenderMsg from "./RenderMsg";
 
-const RegistrationComp = () => {
-  const [showMsg, setShowMsg] = useState(true);
+const RegistrationComp = (props) => {
   const [whatMsgToShow, setWhatMsgToShow] = useState(0);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [newUser, setNewUser] = useState({
     email: "",
-    first_name: "",
+    firstName: "",
     surname: "",
     street: "",
-    zip_code: "",
+    zipCode: "",
     city: "",
     country: "",
-    phone_number: "",
-    social_security_number: "",
+    phoneNumber: "",
+    socialSecurityNumber: "",
     password: "",
-    confirm_password: "",
+    confirmPassword: "",
   });
 
   function handleInput(e) {
@@ -30,93 +29,60 @@ const RegistrationComp = () => {
   function handleInputReset() {
     setNewUser({
       email: "",
-      first_name: "",
+      firstName: "",
       surname: "",
       street: "",
-      zip_code: "",
+      zipCode: "",
       city: "",
       country: "",
-      phone_number: "",
-      social_security_number: "",
+      phoneNumber: "",
+      socialSecurityNumber: "",
       password: "",
-      confirm_passwrod: "",
+      confirmPassword: "",
     });
   }
 
   function comparePassword() {
-    if (newUser.confirm_password === newUser.password) {
+    if (newUser.confirmPassword === newUser.password) {
       handlePostUser();
     } else {
-      setShowMsg(true);
-      setWhatMsgToShow(4);
-
-      setTimeout(() => {
-        setShowMsg(false);
-      }, 2500);
+      setWhatMsgToShow(2);
     }
   }
 
   function handlePostUser() {
-    const url = "";
-
     axios
       .post(`http://localhost:3002/api/register`, newUser)
       .then((res) => {
-        console.log(res);
         handleInputReset();
-        setShowMsg(true);
         setWhatMsgToShow(1);
-
-        setTimeout(() => {
-          setShowMsg(false);
-        }, 2500);
+        props.setValue(0);
       })
       .catch((err) => {
         console.log(err);
-        // account finns redan
-        setWhatMsgToShow(2);
-        // // Beroende på vilken felmeddelande vi får ska vi ändra till 2:a eller 3:
-        // if(){
-        //   setWhatMsgToShow(2);
-        // } else {
-        //   setWhatMsgToShow(5); // denna siffran ska alltid vara högst
-        // }
-        setShowMsg(true);
-        setTimeout(() => {
-          setShowMsg(false);
-        }, 2500);
       });
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(e);
-    console.log("From submit form ", newUser);
     setAnchorEl(e.currentTarget);
 
-    let fieldsEmpty;
+    let fieldsEmpty = false;
     for (const item of Object.values(newUser)) {
-      console.log(item);
-      if (item === "") {
-        fieldsEmpty = false;
-      } else {
-        fieldsEmpty = true;
+      if (item.length === 0) {
+        setWhatMsgToShow(1);
+        return;
       }
+      fieldsEmpty = true;
     }
 
-    if (!fieldsEmpty) {
-      setShowMsg(true);
-      setWhatMsgToShow(3);
-
-      setTimeout(() => {
-        setShowMsg(false);
-      }, 2500);
-    } else {
+    if (fieldsEmpty) {
       comparePassword();
     }
   }
   const handleClose = () => {
     setAnchorEl(null);
+    setWhatMsgToShow(0);
   };
 
   return (

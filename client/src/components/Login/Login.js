@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import { Redirect } from "react-router-dom";
 import styled from "styled-components"
 import axios from "axios";
+import SimpleDialog from '@material-ui/core/Dialog';
+
+
 
 const Container = styled.div`
-  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -14,11 +15,27 @@ const Container = styled.div`
       display: flex;
       align-items: center;
       justify-content: center;
+      flex-direction: column;
+    }
+    .loginBtn{
+      margin-top: 20px;
     }
 `
 
-const Login = () => {
+const Login = (props) => {
   const [user, setUser] = useState({ email: "", password: "" });
+  const [open, setOpen] = useState(false);
+  const [errorMsg, setErrorMsg] = useState(0)
+ 
+  const options = {
+    xsrfCookieName: 'XSRF-TOKEN',
+    xsrfHeaderName: 'X-XSRF-TOKEN',
+  };
+
+  const instance = axios.create({
+    withCredentials: true,
+  })
+
   const onChangeUser = (e) => {
     const { value } = e.target;
     const { name } = e.target;
@@ -26,28 +43,26 @@ const Login = () => {
   };
 
   const onSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault();  
     if (user) {
-      axios.post("http://localhost:3002/api/login", { user }, /*{ headers: {
-        Cookie: "cookie1=value; cookie2=value; cookie3=value;"
-    }}*/)
+      instance.post("http://localhost:3002/api/login/", {user}, options)
       .then((res) => {
-        console.log(res);
-        if(res.status === 201){
-          // return <Redirect to="/" />;
-          // window.history.go(-1)
-        }
+        props.handleModalClose();
       })
       .catch(err => {
-        //window.history.go(-1)
-        console.log("Error message" + err)
+        setOpen(true);
+        setErrorMsg(err.response.data.error[0].msg);
       });
     }
+  };
+
+  const handleClose = () => {
+    setOpen(false)
   };
   
   return (
     <Container>
-      <form className="login__Main" onSubmit={onSubmit}>
+      <form className="login__Main" onSubmit={(e) => onSubmit(e)}>
         <TextField
           required
           name="email"
@@ -66,9 +81,15 @@ const Login = () => {
           value={user.password}
           onChange={onChangeUser}
         />
-        <Button type="submit">Login</Button>
+        <Button className="loginBtn" type="submit" variant="contained" color="primary">Login</Button> 
+        {open ? <SimpleDialog  selectedvalue={errorMsg} open={open} onClose={handleClose} > 
+          {errorMsg}
+
+      </SimpleDialog> : null}
       </form>
+      
     </Container>
+
   );
 };
 
