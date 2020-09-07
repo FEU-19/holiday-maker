@@ -23,8 +23,8 @@ const useStyle = makeStyles(() => ({
         justifyContent: "space-between",
         margintop: 20,
         marginBottom: 20,
-        // marginLeft: "20vw",
-        // marginRight: "20vw",
+        //marginLeft: "20vw",
+       // marginRight: "20vw",
     },
     title: {
         marginTop: 5,
