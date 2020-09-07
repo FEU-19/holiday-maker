@@ -21,7 +21,7 @@ function ModalDialogButton({images}) {
     <div>
       <br />
       <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Open simple dialog
+        Show room images
       </Button>
       <SimpleDialog open={open} onClose={handleClose} images={images} currentPicIndex={currentPicIndex} updatePicIndex={updatePicIndex} />
     </div>

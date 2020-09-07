@@ -18,6 +18,9 @@ const useStyle = makeStyles(() => ({
   justifyContent: "space-between",
   alignItems: "flex-end",
  },
+ header: {
+    textAlign:"right",
+ }, 
  text: {
   margin: 20,
   fontSize: 16,

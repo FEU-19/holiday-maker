@@ -41,7 +41,7 @@ const Carousel = ({images,currentPicIndex,updatePicIndex, props}) => {
             top: '50%',
             transform: 'translateY(-50%)',
             position: 'absolute'
-        }
+        },
     })
 
     const leftButton = () =>{
