@@ -152,7 +152,7 @@ const RoomCard = ({ roomsInfo }) => {
                                     label={
                                         roomInfo.selfCatering && (
                                             <p style={{ paddingRight: "10vw" }}>
-                                                Half board: {roomInfo.selfCatering + ":-"}
+                                                Self Catering: {roomInfo.selfCatering + ":-"}
                                             </p>
                                         )
                                     }

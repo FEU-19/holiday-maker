@@ -37,7 +37,7 @@ const Residence = () => {
     <div>
       <div>
         <h1>{data.name}</h1>
-        <HotelCarousel/>
+        <HotelCarousel dataImage={data}/>
         <ResidenceInformation info={data} />
       </div>
       <div>
