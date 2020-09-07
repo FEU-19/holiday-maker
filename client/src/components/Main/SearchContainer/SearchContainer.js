@@ -67,7 +67,6 @@ const SearchContainer = ({ setFilteredDataCB }) => {
       resolve(c);
     })
     .then((res) => {
-      console.log(res)
       setFilteredDataCB(res);
     })
     .catch((err) => {
