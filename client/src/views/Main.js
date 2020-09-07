@@ -1,10 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from 'styled-components';
 
 import SearchContainer from '../components/Main/SearchContainer/SearchContainer'
 import ContentContainer from '../components/Main/ContentContainer/ContentContainer'
-
-
 
 // stor bokstav på variabler i styled components
 const Container = styled.main`
@@ -16,11 +14,17 @@ const Container = styled.main`
 `
 
 const Main = () => {
+  const [filteredData, setFilteredData] = useState([]);
+
+  function setFilteredDataCB(data) {
+    setFilteredData(data);
+  }
+
   return (
-      <Container>
-        <SearchContainer />
-        <ContentContainer />
-      </Container>
+    <Container>
+      <SearchContainer setFilteredDataCB={setFilteredDataCB} />
+      <ContentContainer filteredData={filteredData} />
+    </Container>
   )
 };
 
