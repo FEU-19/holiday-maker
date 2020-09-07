@@ -2,35 +2,27 @@ const bcrypt = require("bcrypt");
 const User = require("../models/User");
 
 exports.createLogout = async (req, res) =>{
-  let userId = req.body.userId;
+  const { userId } = req.body.userId;
 
-  res.clearCookie("access_token", "Bearer" + userId).end();
+  res.clearCookie("access_token", `Bearer${userId}`).end();
 }
 
 exports.createLogin = async (req, res) => {
-  const {
-    email,
-    password
-  } = req.body.user;
+  const { email, password } = req.body.user;
   if (!email || !password) {
     return res.status(400).json({
-      error: [{
-        msg: "Invalid Credentials",
-      }]
+      error: [{ msg: "Invalid Credentials" }],
     });
   }
 
   try {
-    let user = await User.findOne({
+    const user = await User.findOne({
       email,
     });
-    console.log(user);
 
     if (!user) {
       return res.status(400).json({
-        error: [{
-          msg: "Invalid Credentials",
-        }]
+        error: [{ msg: "Invalid Credentials" }],
       });
     }
 
@@ -38,18 +30,15 @@ exports.createLogin = async (req, res) => {
 
     if (!isMatch) {
       return res.status(400).json({
-        error: [{
-          msg: "Invalid Credentials",
-        }]
+        error: [{ msg: "Invalid Credentials" }],
       });
     }
 
-    res.status(200)
-    res.cookie("access_token", "Bearer" + user.id, {
+    res.status(200);
+    res.cookie("access_token", `Bearer${user.id}`, {
       expires: new Date(Date.now() + 8 * 3600000),
-    })
-    res.send("fungerar")
-
+    });
+    res.end();
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");
@@ -68,26 +57,19 @@ exports.create = async (req, res) => {
     phoneNumber,
     socialSecurityNumber,
     password,
-    confirmPassword,
   } = req.body;
 
   if (!email || !password) {
     return res.status(400).json({
-      error: [{
-        msg: "Please fill all of the existing fields",
-      }],
+      error: [{ msg: "Please fill all of the existing fields" }],
     });
   }
 
   try {
-    let user = await User.findOne({
-      email
-    });
+    let user = await User.findOne({ email });
     if (user) {
       return res.status(400).json({
-        error: [{
-          msg: "User already exists",
-        }],
+        error: [{ msg: "User already exists" }],
       });
     }
 
@@ -117,8 +99,4 @@ exports.create = async (req, res) => {
       msg: "Server error",
     });
   }
-};
-
-exports.read = (req, res) => {
-  res.send("OK");
 };

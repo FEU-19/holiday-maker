@@ -23,50 +23,47 @@ const LoginModal = () =>{
     setCookie(document.cookie);
   }, [open])
 
-  useEffect(()=>{
-    
-  })
-  
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
+  function TabPanel(props) {
+    const { children, value, index, ...other } = props;
 
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box p={3}>
-          <Typography component={'span'}>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
+    return (
+      <div
+        role="tabpanel"
+        hidden={value !== index}
+        id={`simple-tabpanel-${index}`}
+        aria-labelledby={`simple-tab-${index}`}
+        {...other}
+      >
+        {value === index && (
+          <Box p={3}>
+            <Typography component={'span'}>{children}</Typography>
+          </Box>
+        )}
+      </div>
+    );
+  }
 
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
-};
-
-function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
+  TabPanel.propTypes = {
+    children: PropTypes.node,
+    index: PropTypes.any.isRequired,
+    value: PropTypes.any.isRequired,
   };
-}
 
-const handleChange = (event, newValue) => {
-  setValue(newValue);
-};
+  function a11yProps(index) {
+    return {
+      id: `simple-tab-${index}`,
+      'aria-controls': `simple-tabpanel-${index}`,
+    };
+  }
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
 
   const handleModalOpen = () =>{
     setOpen(true);
+    setValue(0);
   }
 
   const handleModalRegistration = () =>{
@@ -75,7 +72,6 @@ const handleChange = (event, newValue) => {
   }
 
   const handleModalClose = () =>{
-    console.log("WOOOOOOORKS");
     setOpen(false);
   }
 
@@ -124,9 +120,6 @@ const handleChange = (event, newValue) => {
         <TabPanel value={value} index={1}>
           <RegistrationComp setValue={setValue}/>
         </TabPanel>
-        <DialogContent>
-            
-        </DialogContent>
         <DialogActions>
           <Button onClick={handleModalClose} color="primary">
             Cancel

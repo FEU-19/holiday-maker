@@ -1,11 +1,10 @@
 import React from "react";
 
-import LoginModal from "../components/modals/LoginModal";
+import HeaderComp from "../components/common/Header/Header";
 
 const Main = () => {
   return <div>
-    Index Page
-    <LoginModal />
+    <HeaderComp />
   </div>;
 };
 

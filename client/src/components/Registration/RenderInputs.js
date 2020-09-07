@@ -23,9 +23,15 @@ const Container = styled.div`
       button {
         margin-top: 10px;
       }
+      .num{
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+      }
     }  
 `
-   {/* className={classes.root} noValidate */}
 
 const RenderInputs = ({ handleSubmit, newUser, handleInput }) => {
   return (
@@ -59,9 +65,10 @@ const RenderInputs = ({ handleSubmit, newUser, handleInput }) => {
         <TextField
           id="phoneNumber"
           label="Phone number"
-          type="text"
+          type="number"
           name="phoneNumber"
-          value={newUser.phoneNumber}
+          className="num"
+          value={newUser.phoneNumber.toString()}
           onChange={handleInput}
           required
           minLength="1" // 10
@@ -71,9 +78,10 @@ const RenderInputs = ({ handleSubmit, newUser, handleInput }) => {
         <TextField
           id="socialSecurityNumber"
           label="social security number"
-          type="text"
+          type="number"
+          className="num"
           name="socialSecurityNumber"
-          value={newUser.socialSecurityNumber}
+          value={newUser.socialSecurityNumber.toString()}
           onChange={handleInput}
           required
           minLength="1" // 8
@@ -119,9 +127,10 @@ const RenderInputs = ({ handleSubmit, newUser, handleInput }) => {
         <TextField
           id="zipCode"
           label="Zip code"
-          type="text"
+          type="number"
           name="zipCode"
-          value={newUser.zipCode}
+          className="num"
+          value={newUser.zipCode.toString()}
           onChange={handleInput}
           required
           minLength="1"

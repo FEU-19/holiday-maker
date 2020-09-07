@@ -27,7 +27,6 @@ const Login = (props) => {
   const [open, setOpen] = useState(false);
   const [errorMsg, setErrorMsg] = useState(0)
  
-
   const options = {
     xsrfCookieName: 'XSRF-TOKEN',
     xsrfHeaderName: 'X-XSRF-TOKEN',
@@ -46,28 +45,19 @@ const Login = (props) => {
   const onSubmit = (e) => {
     e.preventDefault();  
     if (user) {
-
-      
       instance.post("http://localhost:3002/api/login/", {user}, options)
       .then((res) => {
-        console.log(res);
         props.handleModalClose();
       })
       .catch(err => {
-        //window.history.go(-1)
-        console.log("Error message" + err.response.data.error[0].msg)
-        //setShowErrorMsg(true)
         setOpen(true);
-        setErrorMsg("Oops något blev fel");
-
+        setErrorMsg(err.response.data.error[0].msg);
       });
     }
   };
 
   const handleClose = () => {
-    //setAnchorEl(null);
     setOpen(false)
-    //setErrorMsg(value);
   };
   
   return (
