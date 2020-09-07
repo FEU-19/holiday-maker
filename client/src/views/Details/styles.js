@@ -1,5 +1,5 @@
 import { makeStyles, createMuiTheme } from "@material-ui/core/styles";
-import { green } from "@material-ui/core/colors";
+import { green, orange } from "@material-ui/core/colors";
 
 export const useStyle = makeStyles((style) => ({
   root: {
@@ -31,6 +31,9 @@ export const useStyle = makeStyles((style) => ({
 export const Theme = createMuiTheme({
   palette: {
     primary: {
+      main: green[500],
+    },
+    secondary: {
       main: green[500],
     },
   },
