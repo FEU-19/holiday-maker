@@ -18,6 +18,7 @@
     "react-helmet-async": "^1.0.6",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
+    "react-test-renderer": "^16.13.1",
     "styled-components": "^5.1.1"
   },
   "scripts": {

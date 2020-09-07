@@ -1,7 +1,10 @@
 import React from "react";
+
+import HeaderComp from "../components/common/Header/Header";
+
 const Main = () => {
   return <div>
-    Index Page
+    <HeaderComp />
   </div>;
 };
 

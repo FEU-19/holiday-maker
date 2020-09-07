@@ -18,7 +18,6 @@ const RenderMsg = ({ whatMsgToShow, handleClose, anchorEl }) => {
 
   return (
     <Popover
-    // className={classes.typography} 
       id={id}
       open={open}
       anchorEl={anchorEl}
