@@ -11,9 +11,7 @@ const SelectDropDown = styled(Select)`
 `
 
 
-
-const SelectCity = ({ residentData }) => {
-    const [city, setCity] = useState("");
+const SelectCity = ({ residentData, city, setCity }) => {
 
     const handleChange = (e) => {
         setCity(e.target.value);

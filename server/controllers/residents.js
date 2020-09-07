@@ -1,4 +1,4 @@
-const HOTELS = require("../config/constants");
+const Hotel = require('../models/Hotel');
 
 // POST
 exports.create = (_req, res) => {
@@ -6,6 +6,15 @@ exports.create = (_req, res) => {
 };
 
 // GET
-exports.read = (_req, res) => {
-  res.json(HOTELS);
+exports.read = (req, res) => {
+  Hotel.find({})
+    .then((response) => {
+      if (!response) {
+        return res.status(404).send({ msg: "No data found" });
+      }
+      return res.status(200).json({ data: response });
+    })
+    .catch((err) => {
+      return res.status(500).send({ error: err.message });
+    });
 };
