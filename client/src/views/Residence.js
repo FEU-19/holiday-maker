@@ -28,21 +28,22 @@ const Residence = () => {
   return <p>Loading...</p>;
  }
 
- return (
-  <div>
-   <div>
-    <h1>{data.name}</h1>
-    <HotelCarousel />
-    <ResidenceInformation info={data} />
-   </div>
-   <div>
-    <RoomCardMapper allRooms={data.rooms} />
-   </div>
-   <div>
-    <GeneralInformation generalInfo={data} />
-   </div>
-  </div>
- );
+  return (
+    <div>
+      <div>
+        <h1>{data.name}</h1>
+        <HotelCarousel dataImage={data}/>
+        <ResidenceInformation info={data} />
+      </div>
+      <div>
+        <RoomCardMapper allRooms={data.rooms} />
+      </div>
+      <div>
+        <GeneralInformation generalInfo={data} />
+      </div>
+    </div>
+  );
+
 };
 
 export default Residence;

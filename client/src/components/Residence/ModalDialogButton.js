@@ -2,16 +2,12 @@ import React,{useEffect,useState} from 'react';
 import Button from '@material-ui/core/Button';
 import SimpleDialog from './SimpleDialog';
 import data from './residents.json';
+import axios from 'axios'
 
 
-function ModalDialogButton() {
+function ModalDialogButton({images}) {
   const [open, setOpen] = React.useState(false);
-  const [images, updateImages] = useState([]);
   const [currentPicIndex, updatePicIndex] = useState(0)
-
-  useEffect(()=>{
-    updateImages(data[0].rooms[0].images)
-  },[])
 
   const handleClickOpen = () => {
     setOpen(true);
