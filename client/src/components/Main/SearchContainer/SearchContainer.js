@@ -14,8 +14,8 @@ import SelectAmountOfAdults from './SelectAmountOfAdults';
 import CheckboxKidsClub from './CheckboxKidsClub';
 import CheckboxPool from './CheckboxPool';
 import CheckboxRestaurant from './CheckboxRestaurant';
-
-
+import SelectDistanceCenter from './SelectDistanceCenter.js';
+import SelectDistanceBeach from './SelectDistanceBeach';
 
 // Filter functions
 import adultChildToBedFilter from '../../../utils/adultChildToBedFilter.js';
@@ -24,7 +24,7 @@ import filterKidsClub from '../../../utils/filterKidsClub'
 import filterNightEntertainment from '../../../utils/filterNightEntertainment';
 import filterPool from '../../../utils/filterPool';
 import filterRestaurant from '../../../utils/filterRestaurant';
-import dateFilter from '../../../utils/dateFilter.js';
+import filterDate from '../../../utils/filterDate.js';
 
 
 const Container = styled.div`
@@ -34,10 +34,12 @@ display: flex;
 justify-content: center;
 `;
 
-const SearchContainer = () => {
+const SearchContainer = ({ setFilteredDataCB }) => {
   const [residentData, setResidentData] = useState([{}]);
-  const [filteredData, setFilteredData] = useState([]);
   const [amountOfChildren, setAmountOfChildren] = useState(0);
+  const [distanceCenter, setDistanceCenter] = useState('');
+  const [beachDistance, setBeachDistance] = useState('');
+  const [date, setDate] = useState({start: '2020-06-02T10:30:00.000Z', end: '2020-06-08T10:00:00.000Z'})
 
   useEffect(() => {
     axios.get('http://localhost:8080/api/residents/')
@@ -49,29 +51,24 @@ const SearchContainer = () => {
     });
   }, []);
 
-  // whenever filterData changes console.log() runs.
-  useEffect(() => {
-    console.log(filteredData);
-  }, [filteredData])
-
   function onSubmit(e) {
     e.preventDefault();
 
-    // An example of how to handle our filter functions
-    // Updated task "created func which shows the filtered hotel obj"
     new Promise((resolve, reject) => {
       let c = [...residentData];
 
-      c = filterCity(c, 'Manila');
-      c = filterPool(c, true);
-      c = filterNightEntertainment(c, false);   
+      c = filterCity(c, 'default');
+      c = filterPool(c, 'default');
+      c = filterNightEntertainment(c, false);
       c = filterKidsClub(c, 'default');
       c = filterRestaurant(c, 'default');
+      // c = filterDate(c, date);
 
       resolve(c);
     })
     .then((res) => {
-      setFilteredData(res);
+      setFilteredDataCB(res);
+
     })
     .catch((err) => {
       console.error(err);
@@ -86,17 +83,24 @@ const SearchContainer = () => {
           container
           justify="space-around"
         >
-
-          <SelectCity residentData={residentData} />
-          <DatePicker
-          residentData={residentData}/>
-          <SelectAmountOfAdults />
           <SelectAmountOfChildren
             setAmountOfChildren={ setAmountOfChildren }
             amountOfChildren={ amountOfChildren }
           />
           <ChildrenAgeSelects amountOfChildren={ amountOfChildren } />
-
+          <SelectCity residentData={residentData} />
+          <DatePicker
+            residentData={residentData}
+            date={date}
+            setDate={setDate}/>
+          <SelectAmountOfAdults />
+          <SelectDistanceCenter
+            distanceCenter={ distanceCenter }
+            setDistanceCenter={ setDistanceCenter }
+          />
+          <SelectDistanceBeach
+            beachDistance={beachDistance}
+            setBeachDistance={setBeachDistance} />
           <Button
             type="submit"
             variant="contained"
@@ -115,6 +119,7 @@ const SearchContainer = () => {
           <CheckboxKidsClub />
           <CheckboxNightEntertainment />
           <CheckboxPool />
+
          </Grid>
         </form>
       </Container>
