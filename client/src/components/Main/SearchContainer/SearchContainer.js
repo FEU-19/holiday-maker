@@ -42,7 +42,7 @@ const SearchContainer = () => {
   useEffect(() => {
     axios.get('http://localhost:8080/api/residents/')
     .then((res) => {
-      setResidentData(res.data);
+      setResidentData(res.data.data);
     })
     .catch((err) => {
       console.error(err);
@@ -76,7 +76,6 @@ const SearchContainer = () => {
     .catch((err) => {
       console.error(err);
     });
-
   }
 
   return (
