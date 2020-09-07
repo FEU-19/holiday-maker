@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const roomSchema = new mongoose.Schema({
+const RoomSchema = new mongoose.Schema({
   images: [String],
   type: String,
   size: String,
@@ -15,4 +15,4 @@ const roomSchema = new mongoose.Schema({
   occupiedDates: Array,
 });
 
-module.exports = roomSchema;
+module.export = RoomSchema;
