@@ -1,15 +1,23 @@
+import React from "react";
 import "@testing-library/jest-dom/extend-expect";
 import ReactDOM from 'react-dom'
 import LoginView from "../../views/Login";
-import React from "react";
-import Login from "./Login"
+import {mount, shallow} from 'enzyme';
+import Login from "./Login";
+import Enzyme from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+ 
+Enzyme.configure({ adapter: new Adapter() });
 
 it ('renders without crashing', () => {
     const Container = document.createElement('Container');
     ReactDOM.render(<LoginView />, Container)
 });
 
-it ()
+// it ('renders two input fields', () => {
+//     const wrapper = shallow(<LoginView />)
+//     expect(wrapper.find(input).to.have.lengthOf(2))
+// })
 
 // test('Create a valid Service', async(done) => {
 //     const service = {
