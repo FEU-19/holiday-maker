@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
     Grid,
@@ -10,6 +10,7 @@ import {
 } from "@material-ui/core";
 import { Card, CardContent, Typography } from "@material-ui/core";
 import WifiIcon from "@material-ui/icons/Wifi";
+import FreeBreakfastIcon from '@material-ui/icons/FreeBreakfast';
 import DirectionsCar from "@material-ui/icons/DirectionsCar";
 
 import RoomType from "./RoomType";
@@ -23,7 +24,6 @@ const useStyle = makeStyles(() => ({
         justifyContent: "space-between",
         marginBottom: 20,
         margintop: 20,
-      
         //marginLeft: "20vw",
        // marginRight: "20vw",
     },
@@ -52,18 +52,26 @@ const useStyle = makeStyles(() => ({
     },
 }));
 
-const RoomCard = ({ roomsInfo }) => {
+
+const RoomCard = ({ roomInfo }) => {
     const classes = useStyle();
     const [value, setValue] = useState({selected: "" });
-    const roomInfo = roomsInfo[0];
+    const [extraBedValue, setExtraBedValue] = useState({extraBedValue: "" });
 
     const handleChange = (e) => {
         setValue( {selected: e.target.value});
-       
+    };
+
+    const handleCheck = (e) => {
+      if (e.target.checked){
+        setExtraBedValue( {extraBedPrice: e.target.value});
+      } else {
+        setExtraBedValue( {extraBedPrice: 0});
+      }
     };
 
     const {selected} = value;
-    
+
     return (
         <Card className={classes.card}>
             <RoomType roomType={roomInfo} />
@@ -82,6 +90,16 @@ const RoomCard = ({ roomsInfo }) => {
                     </Grid>
                     <Grid className={classes.icons}>
                         <Grid item xs={4}>
+                            <FreeBreakfastIcon />
+                        </Grid>
+                        <Grid>
+                            <Typography item xs={8}>
+                                Free breakfast for 2 people
+                            </Typography>
+                        </Grid>
+                    </Grid>
+                    <Grid className={classes.icons}>
+                        <Grid item xs={4}>
                             <DirectionsCar />
                         </Grid>
                         <Grid>
@@ -93,8 +111,9 @@ const RoomCard = ({ roomsInfo }) => {
                     <Grid>
                         <FormControl component="fieldset">
                             <FormControlLabel
-                                value="extraBed"
+                                value={roomInfo.extraBed}
                                 control={<Checkbox color="primary" />}
+                                onChange={handleCheck}
                                 label={
                                     <p style={{ paddingRight: "10vw" }}>Extra Bed: {roomInfo.extraBed}</p>
                                 }
@@ -108,62 +127,74 @@ const RoomCard = ({ roomsInfo }) => {
                             >
                                 <FormControlLabel
                                     style={{ borderTop: "1px solid #ccd9dd" }}
-                                    value={roomInfo.allInclusive}
+                                    value={roomInfo.allInclusive.toString()}
                                     control={<Radio color="default" />}
+                                    disabled={roomInfo.allInclusive ? "" : "disabled"}
                                     label={
-                                        roomInfo.allInclusive && (
+                                        roomInfo.allInclusive ? (
                                             <p style={{ paddingRight: "10vw" }}>
-                                                All Inclusive: {roomInfo.allInclusive + ":-"}
+                                            All Inclusive: {roomInfo.allInclusive + ":-"}
                                             </p>
-                                        )
-                                    }
+                                            ) : (
+                                            <p style={{ paddingRight: "10vw" }}>All Inclusive: {"N/A"}</p>
+                                            )
+                                        }
                                     labelPlacement="start"
                                 />
                                 <FormControlLabel
                                     style={{ borderTop: "1px solid #ccd9dd" }}
-                                    value="fullBoard"
+                                    value={roomInfo.fullBoard.toString()}
                                     control={<Radio color="default" />}
+                                    disabled={roomInfo.fullBoard ? "" : "disabled"}
                                     label={
-                                        roomInfo.fullBoard && (
+                                        roomInfo.fullBoard ? (
                                             <p style={{ paddingRight: "10vw" }}>
-                                                Full board: {roomInfo.fullBoard + ":-"}
+                                            Half Board: {roomInfo.fullBoard + ":-"}
                                             </p>
-                                        )
-                                    }
+                                            ) : (
+                                            <p style={{ paddingRight: "10vw" }}>Full Board: {"N/A"}</p>
+                                            )
+                                        }
                                     labelPlacement="start"
                                 />
                                 <FormControlLabel
                                     style={{ borderTop: "1px solid #ccd9dd" }}
-                                    value="halfBoard"
+                                    value={roomInfo.halfBoard.toString()}
                                     control={<Radio color="default" />}
+                                    disabled={roomInfo.halfBoard ? "" : "disabled"}
                                     label={
-                                        roomInfo.halfBoard && (
+                                        roomInfo.halfBoard ? (
                                             <p style={{ paddingRight: "10vw" }}>
-                                                Half board: {roomInfo.halfBoard + ":-"}
+                                            Half Board: {roomInfo.halfBoard + ":-"}
                                             </p>
-                                        )
-                                    }
+                                            ) : (
+                                            <p style={{ paddingRight: "10vw" }}>Half Board: {"N/A"}</p>
+                                            )
+                                        }
                                     labelPlacement="start"
                                 />
                                 <FormControlLabel
                                     style={{ borderTop: "1px solid #ccd9dd" }}
-                                    value="selfCatering"
+                                    value={roomInfo.selfCatering.toString()}
                                     control={<Radio color="default" />}
+                                    disabled={roomInfo.selfCatering ? "" : "disabled"}
                                     label={
-                                        roomInfo.selfCatering && (
-                                            <p style={{ paddingRight: "10vw" }}>
-                                                Self Catering: {roomInfo.selfCatering + ":-"}
-                                            </p>
-                                        )
+                                    roomInfo.selfCatering ? (
+                                    <p style={{ paddingRight: "10vw" }}>
+                                    Self Catering: {roomInfo.selfCatering + ":-"}
+                                    </p>
+                                    ) : (
+                                    <p style={{ paddingRight: "10vw" }}>Self Catering: {"N/A"}</p>
+                                    )
                                     }
                                     labelPlacement="start"
-                                />
+                                    />
                             </RadioGroup>
                         </FormControl>
                     </Grid>
                 </Grid>
             </CardContent>
-            <RoomPrice roomType={roomInfo} selected = {selected}/>
+            <RoomPrice roomType={roomInfo} selected = {selected} extraBed={extraBedValue}/>
         </Card>
     );
 };

@@ -46,7 +46,7 @@ const RoomType = ({ roomType }) => {
     <Typography variant="body2" color="textSecondary" component="p">
      Beds: {roomType.beds}
     </Typography>
-    <ModalDialogButton/>
+    <ModalDialogButton images={roomType.images}/>
    </CardContent>
   </Card>
  );
