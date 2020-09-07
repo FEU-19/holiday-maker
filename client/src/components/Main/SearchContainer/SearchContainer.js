@@ -34,9 +34,8 @@ display: flex;
 justify-content: center;
 `;
 
-const SearchContainer = () => {
+const SearchContainer = ({ setFilteredDataCB }) => {
   const [residentData, setResidentData] = useState([{}]);
-  const [filteredData, setFilteredData] = useState([]);
   const [amountOfChildren, setAmountOfChildren] = useState(0);
 
   useEffect(() => {
@@ -49,21 +48,14 @@ const SearchContainer = () => {
     });
   }, []);
 
-  // whenever filterData changes console.log() runs.
-  useEffect(() => {
-    console.log(filteredData);
-  }, [filteredData])
-
   function onSubmit(e) {
     e.preventDefault();
 
-    // An example of how to handle our filter functions
-    // Updated task "created func which shows the filtered hotel obj"
     new Promise((resolve, reject) => {
       let c = [...residentData];
 
-      c = filterCity(c, 'Manila');
-      c = filterPool(c, true);
+      c = filterCity(c, 'default');
+      c = filterPool(c, 'default');
       c = filterNightEntertainment(c, false);
       c = filterKidsClub(c, 'default');
       c = filterRestaurant(c, 'default');
@@ -71,7 +63,7 @@ const SearchContainer = () => {
       resolve(c);
     })
     .then((res) => {
-      setFilteredData(res);
+      setFilteredDataCB(res);
     })
     .catch((err) => {
       console.error(err);
