@@ -7,6 +7,8 @@ import {
  CardContent,
  Typography,
 } from "@material-ui/core";
+import ModalDialogButton from './ModalDialogButton'
+
 
 const useStyle = makeStyles(() => ({
  card: {
@@ -44,6 +46,7 @@ const RoomType = ({ roomType }) => {
     <Typography variant="body2" color="textSecondary" component="p">
      Beds: {roomType.beds}
     </Typography>
+    <ModalDialogButton/>
    </CardContent>
   </Card>
  );
