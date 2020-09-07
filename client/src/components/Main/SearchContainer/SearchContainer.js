@@ -60,18 +60,19 @@ const SearchContainer = () => {
     // An example of how to handle our filter functions
     // Updated task "created func which shows the filtered hotel obj"
     new Promise((resolve, reject) => {
-      let c = [...residentData];
+      let c = [...residentData]; // c blir hela residentData, en kopia
 
-      c = filterCity(c, 'Manila');
+      c = filterCity(c, 'Manila'); // alla filterfunktioner körs på c
       c = filterPool(c, true);
       c = filterNightEntertainment(c, false);
       c = filterKidsClub(c, 'default');
       c = filterRestaurant(c, 'default');
+      //c = filterDistanceBeach(c, 'default'); // default är när besökare inte valt något värde
 
-      resolve(c);
+      resolve(c); // allt är filtrerat här
     })
     .then((res) => {
-      setFilteredData(res);
+      setFilteredData(res); // res är resultatet av all filtrering ovan
     })
     .catch((err) => {
       console.error(err);
@@ -114,6 +115,7 @@ const SearchContainer = () => {
           <CheckboxKidsClub />
           <CheckboxNightEntertainment />
           <CheckboxPool />
+
          </Grid>
         </form>
       </Container>
