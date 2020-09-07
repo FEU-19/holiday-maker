@@ -2,8 +2,6 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
 const useStyles = makeStyles((theme) => ({
@@ -28,15 +26,13 @@ const distanceInterval = [
   8000,
 ]
 
-export default function SelectDistanceBeach({beachDistance, setBeachDistance}) {
+export default function SelectDistanceBeach({distanceBeach, setDistanceBeach}) {
   const classes = useStyles();
 
 
   function handleBeachChange (e) {
-    setBeachDistance(e.target.value)
+    setDistanceBeach(e.target.value)
   }
-
-  console.log("beach distance:", beachDistance);
 
   return (
     <div>
@@ -44,7 +40,7 @@ export default function SelectDistanceBeach({beachDistance, setBeachDistance}) {
       <Select
         labelId="distance-beach-label"
         id="distance-beach"
-        value={beachDistance}
+        value={distanceBeach}
         onChange={handleBeachChange}
         >
           <MenuItem disabled >Distance</MenuItem>
