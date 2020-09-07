@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Details from "./Details";
-import { useParams } from "react-router-dom";
+import { useParams, Redirect } from "react-router-dom";
 import { Grid, Paper, Divider, Button, ThemeProvider } from "@material-ui/core";
 
 import { useStyle, Theme } from "./styles";
@@ -16,6 +16,7 @@ const parser = {
 
 const APIWrapper = (props) => {
   const [data, setData] = useState(null);
+
   const { id } = useParams();
 
   useEffect(() => {
@@ -40,6 +41,7 @@ const APIWrapper = (props) => {
 };
 
 const SpecHotel = ({ data, hotelId }) => {
+  const [redirect, setRedirect] = useState({ redirect: false, data: null });
   const [value, setValue] = useState({});
   const [extraBed, setExtraBed] = useState();
   const [hotel, setHotel] = useState(data);
@@ -79,7 +81,7 @@ const SpecHotel = ({ data, hotelId }) => {
     console.log(e.target.value);
   };
 
-  const choosenRoom = () => {
+  const coosenRoom = () => {
     const roomNumbersOptions = Object.keys(value);
     let result = hotel.rooms
       .filter((room) => {
@@ -108,18 +110,16 @@ const SpecHotel = ({ data, hotelId }) => {
         };
       });
 
-    // result.forEach((room) => {
-    //   console.log(value);
-    //     room.order.option = parseInt(value[room.roomNumber]);
-    //     room.order.fullPrice += parseInt(room.order.option);
-    //   }
-    // });
-
-    return result;
+    setRedirect({ redirect: true, data: result });
   };
 
   return (
     <ThemeProvider theme={Theme}>
+      {redirect.redirect && (
+        <Redirect
+          to={{ pathname: "/checkout", state: { data: redirect.data } }}
+        />
+      )}
       <Paper>
         <Grid
           container
@@ -180,7 +180,7 @@ const SpecHotel = ({ data, hotelId }) => {
       )}
 
       <Button
-        onClick={choosenRoom}
+        onClick={coosenRoom}
         className={style.sticky}
         color="primary"
         variant="contained"
