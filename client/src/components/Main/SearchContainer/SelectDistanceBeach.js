@@ -36,6 +36,8 @@ export default function SelectDistanceBeach({beachDistance, setBeachDistance}) {
     setBeachDistance(e.target.value)
   }
 
+  console.log("beach distance:", beachDistance);
+
   return (
     <div>
       <InputLabel id="distance-beach-label">Distance to beach</InputLabel>
