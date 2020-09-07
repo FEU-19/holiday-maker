@@ -13,7 +13,6 @@ const SelectAmountOfAdults = () => {
     setAmountOfAdults(e.target.value);
   };
 
-  console.log(amountOfAdults);
 
   return (
     <>

@@ -9,8 +9,6 @@ const SelectAmountOfChildren = ({setAmountOfChildren, amountOfChildren}) => {
     setAmountOfChildren(e.target.value);
   };
 
-  console.log(amountOfChildren);
-
   return (
     <>
       <InputLabel id="selectAmountOfChildren">Amount of children</InputLabel>
