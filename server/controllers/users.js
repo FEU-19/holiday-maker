@@ -59,7 +59,18 @@ exports.create = async (req, res) => {
     password,
   } = req.body;
 
-  if (!email || !password) {
+  if (
+    !email ||
+    !password ||
+    !surname ||
+    !street ||
+    !zipCode ||
+    !city ||
+    !country ||
+    !phoneNumber ||
+    !socialSecurityNumber ||
+    !firstName
+  ) {
     return res.status(400).json({
       error: [{ msg: "Please fill all of the existing fields" }],
     });
