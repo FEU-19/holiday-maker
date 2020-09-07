@@ -3,7 +3,7 @@ import Residence from "./Residence.js"
 
 const Main = () => {
 
-  return <div>Index Page
+  return <div>
     <Residence />
   </div>;
 };

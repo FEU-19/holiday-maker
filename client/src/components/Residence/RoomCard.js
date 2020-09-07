@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
     Grid,
@@ -10,6 +10,7 @@ import {
 } from "@material-ui/core";
 import { Card, CardContent, Typography } from "@material-ui/core";
 import WifiIcon from "@material-ui/icons/Wifi";
+import FreeBreakfastIcon from '@material-ui/icons/FreeBreakfast';
 import DirectionsCar from "@material-ui/icons/DirectionsCar";
 
 import RoomType from "./RoomType";
@@ -76,6 +77,16 @@ const RoomCard = ({ roomsInfo }) => {
                         <Grid>
                             <Typography item xs={8}>
                                 Free Wifi
+                            </Typography>
+                        </Grid>
+                    </Grid>
+                    <Grid className={classes.icons}>
+                        <Grid item xs={4}>
+                            <FreeBreakfastIcon />
+                        </Grid>
+                        <Grid>
+                            <Typography item xs={8}>
+                                Free breakfast for 2 people
                             </Typography>
                         </Grid>
                     </Grid>
