@@ -40,7 +40,7 @@ const SearchContainer = ({ setFilteredDataCB }) => {
   const [distanceCenter, setDistanceCenter] = useState('');
   const [beachDistance, setBeachDistance] = useState('');
   const [date, setDate] = useState({start: '2020-06-02T10:30:00.000Z', end: '2020-06-08T10:00:00.000Z'})
-  
+
   useEffect(() => {
     axios.get('http://localhost:8080/api/residents/')
     .then((res) => {
