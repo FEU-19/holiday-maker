@@ -54,12 +54,13 @@ const RegistrationComp = (props) => {
     axios
       .post(`http://localhost:3002/api/register`, newUser)
       .then((res) => {
+        console.log(res.data.msg);
         handleInputReset();
-        setWhatMsgToShow(1);
         props.setValue(0);
       })
       .catch((err) => {
         console.log(err);
+        setWhatMsgToShow(err.response.data.error[0].msg);
       });
   }
 
