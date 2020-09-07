@@ -38,7 +38,7 @@ export default function SelectDistanceBeach({beachDistance, setBeachDistance}) {
 
   return (
     <div>
-      <InputLabel id="distance-beach-label">Distance</InputLabel>
+      <InputLabel id="distance-beach-label">Distance to beach</InputLabel>
       <Select
         labelId="distance-beach-label"
         id="distance-beach"
@@ -46,7 +46,7 @@ export default function SelectDistanceBeach({beachDistance, setBeachDistance}) {
         onChange={handleBeachChange}
         >
           <MenuItem disabled >Distance</MenuItem>
-          {distanceInterval.map((index, distance) =>
+          {distanceInterval.map((distance, index) =>
             distance === '' ?
             <MenuItem value={distance} key={index}>None</MenuItem>
             :
