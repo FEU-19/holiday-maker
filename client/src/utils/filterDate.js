@@ -13,7 +13,7 @@ import getDateArray from './getDateArrayInterval';
 //     _id: {
 //       $oid: '5f4e2b500ae3bf21d48b09f2'
 //     },
-// 
+//
 //     rooms: [
 //
 //
@@ -56,7 +56,7 @@ import getDateArray from './getDateArrayInterval';
 let date = {start: '2020-06-02T12:15:00.000Z', end: '2020-06-08T12:16:00.000Z'}
 
 
-     export default function dateFilter (residents, date) {
+     export default function filterDate (residents, date) {
        console.log("hej");
        let newResidents = residents;
        let dateInterval = getDateArray(new Date(date.start), new Date(date.end))

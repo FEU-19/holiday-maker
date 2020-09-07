@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -6,7 +7,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 
 const SelectAmountOfAdults = () => {
-  const [amountOfAdults, setAmountOfAdults] = React.useState(1);
+  const [amountOfAdults, setAmountOfAdults] = useState(1);
 
   const handleChange = (e) => {
     setAmountOfAdults(e.target.value);

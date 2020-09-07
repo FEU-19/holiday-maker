@@ -11,7 +11,6 @@ const SelectDropDown = styled(Select)`
 `
 
 
-
 const SelectCity = ({ residentData }) => {
     const [city, setCity] = useState("");
 
