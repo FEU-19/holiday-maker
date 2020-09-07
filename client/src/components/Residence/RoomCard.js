@@ -53,11 +53,10 @@ const useStyle = makeStyles(() => ({
 }));
 
 
-const RoomCard = ({ roomsInfo }) => {
+const RoomCard = ({ roomInfo }) => {
     const classes = useStyle();
     const [value, setValue] = useState({selected: "" });
     const [extraBedValue, setExtraBedValue] = useState({extraBedValue: "" });
-    const roomInfo = roomsInfo[0];
 
     const handleChange = (e) => {
         setValue( {selected: e.target.value});
@@ -72,7 +71,6 @@ const RoomCard = ({ roomsInfo }) => {
     };
 
     const {selected} = value;
-    console.log(extraBedValue);
 
     return (
         <Card className={classes.card}>

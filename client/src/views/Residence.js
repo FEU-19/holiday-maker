@@ -1,22 +1,15 @@
 import React, { useEffect, useState } from "react";
 import {box} from "@material-ui/core/box";
-//import data from "../components/Residence/residents.json";
 import ResidenceInformation from "../components/Residence/ResidenceInformation";
-import RoomCard from "../components/Residence/RoomCard";
 import GeneralInformation from "../components/Residence/GeneralInformation";
-import HotelCarousel from '../components/Residence/HotelCarousel'
+import HotelCarousel from '../components/Residence/HotelCarousel';
+import RoomCardMapper from '../components/Residence/RoomCardMapper';
 import axios from "axios";
-//const hotel = data[0];
-//const rooms = data[0].rooms;
-
 
 
 // Hotel ID will come as props from search team, but not yet implemented
 const Residence = () => {
-
   const [data, updateData] = useState({});
-
-
 
   useEffect(() => {
     axios.get("http://localhost:8080/api/residents/5f5230fbfd504a310c818546")
@@ -28,15 +21,9 @@ const Residence = () => {
       });
   }, []);
 
-  //console.log(data);
-  //console.log(residence.rooms);
-
-
   if (Object.keys(data).length === 0) {
     return (<p>Loading...</p>);
   }
-
-  console.log(data);
 
   return (
     <div>
@@ -46,7 +33,7 @@ const Residence = () => {
         <ResidenceInformation info={data} />
       </div>
       <div>
-        <RoomCard roomsInfo={data.rooms} />
+        <RoomCardMapper allRooms={data.rooms} />
       </div>
       <div>
         <GeneralInformation generalInfo={data} />
