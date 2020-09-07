@@ -26,6 +26,7 @@ import filterPool from '../../../utils/filterPool';
 import filterRestaurant from '../../../utils/filterRestaurant';
 import filterDate from '../../../utils/filterDate.js';
 import filterDistanceBeach from '../../../utils/filterDistanceBeach';
+import filterDistanceCity from '../../../utils/filterDistanceCity';
 
 
 const Container = styled.div`
@@ -40,7 +41,7 @@ const SearchContainer = ({ setFilteredDataCB }) => {
   const [city, setCity] = useState('');
   const [amountOfChildren, setAmountOfChildren] = useState(0);
   const [distanceCity, setDistanceCity] = useState('');
-  const [beachDistance, setBeachDistance] = useState('');
+  const [distanceBeach, setDistanceBeach] = useState('');
   const [date, setDate] = useState({start: '2020-06-02T10:30:00.000Z', end: '2020-06-08T10:00:00.000Z'})
   
   useEffect(() => {
@@ -64,7 +65,8 @@ const SearchContainer = ({ setFilteredDataCB }) => {
       c = filterNightEntertainment(c, false);
       c = filterKidsClub(c, 'default');
       c = filterRestaurant(c, 'default');
-      c = filterDistanceBeach(c, beachDistance ); 
+      c = filterDistanceBeach(c, distanceBeach );
+      c = filterDistanceCity(c, distanceCity)
       // c = filterDate(c, date);
       
       resolve(c);
@@ -102,8 +104,8 @@ const SearchContainer = ({ setFilteredDataCB }) => {
             setDistanceCity={ setDistanceCity }
           />
           <SelectDistanceBeach
-            beachDistance={beachDistance}
-            setBeachDistance={setBeachDistance} />
+            distanceBeach={distanceBeach}
+            setDistanceBeach={setDistanceBeach} />
           <Button
             type="submit"
             variant="contained"
