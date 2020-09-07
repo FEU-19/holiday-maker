@@ -1,5 +1,4 @@
 import React from "react";
-import data from "./residents.json";
 import { makeStyles } from "@material-ui/core/styles";
 import {
  Card,
@@ -26,17 +25,17 @@ const useStyle = makeStyles(() => ({
  },
 }));
 
-const RoomPrice = ({ roomType, selected }) => {
+const RoomPrice = ({ roomType, selected ,}) => {
  const classes = useStyle();
- console.log(roomType);
+ console.log(selected);
  //const finalPrice = roomType.price + price.extras;
 
  return (
   <Card className={classes.card}>
    <CardHeader
     className={classes.header}
-    //title={roomType.price + ":-" + " SEK"}
-    title = {selected}
+    title={roomType.price + ":-" + " SEK"}
+    //title = {selected}
     subheader={"for 1 room for 1 night"}
    />
    <Typography className={classes.text} component="p">
