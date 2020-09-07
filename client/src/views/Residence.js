@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import ResidenceInformation from "../components/Residence/ResidenceInformation";
 import RoomCard from "../components/Residence/RoomCard";
 import GeneralInformation from "../components/Residence/GeneralInformation";
+import HotelCarousel from '../components/Residence/HotelCarousel'
 import axios from "axios";
 //const hotel = data[0];
 //const rooms = data[0].rooms;
@@ -36,6 +37,7 @@ const Residence = () => {
     <div>
       <div>
         <h1>{data.name}</h1>
+        <HotelCarousel/>
         <ResidenceInformation info={data} />
       </div>
       <div>
