@@ -54,7 +54,7 @@ const BookingForm = ({ room, value, setValue }) => {
                 <FormControlLabel
                   value={room.allInclusive.toString()}
                   control={<Radio />}
-                  label="All-Inclusive,"
+                  label="All-Inclusive"
                 />
                 <FormControlLabel
                   value={room.halfBoard.toString()}
