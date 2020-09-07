@@ -52,18 +52,26 @@ const useStyle = makeStyles(() => ({
     },
 }));
 
-const RoomCard = ({ roomsInfo }) => {
+
+const RoomCard = ({ roomInfo }) => {
     const classes = useStyle();
     const [value, setValue] = useState({selected: "" });
- 
-    const roomInfo = roomsInfo[0];
+    const [extraBedValue, setExtraBedValue] = useState({extraBedValue: "" });
 
     const handleChange = (e) => {
         setValue( {selected: e.target.value});
     };
 
+    const handleCheck = (e) => {
+      if (e.target.checked){
+        setExtraBedValue( {extraBedPrice: e.target.value});
+      } else {
+        setExtraBedValue( {extraBedPrice: 0});
+      }
+    };
+
     const {selected} = value;
-    
+
     return (
         <Card className={classes.card}>
             <RoomType roomType={roomInfo} />
@@ -103,8 +111,9 @@ const RoomCard = ({ roomsInfo }) => {
                     <Grid>
                         <FormControl component="fieldset">
                             <FormControlLabel
-                                value="extraBed"
-                                control={<Checkbox color="default" />}
+                                value={roomInfo.extraBed}
+                                control={<Checkbox color="primary" />}
+                                onChange={handleCheck}
                                 label={
                                     <p style={{ paddingRight: "10vw" }}>Extra Bed: {roomInfo.extraBed}</p>
                                 }
@@ -118,7 +127,7 @@ const RoomCard = ({ roomsInfo }) => {
                             >
                                 <FormControlLabel
                                     style={{ borderTop: "1px solid #ccd9dd" }}
-                                    value= {roomInfo.allInclusive.toString()}
+                                    value={roomInfo.allInclusive.toString()}
                                     control={<Radio color="default" />}
                                     disabled={roomInfo.allInclusive ? "" : "disabled"}
                                     label={
@@ -185,7 +194,7 @@ const RoomCard = ({ roomsInfo }) => {
                     </Grid>
                 </Grid>
             </CardContent>
-            <RoomPrice roomType={roomInfo} selected = {selected}/>
+            <RoomPrice roomType={roomInfo} selected = {selected} extraBed={extraBedValue}/>
         </Card>
     );
 };
