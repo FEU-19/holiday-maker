@@ -14,6 +14,7 @@ import SelectAmountOfAdults from './SelectAmountOfAdults';
 import CheckboxKidsClub from './CheckboxKidsClub';
 import CheckboxPool from './CheckboxPool';
 import CheckboxRestaurant from './CheckboxRestaurant';
+import SelectDistanceCenter from './SelectDistanceCenter.js';
 
 
 
@@ -38,6 +39,7 @@ const SearchContainer = () => {
   const [residentData, setResidentData] = useState([{}]);
   const [filteredData, setFilteredData] = useState([]);
   const [amountOfChildren, setAmountOfChildren] = useState(0);
+  const [distanceCenter, setDistanceCenter] = useState('');
 
   useEffect(() => {
     axios.get('http://localhost:8080/api/residents/')
@@ -96,6 +98,10 @@ const SearchContainer = () => {
           <DatePicker
           residentData={residentData}/>
           <SelectAmountOfAdults />
+          <SelectDistanceCenter
+            distanceCenter={ distanceCenter }
+            setDistanceCenter={ setDistanceCenter }
+          />
           <Button
             type="submit"
             variant="contained"
