@@ -1,12 +1,15 @@
 import React from "react";
-import { shallow, mount, render } from 'enzyme';
+import "@testing-library/jest-dom/extend-expect";
+import { configure,
+    shallow,
+    mount,
+    ShallowWrapper,
+    ReactWrapper } from 'enzyme';
 import ReactDOM from 'react-dom'
 
 import Registration from "../../views/Registration";
-import RenderInputs from "./RenderInputs";
-import RenderMsg from './RenderMsg';
-import RegistrationComp from './RegistrationComp';
-import RegisterButton from './RegisterButton';
+import * as Adapter from 'enzyme-adapter-react-16';
+
 
 it ('renders without crashing', () => {
     const Container = document.createElement('Container');
@@ -29,25 +32,40 @@ describe('Form', () => {
         password: "",
         confirm_password: "",
       }
-   
-    it('Finds the first input', () => {
-        const wrapper = shallow(<RenderInputs newUser={newUser}/>);
-        let nameInput = wrapper.find('input').first();
-        console.log(wrapper.length );
-        console.log(nameInput);
-
-        
-        
-        // nameInput.simulate('change', {
-        //     target: {value: 'Bob'}
-        // })
-      
-        
-
-        // expect(wrapper.find('form').exists())
-        // .toBe(true);
-        
-        // expect(nameInput.state().value).toEqual('');
+    //   const wrapper = mount(<Registration newUser={newUser} />);
+    let reactWrapper: ReactWrapper;
+    beforeEach(() => {
+        reactWrapper = mount(<Registration newUser={newUser} />);
     });
+
+    it('Child React Component html content would be rendered', () => {
+        
+        expect(reactWrapper.find('input').length).toBe(11);
+        expect(reactWrapper.find('button').length).toBe(1);
+      
+       });
+   
+    it('Firs input should be EMPTY', () => {
+        let nameInput = reactWrapper.find('input').first();
+
+        console.log('nameInput  ',typeof nameInput);
+        console.log('nameInput ', nameInput.length);
+
+        expect(nameInput.props().value).toEqual('');
+    });
+
+    
+
+    // it('Let me fill in name input', () => {
+    //     let nameInput = reactWrapper.find('input').first();
+    //     nameInput.simulate('change', {
+    //         target: {first_name: 'Bob'},
+    //     });
+
+      
+    //     console.log(nameInput.value);
+    //     nameInput = reactWrapper.find('input').first();
+    //     expect(nameInput.props().value).toEqual('Bob');
+    // });
 });
 
