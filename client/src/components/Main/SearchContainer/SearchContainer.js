@@ -56,17 +56,18 @@ const SearchContainer = ({ setFilteredDataCB }) => {
 
     new Promise((resolve, reject) => {
       let c = [...residentData];
-
+      
       c = filterCity(c, 'default');
       c = filterPool(c, 'default');
       c = filterNightEntertainment(c, false);
       c = filterKidsClub(c, 'default');
       c = filterRestaurant(c, 'default');
-      c = filterDate(c, date);
-
+      // c = filterDate(c, date);
+      
       resolve(c);
     })
     .then((res) => {
+      console.log(res)
       setFilteredDataCB(res);
     })
     .catch((err) => {
