@@ -5,9 +5,8 @@ import data from './residents.json';
 import axios from 'axios'
 
 
-function ModalDialogButton() {
+function ModalDialogButton({images}) {
   const [open, setOpen] = React.useState(false);
-  const [images, updateImages] = useState([]);
   const [currentPicIndex, updatePicIndex] = useState(0)
 
   const handleClickOpen = () => {
