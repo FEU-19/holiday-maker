@@ -5,12 +5,11 @@ const Hotel = require("../models/Hotel");
 const bookingNrGenerator = require("../utils/bookingNrGenerator");
 // {adults: N, children: N, hotel: String, rooms: Array, bookingDates: {start: String, end: String}}
 exports.create = async (req, res) => {
-  // Id will also be a cookie.
-  const Id = req.body.userId;
+  // Id will be a cookie.
+  const Id = req.body.userId; // When full merge, change to res.cookie.
   const data = req.body;
   const orderData = {};
 
-  // -----------------------------------------------------------------------------
   const user = await User.findById(Id);
   console.log(user);
   orderData.userId = data.userId;
@@ -23,7 +22,6 @@ exports.create = async (req, res) => {
   orderData.bookingDates = data.bookingDates;
   orderData.hotel = data.hotel;
 
-  // Add occupiedDates to booked rooms.
   const order = new Order(orderData);
   order.save((err) => {
     if (err) res.status(500).send({ error: err.message });
