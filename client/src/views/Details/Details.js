@@ -48,11 +48,7 @@ const Details = ({
           <p>Room-Number: {room.roomNumber}</p>
         </Grid>
         <Divider orientation="vertical" flexItem />
-<<<<<<< HEAD
-        <Grid item xs={2} className={style.section}>
-          <BookingForm room={room} value={value} setValue={setValue} />
-=======
-        <Grid item xs={5} className={style.section}>
+        <Grid item xs={3} className={style.section}>
           <BookingForm
             room={room}
             value={value}
@@ -60,18 +56,10 @@ const Details = ({
             handleRadioChange={handleRadioChange}
             handleDropDownChange={handleDropDownChange}
           />
->>>>>>> 7c328cd0168240510dc07bef059a89d8da69c0b5
         </Grid>
         <Divider orientation="vertical" flexItem />
         <Grid item xs={2} className={style.section}>
           <p>Price: {room.price} Pecetas</p>
-<<<<<<< HEAD
-          <p> Extra: {value} Pecetas</p>
-          <label>
-            Select:
-            <Checkbox />
-          </label>
-=======
           <p> Extra: {value[room.roomNumber]} Pecetas</p>
         </Grid>
         <Divider orientation="vertical" flexItem />
@@ -80,7 +68,6 @@ const Details = ({
             checked={room.checked}
             onChange={() => handleChange(room.roomNumber)}
           />
->>>>>>> 7c328cd0168240510dc07bef059a89d8da69c0b5
         </Grid>
       </Grid>
     </Paper>

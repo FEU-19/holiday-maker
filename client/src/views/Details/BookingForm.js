@@ -56,9 +56,6 @@ const BookingForm = ({
               >
                 <FormControlLabel
                   value={room.allInclusive.toString()}
-<<<<<<< HEAD
-                  control={<Radio />}
-=======
                   control={
                     <Radio
                       checked={
@@ -67,7 +64,6 @@ const BookingForm = ({
                       }
                     />
                   }
->>>>>>> 7c328cd0168240510dc07bef059a89d8da69c0b5
                   label="All-Inclusive"
                 />
                 <FormControlLabel

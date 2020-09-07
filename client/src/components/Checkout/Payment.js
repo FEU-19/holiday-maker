@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Redirect } from "react-router-dom";
+import { Redirect, useLocation } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -22,7 +22,10 @@ import TextInput from "./TextInput";
 import PaymentForm from "./PaymentForm";
 import CountryDropdownList from "./CountryDropdownList";
 
-function Payment() {
+function Payment(props) {
+  const { state } = useLocation();
+
+  console.log(state);
   const useStyles = makeStyles((theme) => ({
     root: {
       "& > *": {
