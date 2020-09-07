@@ -2,11 +2,7 @@ const bcrypt = require("bcrypt");
 const User = require("../models/User");
 
 exports.createLogin = async (req, res) => {
-
-  const {
-    email,
-    password
-  } = req.body.user;
+  const { email, password } = req.body.user;
   if (!email || !password) {
     return res.status(400).end();
   }
@@ -19,9 +15,11 @@ exports.createLogin = async (req, res) => {
 
     if (!user) {
       return res.status(400).json({
-        error: [{
-          msg: "Invalid Credentials",
-        }]
+        error: [
+          {
+            msg: "Invalid Credentials",
+          },
+        ],
       });
     }
 
@@ -29,22 +27,24 @@ exports.createLogin = async (req, res) => {
 
     if (!isMatch) {
       return res.status(400).json({
-        error: [{
-          msg: "Invalid Credentials",
-        }]
+        error: [
+          {
+            msg: "Invalid Credentials",
+          },
+        ],
       });
     }
-    res.status(200)
+    res.status(200);
     /*res.cookie("access_token", "Bearer" + user.id, {
       expires: new Date(Date.now() + 8 * 3600000),
       httpOnly: true
     }) */
-    res.send("fungerar")
+    res.send("fungerar");
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");
   }
-}
+};
 
 exports.create = async (req, res) => {
   const {
@@ -58,26 +58,30 @@ exports.create = async (req, res) => {
     phone_number,
     social_security_number,
     password,
-    confirm_password
+    confirm_password,
   } = req.body;
 
   if (!email || !password) {
     return res.status(400).json({
-      error: [{
-        msg: "Please fill all of the existing fields"
-      }],
+      error: [
+        {
+          msg: "Please fill all of the existing fields",
+        },
+      ],
     });
   }
 
   try {
     let user = await User.findOne({
-      email
+      email,
     });
     if (user) {
       return res.status(400).json({
-        error: [{
-          msg: "User already exists"
-        }],
+        error: [
+          {
+            msg: "User already exists",
+          },
+        ],
       });
     }
 
