@@ -1,11 +1,9 @@
 import React from "react";
-import LoginButton from "./LoginButton";
-import RegisterButton from "./components/Registration/RegisterButton"
+import LoginModal from "../../modals/LoginModal"
 
 const Header = () => {
   return <header>
-      <LoginButton />
-      <RegisterButton />
+    <LoginModal />
   </header>;
 };
 
