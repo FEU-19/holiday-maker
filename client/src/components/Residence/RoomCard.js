@@ -52,11 +52,15 @@ const useStyle = makeStyles(() => ({
     },
 }));
 
+
+
+
 const RoomCard = ({ roomsInfo }) => {
+    const roomInfo = roomsInfo[0];
     const classes = useStyle();
     const [value, setValue] = useState({selected: "" });
  
-    const roomInfo = roomsInfo[0];
+    
 
     const handleChange = (e) => {
         setValue( {selected: e.target.value});
@@ -168,15 +172,10 @@ const RoomCard = ({ roomsInfo }) => {
                                     style={{ borderTop: "1px solid #ccd9dd" }}
                                     value={roomInfo.selfCatering.toString()}
                                     control={<Radio color="default" />}
-                                    disabled={roomInfo.selfCatering ? "" : "disabled"}
                                     label={
-                                    roomInfo.selfCatering ? (
-                                    <p style={{ paddingRight: "10vw" }}>
-                                    Self Catering: {roomInfo.selfCatering + ":-"}
-                                    </p>
-                                    ) : (
-                                    <p style={{ paddingRight: "10vw" }}>Self Catering: {"N/A"}</p>
-                                    )
+                                    (<p style={{ paddingRight: "10vw" }}>
+                                    Self Catering
+                                    </p>)
                                     }
                                     labelPlacement="start"
                                     />

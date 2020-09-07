@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import {box} from "@material-ui/core/box";
 import { makeStyles } from "@material-ui/core/styles";
 //import data from "../components/Residence/residents.json";
 import ResidenceInformation from "../components/Residence/ResidenceInformation";
@@ -12,15 +11,21 @@ import axios from "axios";
 
 const useStyle = makeStyles(() => ({
   article: {
-    position: "absolut",
-    left: "50%",
-    top: "50%",
-    transform: "translate(-50%, -50%)",
+    width: "100%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  title: {
+    textAlign: "center",
+  },
+  info: {
     
-
-
   }
+
 }))
+
 // Hotel ID will come as props from search team, but not yet implemented
 const Residence = () => {
   const classes = useStyle();
@@ -50,10 +55,12 @@ const Residence = () => {
 
   return (
     <div className = {classes.article}>
-      <div>
-        <h1>{data.name}</h1>
+      <div className = {classes.titlecontainer}>
+        <h1 className = {classes.title}>{data.name}</h1>
         <HotelCarousel/>
-        <ResidenceInformation info={data} />
+        <div className = {classes.info}>
+          <ResidenceInformation info={data} />
+        </div>
       </div>
       <div>
         <RoomCard roomsInfo={data.rooms} />
