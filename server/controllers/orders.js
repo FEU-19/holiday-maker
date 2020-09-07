@@ -12,33 +12,29 @@ exports.create = async (req, res) => {
 
   // -----------------------------------------------------------------------------
   const user = await User.findById(Id);
-
-  orderData.userId = user._id;
-  orderData.timeLog = Date.now();
+  console.log(user);
+  orderData.userId = data.userId;
   orderData.bookingNumber = bookingNrGenerator(
     user.first_name,
     user.surname,
     6
   );
-  orderData.room = data.room;
+  orderData.rooms = data.rooms;
   orderData.bookingDates = data.bookingDates;
   orderData.hotel = data.hotel;
 
   // Add occupiedDates to booked rooms.
-  orderData.room.forEach((room) => {
-    room.occupiedDates.push(data.bookingDates);
-  });
   const order = new Order(orderData);
   order.save((err) => {
     if (err) res.status(500).send({ error: err.message });
   });
 
   const roomNs = [];
-  data.room.forEach((room) => {
+  data.rooms.forEach((room) => {
     roomNs.push(room.roomNumber);
   });
 
-  const hotel = await Hotel.findOne({ name: data.hotel });
+  const hotel = await Hotel.findOne({ _id: data.hotel });
   hotel.rooms.forEach((room) => {
     if (roomNs.includes(room.roomNumber)) {
       room.occupiedDates.push(data.bookingDates);

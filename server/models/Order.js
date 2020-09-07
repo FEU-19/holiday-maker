@@ -1,19 +1,29 @@
 const mongoose = require("mongoose");
-const RoomSchema = require("./Room");
 
-const orderSchema = mongoose.Schema({
-  userId: String,
-  adults: Number,
-  children: Number,
-  hotel: String,
-  room: [RoomSchema],
-  bookingDates: {
-    start: String,
-    end: String,
+const orderSchema = mongoose.Schema(
+  {
+    userId: mongoose.Schema.Types.ObjectId,
+    adults: Number,
+    children: Number,
+    hotel: mongoose.Schema.Types.ObjectId,
+    rooms: [
+      {
+        price: Number,
+        option: String,
+        roomNumber: String,
+      },
+    ],
+    bookingDates: {
+      start: String,
+      end: String,
+    },
+    bookingNumber: String,
+    totalPrice: Number,
   },
-  bookingNumber: String,
-  timeLog: String,
-});
+  {
+    timestamp: true,
+  }
+);
 
 const Order = mongoose.model("order", orderSchema);
 
