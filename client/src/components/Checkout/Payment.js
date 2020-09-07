@@ -34,6 +34,7 @@ function Payment() {
 
   const classes = useStyles();
 
+  //Payment States
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -41,6 +42,12 @@ function Payment() {
   const [city, setCity] = useState("");
   const [zipcode, setZipCode] = useState("");
   const [adress, setAdress] = useState("");
+
+  // PaymentForm States
+  const [cardNum, setCardNum] = useState("");
+  const [expire, setExpire] = useState("");
+  const [cvc, setCvc] = useState("");
+  const [type, setType] = useState("");
 
   // Check if payment confirmed
   const [paymentSuccess, setPaymentSuccess] = useState(false);
@@ -115,7 +122,12 @@ function Payment() {
         <br />
         <HR />
 
-        <PaymentForm />
+        <PaymentForm
+          setCardNum={setCardNum}
+          setExpire={setExpire}
+          setCvc={setCvc}
+          setType={setType}
+        />
 
         <PayBtn
           onClick={() => setShowModal(true)}
