@@ -14,9 +14,8 @@ import SelectAmountOfAdults from './SelectAmountOfAdults';
 import CheckboxKidsClub from './CheckboxKidsClub';
 import CheckboxPool from './CheckboxPool';
 import CheckboxRestaurant from './CheckboxRestaurant';
+import SelectDistanceCenter from './SelectDistanceCenter.js';
 import SelectDistanceBeach from './SelectDistanceBeach';
-
-
 
 // Filter functions
 import adultChildToBedFilter from '../../../utils/adultChildToBedFilter.js';
@@ -39,10 +38,10 @@ const SearchContainer = () => {
   const [residentData, setResidentData] = useState([{}]);
   const [filteredData, setFilteredData] = useState([]);
   const [amountOfChildren, setAmountOfChildren] = useState(0);
+  const [distanceCenter, setDistanceCenter] = useState('');
   const [beachDistance, setBeachDistance] = useState('');
   const [date, setDate] = useState({start: '2020-06-02T10:30:00.000Z', end: '2020-06-08T10:00:00.000Z'})
-
-
+  
   useEffect(() => {
     axios.get('http://localhost:8080/api/residents/')
     .then((res) => {
@@ -102,6 +101,10 @@ const SearchContainer = () => {
             date={date}
             setDate={setDate}/>
           <SelectAmountOfAdults />
+          <SelectDistanceCenter
+            distanceCenter={ distanceCenter }
+            setDistanceCenter={ setDistanceCenter }
+          />
           <SelectDistanceBeach
             beachDistance={beachDistance}
             setBeachDistance={setBeachDistance} />
