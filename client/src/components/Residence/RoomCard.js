@@ -23,7 +23,7 @@ const useStyle = makeStyles(() => ({
         justifyContent: "space-between",
         marginBottom: 20,
         margintop: 20,
-      
+
         //marginLeft: "20vw",
        // marginRight: "20vw",
     },
@@ -52,18 +52,28 @@ const useStyle = makeStyles(() => ({
     },
 }));
 
+
 const RoomCard = ({ roomsInfo }) => {
     const classes = useStyle();
     const [value, setValue] = useState({selected: "" });
+    const [extraBedValue, setExtraBedValue] = useState({extraBedValue: "" });
     const roomInfo = roomsInfo[0];
 
     const handleChange = (e) => {
         setValue( {selected: e.target.value});
-       
+    };
+
+    const handleCheck = (e) => {
+      if (e.target.checked){
+        setExtraBedValue( {extraBedPrice: e.target.value});
+      } else {
+        setExtraBedValue( {extraBedPrice: 0});
+      }
     };
 
     const {selected} = value;
-    
+    console.log(extraBedValue);
+
     return (
         <Card className={classes.card}>
             <RoomType roomType={roomInfo} />
@@ -93,8 +103,9 @@ const RoomCard = ({ roomsInfo }) => {
                     <Grid>
                         <FormControl component="fieldset">
                             <FormControlLabel
-                                value="extraBed"
+                                value={roomInfo.extraBed}
                                 control={<Checkbox color="primary" />}
+                                onChange={handleCheck}
                                 label={
                                     <p style={{ paddingRight: "10vw" }}>Extra Bed: {roomInfo.extraBed}</p>
                                 }
@@ -108,7 +119,7 @@ const RoomCard = ({ roomsInfo }) => {
                             >
                                 <FormControlLabel
                                     style={{ borderTop: "1px solid #ccd9dd" }}
-                                    value={roomInfo.allInclusive}
+                                    value={roomInfo.allInclusive.toString()}
                                     control={<Radio color="default" />}
                                     label={
                                         roomInfo.allInclusive && (
@@ -149,8 +160,15 @@ const RoomCard = ({ roomsInfo }) => {
                                     style={{ borderTop: "1px solid #ccd9dd" }}
                                     value="selfCatering"
                                     control={<Radio color="default" />}
+                                    disabled={roomInfo.selfCatering ? "" : "disabled"}
                                     label={
-                                        roomInfo.selfCatering && (
+                                        roomInfo.selfCatering ? (
+                                            <p style={{ paddingRight: "10vw" }}>
+                                                Half board: {roomInfo.selfCatering + ":-"}
+                                            </p>
+                                        )
+                                        :
+                                        (
                                             <p style={{ paddingRight: "10vw" }}>
                                                 Half board: {roomInfo.selfCatering + ":-"}
                                             </p>
@@ -163,7 +181,7 @@ const RoomCard = ({ roomsInfo }) => {
                     </Grid>
                 </Grid>
             </CardContent>
-            <RoomPrice roomType={roomInfo} selected = {selected}/>
+            <RoomPrice roomType={roomInfo} selected = {selected} extraBed={extraBedValue}/>
         </Card>
     );
 };
