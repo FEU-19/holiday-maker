@@ -1,9 +1,6 @@
-import React, { useState, useEffect} from 'react';
-import moment from 'moment';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-
-import dateFilter from '../../../utils/dateFilter'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -17,9 +14,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function DatePicker({residentData}) {
+export default function DatePicker({residentData, date, setDate}) {
   const classes = useStyles();
-  const [date, setDate] = useState({start: '2020-06-02T10:30:00.000Z', end: '2020-06-08T10:00:00.000Z'})
 
   function StartDateChange (e) {
     e.persist();
