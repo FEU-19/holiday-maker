@@ -1,14 +1,14 @@
 import React from "react";
 import "@testing-library/jest-dom/extend-expect";
-import ReactDOM from 'react-dom'
-import LoginView from "../../views/Login";
+import ReactDOM from 'react-dom';
 import {mount, shallow} from 'enzyme';
 import Login from "./Login";
+import modal
 
 
 it ('renders without crashing', () => {
     const Container = document.createElement('Container');
-    ReactDOM.render(<LoginView />, Container)
+    ReactDOM.render(<Login />, Container)
 });
 
 // it ('renders two input fields', () => {

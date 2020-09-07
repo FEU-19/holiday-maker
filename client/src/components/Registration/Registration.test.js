@@ -43,7 +43,7 @@ describe("Form", () => {
     expect(reactWrapper.find("button").length).toBe(1);
   });
 
-  it("Firs input should be EMPTY", () => {
+  it("First input should be EMPTY", () => {
     const nameInput = reactWrapper.find("input").first();
 
     console.log("nameInput  ", typeof nameInput);
