@@ -12,11 +12,7 @@ import {
   EXP_CVC_Input,
 } from "./PaymentStyles";
 
-function PaymentForm() {
-  const [cardNum, setCardNum] = useState("");
-  const [expire, setExpire] = useState("");
-  const [cvc, setCvc] = useState("");
-  const [type, setType] = useState("");
+function PaymentForm({ setCardNum, setExpire, setCvc, setType }) {
   const [cardImg, setCardImg] = useState("");
 
   const handleCardNum = (e) => {
@@ -28,32 +24,25 @@ function PaymentForm() {
   function onCreditCardTypeChanged(type) {
     setType(type);
 
-    const visaCard =
-      "https://cdn.iconscout.com/icon/free/png-512/visa-3-226460.png";
+    const visaCard = "https://i.ibb.co/vVYd6Xq/visa-3-226460.png";
 
-    const masterCard =
-      "https://lh3.googleusercontent.com/proxy/dmvFcHAdPHPbRyhhg1GAivix2C6xFQUpeZDJEVNMBQ7NeA1w1_jygSEgnpP6Gv2Kyz2iBF-oj8yN0VeivB_eDlehPTAS890p6rqnu1_IavgM7efA3U3nbIhlyj90ci1jTuSHAA";
+    const masterCard = "https://i.ibb.co/HFg4VgG/Master-Card.png";
 
-    const maestroCard =
-      "https://cdn0.iconfinder.com/data/icons/credit-8/512/21_credit-512.png";
+    const maestroCard = "https://i.ibb.co/vQm4yLR/21-credit-512.png";
 
-    const AMEX =
-      "https://paymentweek.com/wp-content/uploads/2015/10/American-Express-copy.png";
+    const AMEX = "https://i.ibb.co/FXP29n4/American-Express-copy.png";
 
     const discover =
-      "https://img.pngio.com/atm-card-credit-card-debit-card-discover-icon-discover-card-png-512_512.png";
+      "https://i.ibb.co/bXPV1nH/atm-card-credit-card-debit-card-discover-icon-discover-card-png-512-512.png";
 
-    const JCB =
-      "https://www.jcbusa.com/wp-content/uploads/2017/10/cropped-favicon.png";
+    const JCB = "https://i.ibb.co/5nhStm0/cropped-favicon.png";
 
-    const dinnersCard =
-      "https://lh3.googleusercontent.com/proxy/Jw1N_BUB_ZnnPy8k7msnklKWEdRIbWkj1tQwfOzSHJz6JC31ZZFd0L4atnBqfKTzm1GUYDKkK9rqC2rrwS7GO5SovOE4qZZy5CGtgMWXY48ZurVEljMj1Q";
+    const dinnersCard = "https://i.ibb.co/WVqdBMS/Diners-Club1950.png";
 
     const instaPay =
-      "https://lh3.googleusercontent.com/XsGvw5zwKGRs4S6o3ma4ika8WXk_cdwJajEEZhxUlPCJGnjBtMuHAXQRjdPQhMdErPoB";
+      "https://i.ibb.co/1Jmrn7Q/Xs-Gvw5zw-KGRs4-S6o3ma4ika8-WXk-cdw-Jaj-EEZhx-Ul-PCJGnj-Bt-Mu-HAXQRjd-PQh-Md-Er-Po-B.png";
 
-    const UATP =
-      "https://uatp.com/wp-content/uploads/2016/08/website_UATPLogo.png";
+    const UATP = "https://i.ibb.co/kJ2BGzZ/website-UATPLogo.png";
 
     type === "visa" && setCardImg(visaCard);
     type === "mastercard" && setCardImg(masterCard);
