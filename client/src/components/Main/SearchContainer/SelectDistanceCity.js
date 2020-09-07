@@ -16,20 +16,20 @@ const distanceInterval = [
   8000
 ]
 
-const SelectDistanceCenter = ({distanceCenter, setDistanceCenter}) => {
+const SelectDistanceCity = ({distanceCity, setDistanceCity}) => {
   const handleChange = (e) => {
-    setDistanceCenter(e.target.value);
+    setDistanceCity(e.target.value);
     console.log(e.target.value);
   };
 
   return (
     <>
-      <InputLabel id="selectDistanceCenter">Distance to center</InputLabel>
+      <InputLabel id="selectDistanceCity">Distance to city</InputLabel>
       <Select
-        aria-label="Select Distance To Center"
+        aria-label="Select Distance To City"
         displayEmpty
-        id="selectDistanceCenter"
-        value={ distanceCenter }
+        id="selectDistanceCity"
+        value={ distanceCity }
         onChange={ handleChange }
       >
         <MenuItem disabled>Distance</MenuItem>
@@ -46,4 +46,4 @@ const SelectDistanceCenter = ({distanceCenter, setDistanceCenter}) => {
   )
 };
 
-export default SelectDistanceCenter;
+export default SelectDistanceCity;

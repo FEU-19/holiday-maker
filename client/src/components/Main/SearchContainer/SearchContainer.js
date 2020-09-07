@@ -14,7 +14,7 @@ import SelectAmountOfAdults from './SelectAmountOfAdults';
 import CheckboxKidsClub from './CheckboxKidsClub';
 import CheckboxPool from './CheckboxPool';
 import CheckboxRestaurant from './CheckboxRestaurant';
-import SelectDistanceCenter from './SelectDistanceCenter.js';
+import SelectDistanceCity from './SelectDistanceCity.js';
 import SelectDistanceBeach from './SelectDistanceBeach';
 
 // Filter functions
@@ -25,6 +25,7 @@ import filterNightEntertainment from '../../../utils/filterNightEntertainment';
 import filterPool from '../../../utils/filterPool';
 import filterRestaurant from '../../../utils/filterRestaurant';
 import filterDate from '../../../utils/filterDate.js';
+import filterDistanceBeach from '../../../utils/filterDistanceBeach';
 
 
 const Container = styled.div`
@@ -36,8 +37,9 @@ justify-content: center;
 
 const SearchContainer = ({ setFilteredDataCB }) => {
   const [residentData, setResidentData] = useState([{}]);
+  const [city, setCity] = useState('');
   const [amountOfChildren, setAmountOfChildren] = useState(0);
-  const [distanceCenter, setDistanceCenter] = useState('');
+  const [distanceCity, setDistanceCity] = useState('');
   const [beachDistance, setBeachDistance] = useState('');
   const [date, setDate] = useState({start: '2020-06-02T10:30:00.000Z', end: '2020-06-08T10:00:00.000Z'})
   
@@ -57,11 +59,12 @@ const SearchContainer = ({ setFilteredDataCB }) => {
     new Promise((resolve, reject) => {
       let c = [...residentData];
       
-      c = filterCity(c, 'default');
+      c = filterCity(c, city);
       c = filterPool(c, 'default');
       c = filterNightEntertainment(c, false);
       c = filterKidsClub(c, 'default');
       c = filterRestaurant(c, 'default');
+      c = filterDistanceBeach(c, beachDistance ); 
       // c = filterDate(c, date);
       
       resolve(c);
@@ -88,15 +91,15 @@ const SearchContainer = ({ setFilteredDataCB }) => {
             amountOfChildren={ amountOfChildren }
           />
           <ChildrenAgeSelects amountOfChildren={ amountOfChildren } />
-          <SelectCity residentData={residentData} />
+          <SelectCity residentData={residentData} city={city} setCity={setCity} />
           <DatePicker
             residentData={residentData}
             date={date}
             setDate={setDate}/>
           <SelectAmountOfAdults />
-          <SelectDistanceCenter
-            distanceCenter={ distanceCenter }
-            setDistanceCenter={ setDistanceCenter }
+          <SelectDistanceCity
+            distanceCity={ distanceCity }
+            setDistanceCity={ setDistanceCity }
           />
           <SelectDistanceBeach
             beachDistance={beachDistance}
