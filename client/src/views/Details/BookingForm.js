@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import DropDown from '../../components/common/DropDown/DropDown';
+import DropDown from "../../components/common/DropDown/DropDown";
 import DatePicker from "./DatePicker";
 import {
   Grid,
@@ -22,16 +22,18 @@ const Wrapper = styled.form`
   width: 100%;
 `;
 
-const BookingForm = ({ room, value, setValue }) => {
+const BookingForm = ({
+  room,
+  value,
+  setValue,
+  handleRadioChange,
+  handleDropDownChange,
+}) => {
   const [bookingInfo, setBookingInfo] = useState({});
 
   const handleOnChange = (e) => {
     const data = { ...bookingInfo, [e.target.name]: e.target.value };
     setBookingInfo(data);
-  };
-
-  const handleRadioChange = (e) => {
-    setValue(e.target.value);
   };
 
   return (
@@ -43,45 +45,74 @@ const BookingForm = ({ room, value, setValue }) => {
         <Grid item xs={12}>
           {room.allInclusive ? (
             <FormControl component="fieldset">
-              <FormLabel component="legend">
-                Pris på valt värde: {value}
+              <FormLabel component="label">
+                Pris på valt värde: {value[`${room.roomNumber}`]}
               </FormLabel>
               <RadioGroup
-                aria-label="options"
-                name="options"
+                aria-label={room.roomNumber}
+                name={room.roomNumber}
                 value={value}
-                onChange={handleRadioChange}
+                onChange={(e) => handleRadioChange(e)}
               >
                 <FormControlLabel
                   value={room.allInclusive.toString()}
-                  control={<Radio />}
-                  label="All-Inclusive,"
+                  control={
+                    <Radio
+                      checked={
+                        value[`${room.roomNumber}`] ===
+                        room.allInclusive.toString()
+                      }
+                    />
+                  }
+                  label="All-Inclusive"
                 />
                 <FormControlLabel
                   value={room.halfBoard.toString()}
-                  control={<Radio />}
+                  control={
+                    <Radio
+                      checked={
+                        value[`${room.roomNumber}`] ===
+                        room.halfBoard.toString()
+                      }
+                    />
+                  }
                   label="Half-board"
                 />
                 <FormControlLabel
                   value={room.fullBoard.toString()}
-                  control={<Radio />}
+                  control={
+                    <Radio
+                      checked={
+                        value[`${room.roomNumber}`] ===
+                        room.fullBoard.toString()
+                      }
+                    />
+                  }
                   label="Full-board"
                 />
                 <FormControlLabel
                   value={room.selfCatering.toString()}
-                  control={<Radio />}
+                  control={
+                    <Radio
+                      checked={
+                        value[`${room.roomNumber}`] ===
+                        room.selfCatering.toString()
+                      }
+                    />
+                  }
                   label="Self-catering"
                 />
               </RadioGroup>
-              
             </FormControl>
           ) : (
             <p>Everything is already included</p>
           )}
-          <DropDown extraBed={room.extraBed} />
+          <DropDown
+            handleDropDownChange={handleDropDownChange}
+            extraBed={room.extraBed}
+          />
         </Grid>
       </Grid>
-      
     </Wrapper>
   );
 };
