@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
     Grid,
@@ -53,16 +53,15 @@ const useStyle = makeStyles(() => ({
 
 const RoomCard = ({ roomsInfo }) => {
     const classes = useStyle();
-    const [value, setValue] = useState({});
+    const [value, setValue] = useState({selected: "" });
     const roomInfo = roomsInfo[0];
-    console.log(roomInfo.allInclusive);
 
-    const handleChange = (event) => {
-        setValue(event.target.value);
+    const handleChange = (e) => {
+        setValue( {selected: e.target.value});
+        console.log(selected)
     };
 
-    
-
+    const {selected} = value;
 
     return (
         <Card className={classes.card}>
@@ -91,7 +90,7 @@ const RoomCard = ({ roomsInfo }) => {
                         </Grid>
                     </Grid>
                     <Grid>
-                        <FormControl conponent="fieldset">
+                        <FormControl component="fieldset">
                             <FormControlLabel
                                 value="extraBed"
                                 control={<Checkbox color="primary" />}
@@ -103,7 +102,7 @@ const RoomCard = ({ roomsInfo }) => {
                             <RadioGroup
                                 aria-label="price"
                                 name="price"
-                                value={value}
+                                value={selected}
                                 onChange={handleChange}
                             >
                                 <FormControlLabel
@@ -111,9 +110,9 @@ const RoomCard = ({ roomsInfo }) => {
                                     value={roomInfo.allInclusive}
                                     control={<Radio color="default" />}
                                     label={
-                                        roomInfo["all-inclusive"] && (
+                                        roomInfo.allInclusive && (
                                             <p style={{ paddingRight: "10vw" }}>
-                                                All Inclusive: {roomInfo["all-inclusive"] + ":-"}
+                                                All Inclusive: {roomInfo.allInclusive + ":-"}
                                             </p>
                                         )
                                     }
@@ -124,9 +123,9 @@ const RoomCard = ({ roomsInfo }) => {
                                     value="fullBoard"
                                     control={<Radio color="default" />}
                                     label={
-                                        roomInfo["full-board"] && (
+                                        roomInfo.fullBoard && (
                                             <p style={{ paddingRight: "10vw" }}>
-                                                Full board: {roomInfo["full-board"] + ":-"}
+                                                Full board: {roomInfo.fullBoard + ":-"}
                                             </p>
                                         )
                                     }
@@ -134,12 +133,12 @@ const RoomCard = ({ roomsInfo }) => {
                                 />
                                 <FormControlLabel
                                     style={{ borderTop: "1px solid #ccd9dd" }}
-                                    value="half-board"
+                                    value="halfBoard"
                                     control={<Radio color="default" />}
                                     label={
-                                        roomInfo["half-board"] && (
+                                        roomInfo.halfBoard && (
                                             <p style={{ paddingRight: "10vw" }}>
-                                                Half board: {roomInfo["half-board"] + ":-"}
+                                                Half board: {roomInfo.halfBoard + ":-"}
                                             </p>
                                         )
                                     }
@@ -147,12 +146,12 @@ const RoomCard = ({ roomsInfo }) => {
                                 />
                                 <FormControlLabel
                                     style={{ borderTop: "1px solid #ccd9dd" }}
-                                    value="selfCatring"
+                                    value="selfCatering"
                                     control={<Radio color="default" />}
                                     label={
-                                        roomInfo["self-catering"] && (
+                                        roomInfo.selfCatering && (
                                             <p style={{ paddingRight: "10vw" }}>
-                                                Half board: {roomInfo["half-board"] + ":-"}
+                                                Half board: {roomInfo.selfCatering + ":-"}
                                             </p>
                                         )
                                     }
@@ -163,7 +162,7 @@ const RoomCard = ({ roomsInfo }) => {
                     </Grid>
                 </Grid>
             </CardContent>
-            <RoomPrice roomType={roomInfo} />
+            <RoomPrice roomType={roomInfo} selected = {selected}/>
         </Card>
     );
 };
