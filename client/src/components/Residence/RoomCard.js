@@ -59,11 +59,11 @@ const RoomCard = ({ roomsInfo }) => {
 
     const handleChange = (e) => {
         setValue( {selected: e.target.value});
-        console.log(selected)
+       
     };
 
     const {selected} = value;
-    console.log("hej hej")
+    
     return (
         <Card className={classes.card}>
             <RoomType roomType={roomInfo} />
