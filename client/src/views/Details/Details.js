@@ -17,7 +17,8 @@ const Details = ({ room }) => {
         container
         spacing={2}
         justify="center"
-        alignContent="stretch"
+        // alignContent="stretch"
+        alignItems="center"
         className={style.rule}
       >
         <Grid item xs={3} className={style.section}>
@@ -29,26 +30,29 @@ const Details = ({ room }) => {
           <img
             src={room.images[0]}
             onClick={() => setOpenModal(true)}
-            style={{ width: "85%", height: "30%" }}
+            className={style.roomImg}
             alt="A room"
           />
+        </Grid>
+        <Divider orientation="vertical" flexItem />
+        <Grid item xs={3} className={style.section}>
           <p>Type: {room.type}</p>
           <p>Size: {room.size}</p>
           <p>Beds: {room.beds}</p>
           <p>Room-Number: {room.roomNumber}</p>
         </Grid>
         <Divider orientation="vertical" flexItem />
-        <Grid item xs={5} className={style.section}>
+        <Grid item xs={2} className={style.section}>
           <BookingForm room={room} value={value} setValue={setValue} />
         </Grid>
         <Divider orientation="vertical" flexItem />
         <Grid item xs={2} className={style.section}>
           <p>Price: {room.price} Pecetas</p>
           <p> Extra: {value} Pecetas</p>
-        </Grid>
-        <Divider orientation="vertical" flexItem />
-        <Grid item xs className={style.section}>
-          <Checkbox />
+          <label>
+            Select:
+            <Checkbox />
+          </label>
         </Grid>
       </Grid>
     </Paper>
