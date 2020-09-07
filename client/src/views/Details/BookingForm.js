@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import DropDown from '../../components/common/DropDown/DropDown';
 import DatePicker from "./DatePicker";
 import {
   Grid,
@@ -72,12 +73,15 @@ const BookingForm = ({ room, value, setValue }) => {
                   label="Self-catering"
                 />
               </RadioGroup>
+              
             </FormControl>
           ) : (
             <p>Everything is already included</p>
           )}
+          <DropDown extraBed={room.extraBed} />
         </Grid>
       </Grid>
+      
     </Wrapper>
   );
 };
