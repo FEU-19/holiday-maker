@@ -68,6 +68,7 @@ const SearchContainer = ({ setFilteredDataCB }) => {
     })
     .then((res) => {
       setFilteredDataCB(res);
+
     })
     .catch((err) => {
       console.error(err);
@@ -118,6 +119,7 @@ const SearchContainer = ({ setFilteredDataCB }) => {
           <CheckboxKidsClub />
           <CheckboxNightEntertainment />
           <CheckboxPool />
+
          </Grid>
         </form>
       </Container>
