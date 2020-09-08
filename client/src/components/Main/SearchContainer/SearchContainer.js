@@ -81,19 +81,15 @@ const SearchContainer = ({ setFilteredDataCB }) => {
     new Promise((resolve, reject) => {
       let c = [...residentData];
 
-
-
-
       c = filterCity(c, city);
       c = filterPool(c, checkedPool);
       c = filterNightEntertainment(c, checkedNightEntertainment);
       c = filterKidsClub(c, checkedKidsClub);
       c = filterRestaurant(c, checkedRestaurant);
       c = filterDistanceBeach(c, distanceBeach);
+      c = filterDistanceCity(c, distanceCity);
 
       // c = filterDate(c, date);
-
-      c = filterDistanceCity(c, distanceCity);
 
       resolve(c);
     })
@@ -125,7 +121,10 @@ const SearchContainer = ({ setFilteredDataCB }) => {
               setDate={setDate} />
           </Grid>
           <Grid item xs={2}>
-            <SelectAmountOfAdults />
+            <SelectAmountOfAdults 
+              setAmountOfAdults={setAmountOfAdults}
+              amountOfAdults={amountOfAdults}
+            />
           </Grid>
           <Grid item xs={2}>
             <SelectAmountOfChildren
@@ -150,43 +149,14 @@ const SearchContainer = ({ setFilteredDataCB }) => {
               placeholder="Submit"
             >
               Submit
-
-          <SelectAmountOfChildren
-            setAmountOfChildren={ setAmountOfChildren }
-            amountOfChildren={ amountOfChildren }
-          />
-          <ChildrenAgeSelects amountOfChildren={ amountOfChildren } />
-          <SelectCity residentData={residentData} city={city} setCity={setCity} />
-          <DatePicker
-            residentData={residentData}
-            date={date}
-            setDate={setDate}/>
-          <SelectAmountOfAdults amountOfAdults= {amountOfAdults} setAmountOfAdults= {setAmountOfAdults}/>
-          <SelectDistanceCity
-            distanceCity={ distanceCity }
-            setDistanceCity={ setDistanceCity }
-          />
-          <SelectDistanceBeach
-            distanceBeach={distanceBeach}
-            setDistanceBeach={setDistanceBeach} />
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            placeholder="Submit"
-          >
-            Submit
-
-          </Button>
+            </Button>
           </Grid>
         </ButtonContainer>
-
         <GridContainer
           className="search-bottom"
           container spacing={1}
           justify="space-around"
         >
-
           <Grid item xs={2}>
             <CheckboxRestaurant checkedRestaurant= {checkedRestaurant} setCheckedRestaurant= {setCheckedRestaurant} />
           </Grid>
@@ -199,22 +169,16 @@ const SearchContainer = ({ setFilteredDataCB }) => {
           <Grid item xs={2}>
             <CheckboxPool checkedPool= {checkedPool} setCheckedPool= {setCheckedPool}/>
           </Grid>
-          <Grid
-            className="search-bottom"
-            container spacing={1}
-            justify="space-around"
-          />
-            <Grid item xs={2}>
-              <SelectDistanceCity
-                distanceCity={distanceCity}
-                setDistanceCity={setDistanceCity}
-              />
-            </Grid>
-            <Grid item xs={2}>
-              <SelectDistanceBeach
-                distanceBeach={distanceBeach}
-                setDistanceBeach={setDistanceBeach} />
-            </Grid>
+          <Grid item xs={2}>
+            <SelectDistanceCity
+              distanceCity={distanceCity}
+              setDistanceCity={setDistanceCity}
+            />
+          </Grid>
+          <Grid item xs={2}>
+            <SelectDistanceBeach
+              distanceBeach={distanceBeach}
+              setDistanceBeach={setDistanceBeach} />
           </Grid>
         </GridContainer>
       </Form>
