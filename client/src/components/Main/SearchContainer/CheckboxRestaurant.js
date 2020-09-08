@@ -1,7 +1,15 @@
 import React, { useState } from "react";
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import styled from 'styled-components';
 
+const FormControl = styled(FormControlLabel)`
+
+  .checkbox {
+    
+  }
+`
+//  kolla strl på ikoner
 
 
 const CheckboxRestaurant = () => {
@@ -13,7 +21,8 @@ const CheckboxRestaurant = () => {
 
   return (
     <>
-      <FormControlLabel control={<Checkbox
+      <FormControl control={<Checkbox
+        className="checkbox"
         checked={checked}
         onChange={handleChange}
         color="default"

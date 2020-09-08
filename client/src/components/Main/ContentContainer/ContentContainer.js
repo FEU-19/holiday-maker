@@ -2,11 +2,13 @@ import React from "react";
 import styled from 'styled-components';
 
 const Container = styled.div`
-  border: 2px solid black;
+  border: 1px solid grey;
+  border-radius: 7px;
   width: 90vw;
   min-height: 400px;
   display: flex;
   flex-direction: column;
+  margin-bottom:7px;
 
   .map-container {
     border: 1px solid black;

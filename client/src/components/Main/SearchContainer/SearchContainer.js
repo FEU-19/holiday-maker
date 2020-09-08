@@ -30,11 +30,25 @@ import filterDistanceCity from '../../../utils/filterDistanceCity';
 
 
 const Container = styled.div`
-border: 2px solid red;
 width: 90vw;
 display: flex;
 justify-content: center;
 `;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+
+const GridContainer = styled(Grid)`
+  padding: 20px;
+`
+
+const ButtonContainer = styled(Grid)`
+  border-bottom: 1px solid grey;
+  padding: 10px;
+`
 
 const SearchContainer = ({ setFilteredDataCB }) => {
   const [residentData, setResidentData] = useState([{}]);
@@ -42,16 +56,16 @@ const SearchContainer = ({ setFilteredDataCB }) => {
   const [amountOfChildren, setAmountOfChildren] = useState(0);
   const [distanceCity, setDistanceCity] = useState('');
   const [distanceBeach, setDistanceBeach] = useState('');
-  const [date, setDate] = useState({start: '2020-06-02T10:30:00.000Z', end: '2020-06-08T10:00:00.000Z'})
-  
+  const [date, setDate] = useState({ start: '2020-06-02T10:30:00.000Z', end: '2020-06-08T10:00:00.000Z' })
+
   useEffect(() => {
     axios.get('http://localhost:8080/api/residents/')
-    .then((res) => {
-      setResidentData(res.data.data);
-    })
-    .catch((err) => {
-      console.error(err);
-    });
+      .then((res) => {
+        setResidentData(res.data.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }, []);
 
   function onSubmit(e) {
@@ -59,76 +73,112 @@ const SearchContainer = ({ setFilteredDataCB }) => {
 
     new Promise((resolve, reject) => {
       let c = [...residentData];
-      
+
       c = filterCity(c, city);
       c = filterPool(c, 'default');
       c = filterNightEntertainment(c, false);
       c = filterKidsClub(c, 'default');
       c = filterRestaurant(c, 'default');
-      c = filterDistanceBeach(c, distanceBeach );
+      c = filterDistanceBeach(c, distanceBeach);
       c = filterDistanceCity(c, distanceCity)
       // c = filterDate(c, date);
-      
+
       resolve(c);
     })
-    .then((res) => {
-      setFilteredDataCB(res);
+      .then((res) => {
+        setFilteredDataCB(res);
 
-    })
-    .catch((err) => {
-      console.error(err);
-    });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }
 
   return (
     <Container>
-      <form onSubmit={onSubmit}>
-        <Grid
+      <Form onSubmit={onSubmit}>
+        <GridContainer
           className="search-top"
-          container
+          container spacing={1}
           justify="space-around"
         >
-          <SelectAmountOfChildren
-            setAmountOfChildren={ setAmountOfChildren }
-            amountOfChildren={ amountOfChildren }
-          />
-          <ChildrenAgeSelects amountOfChildren={ amountOfChildren } />
-          <SelectCity residentData={residentData} city={city} setCity={setCity} />
-          <DatePicker
-            residentData={residentData}
-            date={date}
-            setDate={setDate}/>
-          <SelectAmountOfAdults />
-          <SelectDistanceCity
-            distanceCity={ distanceCity }
-            setDistanceCity={ setDistanceCity }
-          />
-          <SelectDistanceBeach
-            distanceBeach={distanceBeach}
-            setDistanceBeach={setDistanceBeach} />
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            placeholder="Submit"
-          >
-            Submit
+          <Grid item xs={2}>
+            <SelectCity residentData={residentData} city={city} setCity={setCity} />
+          </Grid>
+          <Grid item xs={4}>
+            <DatePicker
+              residentData={residentData}
+              date={date}
+              setDate={setDate} />
+          </Grid>
+          <Grid item xs={2}>
+            <SelectAmountOfAdults />
+          </Grid>
+          <Grid item xs={2}>
+            <SelectAmountOfChildren
+              setAmountOfChildren={setAmountOfChildren}
+              amountOfChildren={amountOfChildren}
+            /></Grid>
+          <Grid item xs={2}>
+            <ChildrenAgeSelects amountOfChildren={amountOfChildren} />
+          </Grid>
+        </GridContainer>
+
+        <ButtonContainer
+          className="search-top"
+          container spacing={1}
+          justify="flex-end"
+        >
+          <Grid item xs={2}>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              placeholder="Submit"
+            >
+              Submit
           </Button>
-        </Grid>
-        <Grid
+          </Grid>
+        </ButtonContainer>
+
+        <GridContainer
           className="search-bottom"
-          container
+          container spacing={1}
           justify="space-around"
         >
-          <CheckboxRestaurant />
-          <CheckboxKidsClub />
-          <CheckboxNightEntertainment />
-          <CheckboxPool />
+          <Grid item xs={2}>
+            <CheckboxRestaurant />
+          </Grid>
+          <Grid item xs={2}>
+            <CheckboxKidsClub />
+          </Grid>
+          <Grid item xs={2}>
+            <CheckboxNightEntertainment />
+          </Grid>
+          <Grid item xs={2}>
+            <CheckboxPool />
+          </Grid>
+          <Grid
+            className="search-bottom"
+            container spacing={1}
+            justify="space-around"
+          >
+            <Grid item xs={2}>
+              <SelectDistanceCity
+                distanceCity={distanceCity}
+                setDistanceCity={setDistanceCity}
+              />
+            </Grid>
+            <Grid item xs={2}>
+              <SelectDistanceBeach
+                distanceBeach={distanceBeach}
+                setDistanceBeach={setDistanceBeach} />
+            </Grid>
+          </Grid>
+        </GridContainer>
+      </Form>
+    </Container>
+  );
+};
 
-         </Grid>
-        </form>
-      </Container>
-    );
-  };
-
-  export default SearchContainer;
+export default SearchContainer;
