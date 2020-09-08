@@ -50,6 +50,7 @@ const Residence = () => {
    .get("http://localhost:8080/api/residents/5f574c1fee5d854ae893f216")
    .then((response) => {
     updateData(response.data.data);
+    console.log(response.data.data);
    })
    .then(() => {
      clearTimeout(wait);
