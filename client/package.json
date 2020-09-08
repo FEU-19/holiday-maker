@@ -12,6 +12,7 @@
     "cleave.js": "^1.6.0",
     "moment": "^2.27.0",
     "react": "^16.13.1",
+    "react-cookie": "^4.0.3",
     "react-dom": "^16.13.1",
     "react-helmet-async": "^1.0.6",
     "react-router-dom": "^5.2.0",
