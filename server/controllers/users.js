@@ -4,7 +4,7 @@ const User = require("../models/User");
 exports.createLogout = async (req, res) =>{
   const { userId } = req.body.userId;
 
-  res.clearCookie("access_token", `Bearer${userId}`).end();
+  res.clearCookie("holidayMakerCookie", `Bearer${userId}`).end();
 }
 
 exports.createLogin = async (req, res) => {
@@ -35,7 +35,7 @@ exports.createLogin = async (req, res) => {
     }
 
     res.status(200);
-    res.cookie("access_token", `Bearer${user.id}`, {
+    res.cookie("holidayMakerCookie", `Bearer${user.id}`, {
       expires: new Date(Date.now() + 8 * 3600000),
     });
     res.end();

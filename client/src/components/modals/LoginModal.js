@@ -14,14 +14,17 @@ import PropTypes from 'prop-types';
 import RegistrationComp from "../Registration/RegistrationComp";
 import LoginComp from "../Login/Login";
 
+import { cookieFinder } from "../../utils/findCookie"
+
 const LoginModal = () =>{
   const [open, setOpen] = useState(false);
-  const [cookie, setCookie] = useState(document.cookie);
+  const [cookie, setCookie] = useState(false);
   const [value, setValue] = useState(0);
 
   useEffect(() => {
-    setCookie(document.cookie);
+    setCookie(cookieFinder());
   }, [open])
+  console.log(cookie + " THIS IS MY COOKIE")
 
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
