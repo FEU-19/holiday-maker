@@ -6,7 +6,7 @@ import Residence from "./views/Residence";
 // To add more routes use format as below and add to the routes array
 const routes = [
   { path: "/", component: Main },
-  { path: "residence", component: Residence },
+  { path: "/residence", component: Residence },
 ];
 
 function AppRouter() {
