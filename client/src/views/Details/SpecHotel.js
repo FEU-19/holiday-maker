@@ -91,7 +91,6 @@ const SpecHotel = ({ data, hotelId }) => {
       })
       .map((room) => {
         let option = "None";
-
         if (roomNumbersOptions.includes(room.roomNumber)) {
           const priceForOption = parseInt(value[room.roomNumber]);
           option = Object.entries(room).reduce(
