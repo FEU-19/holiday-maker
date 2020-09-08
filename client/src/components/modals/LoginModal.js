@@ -11,8 +11,8 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import PropTypes from 'prop-types';
 
-import RegistrationComp from "../Registration/RegistrationComp";
-import LoginComp from "../Login/Login";
+import RegistrationComp from "./Registration/RegistrationComp";
+import LoginComp from "./Login/Login";
 
 import { cookieFinder } from "../../utils/findCookie"
 
@@ -89,7 +89,7 @@ const LoginModal = () =>{
     e.preventDefault();
     let cookie = document.cookie;
     instance
-      .post("http://localhost:3002/api/logout/", { cookie }, options)
+      .post("http://localhost:8080/api/logout/", { cookie }, options)
       .then((res) => {
         setCookie(null);
       })
