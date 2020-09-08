@@ -16,25 +16,29 @@ it("renders without crashing", () => {
   ReactDOM.render(<RegistrationComp />, Container);
 });
 
-
-// const simulateChangeInput = (reactWrapper, inputSelector, newValue) => {
-//     const input = reactWrapper.find(inputSelector)
-//     input.simulate('change', {
-//         target: {value: newValue}
-//     });
-
-//     return reactWrapper.find(inputSelector);
-// }
-
 describe("Full form test", () => {
   let reactWrapper = ReactWrapper;
   const newUser = {
-    firstName: "Bob",
-
+    email: "",
+    firstName: "",
+    surname: "",
+    street: "",
+    zipCode: "",
+    city: "",
+    country: "",
+    phoneNumber: "",
+    socialSecurityNumber: "",
+    password: "",
+    confirmPassword: "",
   };
 
   beforeEach(() => {
     reactWrapper = mount(<RegistrationComp newUser={newUser} />);
+  });
+
+  it("form exists", () => {
+    const wrapper = shallow(<RegistrationComp />);
+    expect(wrapper.find("div").exists()).toBe(true);
   });
 
   it("Registration children will be render", () => {
@@ -47,32 +51,13 @@ describe("Full form test", () => {
     expect(nameInput.props().value).toEqual("");
   });
 
-
   it("Should have an email field and 2 password field", () => {
-
     expect(reactWrapper.find('input[type="email"]').length).toEqual(1);
     expect(reactWrapper.find('input[type="password"]').length).toEqual(2);
-       
   });
 
   it("state should have a name", () => {
-
+    newUser.firstName = "Bob";
     expect(newUser.firstName).toEqual("Bob");
-    
-        
   });
-
-
-
-//   it("Let me fill in name input", () => {
-//     let nameInput = reactWrapper.find("input").first();
-//     // const updatedNameInput = simulateChangeInput(reactWrapper, '#firstName', 'Bob');
-    
-//     nameInput.invoke('change', { target: { value: "Bob" } })
-
-//     // console.log(nameInput.value);
-//     // nameInput = reactWrapper.find("input").first();
-//     expect(nameInput.props().value).toEqual("Bob");
-//     done();
-//   });
 });

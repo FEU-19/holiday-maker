@@ -34,9 +34,9 @@ describe('form', () => {
         expect(reactWrapper.find('button').length).toBe(1);
     });
     it('simulates click events', () => {
-        const wrapper = shallow(<Login />);
-        const button = wrapper.find('button');
-        const valueBefore = wrapper.Object.is('user')
+        // const wrapper = shallow(<Login />);
+        // const button = wrapper.find('button');
+        // const valueBefore = wrapper.Object.is('user')
         //expect(valueBefore).Object.is('')
 
 
