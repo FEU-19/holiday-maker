@@ -69,7 +69,7 @@ const SearchContainer = ({ setFilteredDataCB }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/residents/")
+      .get("http://localhost:8080/api/residences/")
       .then((res) => {
         setResidentData(res.data.data);
         setFilteredDataCB(res.data.data);

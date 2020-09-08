@@ -25,6 +25,8 @@ import CountryDropdownList from "./CountryDropdownList";
 function Payment() {
   const { state } = useLocation();
 
+  console.log(state);
+
   const useStyles = makeStyles((theme) => ({
     root: {
       "& > *": {

@@ -34,7 +34,6 @@ const RoomPrice = ({
   const selectedToInt = parseInt(selected) || 0;
   const extraBedToInt = parseInt(extraBed.extraBedPrice) || 0;
   const totalPrice = price + selectedToInt + extraBedToInt;
-  console.log(extraBed);
   //const finalPrice = roomType.price + price.extras;
 
   return (
