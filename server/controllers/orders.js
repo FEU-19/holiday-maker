@@ -6,7 +6,8 @@ const bookingNrGenerator = require("../utils/bookingNrGenerator");
 // {adults: N, children: N, hotel: String, rooms: Array, bookingDates: {start: String, end: String}}
 exports.create = async (req, res) => {
   // Id will be a cookie.
-  const Id = req.body.userId; // When full merge, change to res.cookie.
+
+  const Id = req.body.user;
   const data = req.body;
   const orderData = {};
 
