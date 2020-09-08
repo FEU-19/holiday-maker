@@ -3,10 +3,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import {
  Card,
  CardHeader,
- CardMedia,
  CardContent,
  Typography,
+ TableCell,
+ Table,
 } from "@material-ui/core";
+import ModalDialogBook from "./ModalDialogBook";
 
 const useStyle = makeStyles(() => ({
  card: {
@@ -15,16 +17,33 @@ const useStyle = makeStyles(() => ({
   backgroundColor: "rgb(234, 234, 234)",
   display: "flex",
   flexDirection: "column",
-  justifyContent: "space-between",
+  //justifyContent: "space-between",
   alignItems: "flex-end",
  },
  header: {
     textAlign:"right",
+    paddingBottom: 0,
  },
  text: {
-  margin: 20,
+  padding: 16,
+  paddingTop: 0,
   fontSize: 16,
   fontWeight: "bolder",
+  textAlign:"right",
+ },
+ container: {
+   margin: "0 auto",
+   padding: "20px",
+   display: "flex",
+   justifyContent: "center",
+   alignItems: "center",
+   overflow: "auto",
+   paddingTop: 260,
+   padding: 0,
+ },
+ button: {
+   overflow: "auto",
+
  },
 }));
 
@@ -40,12 +59,16 @@ const RoomPrice = ({ roomType, selected, price, extraBed }) => {
    <CardHeader
     className={classes.header}
     title={totalPrice + ":-" + " SEK"}
-    //title = {selected}
     subheader={"for 1 room for 1 night"}
    />
-   <Typography className={classes.text} component="p">
-    Today's Price including taxes and fees
+   <Typography className={classes.text}  component="p">
+         Today's Price including taxes and fees
    </Typography>
+   <CardContent className = {classes.container}>
+      <ModalDialogBook className = {classes.button}/>
+   </CardContent>
+
+   
   </Card>
  );
 };
