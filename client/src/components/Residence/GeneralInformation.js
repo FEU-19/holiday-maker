@@ -2,7 +2,8 @@ import React, { useState, useEffect} from "react";
 
 // Style variables
 const boxContainer = {
-  width: "600px",
+  //width: "600px",
+  width: "1305.280",
   padding: "30px 30px 50px 30px",
 };
 
@@ -10,7 +11,7 @@ const title = {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  width: "200px",
+  width: "319px",
   height: "35px",
   backgroundColor: "lightgrey",
   color: "#464646",
@@ -20,9 +21,14 @@ const title = {
 
 const contentContainer = {
   display: "flex",
-  alignSelf: "flex-start",
-  justifyContent: "center",
-  width: "600px",
+  flexDirection: "row",
+  flexWrap: "nowrap",
+  justifyContent: "space-between",
+  width: "1200px",
+  
+  //alignSelf: "flex-start",
+  //justifyContent: "center",
+  //width: "600px",
   backgroundColor: "#EAEAEA",
   color: "#464646",
   borderRadius: "0 0 4px 4px",
@@ -36,7 +42,7 @@ const content = {
 };
 
 const headInfo = {
-  width: "600px",
+  //width: "600px",
   padding: "30px 40px 20px 40px",
   borderRadius: "0 4px 0 0",
   color: "#464646",
@@ -56,11 +62,11 @@ const subTitle = {
   fontWeight: "bold",
 };
 
-const subTitleBeds = {
+/*const subTitleBeds = {
   margin: "0",
   padding: "20px 0 10px 0",
   fontWeight: "bold",
-};
+};*/
 
 
 const GeneralInformation = ({generalInfo}) => {
@@ -105,10 +111,10 @@ const GeneralInformation = ({generalInfo}) => {
   function getRoomInfo(key){
     const tempObject = generalInfo.rooms.reduce(
     (acc, cur) => {
-        if (acc[cur.[key]]) {
-            acc[cur.[key]] += 1;
+        if (acc[cur[key]]) {
+            acc[cur[key]] += 1;
         } else {
-          acc[cur.[key]] = 1;
+          acc[cur[key]] = 1;
         }
         return acc;
       }, {}
@@ -131,7 +137,7 @@ console.log(info);
           <h4>Residence Overview</h4>
         </div>
         <div className="residence__generalInformationContainer__headInfo" style={headInfo}>
-          <p style={textReset}>This residence has {info.numberOfRooms} rooms, {info.totalBeds} Beds and {info.totalExtraBeds} Extra beds.</p>
+          <p style={textReset}>This residence has {info.numberOfRooms} rooms.</p>
         </div>
         <div className="residence__generalInformationContainer__contentContainer" style={contentContainer}>
           <div className="residence__generalInformationContainer__contentContainer__content" style={content}>
@@ -142,7 +148,9 @@ console.log(info);
                 <p style={textReset}>{value} {room}s</p>
               );
             })}
-            <p style={subTitleBeds}>Beds</p>
+            </div>
+            <div className="residence__generalInformationContainer__contentContainer__content" style={content}>
+            <p style={subTitle}>Beds</p>
             <p style={textReset}>{info.totalBeds} Beds</p>
             <p style={textReset}>{info.totalExtraBeds} Extra beds</p>
           </div>
