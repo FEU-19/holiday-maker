@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
-
-
 const CheckboxPool = ({checkedPool, setCheckedPool}) => {
+
+  useEffect(() => {
+    if (!checkedPool) {
+      setCheckedPool('none');
+    }
+  }, [checkedPool, setCheckedPool])
 
   const handleChange = (e) => {
     setCheckedPool(e.target.checked);
