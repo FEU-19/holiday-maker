@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const distanceInterval = [
-  '',
+  0,
   500,
   1000,
   1500,

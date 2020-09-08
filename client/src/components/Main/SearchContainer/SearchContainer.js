@@ -40,8 +40,8 @@ const SearchContainer = ({ setFilteredDataCB }) => {
   const [residentData, setResidentData] = useState([{}]);
   const [city, setCity] = useState('');
   const [amountOfChildren, setAmountOfChildren] = useState(0);
-  const [distanceCity, setDistanceCity] = useState('');
-  const [distanceBeach, setDistanceBeach] = useState('');
+  const [distanceCity, setDistanceCity] = useState(0);
+  const [distanceBeach, setDistanceBeach] = useState(0);
   const [date, setDate] = useState({start: '2020-06-02T10:30:00.000Z', end: '2020-06-08T10:00:00.000Z'})
   
   useEffect(() => {
@@ -60,14 +60,15 @@ const SearchContainer = ({ setFilteredDataCB }) => {
     new Promise((resolve, reject) => {
       let c = [...residentData];
       
+      // c = filterDate(c, date);
+      
       c = filterCity(c, city);
       c = filterPool(c, 'default');
-      c = filterNightEntertainment(c, false);
+      c = filterNightEntertainment(c, 'default');
       c = filterKidsClub(c, 'default');
       c = filterRestaurant(c, 'default');
-      c = filterDistanceBeach(c, distanceBeach );
-      c = filterDistanceCity(c, distanceCity)
-      // c = filterDate(c, date);
+      c = filterDistanceBeach(c, distanceBeach);
+      c = filterDistanceCity(c, distanceCity);
       
       resolve(c);
     })
