@@ -1,5 +1,5 @@
-export default function filterRestaurant(data, userInput = 'default') {
-  if (userInput === 'default') return data;
+export default function filterRestaurant(data, userInput = 'none') {
+  if (userInput === 'none') return data;
 
   return data.filter(hotel => hotel.restaurant === userInput);
 }

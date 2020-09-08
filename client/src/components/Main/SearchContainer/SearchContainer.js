@@ -39,10 +39,10 @@ justify-content: center;
 const SearchContainer = ({ setFilteredDataCB }) => {
   const [residentData, setResidentData] = useState([{}]);
   const [city, setCity] = useState('');
-  const [checkedKidsClub, setCheckedKidsclub] = useState(false);
-  const [checkedNightEntertainment, setCheckedNightEntertainment] = useState(false);
-  const [checkedPool, setCheckedPool] = useState(false);
-  const [checkedRestaurant, setCheckedRestaurant] = useState(false);
+  const [checkedKidsClub, setCheckedKidsclub] = useState('none');
+  const [checkedNightEntertainment, setCheckedNightEntertainment] = useState('none');
+  const [checkedPool, setCheckedPool] = useState('none');
+  const [checkedRestaurant, setCheckedRestaurant] = useState('none');
   const [amountOfChildren, setAmountOfChildren] = useState(0);
   const [distanceCity, setDistanceCity] = useState(0);
   const [distanceBeach, setDistanceBeach] = useState(0);
@@ -69,10 +69,10 @@ const SearchContainer = ({ setFilteredDataCB }) => {
       // c = filterDate(c, date);
 
       c = filterCity(c, city);
-      c = filterPool(c, 'default');
-      c = filterNightEntertainment(c, 'default');
-      c = filterKidsClub(c, 'default');
-      c = filterRestaurant(c, 'default');
+      c = filterPool(c, checkedPool);
+      c = filterNightEntertainment(c, checkedNightEntertainment);
+      c = filterKidsClub(c, checkedKidsClub);
+      c = filterRestaurant(c, checkedRestaurant);
       c = filterDistanceBeach(c, distanceBeach);
       c = filterDistanceCity(c, distanceCity);
 
@@ -127,10 +127,10 @@ const SearchContainer = ({ setFilteredDataCB }) => {
           container
           justify="space-around"
         >
-          <CheckboxRestaurant checkedRestaurant= {checkedRestaurant} setCheckedRestaurant= {setCheckedRestaurant}/>
-          <CheckboxKidsClub checkedKidsClub= {checkedKidsClub} setCheckedKidsclub= {setCheckedKidsclub} />
-          <CheckboxNightEntertainment checkedNightEntertainment= {checkedNightEntertainment} setCheckedNightEntertainment= {setCheckedNightEntertainment}/>
-          <CheckboxPool checkedPool= {checkedPool} setCheckedPool= {setCheckedPool}/>
+          <CheckboxRestaurant checkedRestaurant={checkedRestaurant} setCheckedRestaurant={setCheckedRestaurant}/>
+          <CheckboxKidsClub checkedKidsClub={checkedKidsClub} setCheckedKidsclub={setCheckedKidsclub} />
+          <CheckboxNightEntertainment checkedNightEntertainment={checkedNightEntertainment} setCheckedNightEntertainment={setCheckedNightEntertainment}/>
+          <CheckboxPool checkedPool={checkedPool} setCheckedPool={setCheckedPool}/>
 
          </Grid>
         </form>
