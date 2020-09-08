@@ -47,6 +47,6 @@ describe('form', () => {
         // wrapper.find('button').simulate('click');
         
         // expect('onSubmit').to.call.function('onSubmit');
-      });
+    });
 });
 

@@ -1,38 +1,33 @@
 import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import styled from "styled-components"
+import styled from "styled-components";
 import axios from "axios";
-import SimpleDialog from '@material-ui/core/Dialog';
+import SimpleDialog from "@material-ui/core/Dialog";
 
 const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-    form{
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-    }
-    .loginBtn{
-      margin-top: 20px;
-    }
-`
+  form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .loginBtn {
+    margin-top: 20px;
+  }
+`;
 
 const Login = (props) => {
   const [user, setUser] = useState({ email: "", password: "" });
   const [open, setOpen] = useState(false);
-  const [errorMsg, setErrorMsg] = useState(0)
-
-  const options = {
-    xsrfCookieName: 'XSRF-TOKEN',
-    xsrfHeaderName: 'X-XSRF-TOKEN',
-  };
+  const [errorMsg, setErrorMsg] = useState(0);
 
   const instance = axios.create({
     withCredentials: true,
-  })
+  });
 
   const onChangeUser = (e) => {
     const { value } = e.target;
@@ -41,23 +36,24 @@ const Login = (props) => {
   };
 
   const onSubmit = (e) => {
-    e.preventDefault();  
+    e.preventDefault();
     if (user) {
-      instance.post("http://localhost:3002/api/login/", {user}, options)
-      .then((res) => {
-        props.handleModalClose();
-      })
-      .catch(err => {
-        setOpen(true);
-        setErrorMsg(err.response.data.error[0].msg);
-      });
+      instance
+        .post("http://localhost:3002/api/login/", { user }, props.options)
+        .then((res) => {
+          props.handleModalClose();
+        })
+        .catch((err) => {
+          setOpen(true);
+          setErrorMsg(err.response.data.error[0].msg);
+        });
     }
   };
 
   const handleClose = () => {
-    setOpen(false)
+    setOpen(false);
   };
-  
+
   return (
     <Container>
       <form className="login__Main" onSubmit={(e) => onSubmit(e)}>
@@ -79,13 +75,25 @@ const Login = (props) => {
           value={user.password}
           onChange={onChangeUser}
         />
-        <Button className="loginBtn" type="submit" variant="contained" color="primary">Login</Button> 
-        {open ? <SimpleDialog  selectedvalue={errorMsg} open={open} onClose={handleClose} > 
-          {errorMsg}
-      </SimpleDialog> : null}
+        <Button
+          className="loginBtn"
+          type="submit"
+          variant="contained"
+          color="primary"
+        >
+          Login
+        </Button>
+        {open ? (
+          <SimpleDialog
+            selectedvalue={errorMsg}
+            open={open}
+            onClose={handleClose}
+          >
+            {errorMsg}
+          </SimpleDialog>
+        ) : null}
       </form>
     </Container>
-
   );
 };
 
