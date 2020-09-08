@@ -1,5 +1,5 @@
-export default function filterPool(data, userInput = 'default') {
-  if (userInput === 'default') return data;
+export default function filterPool(data, userInput = 'none') {
+  if (userInput === 'none') return data;
 
   return data.filter(hotel => hotel.pool === userInput);
 }
