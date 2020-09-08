@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import styled from 'styled-components';
 
 
 
@@ -12,8 +13,11 @@ const CheckboxRestaurant = ({checkedRestaurant, setCheckedRestaurant}) => {
 
   return (
     <>
+
+
       <FormControlLabel control={<Checkbox
         checked={checkedRestaurant}
+
         onChange={handleChange}
         color="default"
         inputProps={{ 'aria-label': 'restaurant' }} />}

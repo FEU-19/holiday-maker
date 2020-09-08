@@ -30,11 +30,25 @@ import filterDistanceCity from '../../../utils/filterDistanceCity';
 
 
 const Container = styled.div`
-border: 2px solid red;
 width: 90vw;
 display: flex;
 justify-content: center;
 `;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+
+const GridContainer = styled(Grid)`
+  padding: 20px;
+`
+
+const ButtonContainer = styled(Grid)`
+  border-bottom: 1px solid grey;
+  padding: 10px;
+`
 
 const SearchContainer = ({ setFilteredDataCB }) => {
   const [residentData, setResidentData] = useState([{}]);
@@ -44,6 +58,7 @@ const SearchContainer = ({ setFilteredDataCB }) => {
   const [checkedPool, setCheckedPool] = useState(false);
   const [checkedRestaurant, setCheckedRestaurant] = useState(false);
   const [amountOfChildren, setAmountOfChildren] = useState(0);
+
   const [distanceCity, setDistanceCity] = useState(0);
   const [distanceBeach, setDistanceBeach] = useState(0);
   const [amountOfAdults, setAmountOfAdults] = useState(1);
@@ -52,12 +67,12 @@ const SearchContainer = ({ setFilteredDataCB }) => {
 
   useEffect(() => {
     axios.get('http://localhost:8080/api/residents/')
-    .then((res) => {
-      setResidentData(res.data.data);
-    })
-    .catch((err) => {
-      console.error(err);
-    });
+      .then((res) => {
+        setResidentData(res.data.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }, []);
 
   function onSubmit(e) {
@@ -66,7 +81,8 @@ const SearchContainer = ({ setFilteredDataCB }) => {
     new Promise((resolve, reject) => {
       let c = [...residentData];
 
-      // c = filterDate(c, date);
+
+
 
       c = filterCity(c, city);
       c = filterPool(c, 'default');
@@ -74,27 +90,67 @@ const SearchContainer = ({ setFilteredDataCB }) => {
       c = filterKidsClub(c, 'default');
       c = filterRestaurant(c, 'default');
       c = filterDistanceBeach(c, distanceBeach);
+
+      // c = filterDate(c, date);
+
       c = filterDistanceCity(c, distanceCity);
 
       resolve(c);
     })
-    .then((res) => {
-      setFilteredDataCB(res);
+      .then((res) => {
+        setFilteredDataCB(res);
 
-    })
-    .catch((err) => {
-      console.error(err);
-    });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }
 
   return (
     <Container>
-      <form onSubmit={onSubmit}>
-        <Grid
+      <Form onSubmit={onSubmit}>
+        <GridContainer
           className="search-top"
-          container
+          container spacing={1}
           justify="space-around"
         >
+
+          <Grid item xs={2}>
+            <SelectCity residentData={residentData} city={city} setCity={setCity} />
+          </Grid>
+          <Grid item xs={4}>
+            <DatePicker
+              residentData={residentData}
+              date={date}
+              setDate={setDate} />
+          </Grid>
+          <Grid item xs={2}>
+            <SelectAmountOfAdults />
+          </Grid>
+          <Grid item xs={2}>
+            <SelectAmountOfChildren
+              setAmountOfChildren={setAmountOfChildren}
+              amountOfChildren={amountOfChildren}
+            /></Grid>
+          <Grid item xs={2}>
+            <ChildrenAgeSelects amountOfChildren={amountOfChildren} />
+          </Grid>
+        </GridContainer>
+
+        <ButtonContainer
+          className="search-top"
+          container spacing={1}
+          justify="flex-end"
+        >
+          <Grid item xs={2}>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              placeholder="Submit"
+            >
+              Submit
+
           <SelectAmountOfChildren
             setAmountOfChildren={ setAmountOfChildren }
             amountOfChildren={ amountOfChildren }
@@ -120,22 +176,51 @@ const SearchContainer = ({ setFilteredDataCB }) => {
             placeholder="Submit"
           >
             Submit
+
           </Button>
-        </Grid>
-        <Grid
+          </Grid>
+        </ButtonContainer>
+
+        <GridContainer
           className="search-bottom"
-          container
+          container spacing={1}
           justify="space-around"
         >
-          <CheckboxRestaurant checkedRestaurant= {checkedRestaurant} setCheckedRestaurant= {setCheckedRestaurant}/>
-          <CheckboxKidsClub checkedKidsClub= {checkedKidsClub} setCheckedKidsclub= {setCheckedKidsclub} />
-          <CheckboxNightEntertainment checkedNightEntertainment= {checkedNightEntertainment} setCheckedNightEntertainment= {setCheckedNightEntertainment}/>
-          <CheckboxPool checkedPool= {checkedPool} setCheckedPool= {setCheckedPool}/>
 
-         </Grid>
-        </form>
-      </Container>
-    );
-  };
+          <Grid item xs={2}>
+            <CheckboxRestaurant checkedRestaurant= {checkedRestaurant} setCheckedRestaurant= {setCheckedRestaurant} />
+          </Grid>
+          <Grid item xs={2}>
+            <CheckboxKidsClub checkedKidsClub= {checkedKidsClub} setCheckedKidsclub= {setCheckedKidsclub} />
+          </Grid>
+          <Grid item xs={2}>
+            <CheckboxNightEntertainment checkedNightEntertainment= {checkedNightEntertainment} setCheckedNightEntertainment= {setCheckedNightEntertainment}/>
+          </Grid>
+          <Grid item xs={2}>
+            <CheckboxPool checkedPool= {checkedPool} setCheckedPool= {setCheckedPool}/>
+          </Grid>
+          <Grid
+            className="search-bottom"
+            container spacing={1}
+            justify="space-around"
+          >
+            <Grid item xs={2}>
+              <SelectDistanceCity
+                distanceCity={distanceCity}
+                setDistanceCity={setDistanceCity}
+              />
+            </Grid>
+            <Grid item xs={2}>
+              <SelectDistanceBeach
+                distanceBeach={distanceBeach}
+                setDistanceBeach={setDistanceBeach} />
+            </Grid>
+          </Grid>
+        </GridContainer>
+      </Form>
+    </Container>
+  );
+};
 
-  export default SearchContainer;
+export default SearchContainer;
+

@@ -5,11 +5,6 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 
 
-const SelectDropDown = styled(Select)`
-    width: 200px;
-    height: 30px;
-`
-
 
 const SelectCity = ({ residentData, city, setCity }) => {
 
@@ -24,14 +19,14 @@ const SelectCity = ({ residentData, city, setCity }) => {
     return (
         <>
             <InputLabel id="selectcity">City</InputLabel>
-            <SelectDropDown
+            <Select
                 value={city}
                 displayEmpty
                 id="selectcity"
                 onChange={handleChange}
             >
                 {mapCities}
-            </SelectDropDown>
+            </Select>
         </>
     )
 };
