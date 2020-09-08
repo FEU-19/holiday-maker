@@ -53,10 +53,17 @@ const ButtonContainer = styled(Grid)`
 const SearchContainer = ({ setFilteredDataCB }) => {
   const [residentData, setResidentData] = useState([{}]);
   const [city, setCity] = useState('');
+  const [checkedKidsClub, setCheckedKidsclub] = useState(false);
+  const [checkedNightEntertainment, setCheckedNightEntertainment] = useState(false);
+  const [checkedPool, setCheckedPool] = useState(false);
+  const [checkedRestaurant, setCheckedRestaurant] = useState(false);
   const [amountOfChildren, setAmountOfChildren] = useState(0);
-  const [distanceCity, setDistanceCity] = useState('');
-  const [distanceBeach, setDistanceBeach] = useState('');
-  const [date, setDate] = useState({ start: '2020-06-02T10:30:00.000Z', end: '2020-06-08T10:00:00.000Z' })
+
+  const [distanceCity, setDistanceCity] = useState(0);
+  const [distanceBeach, setDistanceBeach] = useState(0);
+  const [amountOfAdults, setAmountOfAdults] = useState(1);
+  const [date, setDate] = useState({start: '2020-06-02T10:30:00.000Z', end: '2020-06-08T10:00:00.000Z'})
+
 
   useEffect(() => {
     axios.get('http://localhost:8080/api/residents/')
@@ -74,14 +81,19 @@ const SearchContainer = ({ setFilteredDataCB }) => {
     new Promise((resolve, reject) => {
       let c = [...residentData];
 
+
+
+
       c = filterCity(c, city);
       c = filterPool(c, 'default');
-      c = filterNightEntertainment(c, false);
+      c = filterNightEntertainment(c, 'default');
       c = filterKidsClub(c, 'default');
       c = filterRestaurant(c, 'default');
       c = filterDistanceBeach(c, distanceBeach);
-      c = filterDistanceCity(c, distanceCity)
+
       // c = filterDate(c, date);
+
+      c = filterDistanceCity(c, distanceCity);
 
       resolve(c);
     })
@@ -102,6 +114,7 @@ const SearchContainer = ({ setFilteredDataCB }) => {
           container spacing={1}
           justify="space-around"
         >
+
           <Grid item xs={2}>
             <SelectCity residentData={residentData} city={city} setCity={setCity} />
           </Grid>
@@ -137,6 +150,33 @@ const SearchContainer = ({ setFilteredDataCB }) => {
               placeholder="Submit"
             >
               Submit
+
+          <SelectAmountOfChildren
+            setAmountOfChildren={ setAmountOfChildren }
+            amountOfChildren={ amountOfChildren }
+          />
+          <ChildrenAgeSelects amountOfChildren={ amountOfChildren } />
+          <SelectCity residentData={residentData} city={city} setCity={setCity} />
+          <DatePicker
+            residentData={residentData}
+            date={date}
+            setDate={setDate}/>
+          <SelectAmountOfAdults amountOfAdults= {amountOfAdults} setAmountOfAdults= {setAmountOfAdults}/>
+          <SelectDistanceCity
+            distanceCity={ distanceCity }
+            setDistanceCity={ setDistanceCity }
+          />
+          <SelectDistanceBeach
+            distanceBeach={distanceBeach}
+            setDistanceBeach={setDistanceBeach} />
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            placeholder="Submit"
+          >
+            Submit
+
           </Button>
           </Grid>
         </ButtonContainer>
@@ -146,17 +186,18 @@ const SearchContainer = ({ setFilteredDataCB }) => {
           container spacing={1}
           justify="space-around"
         >
+
           <Grid item xs={2}>
-            <CheckboxRestaurant />
+            <CheckboxRestaurant checkedRestaurant= {checkedRestaurant} setCheckedRestaurant= {setCheckedRestaurant} />
           </Grid>
           <Grid item xs={2}>
-            <CheckboxKidsClub />
+            <CheckboxKidsClub checkedKidsClub= {checkedKidsClub} setCheckedKidsclub= {setCheckedKidsclub} />
           </Grid>
           <Grid item xs={2}>
-            <CheckboxNightEntertainment />
+            <CheckboxNightEntertainment checkedNightEntertainment= {checkedNightEntertainment} setCheckedNightEntertainment= {setCheckedNightEntertainment}/>
           </Grid>
           <Grid item xs={2}>
-            <CheckboxPool />
+            <CheckboxPool checkedPool= {checkedPool} setCheckedPool= {setCheckedPool}/>
           </Grid>
           <Grid
             className="search-bottom"
@@ -182,3 +223,4 @@ const SearchContainer = ({ setFilteredDataCB }) => {
 };
 
 export default SearchContainer;
+

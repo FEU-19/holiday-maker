@@ -5,17 +5,16 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 
 
-const CheckboxKidsClub = () => {
-  const [checked, setChecked] = useState(false);
+const CheckboxKidsClub = ({checkedKidsClub, setCheckedKidsclub}) => {
 
   const handleChange = (e) => {
-    setChecked(e.target.checked);
+    setCheckedKidsclub(e.target.checked);
   }
 
   return (
     <>
       <FormControlLabel control={<Checkbox
-        checked={checked}
+        checked={checkedKidsClub}
         onChange={handleChange}
         color="default"
         inputProps={{ 'aria-label': 'kids club' }} />}
