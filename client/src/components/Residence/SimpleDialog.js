@@ -6,7 +6,6 @@ import CardMedia from '@material-ui/core/CardMedia';
 import { Button } from '@material-ui/core';
 import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
-import uuidv4 from "uuid/v4";
 
 function SimpleDialog({ onClose, open, currentPicIndex, updatePicIndex, images }){
 
@@ -81,9 +80,9 @@ function SimpleDialog({ onClose, open, currentPicIndex, updatePicIndex, images }
       <>
       <Dialog className={classes.dialog} maxWidth='lg' onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
        <Box component='div' className={classes.div}>
-         {images.map(image => (
+         {images.map((image, index) => (
            <CardMedia
-           key={uuidv4()}
+           key={index}
            className={classes.img}
            component="img"
            src={image}
