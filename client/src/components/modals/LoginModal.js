@@ -14,7 +14,7 @@ import PropTypes from 'prop-types';
 import RegistrationComp from "../Registration/RegistrationComp";
 import LoginComp from "../Login/Login";
 
-const LoginModal = () =>{
+const LoginModal = () => {
   const [open, setOpen] = useState(false);
   const [cookie, setCookie] = useState(document.cookie);
   const [value, setValue] = useState(0);

@@ -5,8 +5,6 @@ import styled from "styled-components"
 import axios from "axios";
 import SimpleDialog from '@material-ui/core/Dialog';
 
-
-
 const Container = styled.div`
   display: flex;
   align-items: center;
@@ -26,7 +24,7 @@ const Login = (props) => {
   const [user, setUser] = useState({ email: "", password: "" });
   const [open, setOpen] = useState(false);
   const [errorMsg, setErrorMsg] = useState(0)
- 
+
   const options = {
     xsrfCookieName: 'XSRF-TOKEN',
     xsrfHeaderName: 'X-XSRF-TOKEN',
@@ -84,10 +82,8 @@ const Login = (props) => {
         <Button className="loginBtn" type="submit" variant="contained" color="primary">Login</Button> 
         {open ? <SimpleDialog  selectedvalue={errorMsg} open={open} onClose={handleClose} > 
           {errorMsg}
-
       </SimpleDialog> : null}
       </form>
-      
     </Container>
 
   );
