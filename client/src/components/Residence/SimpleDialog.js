@@ -6,16 +6,17 @@ import CardMedia from '@material-ui/core/CardMedia';
 import { Button } from '@material-ui/core';
 import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
+import uuidv4 from "uuid/v4";
 
 function SimpleDialog({ onClose, open, currentPicIndex, updatePicIndex, images }){
-    
+
     const useStyles = makeStyles(() => ({
       div: {
         height: 450,
         width: 800,
         display: 'flex',
         overflow: 'hidden'
-           
+
       },
       dialog: {
         position: 'relative',
@@ -65,7 +66,7 @@ function SimpleDialog({ onClose, open, currentPicIndex, updatePicIndex, images }
         updatePicIndex(currentPicIndex - 1)
       }
     }
-    
+
     const onClickRightButton = () => {
       if(currentPicIndex !== images.length-1){
         updatePicIndex(currentPicIndex + 1)
@@ -78,17 +79,18 @@ function SimpleDialog({ onClose, open, currentPicIndex, updatePicIndex, images }
 
     return (
       <>
-      <Dialog className={classes.dialog} maxWidth='lg' onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>       
+      <Dialog className={classes.dialog} maxWidth='lg' onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
        <Box component='div' className={classes.div}>
          {images.map(image => (
-           <CardMedia 
+           <CardMedia
+           key={uuidv4()}
            className={classes.img}
            component="img"
            src={image}
            />
          ))}
        </Box>
-       <Button className={classes.leftbutton} onClick={onClickLeftButton}> 
+       <Button className={classes.leftbutton} onClick={onClickLeftButton}>
         <KeyboardArrowLeftIcon fontSize='large'/>
         </Button>
        <Button className={classes.rightbutton} onClick={onClickRightButton}>

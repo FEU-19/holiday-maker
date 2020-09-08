@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
+import uuidv4 from "uuid/v4";
 
 // Style variables
 const boxContainer = {
@@ -145,7 +146,7 @@ console.log(info);
             {info.roomTypes.map(room => {
               let value = info.roomsOfTypes[room];
               return(
-                <p style={textReset}>{value} {room}s</p>
+                <p key={uuidv4()} style={textReset}>{value} {room}s</p>
               );
             })}
             </div>
@@ -159,7 +160,7 @@ console.log(info);
             {info.roomSizes.map(room => {
               let value = info.roomsOfSizes[room];
               return(
-                <p style={textReset}>{value} {room} rooms</p>
+                <p key={uuidv4()} style={textReset}>{value} {room} rooms</p>
               );
             })}
           </div>

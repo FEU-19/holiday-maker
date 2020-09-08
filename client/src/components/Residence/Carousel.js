@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { IconButton,makeStyles } from '@material-ui/core'
 import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
+import uuidv4 from "uuid/v4";
 
 const DIV = styled.div`
 display: flex;
@@ -55,14 +56,14 @@ const Carousel = ({images,currentPicIndex,updatePicIndex, props}) => {
             updatePicIndex(currentPicIndex+1)
         }
     }
-  
+
     const classes = stylesForButton();
 
     return(
         <MainDiv>
         <DIV>
             {images.map( image =>(
-                <DIVIMG >
+                <DIVIMG key={uuidv4()}>
                 <IMG src={image} currentPicIndex={currentPicIndex}/>
                 </DIVIMG>
             ))}

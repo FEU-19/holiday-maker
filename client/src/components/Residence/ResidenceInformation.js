@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import CheckIcon from '@material-ui/icons/Check';
 
 // Style variables

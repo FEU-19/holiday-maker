@@ -20,7 +20,7 @@ const useStyle = makeStyles(() => ({
  },
  header: {
     textAlign:"right",
- }, 
+ },
  text: {
   margin: 20,
   fontSize: 16,
@@ -33,7 +33,6 @@ const RoomPrice = ({ roomType, selected, price, extraBed }) => {
  const selectedToInt = parseInt(selected) || 0;
  const extraBedToInt = parseInt(extraBed.extraBedPrice) || 0;
  const totalPrice = price + selectedToInt + extraBedToInt;
- console.log(extraBed);
  //const finalPrice = roomType.price + price.extras;
 
  return (
