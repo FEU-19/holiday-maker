@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { styled } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import NativeSelect from "@material-ui/core/NativeSelect";
 import Box from "@material-ui/core/Box";
-import axios from "axios";
 
 const MyFormControl = styled(FormControl)({
   minWidth: 120,
