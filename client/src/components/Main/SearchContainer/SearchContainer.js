@@ -61,7 +61,7 @@ const SearchContainer = ({ setFilteredDataCB }) => {
       let c = [...residentData];
       
       // c = filterDate(c, date);
-      
+
       c = filterCity(c, city);
       c = filterPool(c, 'default');
       c = filterNightEntertainment(c, 'default');
