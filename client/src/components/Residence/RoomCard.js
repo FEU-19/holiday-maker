@@ -18,35 +18,36 @@ import RoomPrice from "./RoomPrice";
 
 const useStyle = makeStyles(() => ({
     card: {
-    position: "relative",
-    display: "flex",
-    flexWrap: "nowrap",
-    justifyContent: "space-between",
-    marginBottom: 20,
-    margintop: 20,
-    marginLeft: "3vw",
-    marginRight: "3vw",
+        position: "relative",
+        display: "flex",
+        flexWrap: "nowrap",
+        justifyContent: "space-between", 
+        marginBottom: 20,
+        margintop: 20,
+        marginLeft: "3vw",
+        marginRight: "3vw",
     },
     title: {
-    marginTop: 5,
-    marginBottom: 20,
-    fontSize: 16,
-    fontWeight: "bolder",
+        marginTop: 5,
+        marginBottom: 20,
+        fontSize: 16,
+        fontWeight: "bolder",
+        textAlign: "center",
     },
     content: {
-    minWidth: 500,
-    fontSize: 14,
-    padding: 25,
-    objectFit: "cover",
+        minWidth: 500,
+        fontSize: 14,
+        padding: 25,
+        objectFit: "cover",
     },
     grid: {
         display:"flex",
         flexDirection: "column",
     },
     icons: {
-    margin: 10,
-    display: "flex",
-    alignItems: "center",
+        margin: 10,
+        display: "flex",
+        alignItems: "center",
     },
     options: {
     margin: 10,
@@ -79,9 +80,9 @@ const RoomCard = ({ roomInfo }) => {
     <Card className={classes.card}>
         <RoomType roomType={roomInfo} />
             <CardContent className={classes.content}>
-                <Typography className={classes.title}>Options</Typography>
                 <Grid container spacing={2} justify="center">
                     <Grid className = {classes.grid}>
+                        <Typography className = {classes.title}>Included</Typography>
                         <Grid className={classes.icons}>
                             <Grid item xs={2}>
                                 <WifiIcon />
@@ -115,6 +116,7 @@ const RoomCard = ({ roomInfo }) => {
                     </Grid>
                     <Grid>
                         <FormControl component="fieldset">
+                            <Typography className={classes.title}>Options</Typography>
                             <FormControlLabel
                                 value={roomInfo.extraBed}
                                 control={<Checkbox color="default" />}
