@@ -1,5 +1,4 @@
 import React, { useState, useEffect} from "react";
-import uuidv4 from "uuid/v4";
 
 // Style variables
 const boxContainer = {
@@ -26,7 +25,7 @@ const contentContainer = {
   flexWrap: "nowrap",
   justifyContent: "space-between",
   width: "1200px",
-  
+
   //alignSelf: "flex-start",
   //justifyContent: "center",
   //width: "600px",
@@ -143,10 +142,10 @@ console.log(info);
         <div className="residence__generalInformationContainer__contentContainer" style={contentContainer}>
           <div className="residence__generalInformationContainer__contentContainer__content" style={content}>
             <p style={subTitle}>Type of rooms</p>
-            {info.roomTypes.map(room => {
+            {info.roomTypes.map((room, index) => {
               let value = info.roomsOfTypes[room];
               return(
-                <p key={uuidv4()} style={textReset}>{value} {room}s</p>
+                <p key={index + room} style={textReset}>{value} {room}s</p>
               );
             })}
             </div>
@@ -157,10 +156,10 @@ console.log(info);
           </div>
           <div className="residence__generalInformationContainer__contentContainer__content" style={content}>
             <p style={subTitle}>Room sizes</p>
-            {info.roomSizes.map(room => {
+            {info.roomSizes.map((room, index) => {
               let value = info.roomsOfSizes[room];
               return(
-                <p key={uuidv4()} style={textReset}>{value} {room} rooms</p>
+                <p key={index + room} style={textReset}>{value} {room} rooms</p>
               );
             })}
           </div>
