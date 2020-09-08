@@ -26,6 +26,7 @@ import filterPool from '../../../utils/filterPool';
 import filterRestaurant from '../../../utils/filterRestaurant';
 import filterDate from '../../../utils/filterDate.js';
 import filterDistanceBeach from '../../../utils/filterDistanceBeach';
+import filterDistanceCity from '../../../utils/filterDistanceCity';
 
 
 const Container = styled.div`
@@ -110,8 +111,8 @@ const SearchContainer = ({ setFilteredDataCB }) => {
             setDistanceCity={ setDistanceCity }
           />
           <SelectDistanceBeach
-            distanceBeach={ distanceBeach }
-            setDistanceBeach={ setDistanceBeach } />
+            distanceBeach={distanceBeach}
+            setDistanceBeach={setDistanceBeach} />
           <Button
             type="submit"
             variant="contained"
