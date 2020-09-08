@@ -1,4 +1,5 @@
 import React, { useState, useEffect} from "react";
+import uuidv4 from "uuid/v4";
 
 // Style variables
 const boxContainer = {
@@ -118,11 +119,10 @@ const GeneralInformation = ({generalInfo}) => {
 
  // Makes sure nothing is rendered until all data has been processed
   if (Object.keys(info).length === 0){
-    return(<p>Loading...</p>);
+    return(<div />);
   }
 
 
-console.log(info);
 
   return(
     <div>
@@ -139,7 +139,7 @@ console.log(info);
             {info.roomTypes.map(room => {
               let value = info.roomsOfTypes[room];
               return(
-                <p style={textReset}>{value} {room}s</p>
+                <p key={uuidv4()} style={textReset}>{value} {room}s</p>
               );
             })}
             <p style={subTitleBeds}>Beds</p>
@@ -151,7 +151,7 @@ console.log(info);
             {info.roomSizes.map(room => {
               let value = info.roomsOfSizes[room];
               return(
-                <p style={textReset}>{value} {room} rooms</p>
+                <p key={uuidv4()} style={textReset}>{value} {room} rooms</p>
               );
             })}
           </div>

@@ -14,9 +14,9 @@ const useStyles = makeStyles({
 const HotelCarousel = ({dataImage}) =>{
     const [images, updateImages] = useState([])
     const [currentPicIndex, updatePicIndex] = useState(0)
-    
+
     useEffect(()=>{
-    axios.get("http://localhost:8080/api/residents/5f5230fbfd504a310c818546")
+    axios.get("http://localhost:8080/api/residents/5f574c1fee5d854ae893f216")
       .then(response => {
         let picArray = response.data.data.rooms.map(item => item.images)
         updateImages(picArray)
