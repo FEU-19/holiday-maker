@@ -4,17 +4,16 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 
 
-const CheckboxPool = () => {
-  const [checked, setChecked] = useState(false);
+const CheckboxPool = ({checkedPool, setCheckedPool}) => {
 
   const handleChange = (e) => {
-    setChecked(e.target.checked);
+    setCheckedPool(e.target.checked);
   }
 
   return (
     <>
       <FormControlLabel control={<Checkbox
-        checked={checked}
+        checked={checkedPool}
         onChange={handleChange}
         color="default"
         inputProps={{ 'aria-label': 'pool' }} />}
