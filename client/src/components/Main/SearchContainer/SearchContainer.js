@@ -43,9 +43,9 @@ const SearchContainer = ({ setFilteredDataCB }) => {
   const [checkedPool, setCheckedPool] = useState(false);
   const [checkedRestaurant, setCheckedRestaurant] = useState(false);
   const [amountOfChildren, setAmountOfChildren] = useState(0);
+  const [distanceCity, setDistanceCity] = useState(0);
+  const [distanceBeach, setDistanceBeach] = useState(0);
   const [amountOfAdults, setAmountOfAdults] = useState(1);
-  const [distanceCity, setDistanceCity] = useState('');
-  const [beachDistance, setBeachDistance] = useState('');
   const [date, setDate] = useState({start: '2020-06-02T10:30:00.000Z', end: '2020-06-08T10:00:00.000Z'})
 
 
@@ -65,13 +65,15 @@ const SearchContainer = ({ setFilteredDataCB }) => {
     new Promise((resolve, reject) => {
       let c = [...residentData];
 
+      // c = filterDate(c, date);
+
       c = filterCity(c, city);
       c = filterPool(c, 'default');
-      c = filterNightEntertainment(c, false);
+      c = filterNightEntertainment(c, 'default');
       c = filterKidsClub(c, 'default');
       c = filterRestaurant(c, 'default');
-      c = filterDistanceBeach(c, beachDistance );
-      // c = filterDate(c, date);
+      c = filterDistanceBeach(c, distanceBeach);
+      c = filterDistanceCity(c, distanceCity);
 
       resolve(c);
     })

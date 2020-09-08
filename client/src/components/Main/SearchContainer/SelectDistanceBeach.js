@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const distanceInterval = [
-  '',
+  0,
   500,
   1000,
   1500,
@@ -45,10 +45,10 @@ export default function SelectDistanceBeach({distanceBeach, setDistanceBeach}) {
         >
           <MenuItem disabled >Distance</MenuItem>
           {distanceInterval.map((distance, index) =>
-            distance === '' ?
-            <MenuItem value={distance} key={index}>None</MenuItem>
-            :
+            distance ?
             <MenuItem value={distance} key={index}>{ '< ' + distance + 'm'}</MenuItem>
+            :
+            <MenuItem value={distance} key={index}>None</MenuItem>
           )}
         </Select>
       </div>

@@ -5,7 +5,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 
 const distanceInterval = [
-  '',
+  0,
   500,
   1000,
   1500,
@@ -19,7 +19,6 @@ const distanceInterval = [
 const SelectDistanceCity = ({distanceCity, setDistanceCity}) => {
   const handleChange = (e) => {
     setDistanceCity(e.target.value);
-    console.log(e.target.value);
   };
 
   return (
@@ -35,9 +34,9 @@ const SelectDistanceCity = ({distanceCity, setDistanceCity}) => {
         <MenuItem disabled>Distance</MenuItem>
         {
           distanceInterval.map((distance, index) =>
-            distance === ''
-            ? <MenuItem value={ distance } key={index}>None</MenuItem>
-            : <MenuItem value={ distance } key={index}>{ "< " + distance } m</MenuItem>
+            distance
+            ? <MenuItem value={ distance } key={index}>{ "< " + distance } m</MenuItem>
+            : <MenuItem value={ distance } key={index}>None</MenuItem>
           )
         }
 
