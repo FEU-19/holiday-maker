@@ -3,13 +3,15 @@ import { Switch, Route } from "react-router-dom";
 import Main from "./views/Main";
 
 // To add more routes use format as below and add to the routes array
-const routes = [{ path: "/", component: Main }];
+const routes = [
+  { path: "/", component: Main },
+];
 
 function AppRouter() {
   return (
     <Switch>
       {routes.map(({ path, component }) => (
-        <Route exact path={path} component={component} />
+        <Route exact path={path} component={component} key={path} />
       ))}
     </Switch>
   );
