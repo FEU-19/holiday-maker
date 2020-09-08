@@ -8,7 +8,7 @@ ReactDOM.render(
   <BrowserRouter>
     <HelmetProvider>
       <AppRouter />
-    </HelmetProvider>
+    </HelmetProvider>{" "}
   </BrowserRouter>,
   document.getElementById("root")
 );

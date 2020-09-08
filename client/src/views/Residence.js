@@ -77,24 +77,23 @@ const Residence = () => {
         </div>);
   }
 
-  return (
-    <div className = {classes.article}>
-      <div className = {classes.titlecontainer}>
-        <h1 className = {classes.title}>{data.name}</h1>
-        <HotelCarousel dataImage = {data}/>
-        <div className = {classes.info}>
-          <ResidenceInformation info={data} />
-        </div>
-      </div>
-      <div>
-        <RoomCardMapper allRooms={data.rooms} />
-      </div>
-      <div>
-        <GeneralInformation generalInfo={data} />
-      </div>
+ return (
+  <div className={classes.article}>
+   <div className={classes.titlecontainer}>
+    <h1 className={classes.title}>{data.name}</h1>
+    <HotelCarousel dataImage={data} />
+    <div className={classes.info}>
+     <ResidenceInformation info={data} />
     </div>
-  );
-
+   </div>
+   <div>
+    <RoomCardMapper allRooms={data.rooms} />
+   </div>
+   <div>
+    <GeneralInformation generalInfo={data} />
+   </div>
+  </div>
+ );
 };
 
 export default Residence;
