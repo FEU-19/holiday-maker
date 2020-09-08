@@ -28,7 +28,6 @@ import filterDate from '../../../utils/filterDate.js';
 import filterDistanceBeach from '../../../utils/filterDistanceBeach';
 import filterDistanceCity from '../../../utils/filterDistanceCity';
 
-
 const Container = styled.div`
 width: 90vw;
 display: flex;
@@ -93,13 +92,12 @@ const SearchContainer = ({ setFilteredDataCB }) => {
 
       resolve(c);
     })
-      .then((res) => {
-        setFilteredDataCB(res);
-
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    .then((res) => {
+      setFilteredDataCB(res);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
   }
 
   return (
