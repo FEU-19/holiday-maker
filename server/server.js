@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+
 const connectDB = require("./config/db");
 const { routers } = require("./routes/index");
 
@@ -12,6 +13,9 @@ dotenv.config({ path: "./config/config.env" });
 connectDB();
 
 const app = express();
+
+// Middleware
+app.use(cors());
 
 // Body parser
 app.use(express.json());

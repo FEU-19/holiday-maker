@@ -1,11 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
+import styled from 'styled-components';
+
+import SearchContainer from '../components/Main/SearchContainer/SearchContainer'
+import ContentContainer from '../components/Main/ContentContainer/ContentContainer'
+
+// stor bokstav på variabler i styled components
+const Container = styled.main`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid black; 
+`
 
 import HeaderComp from "../components/common/Header/Header";
 
 const Main = () => {
-  return <div>
-    <HeaderComp />
-  </div>;
+  
+  const [filteredData, setFilteredData] = useState([]);
+
+  function setFilteredDataCB(data) {
+    setFilteredData(data);
+  }
+
+  return (
+    <>
+      <HeaderComp />
+      <Container>
+        <SearchContainer setFilteredDataCB={setFilteredDataCB} />
+        <ContentContainer filteredData={filteredData} />
+      </Container>
+    </>
+  )
 };
 
 export default Main;
