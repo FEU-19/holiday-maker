@@ -1,13 +1,10 @@
-import React,{useEffect,useState} from 'react';
-import Button from '@material-ui/core/Button';
-import SimpleDialog from './SimpleDialog';
-import data from './residents.json';
-import axios from 'axios'
+import React, { useState } from "react";
+import Button from "@material-ui/core/Button";
+import SimpleDialog from "./SimpleDialog";
 
-
-function ModalDialogButton({images}) {
+function ModalDialogButton({ images }) {
   const [open, setOpen] = React.useState(false);
-  const [currentPicIndex, updatePicIndex] = useState(0)
+  const [currentPicIndex, updatePicIndex] = useState(0);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -23,9 +20,15 @@ function ModalDialogButton({images}) {
       <Button variant="outlined" color="primary" onClick={handleClickOpen}>
         Show room images
       </Button>
-      <SimpleDialog open={open} onClose={handleClose} images={images} currentPicIndex={currentPicIndex} updatePicIndex={updatePicIndex} />
+      <SimpleDialog
+        open={open}
+        onClose={handleClose}
+        images={images}
+        currentPicIndex={currentPicIndex}
+        updatePicIndex={updatePicIndex}
+      />
     </div>
   );
 }
 
-export default React.memo(ModalDialogButton)
+export default React.memo(ModalDialogButton);
