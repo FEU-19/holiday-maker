@@ -12,7 +12,10 @@ const Container = styled.main`
   border: 2px solid black; 
 `
 
+import HeaderComp from "../components/common/Header/Header";
+
 const Main = () => {
+  
   const [filteredData, setFilteredData] = useState([]);
 
   function setFilteredDataCB(data) {
@@ -20,10 +23,13 @@ const Main = () => {
   }
 
   return (
-    <Container>
-      <SearchContainer setFilteredDataCB={setFilteredDataCB} />
-      <ContentContainer filteredData={filteredData} />
-    </Container>
+    <>
+      <HeaderComp />
+      <Container>
+        <SearchContainer setFilteredDataCB={setFilteredDataCB} />
+        <ContentContainer filteredData={filteredData} />
+      </Container>
+    </>
   )
 };
 
