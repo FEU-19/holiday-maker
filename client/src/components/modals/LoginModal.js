@@ -24,7 +24,6 @@ const LoginModal = () =>{
   useEffect(() => {
     setCookie(cookieFinder());
   }, [open])
-  console.log(cookie + " THIS IS MY COOKIE")
 
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -39,7 +38,7 @@ const LoginModal = () =>{
       >
         {value === index && (
           <Box p={3}>
-            <Typography component={'span'}>{children}</Typography>
+            <Typography component={"span"}>{children}</Typography>
           </Box>
         )}
       </div>
@@ -55,7 +54,7 @@ const LoginModal = () =>{
   function a11yProps(index) {
     return {
       id: `simple-tab-${index}`,
-      'aria-controls': `simple-tabpanel-${index}`,
+      "aria-controls": `simple-tabpanel-${index}`,
     };
   }
 
@@ -63,65 +62,82 @@ const LoginModal = () =>{
     setValue(newValue);
   };
 
-
-  const handleModalOpen = () =>{
+  const handleModalOpen = () => {
     setOpen(true);
     setValue(0);
-  }
+  };
 
-  const handleModalRegistration = () =>{
+  const handleModalRegistration = () => {
     setOpen(true);
     setValue(1);
-  }
+  };
 
-  const handleModalClose = () =>{
+  const handleModalClose = () => {
     setOpen(false);
-  }
+  };
 
   const options = {
-    xsrfCookieName: 'XSRF-TOKEN',
-    xsrfHeaderName: 'X-XSRF-TOKEN',
+    xsrfCookieName: "XSRF-TOKEN",
+    xsrfHeaderName: "X-XSRF-TOKEN",
   };
 
   const instance = axios.create({
     withCredentials: true,
-  })
+  });
 
-  const onLogout = (e) =>{
+  const onLogout = (e) => {
     e.preventDefault();
     let cookie = document.cookie;
-    let userId = cookie.split('=Bearer')[1];
-    instance.post("http://localhost:3002/api/logout/", {userId}, options)
-      .then((res) =>{
-        console.log('working');
+    instance
+      .post("http://localhost:3002/api/logout/", { cookie }, options)
+      .then((res) => {
         setCookie(null);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
-      })
-  }
+      });
+  };
 
-  return(
+  return (
     <div>
-      {!cookie ? 
-      <div>
-        <Button variant="outlined" color="primary" onClick={handleModalOpen}>Login</Button>
-        <Button variant="outlined" color="primary" onClick={handleModalRegistration}>Registration</Button>
-      </div> : <Button variant="outlined" color="primary" onClick={(e) => onLogout(e)}>
-        Logout
-      </Button>}
-      <Dialog open={open} onClose={handleModalClose} aria-labelledby="form-dialog-title">
-          <AppBar position="static">
-            <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-              <Tab label="Login"  {...a11yProps(0)}/>
-              <Tab label="Registration"  {...a11yProps(1)}/>
-            </Tabs>
-          </AppBar>
+      {!cookie ? (
+        <div>
+          <Button variant="outlined" color="primary" onClick={handleModalOpen}>
+            Login
+          </Button>
+          <Button
+            variant="outlined"
+            color="primary"
+            onClick={handleModalRegistration}
+          >
+            Registration
+          </Button>
+        </div>
+      ) : (
+        <Button variant="outlined" color="primary" onClick={(e) => onLogout(e)}>
+          Logout
+        </Button>
+      )}
+      <Dialog
+        open={open}
+        onClose={handleModalClose}
+        aria-labelledby="form-dialog-title"
+      >
+        <AppBar position="static">
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            aria-label="simple tabs example"
+          >
+            <Tab label="Login" {...a11yProps(0)} />
+            <Tab label="Registration" {...a11yProps(1)} />
+          </Tabs>
+        </AppBar>
         <TabPanel value={value} index={0}>
-          <LoginComp handleModalClose={handleModalClose}/>
+          <LoginComp handleModalClose={handleModalClose} options={options} />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <RegistrationComp setValue={setValue}/>
+          <RegistrationComp setValue={setValue} />
         </TabPanel>
         <DialogActions>
           <Button onClick={handleModalClose} color="primary">
@@ -130,7 +146,7 @@ const LoginModal = () =>{
         </DialogActions>
       </Dialog>
     </div>
-  )
-}
+  );
+};
 
 export default LoginModal;

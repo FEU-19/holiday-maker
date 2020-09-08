@@ -1,8 +1,9 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
+const getCookie = require("../middleware/CookieFinder");
 
 exports.createLogout = async (req, res) =>{
-  const { userId } = req.body.userId;
+  const { userId } = req.body;
 
   res.clearCookie("holidayMakerCookie", `Bearer${userId}`).end();
 }
@@ -38,12 +39,12 @@ exports.createLogin = async (req, res) => {
     res.cookie("holidayMakerCookie", `Bearer${user.id}`, {
       expires: new Date(Date.now() + 8 * 3600000),
     });
-    res.end();
+    return res.send();
   } catch (err) {
     console.error(err.message);
-    res.status(500).send("Server error");
+    return res.status(500).send("Server error");
   }
-}
+};
 
 exports.create = async (req, res) => {
   const {
@@ -59,7 +60,18 @@ exports.create = async (req, res) => {
     password,
   } = req.body;
 
-  if (!email || !password) {
+  if (
+    !email ||
+    !password ||
+    !surname ||
+    !street ||
+    !zipCode ||
+    !city ||
+    !country ||
+    !phoneNumber ||
+    !socialSecurityNumber ||
+    !firstName
+  ) {
     return res.status(400).json({
       error: [{ msg: "Please fill all of the existing fields" }],
     });
@@ -90,12 +102,12 @@ exports.create = async (req, res) => {
     user.password = await bcrypt.hash(password, salt);
 
     await user.save();
-    res.status(201).json({
+    return res.status(201).json({
       msg: "Account was created",
     });
   } catch (err) {
     console.error(err.message);
-    res.status(500).json({
+    return res.status(500).json({
       msg: "Server error",
     });
   }

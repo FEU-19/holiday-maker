@@ -1,4 +1,4 @@
-const residentsRouter = require("./residents");
+const residentsRouter = require("./residences");
 const ordersRouter = require("./orders");
 const usersRouter = require("./users");
 
