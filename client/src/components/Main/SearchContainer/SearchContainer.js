@@ -26,7 +26,6 @@ import filterPool from '../../../utils/filterPool';
 import filterRestaurant from '../../../utils/filterRestaurant';
 import filterDate from '../../../utils/filterDate.js';
 import filterDistanceBeach from '../../../utils/filterDistanceBeach';
-import filterDistanceCity from '../../../utils/filterDistanceCity';
 
 
 const Container = styled.div`
@@ -39,11 +38,17 @@ justify-content: center;
 const SearchContainer = ({ setFilteredDataCB }) => {
   const [residentData, setResidentData] = useState([{}]);
   const [city, setCity] = useState('');
+  const [checkedKidsClub, setCheckedKidsclub] = useState(false);
+  const [checkedNightEntertainment, setCheckedNightEntertainment] = useState(false);
+  const [checkedPool, setCheckedPool] = useState(false);
+  const [checkedRestaurant, setCheckedRestaurant] = useState(false);
   const [amountOfChildren, setAmountOfChildren] = useState(0);
+  const [amountOfAdults, setAmountOfAdults] = useState(1);
   const [distanceCity, setDistanceCity] = useState('');
-  const [distanceBeach, setDistanceBeach] = useState('');
+  const [beachDistance, setBeachDistance] = useState('');
   const [date, setDate] = useState({start: '2020-06-02T10:30:00.000Z', end: '2020-06-08T10:00:00.000Z'})
-  
+
+
   useEffect(() => {
     axios.get('http://localhost:8080/api/residents/')
     .then((res) => {
@@ -59,16 +64,15 @@ const SearchContainer = ({ setFilteredDataCB }) => {
 
     new Promise((resolve, reject) => {
       let c = [...residentData];
-      
+
       c = filterCity(c, city);
       c = filterPool(c, 'default');
       c = filterNightEntertainment(c, false);
       c = filterKidsClub(c, 'default');
       c = filterRestaurant(c, 'default');
-      c = filterDistanceBeach(c, distanceBeach );
-      c = filterDistanceCity(c, distanceCity)
+      c = filterDistanceBeach(c, beachDistance );
       // c = filterDate(c, date);
-      
+
       resolve(c);
     })
     .then((res) => {
@@ -98,14 +102,14 @@ const SearchContainer = ({ setFilteredDataCB }) => {
             residentData={residentData}
             date={date}
             setDate={setDate}/>
-          <SelectAmountOfAdults />
+          <SelectAmountOfAdults amountOfAdults= {amountOfAdults} setAmountOfAdults= {setAmountOfAdults}/>
           <SelectDistanceCity
             distanceCity={ distanceCity }
             setDistanceCity={ setDistanceCity }
           />
           <SelectDistanceBeach
-            distanceBeach={distanceBeach}
-            setDistanceBeach={setDistanceBeach} />
+            beachDistance={beachDistance}
+            setBeachDistance={setBeachDistance} />
           <Button
             type="submit"
             variant="contained"
@@ -120,10 +124,10 @@ const SearchContainer = ({ setFilteredDataCB }) => {
           container
           justify="space-around"
         >
-          <CheckboxRestaurant />
-          <CheckboxKidsClub />
-          <CheckboxNightEntertainment />
-          <CheckboxPool />
+          <CheckboxRestaurant checkedRestaurant= {checkedRestaurant} setCheckedRestaurant= {setCheckedRestaurant}/>
+          <CheckboxKidsClub checkedKidsClub= {checkedKidsClub} setCheckedKidsclub= {setCheckedKidsclub} />
+          <CheckboxNightEntertainment checkedNightEntertainment= {checkedNightEntertainment} setCheckedNightEntertainment= {setCheckedNightEntertainment}/>
+          <CheckboxPool checkedPool= {checkedPool} setCheckedPool= {setCheckedPool}/>
 
          </Grid>
         </form>
