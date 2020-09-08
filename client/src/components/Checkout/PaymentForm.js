@@ -7,9 +7,9 @@ import {
   IMG,
   CarNumContainer,
   CardNum,
-  EXP_CVC_Container,
-  EXP_CVC_Div,
-  EXP_CVC_Input,
+  EXPCVCContainer,
+  EXPCVCDiv,
+  EXPCVCInput,
 } from "./PaymentStyles";
 
 function PaymentForm({ setCardNum, setExpire, setCvc, setType }) {
@@ -77,20 +77,20 @@ function PaymentForm({ setCardNum, setExpire, setCvc, setType }) {
           </tr>
 
           <tr>
-            <EXP_CVC_Container className="exp-cvc__container">
-              <EXP_CVC_Div>
+            <EXPCVCContainer className="exp-cvc__container">
+              <EXPCVCDiv>
                 <p>Expire</p>
-                <EXP_CVC_Input
+                <EXPCVCInput
                   placeholder="MM/YY"
                   options={{ date: true, datePattern: ["m", "d"] }}
                   onChange={(e) => setExpire(e.target.value)}
                   className="exp-cvc__input"
                 />
-              </EXP_CVC_Div>
+              </EXPCVCDiv>
 
-              <EXP_CVC_Div>
+              <EXPCVCDiv>
                 <p>CVC</p>
-                <EXP_CVC_Input
+                <EXPCVCInput
                   placeholder="CVV"
                   options={{
                     blocks: [3],
@@ -99,8 +99,8 @@ function PaymentForm({ setCardNum, setExpire, setCvc, setType }) {
                   onChange={(e) => setCvc(e.target.value)}
                   className="exp-cvc__input"
                 />
-              </EXP_CVC_Div>
-            </EXP_CVC_Container>
+              </EXPCVCDiv>
+            </EXPCVCContainer>
           </tr>
         </tbody>
       </Table>
