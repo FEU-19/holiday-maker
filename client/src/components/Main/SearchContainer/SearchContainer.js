@@ -110,8 +110,8 @@ const SearchContainer = ({ setFilteredDataCB }) => {
             setDistanceCity={ setDistanceCity }
           />
           <SelectDistanceBeach
-            beachDistance={beachDistance}
-            setBeachDistance={setBeachDistance} />
+            distanceBeach={ distanceBeach }
+            setDistanceBeach={ setDistanceBeach } />
           <Button
             type="submit"
             variant="contained"
