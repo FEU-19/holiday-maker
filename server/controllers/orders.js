@@ -7,7 +7,7 @@ const bookingNrGenerator = require("../utils/bookingNrGenerator");
 exports.create = async (req, res) => {
   // Id will be a cookie.
 
-  const Id = req.cookies.user;
+  const Id = req.body.user;
   const data = req.body;
   const orderData = {};
 
