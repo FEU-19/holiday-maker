@@ -1,9 +1,11 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
+const getCookie = require("../middleware/CookieFinder");
 
 exports.createLogout = async (req, res) => {
-  const { userId } = req.body.userId;
-
+  const { cookie } = req.body;
+  const userId = cookie.split("=Bearer")[1];
+  getCookie(req, res);
   res.clearCookie("access_token", `Bearer${userId}`).end();
 };
 

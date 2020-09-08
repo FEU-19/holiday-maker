@@ -85,11 +85,9 @@ const LoginModal = () => {
   const onLogout = (e) => {
     e.preventDefault();
     let cookie = document.cookie;
-    let userId = cookie.split("=Bearer")[1];
     instance
-      .post("http://localhost:3002/api/logout/", { userId }, options)
+      .post("http://localhost:3002/api/logout/", { cookie }, options)
       .then((res) => {
-        console.log("working");
         setCookie(null);
       })
       .catch((err) => {
