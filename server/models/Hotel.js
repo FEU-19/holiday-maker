@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const RoomSchema = require("./Room");
+const roomSchema = require("./Room");
 
 const hotelSchema = new mongoose.Schema({
   city: String,
@@ -11,7 +11,7 @@ const hotelSchema = new mongoose.Schema({
   kidsClub: Boolean,
   restaurant: Boolean,
   rating: Number,
-  rooms: [RoomSchema],
+  rooms: [roomSchema],
 });
 
 const Hotel = mongoose.model("residence", hotelSchema);
