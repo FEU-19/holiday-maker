@@ -8,26 +8,25 @@ import RoomCardMapper from "../components/Residence/RoomCardMapper";
 import axios from "axios";
 
 const useStyle = makeStyles(() => ({
-  article: {
-    width: "100%",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  title: {
-    textAlign: "center",
-  },
-  info: {
-    padding: "2vw"
-  }
-
-}))
+ article: {
+  width: "100%",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+ },
+ title: {
+  textAlign: "center",
+ },
+ info: {
+  padding: "2vw",
+ },
+}));
 
 // Hotel ID will come as props from search team, but not yet implemented
 const Residence = () => {
-  const classes = useStyle();
-  const [data, updateData] = useState({});
+ const classes = useStyle();
+ const [data, updateData] = useState({});
 
  useEffect(() => {
   axios
@@ -47,24 +46,23 @@ const Residence = () => {
   return <p>Loading...</p>;
  }
 
-  return (
-    <div className = {classes.article}>
-      <div className = {classes.titlecontainer}>
-        <h1 className = {classes.title}>{data.name}</h1>
-        <HotelCarousel dataImage = {data}/>
-        <div className = {classes.info}>
-          <ResidenceInformation info={data} />
-        </div>
-      </div>
-      <div>
-        <RoomCardMapper allRooms={data.rooms} />
-      </div>
-      <div>
-        <GeneralInformation generalInfo={data} />
-      </div>
+ return (
+  <div className={classes.article}>
+   <div className={classes.titlecontainer}>
+    <h1 className={classes.title}>{data.name}</h1>
+    <HotelCarousel dataImage={data} />
+    <div className={classes.info}>
+     <ResidenceInformation info={data} />
     </div>
-  );
-
+   </div>
+   <div>
+    <RoomCardMapper allRooms={data.rooms} />
+   </div>
+   <div>
+    <GeneralInformation generalInfo={data} />
+   </div>
+  </div>
+ );
 };
 
 export default Residence;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 
 // Style variables
 const boxContainer = {
@@ -35,10 +35,10 @@ const contentContainer = {
 };
 
 const content = {
-  width: "300px",
-  padding: "0 20px 20px 40px",
-  color: "#464646",
-  boxSizing: "border-box",
+ width: "300px",
+ padding: "0 20px 20px 40px",
+ color: "#464646",
+ boxSizing: "border-box",
 };
 
 const headInfo = {
@@ -52,14 +52,14 @@ const headInfo = {
 };
 
 const textReset = {
-  margin: "0",
-  padding: "0",
+ margin: "0",
+ padding: "0",
 };
 
 const subTitle = {
-  margin: "0",
-  padding: "0 0 10px 0",
-  fontWeight: "bold",
+ margin: "0",
+ padding: "0 0 10px 0",
+ fontWeight: "bold",
 };
 
 /*const subTitleBeds = {
@@ -166,7 +166,7 @@ console.log(info);
         </div>
       </div>
     </div>
-  );
+  )
 };
 
 export default GeneralInformation;
