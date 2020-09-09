@@ -5,7 +5,7 @@ import { Redirect, useLocation } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 
 // import Modal from "../common/Modal/Modal";
-import { Modal, Button, Box } from "@material-ui/core";
+import { Modal, Box } from "@material-ui/core";
 import DoneIcon from "@material-ui/icons/Done";
 import CancelIcon from "@material-ui/icons/Cancel";
 
@@ -22,10 +22,11 @@ import TextInput from "./TextInput";
 import PaymentForm from "./PaymentForm";
 import CountryDropdownList from "./CountryDropdownList";
 
-function Payment(props) {
+function Payment() {
   const { state } = useLocation();
 
   console.log(state);
+
   const useStyles = makeStyles((theme) => ({
     root: {
       "& > *": {
@@ -47,23 +48,23 @@ function Payment(props) {
   const [adress, setAdress] = useState("");
 
   // PaymentForm States
-  const [cardNum, setCardNum] = useState("");
-  const [expire, setExpire] = useState("");
-  const [cvc, setCvc] = useState("");
-  const [type, setType] = useState("");
+  // const [cardNum, setCardNum] = useState("");
+  // const [expire, setExpire] = useState("");
+  // const [cvc, setCvc] = useState("");
+  // const [type, setType] = useState("");
 
   // Check if payment confirmed
-  const [paymentSuccess, setPaymentSuccess] = useState(false);
+  // const [paymentSuccess, setPaymentSuccess] = useState(false);
 
   const [redirect, setRedirect] = useState(false);
 
   // Close modal
   const [showModal, setShowModal] = useState(false);
 
-  const controlCloseModal = (status) => {
-    setShowModal(false);
+  const controlCloseModal = () => {
+    setShowModal(!showModal);
     // if payment is sucessful redirect to booking details page
-    status ? setRedirect(true) : setRedirect(false);
+    true ? setRedirect(true) : setRedirect(false);
   };
 
   if (redirect) {
@@ -126,10 +127,10 @@ function Payment(props) {
         <HR />
 
         <PaymentForm
-          setCardNum={setCardNum}
-          setExpire={setExpire}
-          setCvc={setCvc}
-          setType={setType}
+        // setCardNum={setCardNum}
+        // setExpire={setExpire}
+        // setCvc={setCvc}
+        // setType={setType}
         />
 
         <PayBtn
@@ -141,17 +142,16 @@ function Payment(props) {
         </PayBtn>
       </PaymentContainer>
 
-      <Modal onClose={() => controlCloseModal(paymentSuccess)} open={showModal}>
+      <Modal onClose={() => controlCloseModal()} open={showModal}>
         <Box>
-          {paymentSuccess && (
+          {true ? (
             <div className="modal__container">
               <DoneIcon className="doneIcon" />
               <h1>Thank you!</h1>
               <h2>for booking with Holiday Maker.</h2>
               <p>Booking confirmation has been sent to your email.</p>
             </div>
-          )}
-          {!paymentSuccess && (
+          ) : (
             <div className="modal__container">
               <CancelIcon className="cancelIcon" />
               <h1>Error!</h1>

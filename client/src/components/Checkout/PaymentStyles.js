@@ -1,7 +1,6 @@
 import Cleave from "cleave.js/react";
 
 import styled from "styled-components";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
 
 const PaymentPage = styled.div`
   max-width: 1000px;
@@ -76,20 +75,20 @@ const Table = styled.table`
   border-collapse: collapse;
 `;
 
-const EXP_CVC_Container = styled.td`
+const EXPCVCContainer = styled.td`
   display: flex;
   text-align: center;
   padding: 10px 80px;
   border: 1px solid;
 `;
 
-const EXP_CVC_Div = styled.div`
+const EXPCVCDiv = styled.div`
   display: flex;
   flex: 1;
   justify-content: space-between;
 `;
 
-const EXP_CVC_Input = styled(Cleave)`
+const EXPCVCInput = styled(Cleave)`
   border: none;
   outline: none;
 `;
@@ -118,8 +117,8 @@ export {
   ImgContainer,
   IMG,
   Table,
-  EXP_CVC_Container,
-  EXP_CVC_Div,
-  EXP_CVC_Input,
+  EXPCVCContainer,
+  EXPCVCDiv,
+  EXPCVCInput,
   PayBtn,
 };

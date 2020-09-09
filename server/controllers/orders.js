@@ -39,7 +39,7 @@ exports.create = async (req, res) => {
       room.occupiedDates.push(data.bookingDates);
     }
   });
-  hotel.save((err, arr) => {
+  hotel.save((err) => {
     if (err) res.status(500).send({ error: err.message });
     res.status(201).json(orderData);
   });
