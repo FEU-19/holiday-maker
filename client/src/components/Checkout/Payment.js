@@ -41,6 +41,7 @@ function Payment() {
   }));
 
   const classes = useStyles();
+  const modalStyle = ModalStyle();
 
   //Payment States
   const [firstName, setFirstName] = useState("");
