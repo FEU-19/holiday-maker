@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 
 import { Redirect, useLocation } from "react-router-dom";
+import CheckIcon from "@material-ui/icons/CheckCircle";
+import ErrorIcon from "@material-ui/icons/Error";
+import CloseIcon from "@material-ui/icons/Close";
+import { ModalStyle } from "./PaymentStyles";
 
 import { makeStyles } from "@material-ui/core/styles";
 
