@@ -1,6 +1,7 @@
 import Cleave from "cleave.js/react";
 
 import styled from "styled-components";
+import { makeStyles } from "@material-ui/core/styles";
 
 const PaymentPage = styled.div`
   max-width: 1000px;
