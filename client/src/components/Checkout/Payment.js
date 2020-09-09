@@ -59,7 +59,7 @@ function Payment() {
   // const [type, setType] = useState("");
 
   // Check if payment confirmed
-  // const [paymentSuccess, setPaymentSuccess] = useState(false);
+  const [paymentSuccess, setPaymentSuccess] = useState(true);
 
   const [redirect, setRedirect] = useState(false);
 
