@@ -142,18 +142,25 @@ function Payment() {
         </PayBtn>
       </PaymentContainer>
 
-      <Modal onClose={() => controlCloseModal()} open={showModal}>
-        <Box>
-          {true ? (
+      <Modal onClose={() => controlCloseModal(paymentSuccess)} open={showModal}>
+        <Box className={modalStyle.content}>
+          <button className={modalStyle.closeBtn}>
+            <CloseIcon
+              className={modalStyle.closeIcon}
+              onClick={() => controlCloseModal(paymentSuccess)}
+            />
+          </button>
+          {paymentSuccess && (
             <div className="modal__container">
-              <DoneIcon className="doneIcon" />
+              <CheckIcon className={modalStyle.checkIcon} />
               <h1>Thank you!</h1>
               <h2>for booking with Holiday Maker.</h2>
               <p>Booking confirmation has been sent to your email.</p>
             </div>
-          ) : (
+          )}
+          {!paymentSuccess && (
             <div className="modal__container">
-              <CancelIcon className="cancelIcon" />
+              <ErrorIcon className={modalStyle.errorIcon} />
               <h1>Error!</h1>
               <h3>Your payment hasn't been confirmed, please try again.</h3>
             </div>
