@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import SearchContainer from '../components/Main/SearchContainer/SearchContainer'
 import ContentContainer from '../components/Main/ContentContainer/ContentContainer'
 import HeaderComp from "../components/common/Header/Header";
-
 // stor bokstav på variabler i styled components
 const Container = styled.main`
   display: flex;
@@ -12,6 +11,8 @@ const Container = styled.main`
   align-items: center;
   border: 2px solid black; 
 `
+
+
 
 const Main = () => {
   
