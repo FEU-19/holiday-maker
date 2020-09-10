@@ -2,15 +2,17 @@ import React, { useState, useEffect, useCallback } from "react";
 
 // Style variables
 const boxContainer = {
-  width: "600px",
+  //width: "600px",
   padding: "30px 30px 50px 30px",
+  width:"1305.280",
 };
 
 const title = {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  width: "200px",
+  //width: "200px",
+  width: '319px',
   height: "35px",
   backgroundColor: "lightgrey",
   color: "#464646",
@@ -20,9 +22,12 @@ const title = {
 
 const contentContainer = {
   display: "flex",
-  alignSelf: "flex-start",
-  justifyContent: "center",
-  width: "600px",
+  flexDirection: "row",
+  flexWrap: "nowrap",
+  justifyContent: "space-between",
+  //alignSelf: "flex-start",
+  //justifyContent: "center",
+  //width: "600px",
   backgroundColor: "#EAEAEA",
   color: "#464646",
   borderRadius: "0 0 4px 4px",
@@ -36,7 +41,7 @@ const content = {
 };
 
 const headInfo = {
-  width: "600px",
+  //width: "600px",
   padding: "30px 40px 20px 40px",
   borderRadius: "0 4px 0 0",
   color: "#464646",
@@ -55,11 +60,11 @@ const subTitle = {
   fontWeight: "bold",
 };
 
-const subTitleBeds = {
+/*const subTitleBeds = {
   margin: "0",
   padding: "20px 0 10px 0",
   fontWeight: "bold",
-};
+};*/
 
 function getRoomInfo(key, generalInfo) {
   const tempObject = generalInfo.rooms.reduce((acc, cur) => {
@@ -154,7 +159,9 @@ const GeneralInformation = ({ generalInfo }) => {
                 </p>
               );
             })}
-            <p style={subTitleBeds}>Beds</p>
+            </div>
+            <div className="residence__generalInformationContainer__contentContainer__content" style={content}>
+            <p style={subTitle}>Beds</p>
             <p style={textReset}>{info.totalBeds} Beds</p>
             <p style={textReset}>{info.totalExtraBeds} Extra beds</p>
           </div>

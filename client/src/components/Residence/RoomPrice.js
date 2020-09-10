@@ -9,16 +9,20 @@ const useStyle = makeStyles(() => ({
     backgroundColor: "rgb(234, 234, 234)",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-between",
+    //justifyContent: "space-between",
     alignItems: "flex-end",
   },
   header: {
     textAlign: "right",
+    paddingBottom: 0,
   },
   text: {
-    margin: 20,
+    //margin: 20,
+    padding: 16,
+    paddingTop:0,
     fontSize: 16,
     fontWeight: "bolder",
+    textAlign: "right",
   },
 }));
 
@@ -44,10 +48,10 @@ const RoomPrice = ({
         //title = {selected}
         subheader={"for 1 room for 1 night"}
       />
-      <Checkbox onChange={() => chooseRoom(roomInfo)} />
       <Typography className={classes.text} component="p">
         Today's Price including taxes and fees
       </Typography>
+      <Checkbox onChange={() => chooseRoom(roomInfo)} />
     </Card>
   );
 };

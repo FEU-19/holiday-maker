@@ -6,6 +6,7 @@ import {
   CardMedia,
   CardContent,
   Typography,
+  Grid,
 } from "@material-ui/core";
 import ModalDialogButton from "./ModalDialogButton";
 
@@ -21,6 +22,15 @@ const useStyle = makeStyles(() => ({
     paddingTop: "56.25%",
     margin: 20,
   },
+  container: {
+    margin: "0 auto",
+    padding: "20px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    overflow: "auto",
+    paddingBottom: 15,
+ }
 }));
 
 const RoomType = ({ roomType }) => {
@@ -44,7 +54,9 @@ const RoomType = ({ roomType }) => {
         <Typography variant="body2" color="textSecondary" component="p">
           Beds: {roomType.beds}
         </Typography>
-        <ModalDialogButton images={roomType.images} />
+        <Grid className = {classes.container}>
+          <ModalDialogButton className = {classes.button} images={roomType.images}/>
+        </Grid> 
       </CardContent>
     </Card>
   );

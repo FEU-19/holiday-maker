@@ -32,6 +32,7 @@ const useStyle = makeStyles(() => ({
     marginBottom: 20,
     fontSize: 16,
     fontWeight: "bolder",
+    textAlign: "center",
   },
   content: {
     minWidth: 500,
@@ -79,9 +80,9 @@ const RoomCard = ({ roomInfo, chooseRoom }) => {
     <Card className={classes.card}>
       <RoomType roomType={roomInfo} />
       <CardContent className={classes.content}>
-        <Typography className={classes.title}>Options</Typography>
         <Grid container spacing={2} justify="center">
           <Grid className={classes.grid}>
+            <Typography className={classes.title}>Included</Typography>
             <Grid className={classes.icons}>
               <Grid item xs={2}>
                 <WifiIcon />
@@ -115,6 +116,7 @@ const RoomCard = ({ roomInfo, chooseRoom }) => {
           </Grid>
           <Grid>
             <FormControl component="fieldset">
+              <Typography className={classes.title}>Options</Typography>
               <FormControlLabel
                 value={roomInfo.extraBed}
                 control={<Checkbox color="default" />}
