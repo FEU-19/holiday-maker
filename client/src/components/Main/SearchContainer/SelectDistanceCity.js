@@ -23,7 +23,7 @@ const SelectDistanceCity = ({distanceCity, setDistanceCity}) => {
 
   return (
     <>
-      <InputLabel id="selectDistanceCity">Distance to city</InputLabel>
+      <InputLabel id="selectDistanceCity">Distance to center</InputLabel>
       <Select
         aria-label="Select Distance To City"
         displayEmpty
