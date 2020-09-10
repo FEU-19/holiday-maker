@@ -1,170 +1,145 @@
-import Cleave from "cleave.js/react"
-
-import styled from "styled-components"
-import { makeStyles } from "@material-ui/core/styles"
+import Cleave from "cleave.js/react";
+import styled from "styled-components";
+import { makeStyles } from "@material-ui/core/styles";
 
 const PaymentPage = styled.div`
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 0;
-    box-sizing: border-box;
-`
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+`;
 
 const PaymentContainer = styled.div`
-    width: 100%;
-    text-align: center;
-`
+  width: 100%;
+  text-align: center;
+`;
 
 const H1 = styled.h1`
-    margin-bottom: 20px;
-    padding: 10px;
-`
+  margin-bottom: 20px;
+  padding: 10px;
+`;
 
 const HR = styled.hr`
-    border: none;
-    background-color: gray;
-    height: 2px;
-    margin: 50px 0;
-`
+  border: none;
+  background-color: gray;
+  height: 2px;
+  margin: 50px 0;
+`;
 
 const CarNumContainer = styled.td`
-    display: flex;
-    justify-content: space-around;
-    padding: 10px 80px;
-    border: 1px solid;
-`
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 80px;
+  border: 1px solid;
+`;
 
 const CardNum = styled(Cleave)`
-    border: none;
-    outline: none;
-`
+  border: none;
+  outline: none;
+`;
 
 const InfoForm = styled.form`
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 50px;
-`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 50px;
+`;
 
 const PayForm = styled.form`
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 50px;
-`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 50px;
+`;
 
 const InputContainer = styled.div`
-    flex: 1;
-    text-align: center;
-    margin: 0;
-    display: inline-block;
-`
+  flex: 1;
+  text-align: center;
+  margin: 0;
+  display: inline-block;
+`;
 
 const ImgContainer = styled.div`
-    height: 50px;
-    width: 50px;
-`
+  height: 50px;
+  width: 50px;
+`;
 
 const IMG = styled.img`
-    height: 100%;
-    object-fit: contain;
-    margin-left: 5px;
-`
+  height: 100%;
+  object-fit: contain;
+  margin-left: 5px;
+`;
 
 const Table = styled.table`
-    width: 65%;
-    border-collapse: collapse;
-`
+  width: 65%;
+  border-collapse: collapse;
+`;
 
 const EXPCVCContainer = styled.td`
-    display: flex;
-    text-align: center;
-    padding: 10px 80px;
-    border: 1px solid;
-`
+  display: flex;
+  text-align: center;
+  padding: 10px 80px;
+  border: 1px solid;
+`;
 
 const EXPCVCDiv = styled.div`
-    display: flex;
-    flex: 1;
-    justify-content: space-between;
-`
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+`;
 
 const EXPCVCInput = styled(Cleave)`
-    border: none;
-    outline: none;
-`
+  border: none;
+  outline: none;
+`;
 
 const PayBtn = styled.button`
-    font-size: 22px;
-    background-color: rgb(59, 27, 202);
-    border-radius: 20px;
-    padding: 10px 110px;
-    color: #fff;
-    border: 1px solid;
-    margin: 40px 0;
-    cursor: pointer;
-`
+  font-size: 22px;
+  background-color: rgb(59, 27, 202);
+  border-radius: 20px;
+  padding: 10px 110px;
+  color: #fff;
+  border: 1px solid;
+  margin: 40px 0;
+  cursor: pointer;
+`;
 
 export {
-    PaymentPage,
-    PaymentContainer,
-    H1,
-    HR,
-    CarNumContainer,
-    CardNum,
-    InfoForm,
-    PayForm,
-    InputContainer,
-    ImgContainer,
-    IMG,
-    Table,
-    EXPCVCContainer,
-    EXPCVCDiv,
-    EXPCVCInput,
-    PayBtn,
-}
+  PaymentPage,
+  PaymentContainer,
+  H1,
+  HR,
+  CarNumContainer,
+  CardNum,
+  InfoForm,
+  PayForm,
+  InputContainer,
+  ImgContainer,
+  IMG,
+  Table,
+  EXPCVCContainer,
+  EXPCVCDiv,
+  EXPCVCInput,
+  PayBtn,
+};
 
-// Modal style
-export const ModalStyle = makeStyles(() => ({
-    constainer: {
-        position: "relative",
+export const useStyles = makeStyles((theme) => ({
+  root: {
+    "& > *": {
+      margin: theme.spacing(1),
+      width: "25ch",
     },
-    content: {
-        width: "30rem",
-        height: "20rem",
-        backgroundColor: "white",
-        position: "absolute",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        textAlign: "center",
-        borderRadius: "5px",
-    },
-    closeBtn: {
-        width: "2rem",
-        height: "2rem",
-        position: "absolute",
-        right: "0.1rem",
-        top: "0.1rem",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "transparent",
-        border: "none",
-    },
-    closeIcon: {
-        color: "grey",
-    },
-    errorIcon: {
-        color: "red",
-        fontSize: "3rem",
-    },
-    checkIcon: {
-        color: "green",
-        fontSize: "3rem",
-    },
-}))
+  },
+}));
+
+// Modal icon style
+export const iconStyle = makeStyles(() => ({
+  errorIcon: {
+    color: "red",
+    fontSize: "5rem",
+  },
+  checkIcon: {
+    color: "green",
+    fontSize: "5rem",
+  },
+}));
