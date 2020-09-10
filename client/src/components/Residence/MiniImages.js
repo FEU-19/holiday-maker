@@ -10,7 +10,10 @@ const MiniImages = ({images,index,updatePicIndex}) =>{
     return(
         <>
         {images.map((image,index) => (
-            <Img key={uuidv4()} image={image} index={index} updatePicIndex={updatePicIndex}/>
+            <Img //key={uuidv4()} 
+                 image={image} 
+                 index={index} 
+                 updatePicIndex={updatePicIndex}/>
         ))}
         </>
     )
