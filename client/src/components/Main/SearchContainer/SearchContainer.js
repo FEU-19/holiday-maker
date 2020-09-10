@@ -72,7 +72,6 @@ const SearchContainer = ({ setFilteredDataCB }) => {
       .get("http://localhost:8080/api/residences/")
       .then((res) => {
         setResidentData(res.data.data);
-        setFilteredDataCB(res.data.data);
       })
       .catch((err) => {
         console.error(err);
