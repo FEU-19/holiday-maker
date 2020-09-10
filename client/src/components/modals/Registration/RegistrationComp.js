@@ -52,7 +52,7 @@ const RegistrationComp = (props) => {
 
   function handlePostUser() {
     axios
-      .post(`http://localhost:3002/api/register`, newUser)
+      .post(`http://localhost:8080/api/register`, newUser)
       .then((res) => {
         console.log(res.data.msg);
         handleInputReset();

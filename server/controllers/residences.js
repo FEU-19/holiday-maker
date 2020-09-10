@@ -10,6 +10,7 @@ exports.read = (req, res) => {
       if (!response) {
         return res.status(404).send({ msg: "No data found" });
       }
+
       return res.status(200).json({ data: response });
     })
     .catch((err) => {
