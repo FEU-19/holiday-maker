@@ -2,12 +2,11 @@ const bcrypt = require("bcrypt");
 const User = require("../models/User");
 const getCookie = require("../middleware/CookieFinder");
 
-exports.createLogout = async (req, res) => {
-  const { cookie } = req.body;
-  const userId = cookie.split("=Bearer")[1];
-  getCookie(req, res);
-  res.clearCookie("access_token", `Bearer${userId}`).end();
-};
+exports.createLogout = async (req, res) =>{
+  const { userId } = req.body;
+
+  res.clearCookie("holidayMakerCookie", `Bearer${userId}`).end();
+}
 
 exports.createLogin = async (req, res) => {
   const { email, password } = req.body.user;
@@ -37,13 +36,13 @@ exports.createLogin = async (req, res) => {
     }
 
     res.status(200);
-    res.cookie("access_token", `Bearer${user.id}`, {
+    res.cookie("holidayMakerCookie", `Bearer${user.id}`, {
       expires: new Date(Date.now() + 8 * 3600000),
     });
-    res.end();
+    return res.send();
   } catch (err) {
     console.error(err.message);
-    res.status(500).send("Server error");
+    return res.status(500).send("Server error");
   }
 };
 
@@ -103,12 +102,12 @@ exports.create = async (req, res) => {
     user.password = await bcrypt.hash(password, salt);
 
     await user.save();
-    res.status(201).json({
+    return res.status(201).json({
       msg: "Account was created",
     });
   } catch (err) {
     console.error(err.message);
-    res.status(500).json({
+    return res.status(500).json({
       msg: "Server error",
     });
   }
