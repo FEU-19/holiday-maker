@@ -2,6 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
+// Functions
+import sortRating from "../../../utils/sortRating.js";
+
 const Container = styled.div`
   border: 1px solid grey;
   border-radius: 7px;
