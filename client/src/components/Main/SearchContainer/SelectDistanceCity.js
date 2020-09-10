@@ -31,7 +31,7 @@ const SelectDistanceCity = ({distanceCity, setDistanceCity}) => {
         value={ distanceCity }
         onChange={ handleChange }
       >
-        <MenuItem disabled>No longer than</MenuItem>
+        <MenuItem disabled>No longer than:</MenuItem>
         {
           distanceInterval.map((distance, index) =>
             distance
