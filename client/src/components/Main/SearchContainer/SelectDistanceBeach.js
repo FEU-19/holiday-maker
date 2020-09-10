@@ -33,7 +33,7 @@ export default function SelectDistanceBeach({
         value={distanceBeach}
         onChange={handleBeachChange}
       >
-        <MenuItem disabled>Distance</MenuItem>
+        <MenuItem disabled>No longer than:</MenuItem>
         {distanceInterval.map((distance, index) =>
           distance ? (
             <MenuItem value={distance} key={index}>
@@ -41,7 +41,7 @@ export default function SelectDistanceBeach({
             </MenuItem>
           ) : (
             <MenuItem value={distance} key={index}>
-              None
+              N/A
             </MenuItem>
           )
         )}
