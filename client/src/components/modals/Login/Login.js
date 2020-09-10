@@ -39,7 +39,7 @@ const Login = (props) => {
     e.preventDefault();
     if (user) {
       instance
-        .post("http://localhost:8080/api/login/", { user }, props.options)
+        .post("http://localhost:8080/api/login", { user }, props.options)
         .then((res) => {
           props.handleModalClose();
         })
