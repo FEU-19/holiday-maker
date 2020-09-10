@@ -1,13 +1,10 @@
-import React, { useState } from 'react';
+import React from "react";
 
-import Select from '@material-ui/core/Select';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
+import Select from "@material-ui/core/Select";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
 
-
-
-const SelectAmountOfAdults = ({amountOfAdults, setAmountOfAdults}) => {
-
+const SelectAmountOfAdults = ({ amountOfAdults, setAmountOfAdults }) => {
   const handleChange = (e) => {
     setAmountOfAdults(e.target.value);
   };
@@ -33,7 +30,7 @@ const SelectAmountOfAdults = ({amountOfAdults, setAmountOfAdults}) => {
         <MenuItem value={8}>8</MenuItem>
       </Select>
     </>
-  )
+  );
 };
 
 export default SelectAmountOfAdults;

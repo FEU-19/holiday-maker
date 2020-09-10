@@ -6,13 +6,13 @@ const roomSchema = new mongoose.Schema({
   size: String,
   price: Number,
   extraBed: Number,
-  "all-inclusive": Number,
-  "half-board": Number,
-  "full-board": Number,
-  "self-catering": Number,
+  allInclusive: Number,
+  halfBoard: Number,
+  fullBoard: Number,
+  selfCatering: Number,
   beds: Number,
   roomNumber: String,
   occupiedDates: Array,
 });
 
-module.export = roomSchema;
+module.exports = roomSchema;
