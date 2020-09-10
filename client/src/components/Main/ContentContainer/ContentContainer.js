@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
@@ -29,10 +29,29 @@ const Container = styled.div`
 //
 // *************************************************************
 
-const ContentContainer = ({ filteredData }) => {
+const ContentContainer = ({ filteredData, sortOn }) => {
+  const [sortedData, setSortedData] = useState([]);
+  
+  useEffect(() => {
+    setSortedData([...filteredData]);
+  }, [filteredData])
+
+  useEffect(() => {
+    // If the option 'None' was selected
+    if (!sortOn) return setSortedData([...filteredData]);
+
+    if (sortOn === 'Price') { 
+      // ...
+    }
+
+    if (sortOn === 'Rating') {
+      // ...
+    }
+  }, [sortOn, filteredData])
+
   return (
     <Container>
-      {filteredData.map((hotel) => {
+      {sortedData.map((hotel) => {
         return (
           <div className="map-container" key={hotel._id}>
             <Link
