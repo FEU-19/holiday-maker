@@ -26,6 +26,7 @@ import filterPool from "../../../utils/filterPool";
 import filterRestaurant from "../../../utils/filterRestaurant";
 import filterDistanceBeach from "../../../utils/filterDistanceBeach";
 import filterDistanceCity from "../../../utils/filterDistanceCity";
+import sortRating from "../../../utils/sortRating.js";
 
 const Container = styled.div`
   width: 90vw;
