@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 
 // Functions
 import sortRating from "../../../utils/sortRating.js";
+import sortPrice from "../../../utils/sortPrice.js";
+import getAveragePrice from "../../../utils/getAveragePrice.js";
 
 const Container = styled.div`
   border: 1px solid grey;
