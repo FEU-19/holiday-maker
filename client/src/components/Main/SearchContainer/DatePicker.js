@@ -1,62 +1,62 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
-
-const useStyles = makeStyles((theme) => ({
-  container: {
-    display: "flex",
-    flexWrap: "wrap",
-  },
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: 200,
-  },
-}));
+import React, { useState, useEffect } from "react";
+import Grid from "@material-ui/core/Grid";
+import DateFnsUtils from '@date-io/date-fns';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
 
 export default function DatePicker({ residentData, date, setDate }) {
-  const classes = useStyles();
+  const [startDate, handleStartChange] = useState(new Date(date.start));
+  const [endDate, handleEndChange] = useState(new Date(date.end));
 
-  function StartDateChange(e) {
-    e.persist();
-    setDate((prevState) => ({
-      ...prevState,
-      start: e.target.value + "T00:00:00.000Z",
-    }));
-  }
-
-  function EndDateChange(e) {
-    e.persist();
-    setDate((prevState) => ({
-      ...prevState,
-      end: e.target.value + "T00:00:00.000Z",
-    }));
-  }
+  useEffect(() => {
+    let startToISO = startDate.toISOString();
+    let endToISO = endDate.toISOString();
+    setDate((prevState => ({...prevState, start: startToISO, end: endToISO})))
+  },[setDate, startDate, endDate])
 
   return (
-    <div className={classes.container}>
-      <TextField
-        id="datetime-start"
-        label="Start"
-        type="date"
-        onChange={StartDateChange}
-        defaultValue="2020-06-02"
-        className={classes.textField}
-        InputLabelProps={{
-          shrink: true,
-        }}
-      />
-      <TextField
-        id="datetime-end"
-        label="End"
-        type="date"
-        onChange={EndDateChange}
-        defaultValue="2020-06-08"
-        className={classes.textField}
-        InputLabelProps={{
-          shrink: true,
-        }}
-      />
+    <div>
+      <Grid container spacing={1}>
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <Grid item xs={6}>
+        <KeyboardDatePicker
+          autoOk={true}
+          disableToolbar
+          variant="inline"
+          format="MM/dd/yyyy"
+          id="date-picker-inline-start"
+          label="Start"
+          mr='10px'
+          value={startDate}
+          minDate={new Date('2020-06-01')}
+          maxDate={new Date('2020-07-31')}
+          onChange={date => handleStartChange(date)}
+          KeyboardButtonProps={{
+            'aria-label': 'change date',
+          }}
+        />
+      </Grid>
+      <Grid item xs={6}>
+        <KeyboardDatePicker
+          autoOk={true}
+          disableToolbar
+          variant="inline"
+          format="MM/dd/yyyy"
+          id="date-picker-inline-end"
+          label="End"
+          value={endDate}
+          minDate={new Date('2020-06-01')}
+          maxDate={new Date('2020-07-31')}
+          onChange={date => handleEndChange(date)}
+          KeyboardButtonProps={{
+            'aria-label': 'change date',
+          }}
+        />
+      </Grid>
+      </MuiPickersUtilsProvider>
+    </Grid>
     </div>
   );
 }
