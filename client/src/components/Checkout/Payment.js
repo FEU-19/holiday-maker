@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
 import { Redirect, useLocation } from "react-router-dom";
+import axios from "axios";
+
 import CheckIcon from "@material-ui/icons/CheckCircle";
 import ErrorIcon from "@material-ui/icons/Error";
 import CloseIcon from "@material-ui/icons/Close";
@@ -25,6 +26,45 @@ import PaymentForm from "./PaymentForm";
 import CountryDropdownList from "./CountryDropdownList";
 
 function Payment() {
+  const [user, setUser] = useState({
+    firstName: "",
+    surname: "",
+    email: "",
+    zipCode: "",
+    phoneNumber: "",
+    city: "",
+    adress: "",
+  });
+
+  useEffect(() => {
+    let userId = "5f5aa3bc7bd3af45e0c97964";
+    axios
+      .get(`http://localhost:8080/api/users/${userId}`)
+      .then((response) => {
+        const {
+          firstName,
+          surname,
+          email,
+          zipCode,
+          phoneNumber,
+          city,
+        } = response.data.data;
+        const data = {
+          firstName,
+          surname,
+          email,
+          zipCode,
+          phoneNumber,
+          city,
+          adress: "copacana fixa adressfält!!!",
+        };
+
+        return data;
+      })
+      .then((data) => {
+        setUser(data);
+      });
+  }, []);
   const { state } = useLocation();
 
   console.log(state);
@@ -42,13 +82,15 @@ function Payment() {
   const modalStyle = ModalStyle();
 
   //Payment States
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phoneNum, setPhoneNum] = useState("");
-  const [city, setCity] = useState("");
-  const [zipcode, setZipCode] = useState("");
-  const [adress, setAdress] = useState("");
+
+  function handleChange(e) {
+    let userData = {
+      ...user,
+      [e.target.name]: e.target.value,
+    };
+
+    setUser(userData);
+  }
 
   const [cardNum, setCardNum] = useState("");
   const [expire, setExpire] = useState("");
@@ -73,6 +115,7 @@ function Payment() {
     // url needs to change to booking details page
     return <Redirect to="/" />;
   }
+  console.log(user);
 
   return (
     <PaymentPage className={classes.root} noValidate autoComplete="off">
@@ -80,20 +123,28 @@ function Payment() {
         <H1>Payment</H1>
         <InfoForm>
           <TextInput
+            name="firstName"
             label="First name"
-            onchange={(e) => setFirstName(e.target.value)}
-            value={firstName}
+            value={user.firstName}
+            onchange={handleChange}
           />
           <TextInput
+            name="surname"
             label="Last name"
-            onchange={(e) => setLastName(e.target.value)}
-            value={lastName}
+            onchange={handleChange}
+            value={user.surname}
           />
-          <TextInput label="E-mail name" onchange={(e) => setEmail(e.target.value)} value={email} />
           <TextInput
+            name="email"
+            label="E-mail name"
+            onchange={handleChange}
+            value={user.email}
+          />
+          <TextInput
+            name="phoneNumber"
             label="Phone number"
-            onchange={(e) => setPhoneNum(e.target.value)}
-            value={phoneNum}
+            onchange={handleChange}
+            value={user.phoneNumber}
           />
         </InfoForm>
         <br />
@@ -104,13 +155,24 @@ function Payment() {
             <CountryDropdownList />
           </InputContainer>
 
-          <TextInput label="City" onchange={(e) => setCity(e.target.value)} value={city} />
           <TextInput
-            label="Zip code"
-            onchange={(e) => setZipCode(e.target.value)}
-            value={zipcode}
+            name="city"
+            label="City"
+            onchange={handleChange}
+            value={user.city}
           />
-          <TextInput label="Adress" onchange={(e) => setAdress(e.target.value)} value={adress} />
+          <TextInput
+            name="zipCode"
+            label="Zip code"
+            onchange={handleChange}
+            value={user.zipCode}
+          />
+          <TextInput
+            name="adress"
+            label="Adress"
+            onchange={handleChange}
+            value={user.adress}
+          />
         </InfoForm>
 
         <br />
@@ -123,7 +185,11 @@ function Payment() {
           setType={setType}
         />
 
-        <PayBtn onClick={() => setShowModal(true)} className="payBtn" type="submit">
+        <PayBtn
+          onClick={() => setShowModal(true)}
+          className="payBtn"
+          type="submit"
+        >
           Finish & Pay
         </PayBtn>
       </PaymentContainer>
