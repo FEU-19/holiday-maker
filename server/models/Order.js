@@ -11,6 +11,7 @@ const orderSchema = mongoose.Schema(
         price: Number,
         option: String,
         roomNumber: String,
+        extraBed: Boolean,
       },
     ],
     bookingDates: {
