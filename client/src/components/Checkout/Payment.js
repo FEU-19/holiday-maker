@@ -24,6 +24,7 @@ import {
 import TextInput from "./TextInput";
 import PaymentForm from "./PaymentForm";
 import CountryDropdownList from "./CountryDropdownList";
+import BookingInfo from "./BookingInfo";
 
 function Payment() {
   const { state } = useLocation();
@@ -74,6 +75,7 @@ function Payment() {
     <PaymentPage className={classes.root} noValidate autoComplete="off">
       <PaymentContainer>
         <H1>Payment</H1>
+        <BookingInfo />
         <InfoForm>
           <FormDiv>
             <TextInput

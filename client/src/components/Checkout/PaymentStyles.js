@@ -122,6 +122,32 @@ const PayBtn = styled.button`
   cursor: pointer;
 `;
 
+const BookingInfoDiv = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const BookingInfoContainer = styled.div`
+  display: flex;
+  width: 80%;
+  border: 1px solid brown;
+  border-radius: 10px;
+`;
+
+const BookingInfoBoxDiv = styled.div`
+  flex: 1;
+  display: flex;
+  justify-content: center;
+`;
+
+const BookingInfoTextAlign = styled.div`
+  text-align: left;
+`;
+
+const BookingInfoH1 = styled.h1`
+  text-decoration: underline;
+`;
+
 export {
   PaymentPage,
   PaymentContainer,
@@ -139,6 +165,11 @@ export {
   EXPCVCDiv,
   EXPCVCInput,
   PayBtn,
+  BookingInfoDiv,
+  BookingInfoContainer,
+  BookingInfoBoxDiv,
+  BookingInfoTextAlign,
+  BookingInfoH1,
 };
 
 // Modal style
