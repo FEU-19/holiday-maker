@@ -50,6 +50,7 @@ function Payment() {
   const [zipcode, setZipCode] = useState("");
   const [adress, setAdress] = useState("");
 
+  // PaymentForm States
   const [cardNum, setCardNum] = useState("");
   const [expire, setExpire] = useState("");
   const [cvc, setCvc] = useState("");
@@ -78,40 +79,54 @@ function Payment() {
     <PaymentPage className={classes.root} noValidate autoComplete="off">
       <PaymentContainer>
         <H1>Payment</H1>
-        <InfoForm>
-          <TextInput
-            label="First name"
-            onchange={(e) => setFirstName(e.target.value)}
-            value={firstName}
-          />
-          <TextInput
-            label="Last name"
-            onchange={(e) => setLastName(e.target.value)}
-            value={lastName}
-          />
-          <TextInput label="E-mail name" onchange={(e) => setEmail(e.target.value)} value={email} />
-          <TextInput
-            label="Phone number"
-            onchange={(e) => setPhoneNum(e.target.value)}
-            value={phoneNum}
-          />
-        </InfoForm>
-        <br />
-        <HR />
+        <form>
+          <InfoForm>
+            <TextInput
+              label="First name"
+              onchange={(e) => setFirstName(e.target.value)}
+              value={firstName}
+            />
+            <TextInput
+              label="Last name"
+              onchange={(e) => setLastName(e.target.value)}
+              value={lastName}
+            />
+            <TextInput
+              label="E-mail name"
+              onchange={(e) => setEmail(e.target.value)}
+              value={email}
+            />
+            <TextInput
+              label="Phone number"
+              onchange={(e) => setPhoneNum(e.target.value)}
+              value={phoneNum}
+            />
+          </InfoForm>
+          <br />
+          <HR />
 
-        <InfoForm>
-          <InputContainer>
-            <CountryDropdownList />
-          </InputContainer>
+          <InfoForm>
+            <InputContainer>
+              <CountryDropdownList />
+            </InputContainer>
 
-          <TextInput label="City" onchange={(e) => setCity(e.target.value)} value={city} />
-          <TextInput
-            label="Zip code"
-            onchange={(e) => setZipCode(e.target.value)}
-            value={zipcode}
-          />
-          <TextInput label="Adress" onchange={(e) => setAdress(e.target.value)} value={adress} />
-        </InfoForm>
+            <TextInput
+              label="City"
+              onchange={(e) => setCity(e.target.value)}
+              value={city}
+            />
+            <TextInput
+              label="Zip code"
+              onchange={(e) => setZipCode(e.target.value)}
+              value={zipcode}
+            />
+            <TextInput
+              label="Adress"
+              onchange={(e) => setAdress(e.target.value)}
+              value={adress}
+            />
+          </InfoForm>
+        </form>
 
         <br />
         <HR />
@@ -123,7 +138,11 @@ function Payment() {
           setType={setType}
         />
 
-        <PayBtn onClick={() => setShowModal(true)} className="payBtn" type="submit">
+        <PayBtn
+          onClick={() => setShowModal(true)}
+          className="payBtn"
+          type="submit"
+        >
           Finish & Pay
         </PayBtn>
       </PaymentContainer>

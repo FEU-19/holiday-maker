@@ -57,53 +57,51 @@ function PaymentForm({ setCardNum, setExpire, setCvc, setType }) {
 
   return (
     <PayForm>
-      <Table>
-        <tbody>
-          <tr>
-            <CarNumContainer>
-              <p>Card number</p>
-              <CardNum
-                placeholder="0000 0000 0000 0000"
-                options={{
-                  creditCard: true,
-                  onCreditCardTypeChanged,
-                }}
-                onChange={handleCardNum}
+      <div>
+        <div>
+          <CarNumContainer>
+            <p>Card number</p>
+            <CardNum
+              placeholder="0000 0000 0000 0000"
+              options={{
+                creditCard: true,
+                onCreditCardTypeChanged,
+              }}
+              onChange={handleCardNum}
+            />
+            <ImgContainer>
+              <IMG src={cardImg} />
+            </ImgContainer>
+          </CarNumContainer>
+        </div>
+
+        <div>
+          <EXPCVCContainer className="exp-cvc__container">
+            <EXPCVCDiv>
+              <p>Expire</p>
+              <EXPCVCInput
+                placeholder="MM/YY"
+                options={{ date: true, datePattern: ["m", "d"] }}
+                onChange={(e) => setExpire(e.target.value)}
+                className="exp-cvc__input"
               />
-              <ImgContainer>
-                <IMG src={cardImg} />
-              </ImgContainer>
-            </CarNumContainer>
-          </tr>
+            </EXPCVCDiv>
 
-          <tr>
-            <EXPCVCContainer className="exp-cvc__container">
-              <EXPCVCDiv>
-                <p>Expire</p>
-                <EXPCVCInput
-                  placeholder="MM/YY"
-                  options={{ date: true, datePattern: ["m", "d"] }}
-                  onChange={(e) => setExpire(e.target.value)}
-                  className="exp-cvc__input"
-                />
-              </EXPCVCDiv>
-
-              <EXPCVCDiv>
-                <p>CVC</p>
-                <EXPCVCInput
-                  placeholder="CVV"
-                  options={{
-                    blocks: [3],
-                    numericOnly: true,
-                  }}
-                  onChange={(e) => setCvc(e.target.value)}
-                  className="exp-cvc__input"
-                />
-              </EXPCVCDiv>
-            </EXPCVCContainer>
-          </tr>
-        </tbody>
-      </Table>
+            <EXPCVCDiv>
+              <p>CVC</p>
+              <EXPCVCInput
+                placeholder="CVV"
+                options={{
+                  blocks: [3],
+                  numericOnly: true,
+                }}
+                onChange={(e) => setCvc(e.target.value)}
+                className="exp-cvc__input"
+              />
+            </EXPCVCDiv>
+          </EXPCVCContainer>
+        </div>
+      </div>
     </PayForm>
   );
 }
