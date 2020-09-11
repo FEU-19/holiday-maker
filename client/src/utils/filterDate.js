@@ -22,7 +22,7 @@ export default function filterDate (residents, date) {
           }
       }
 
-      if (collisions === 0) {
+      if (collisions > 0) {
         newResidents[i].rooms.splice(j, 1);
         collisions++;
       }
