@@ -7,18 +7,14 @@ const bookingNrGenerator = require("../utils/bookingNrGenerator");
 exports.create = async (req, res) => {
   // Id will be a cookie.
 
-  const Id = req.body.user;
+  const Id = req.body.userId;
   const data = req.body;
   const orderData = {};
 
   const user = await User.findById(Id);
   console.log(user);
   orderData.userId = data.userId;
-  orderData.bookingNumber = bookingNrGenerator(
-    user.first_name,
-    user.surname,
-    6
-  );
+  orderData.bookingNumber = bookingNrGenerator(user.firstName, user.surname, 6);
   orderData.rooms = data.rooms;
   orderData.bookingDates = data.bookingDates;
   orderData.hotel = data.hotel;
