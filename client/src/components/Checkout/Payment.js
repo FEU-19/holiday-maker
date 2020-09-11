@@ -15,12 +15,14 @@ import {
   PaymentPage,
   PaymentContainer,
   H1,
+  Title,
   HR,
   InfoForm,
   FormDiv,
   InputContainer,
   PayBtn,
 } from "./PaymentStyles";
+
 import TextInput from "./TextInput";
 import PaymentForm from "./PaymentForm";
 import CountryDropdownList from "./CountryDropdownList";
@@ -76,7 +78,9 @@ function Payment() {
       <PaymentContainer>
         <H1>Payment</H1>
         <BookingInfo />
+        <HR />
         <InfoForm>
+          <Title>Account Information</Title>
           <FormDiv>
             <TextInput
               label="First name"
@@ -89,18 +93,20 @@ function Payment() {
               value={lastName}
             />
             <TextInput
-              label="E-mail name"
+              label="E-mail"
               onchange={(e) => setEmail(e.target.value)}
               value={email}
             />
             <TextInput
-              label="Phone number"
+              label="Mobile"
               onchange={(e) => setPhoneNum(e.target.value)}
               value={phoneNum}
             />
           </FormDiv>
           <FormDiv className="">
-            <CountryDropdownList />
+            <InputContainer>
+              <CountryDropdownList />
+            </InputContainer>
 
             <TextInput
               label="City"
@@ -120,7 +126,6 @@ function Payment() {
           </FormDiv>
         </InfoForm>
 
-        <br />
         <HR />
 
         <PaymentForm />

@@ -9,6 +9,8 @@ import {
   EXPCVCContainer,
   EXPCVCDiv,
   EXPCVCInput,
+  Title,
+  PayLabel,
 } from "./PaymentStyles";
 
 function PaymentForm() {
@@ -61,8 +63,9 @@ function PaymentForm() {
 
   return (
     <PayForm>
+      <Title>Payment Method</Title>
       <CarNumContainer>
-        <p>Card Number</p>
+        <PayLabel>Card Number</PayLabel>
         <CardNum
           placeholder="0000 0000 0000 0000"
           options={{
@@ -78,7 +81,7 @@ function PaymentForm() {
 
       <EXPCVCContainer className="exp-cvc__container">
         <EXPCVCDiv>
-          <p>Expire</p>
+          <PayLabel>Expire</PayLabel>
           <EXPCVCInput
             placeholder="MM / YY"
             options={{ date: true, datePattern: ["m", "d"] }}
@@ -88,7 +91,7 @@ function PaymentForm() {
         </EXPCVCDiv>
 
         <EXPCVCDiv>
-          <p>CVC</p>
+          <PayLabel>CVC</PayLabel>
           <EXPCVCInput
             placeholder="CVV"
             options={{

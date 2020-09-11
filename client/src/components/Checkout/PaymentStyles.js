@@ -1,5 +1,4 @@
 import Cleave from "cleave.js/react";
-
 import styled from "styled-components";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -8,7 +7,6 @@ const PaymentPage = styled.div`
   margin: 0 auto;
   padding: 0;
   box-sizing: border-box;
-  background-color: #4ab2bbc2;
   border-radius: 10px;
 `;
 
@@ -21,22 +19,37 @@ const PaymentContainer = styled.div`
 const H1 = styled.h1`
   margin-bottom: 20px;
   padding: 10px;
+  color: #162c72;
+`;
+
+const Title = styled.h2`
+  color: #4ab1bb;
 `;
 
 const HR = styled.hr`
   border: none;
   background-color: #162c72;
-  height: 2px;
-  margin: 50px auto;
+  height: 1.5px;
+  margin: 50px auto 20px auto;
+  width: 90%;
+`;
+
+const SmlHR = styled.hr`
+  border: none;
+  background-color: white;
+  height: 0.5px;
+  margin: 0px auto;
   width: 90%;
 `;
 
 const CarNumContainer = styled.div`
   display: flex;
-  justify-content: flex-start;
-  padding: 10px;
-  border: 1px solid;
+  justify-content: space-between;
+  padding: 10px 20px;
+  border: 1px solid #162c72;
   width: 100%;
+  border-radius: 10px 10px 0 0;
+  margin-top: 15px;
 `;
 
 const CardNum = styled(Cleave)`
@@ -45,25 +58,27 @@ const CardNum = styled(Cleave)`
   margin-left: 10px;
   width: auto;
   background: transparent;
+  width: 40%;
 `;
 
 const InfoForm = styled.form`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  margin-top: 50px;
-  width: 100%;
+  margin: 0 auto;
+  width: 80%;
 `;
 
 const FormDiv = styled.div`
   width: 100%;
   display: flex;
   justify-conent: space-around;
+  margin-top: 15px;
   padding: 5px;
 `;
 
 const PayForm = styled.form`
-  width: 40%;
+  width: 340px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -79,22 +94,28 @@ const InputContainer = styled.div`
 `;
 
 const ImgContainer = styled.div`
+  width: 30%;
   height: 50px;
-  width: 50px;
+  display: flex;
+  justify-content: flex-end;
 `;
 
 const IMG = styled.img`
   height: 100%;
   object-fit: contain;
-  margin-left: 5px;
+`;
+
+const PayLabel = styled.p`
+  color: #162c72;
 `;
 
 const EXPCVCContainer = styled.div`
   display: flex;
-  padding: 10px;
-  border: 1px solid;
+  padding: 10px 20px;
+  border: 1px solid #162c72;
   border-top: none;
   width: 100%;
+  border-radius: 0px 0px 10px 10px;
 `;
 
 const EXPCVCDiv = styled.div`
@@ -107,8 +128,8 @@ const EXPCVCInput = styled(Cleave)`
   margin-left: 10px;
   border: none;
   outline: none;
-  width: 100px;
   background-color: transparent;
+  width: 30%;
 `;
 
 const PayBtn = styled.button`
@@ -122,42 +143,78 @@ const PayBtn = styled.button`
   cursor: pointer;
 `;
 
+// booking info
 const BookingInfoDiv = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
 `;
 
 const BookingInfoContainer = styled.div`
   display: flex;
   width: 80%;
-  border: 1px solid brown;
-  border-radius: 10px;
+  justify-content: center;
+  flex-direction: column;
 `;
 
 const BookingInfoBoxDiv = styled.div`
-  flex: 1;
   display: flex;
-  justify-content: center;
+  flex: 1;
+  align-items: center;
+  flex-direction: column;
+  margin: 10px;
+  border-radius: 10px;
+  background-color: #9db0c6;
+  padding: 0 15px;
+  box-shadow: 0px 1px 1px grey;
 `;
 
 const BookingInfoTextAlign = styled.div`
   text-align: left;
 `;
 
-const BookingInfoH1 = styled.h1`
-  text-decoration: underline;
+const BookingInfoTitle = styled.h3`
+  color: #162c72;
+  display: flex;
+  align-items: center;
+  width: 100px;
+`;
+
+const BookingInfoList = styled.ul`
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 10px auto;
+`;
+
+const BookingInfoItems = styled.li`
+  width: 46%;
+  text-align: left;
+  margin-top: 5px;
+`;
+const BookingInfoText = styled.p`
+  font-weight: 700;
+  align-self: flex-end;
+  margin-right: 40px;
+  color: whitesmoke;
+  font-weight: 700;
 `;
 
 export {
   PaymentPage,
   PaymentContainer,
   H1,
+  Title,
   HR,
+  SmlHR,
   CarNumContainer,
   CardNum,
   InfoForm,
   FormDiv,
   PayForm,
+  PayLabel,
   InputContainer,
   ImgContainer,
   IMG,
@@ -169,7 +226,10 @@ export {
   BookingInfoContainer,
   BookingInfoBoxDiv,
   BookingInfoTextAlign,
-  BookingInfoH1,
+  BookingInfoTitle,
+  BookingInfoText,
+  BookingInfoList,
+  BookingInfoItems,
 };
 
 // Modal style
@@ -214,5 +274,14 @@ export const ModalStyle = makeStyles(() => ({
   checkIcon: {
     color: "green",
     fontSize: "3rem",
+  },
+}));
+
+export const InputStyles = makeStyles(() => ({
+  label: {
+    color: "#162c72",
+    "&focusedLabel": {
+      color: "#162c72",
+    },
   },
 }));

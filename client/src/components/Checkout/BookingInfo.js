@@ -5,41 +5,62 @@ import {
   BookingInfoContainer,
   BookingInfoBoxDiv,
   BookingInfoTextAlign,
-  BookingInfoH1,
+  BookingInfoTitle,
+  BookingInfoText,
+  BookingInfoList,
+  BookingInfoItems,
+  Title,
+  SmlHR,
 } from "./PaymentStyles";
+import Hotel from "@material-ui/icons/Hotel";
+import Flight from "@material-ui/icons/Flight";
 
 function BookingInfo() {
   return (
     <BookingInfoDiv>
-      <BookingInfoContainer>
-        <BookingInfoBoxDiv>
-          <BookingInfoTextAlign>
-            <BookingInfoH1>Resident</BookingInfoH1>
-            <p>Dep: kastrup</p>
-            <p>Arrival: Manilla</p>
-            <p>adults: (1x)</p>
-            <p>children: (0)</p>
-            <p>Dep-date: 2020-02-06 13:42</p>
-            <p>Back home: 2020-02-17 14:00</p>
-            <br />
-            <h2>Price: 1500:-</h2>
-          </BookingInfoTextAlign>
-        </BookingInfoBoxDiv>
+      <Title>Booking Information</Title>
 
+      <BookingInfoContainer>
+        <BookingInfoTitle>
+          <Hotel style={{ marginRight: "5px" }} /> Resident
+        </BookingInfoTitle>
         <BookingInfoBoxDiv>
-          <BookingInfoTextAlign>
-            <BookingInfoH1>Flight</BookingInfoH1>
-            <p>Hotel name...</p>
-            <p>Booked rooms: (2x)</p>
-            <p>adults: (1x)</p>
-            <p>children: (0)</p>
-            <p>Extras: ...</p>
-            <p>From: 2020-02-06</p>
-            <p>To: 2020-02-17</p>
-            <br />
-            <h2>Price: 1500:-</h2>
-          </BookingInfoTextAlign>
+          <BookingInfoList>
+            <BookingInfoItems>Check-In: 2020/09/09</BookingInfoItems>
+            <BookingInfoItems>Check-Out: 2020/09/20</BookingInfoItems>
+            <BookingInfoItems> Room Type: Full-Board</BookingInfoItems>
+            <BookingInfoItems> Rooms: 4</BookingInfoItems>
+            <BookingInfoItems> Adults: 2 </BookingInfoItems>
+            <BookingInfoItems> Children: 2 </BookingInfoItems>
+            <BookingInfoItems> Extra Bed: 0</BookingInfoItems>
+          </BookingInfoList>
+          <SmlHR />
+          <BookingInfoText>Amount: 20000kr</BookingInfoText>
         </BookingInfoBoxDiv>
+        <BookingInfoTitle>
+          <Flight style={{ marginRight: "5px" }} /> Flight
+        </BookingInfoTitle>
+        <BookingInfoBoxDiv>
+          <BookingInfoList>
+            <BookingInfoItems>Departure Time:2020/09/08 12:20</BookingInfoItems>
+            <BookingInfoItems> Arrival Time:2020/09/09 14:20 </BookingInfoItems>
+            <BookingInfoItems>Departure: Copenhagen</BookingInfoItems>
+            <BookingInfoItems>Destination: Miami</BookingInfoItems>
+            <BookingInfoItems> Adults: 2 </BookingInfoItems>
+            <BookingInfoItems> Children: 2 </BookingInfoItems>
+          </BookingInfoList>
+          <SmlHR />
+          <BookingInfoText>Amount: 22200kr</BookingInfoText>
+        </BookingInfoBoxDiv>
+        <h2
+          style={{
+            alignSelf: "flex-end",
+            marginRight: "40px",
+            color: "#162c72",
+          }}
+        >
+          Total: 42200 kr
+        </h2>
       </BookingInfoContainer>
     </BookingInfoDiv>
   );

@@ -1,9 +1,11 @@
 import React from "react";
 
-import { InputContainer } from "./PaymentStyles";
+import { InputContainer, InputStyles } from "./PaymentStyles";
 import TextField from "@material-ui/core/TextField";
 
 function TextInput({ label, onchange, value }) {
+  const inputStyles = InputStyles();
+
   return (
     <InputContainer>
       <TextField
@@ -11,6 +13,12 @@ function TextInput({ label, onchange, value }) {
         label={label}
         value={value}
         onChange={onchange}
+        InputLabelProps={{
+          classes: {
+            root: inputStyles.label,
+            focused: inputStyles.focusedLabel,
+          },
+        }}
       />
     </InputContainer>
   );
