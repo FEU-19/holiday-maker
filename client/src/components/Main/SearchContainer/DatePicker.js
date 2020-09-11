@@ -21,7 +21,7 @@ export default function DatePicker({ residentData, date, setDate }) {
     e.persist();
     setDate((prevState) => ({
       ...prevState,
-      start: e.target.value + ":00.000Z",
+      start: e.target.value + "T00:00:00.000Z",
     }));
   }
 
@@ -29,29 +29,29 @@ export default function DatePicker({ residentData, date, setDate }) {
     e.persist();
     setDate((prevState) => ({
       ...prevState,
-      end: e.target.value + ":00.000Z",
+      end: e.target.value + "T00:00:00.000Z",
     }));
   }
 
   return (
     <div className={classes.container}>
       <TextField
-        id="datetime-local-start"
+        id="datetime-start"
         label="Start"
-        type="datetime-local"
+        type="date"
         onChange={StartDateChange}
-        defaultValue="2020-06-02T00:00"
+        defaultValue="2020-06-02"
         className={classes.textField}
         InputLabelProps={{
           shrink: true,
         }}
       />
       <TextField
-        id="datetime-local-end"
+        id="datetime-end"
         label="End"
-        type="datetime-local"
+        type="date"
         onChange={EndDateChange}
-        defaultValue="2020-06-08T00:00"
+        defaultValue="2020-06-08"
         className={classes.textField}
         InputLabelProps={{
           shrink: true,
