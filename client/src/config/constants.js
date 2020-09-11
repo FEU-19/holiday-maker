@@ -1,1 +1,1 @@
-export const sortValues = ['None', 'Price low to high', 'Rating low to high'];
+export const sortValues = ['None', 'Price low to high', 'Rating high to low'];

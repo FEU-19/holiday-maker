@@ -44,7 +44,7 @@ const ContentContainer = ({ filteredData, sortOn }) => {
       // ...
     }
 
-    if (sortOn === 'Rating low to high') {
+    if (sortOn === 'Rating high to low') {
       // ...
     }
   }, [sortOn, filteredData])
