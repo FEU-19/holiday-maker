@@ -86,7 +86,7 @@ const LoginModal = () => {
     e.preventDefault();
     let cookie = document.cookie;
     instance
-      .post("http://localhost:3002/api/logout/", { cookie }, options)
+      .post("http://localhost:8080/api/logout/", { cookie }, options)
       .then((res) => {
         setCookie(null);
       })
