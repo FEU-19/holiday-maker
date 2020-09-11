@@ -11,7 +11,12 @@ import {
   EXPCVCInput,
 } from "./PaymentStyles";
 
-function PaymentForm({ setCardNum, setExpire, setCvc, setType }) {
+function PaymentForm() {
+  // PaymentForm States
+  const [cardNum, setCardNum] = useState("");
+  const [expire, setExpire] = useState("");
+  const [cvc, setCvc] = useState("");
+  const [type, setType] = useState("");
   const [cardImg, setCardImg] = useState("");
 
   const handleCardNum = (e) => {

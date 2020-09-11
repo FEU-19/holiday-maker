@@ -51,12 +51,6 @@ function Payment() {
   const [zipcode, setZipCode] = useState("");
   const [adress, setAdress] = useState("");
 
-  // PaymentForm States
-  const [cardNum, setCardNum] = useState("");
-  const [expire, setExpire] = useState("");
-  const [cvc, setCvc] = useState("");
-  const [type, setType] = useState("");
-
   // Check if payment confirmed
   const [paymentSuccess, setPaymentSuccess] = useState(true);
 
@@ -127,12 +121,7 @@ function Payment() {
         <br />
         <HR />
 
-        <PaymentForm
-          setCardNum={setCardNum}
-          setExpire={setExpire}
-          setCvc={setCvc}
-          setType={setType}
-        />
+        <PaymentForm />
 
         <PayBtn
           onClick={() => setShowModal(true)}
