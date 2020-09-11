@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import styled from "styled-components";
 import axios from "axios";
 import SimpleDialog from "@material-ui/core/Dialog";
+
+import UserContext from "../../../context/userContext";
 
 const Container = styled.div`
   display: flex;
@@ -25,9 +27,7 @@ const Login = (props) => {
   const [open, setOpen] = useState(false);
   const [errorMsg, setErrorMsg] = useState(0);
 
-  const instance = axios.create({
-    withCredentials: true,
-  });
+  const { setUserData } = useContext(UserContext);
 
   const onChangeUser = (e) => {
     const { value } = e.target;
@@ -35,18 +35,24 @@ const Login = (props) => {
     setUser({ ...user, [name]: value });
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     if (user) {
-      instance
-        .post("http://localhost:8080/api/login", { user }, props.options)
-        .then((res) => {
-          props.handleModalClose();
-        })
-        .catch((err) => {
-          setOpen(true);
-          setErrorMsg(err.response.data.error[0].msg);
+      try {
+        const loginRes = await axios.post("http://localhost:8080/api/login", {
+          user,
         });
+
+        setUserData({
+          token: loginRes.data.token,
+          user: loginRes.data.user,
+        });
+        localStorage.setItem("auth-token", loginRes.data.token);
+        props.handleModalClose();
+      } catch (err) {
+        setOpen(true);
+        setErrorMsg(err.response.data.error[0].msg);
+      }
     }
   };
 

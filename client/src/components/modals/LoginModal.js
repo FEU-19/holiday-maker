@@ -1,29 +1,27 @@
 import axios from "axios";
-import React, { useState, useEffect } from 'react';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect, useContext } from "react";
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import AppBar from "@material-ui/core/AppBar";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
+import PropTypes from "prop-types";
 
 import RegistrationComp from "./Registration/RegistrationComp";
 import LoginComp from "./Login/Login";
+import UserContext from "../../context/userContext";
 
-import { cookieFinder } from "../../utils/findCookie"
+import { cookieFinder } from "../../utils/findCookie";
 
-const LoginModal = () =>{
+const LoginModal = () => {
+  const { userData, setUserData } = useContext(UserContext);
   const [open, setOpen] = useState(false);
   const [cookie, setCookie] = useState(false);
   const [value, setValue] = useState(0);
-
-  useEffect(() => {
-    setCookie(cookieFinder());
-  }, [open])
 
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -76,31 +74,18 @@ const LoginModal = () =>{
     setOpen(false);
   };
 
-  const options = {
-    xsrfCookieName: "XSRF-TOKEN",
-    xsrfHeaderName: "X-XSRF-TOKEN",
-  };
-
-  const instance = axios.create({
-    withCredentials: true,
-  });
-
   const onLogout = (e) => {
     e.preventDefault();
-    let cookie = document.cookie;
-    instance
-      .post("http://localhost:8080/api/logout/", { cookie }, options)
-      .then((res) => {
-        setCookie(null);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    setUserData({
+      token: undefined,
+      user: undefined,
+    });
+    localStorage.setItem("auth-token", "");
   };
 
   return (
     <div>
-      {!cookie ? (
+      {!userData.user ? (
         <div>
           <Button variant="outlined" color="primary" onClick={handleModalOpen}>
             Login
@@ -134,7 +119,7 @@ const LoginModal = () =>{
           </Tabs>
         </AppBar>
         <TabPanel value={value} index={0}>
-          <LoginComp handleModalClose={handleModalClose} options={options} />
+          <LoginComp handleModalClose={handleModalClose} />
         </TabPanel>
         <TabPanel value={value} index={1}>
           <RegistrationComp setValue={setValue} />
