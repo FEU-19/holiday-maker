@@ -8,11 +8,14 @@ const PaymentPage = styled.div`
   margin: 0 auto;
   padding: 0;
   box-sizing: border-box;
+  background-color: #4ab2bbc2;
+  border-radius: 10px;
 `;
 
 const PaymentContainer = styled.div`
   width: 100%;
   text-align: center;
+  margin: 0;
 `;
 
 const H1 = styled.h1`
@@ -22,35 +25,50 @@ const H1 = styled.h1`
 
 const HR = styled.hr`
   border: none;
-  background-color: gray;
+  background-color: #162c72;
   height: 2px;
-  margin: 50px 0;
+  margin: 50px auto;
+  width: 90%;
 `;
 
 const CarNumContainer = styled.div`
   display: flex;
-  justify-content: space-around;
-  padding: 10px 80px;
+  justify-content: flex-start;
+  padding: 10px;
   border: 1px solid;
+  width: 100%;
 `;
 
 const CardNum = styled(Cleave)`
   border: none;
   outline: none;
+  margin-left: 10px;
+  width: auto;
+  background: transparent;
 `;
 
-const InfoForm = styled.div`
+const InfoForm = styled.form`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   margin-top: 50px;
+  width: 100%;
+`;
+
+const FormDiv = styled.div`
+  width: 100%;
+  display: flex;
+  justify-conent: space-around;
+  padding: 5px;
 `;
 
 const PayForm = styled.form`
+  width: 40%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 50px;
+  align-items: center;
+  margin: 10px auto;
 `;
 
 const InputContainer = styled.div`
@@ -71,32 +89,31 @@ const IMG = styled.img`
   margin-left: 5px;
 `;
 
-const Table = styled.div`
-  width: 65%;
-  border-collapse: collapse;
-`;
-
 const EXPCVCContainer = styled.div`
   display: flex;
-  text-align: center;
-  padding: 10px 80px;
+  padding: 10px;
   border: 1px solid;
+  border-top: none;
+  width: 100%;
 `;
 
 const EXPCVCDiv = styled.div`
   display: flex;
   flex: 1;
-  justify-content: space-between;
+  justify-content: flex-start;
 `;
 
 const EXPCVCInput = styled(Cleave)`
+  margin-left: 10px;
   border: none;
   outline: none;
+  width: 100px;
+  background-color: transparent;
 `;
 
 const PayBtn = styled.button`
   font-size: 22px;
-  background-color: rgb(59, 27, 202);
+  background-color: #162c72;
   border-radius: 20px;
   padding: 10px 110px;
   color: #fff;
@@ -113,11 +130,11 @@ export {
   CarNumContainer,
   CardNum,
   InfoForm,
+  FormDiv,
   PayForm,
   InputContainer,
   ImgContainer,
   IMG,
-  Table,
   EXPCVCContainer,
   EXPCVCDiv,
   EXPCVCInput,

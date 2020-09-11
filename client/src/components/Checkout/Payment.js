@@ -17,6 +17,7 @@ import {
   H1,
   HR,
   InfoForm,
+  FormDiv,
   InputContainer,
   PayBtn,
 } from "./PaymentStyles";
@@ -79,8 +80,8 @@ function Payment() {
     <PaymentPage className={classes.root} noValidate autoComplete="off">
       <PaymentContainer>
         <H1>Payment</H1>
-        <form>
-          <InfoForm>
+        <InfoForm>
+          <FormDiv>
             <TextInput
               label="First name"
               onchange={(e) => setFirstName(e.target.value)}
@@ -101,14 +102,9 @@ function Payment() {
               onchange={(e) => setPhoneNum(e.target.value)}
               value={phoneNum}
             />
-          </InfoForm>
-          <br />
-          <HR />
-
-          <InfoForm>
-            <InputContainer>
-              <CountryDropdownList />
-            </InputContainer>
+          </FormDiv>
+          <FormDiv className="">
+            <CountryDropdownList />
 
             <TextInput
               label="City"
@@ -125,8 +121,8 @@ function Payment() {
               onchange={(e) => setAdress(e.target.value)}
               value={adress}
             />
-          </InfoForm>
-        </form>
+          </FormDiv>
+        </InfoForm>
 
         <br />
         <HR />

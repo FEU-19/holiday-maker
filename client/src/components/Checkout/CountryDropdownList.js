@@ -11,7 +11,7 @@ function Country_DropdownList() {
   const useStyles = makeStyles((theme) => ({
     formControl: {
       margin: theme.spacing(1),
-      minWidth: 120,
+      flex: 1,
     },
     selectEmpty: {
       marginTop: theme.spacing(2),
