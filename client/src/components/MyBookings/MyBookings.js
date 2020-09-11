@@ -13,11 +13,11 @@ const MyBookings = () => {
         if(clickedBookings) {
             console.log("myBookings");
 
-            let url = "http://localhost:3002/api/MyBookings";
+            let url = "https://3d73abdd-8709-4745-bb97-43b5a50dd7ce.mock.pstmn.io/api/mybookings";
             axios
                 .get(url)
                 .then((res) => {
-                    console.log(res);
+                    console.log(res.adults);
                    // myBookings.push(res.data...);
                    setMyBookings(res);
                 
@@ -28,14 +28,12 @@ const MyBookings = () => {
     return (
         <div>
             <Button onClick={showMyBookings} >My Bookings </Button>
-            {MyBookings.map(MyBooking => {
-                <ul>
-                    <li>{MyBookings.name}</li>
-                    <li>{MyBookings.num}</li>
-                    <li></li>
-                    <li></li>
-                </ul>
-            })}
+            {/* {myBookings.map(myBooking => 
+                    <ul>
+                        <li>{myBooking.roomNumber}</li>
+                        <li>{myBooking.price}</li>
+                    </ul>
+            )} */}
         </div>
     )
 }
