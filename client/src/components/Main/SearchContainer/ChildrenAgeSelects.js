@@ -12,7 +12,7 @@ class ChildrenAgeSelects extends React.Component {
       selects: <></>,
       MenuItems: <></>,
       childrenAgeArr: [],
-      indexForKey: 0
+      indexForKey: 0,
     };
 
     this.onChange = this.onChange.bind(this);
@@ -50,7 +50,8 @@ class ChildrenAgeSelects extends React.Component {
 
     this.setState({ childrenAgeArr: arr });
 
-    console.log(this.state.childrenAgeArr);
+    this.props.setAgeOfChildren(this.state.childrenAgeArr);
+
     this.renderSelects();
   }
 

@@ -18,7 +18,7 @@ import SelectDistanceCity from "./SelectDistanceCity.js";
 import SelectDistanceBeach from "./SelectDistanceBeach";
 
 // Filter functions
-// import adultChildToBedFilter from "../../../utils/adultChildToBedFilter.js";
+import filterAmountOfTravelers from "../../../utils/filterAmountOfTravelers";
 import filterCity from "../../../utils/filterCity";
 import filterKidsClub from "../../../utils/filterKidsClub";
 import filterNightEntertainment from "../../../utils/filterNightEntertainment";
@@ -58,6 +58,7 @@ const SearchContainer = ({ setFilteredDataCB }) => {
   const [checkedPool, setCheckedPool] = useState("none");
   const [checkedRestaurant, setCheckedRestaurant] = useState("none");
   const [amountOfChildren, setAmountOfChildren] = useState(0);
+  const [ageOfChildren, setAgeOfChildren] = useState([]);
   const [distanceCity, setDistanceCity] = useState(0);
   const [distanceBeach, setDistanceBeach] = useState(0);
   const [amountOfAdults, setAmountOfAdults] = useState(1);
@@ -82,6 +83,7 @@ const SearchContainer = ({ setFilteredDataCB }) => {
 
     let c = [...residentData];
 
+    c = filterAmountOfTravelers(c, amountOfAdults, ageOfChildren);
     c = filterCity(c, city);
     c = filterPool(c, checkedPool);
     c = filterNightEntertainment(c, checkedNightEntertainment);
@@ -129,7 +131,10 @@ const SearchContainer = ({ setFilteredDataCB }) => {
             />
           </Grid>
           <Grid item xs={2}>
-            <ChildrenAgeSelects amountOfChildren={amountOfChildren} />
+            <ChildrenAgeSelects 
+              amountOfChildren={amountOfChildren} 
+              setAgeOfChildren={setAgeOfChildren}
+            />
           </Grid>
         </GridContainer>
 
