@@ -1,6 +1,6 @@
 const User = require("../models/User");
 
-const getCookie = function (req, res) {
+const authorizeUser = async function (req, res, next) {
   const { cookie } = req.body;
 
   if (!cookie) {
@@ -9,15 +9,15 @@ const getCookie = function (req, res) {
 
   const userId = cookie.split("=Bearer")[1];
 
-  const user = User.findOne({
-    userId,
-  });
+  const user = await User.findById(userId);
 
   if (!user) {
     res.send("User does not exist");
   }
 
-  console.log("its okej");
+  req.body.user = user;
+
+  next();
 };
 
-module.exports = getCookie;
+module.exports = authorizeUser;

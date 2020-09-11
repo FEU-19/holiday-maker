@@ -12,7 +12,7 @@ exports.create = async (req, res) => {
   const orderData = {};
 
   const user = await User.findById(Id);
-  console.log(user);
+
   orderData.userId = data.userId;
   orderData.bookingNumber = bookingNrGenerator(user.firstName, user.surname, 6);
   orderData.rooms = data.rooms;
@@ -35,6 +35,7 @@ exports.create = async (req, res) => {
       room.occupiedDates.push(data.bookingDates);
     }
   });
+
   hotel.save((err) => {
     if (err) res.status(500).send({ error: err.message });
     res.status(201).json(orderData);

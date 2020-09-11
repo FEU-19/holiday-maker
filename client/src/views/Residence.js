@@ -36,10 +36,7 @@ const Residence = () => {
         updateData(response.data.data);
       })
       .catch((error) => {
-        console.error(
-          "An error occured while retrieving data from the server",
-          error
-        );
+        console.error("An error occured while retrieving data from the server", error);
       });
   }, [hotelId]);
 
@@ -51,7 +48,7 @@ const Residence = () => {
     <div className={classes.article}>
       <div className={classes.titlecontainer}>
         <h1 className={classes.title}>{data.name}</h1>
-        <HotelCarousel dataImage={data} />
+        <HotelCarousel hotelId={hotelId} />
         <div className={classes.info}>
           <ResidenceInformation info={data} />
         </div>
