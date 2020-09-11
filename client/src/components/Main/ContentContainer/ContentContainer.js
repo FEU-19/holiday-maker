@@ -40,11 +40,11 @@ const ContentContainer = ({ filteredData, sortOn }) => {
     // If the option 'None' was selected
     if (!sortOn) return setSortedData([...filteredData]);
 
-    if (sortOn === 'Price') { 
+    if (sortOn === 'Price low to high') { 
       // ...
     }
 
-    if (sortOn === 'Rating') {
+    if (sortOn === 'Rating low to high') {
       // ...
     }
   }, [sortOn, filteredData])
