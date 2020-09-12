@@ -1,19 +1,9 @@
 export default function filterAmountOfTravelers(c, adults, children) {
-  let data = [...c];
-  let arr = [];
+  let data = JSON.parse(JSON.stringify(c));
 
-  // console.log(data)
-  // console.log(adults)
-  // console.log(children)
+  for (let i = 0; i < data.length; i++) {
+    data[i].rooms = data[i].rooms.filter(room => room.beds >= adults);
+  }
 
-  arr = data.reduce((acc, current) => {
-    acc = current.rooms.filter(room => room.beds <= adults)
-    return acc
-  }, {})
-
-  console.log(c)
-  return c;
+  return data.filter(hotel => hotel.rooms.length !== 0);
 };
-
-//Amount of adults, amount of children and residentsData is needed in that order
-//for the function to work properly. Returns filtered residentsData.
