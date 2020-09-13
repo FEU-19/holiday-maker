@@ -3,7 +3,7 @@ import { Redirect, useLocation } from "react-router-dom";
 import CheckIcon from "@material-ui/icons/CheckCircle";
 import ErrorIcon from "@material-ui/icons/Error";
 import { useStyles, iconStyle } from "./PaymentStyles";
-import Modals from "../common/Modal/Modal";
+import Modal from "../common/Modal/Modal";
 
 import {
   PaymentPage,
