@@ -1,27 +1,20 @@
 import React from "react";
 
-import { InputContainer, InputStyles } from "./PaymentStyles";
+import { InputContainer, InputStyle } from "./PaymentStyles";
 import TextField from "@material-ui/core/TextField";
 
 function TextInput({ label, onchange, value }, props) {
-  const inputStyles = InputStyles();
+  const inputStyles = InputStyle();
 
   return (
-    <InputContainer>
-      <TextField
-        id="standard-basic"
-        label={label}
-        value={value}
-        onChange={onchange}
-        {...props}
-        InputLabelProps={{
-          classes: {
-            root: inputStyles.label,
-            focused: inputStyles.focusedLabel,
-          },
-        }}
-      />
-    </InputContainer>
+    <TextField
+      id="standard-basic"
+      label={label}
+      value={value}
+      onChange={onchange}
+      {...props}
+      className={inputStyles.input}
+    />
   );
 }
 

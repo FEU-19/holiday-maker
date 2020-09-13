@@ -24,9 +24,11 @@ function Country_DropdownList() {
 
   const useStyles = makeStyles((theme) => ({
     formControl: {
-      width: `${86}%`,
+      width: `${40}%`,
       flex: 1,
-      margin: 0,
+      marginTop: 9,
+      marginLeft: 10,
+
       padding: 0,
       backgroundColor: "transparent",
     },

@@ -1,29 +1,22 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+
+import { paymentFormStyle } from "./PaymentStyles";
 import { Box, Button, InputLabel } from "@material-ui/core";
 import Cleave from "cleave.js/react";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    "& > *": {
-      margin: theme.spacing(1),
-    },
-  },
-}));
-
-export default function PaymentForms(
+export default function PaymentForms({
   onCreditCardTypeChanged,
   handleCardNum,
   setExpire,
   setCvc,
-  cardImg
-) {
-  const classes = useStyles();
+  cardImg,
+}) {
+  const classes = paymentFormStyle();
 
   return (
-    <form className={classes.root} noValidate autoComplete="off">
-      <Box>
-        <InputLabel htmlFor={"cardNumber"}>
+    <form className={classes.form} noValidate autoComplete="off">
+      <Box className={classes.wrapper}>
+        <InputLabel className={classes.label} htmlFor={"cardNumber"}>
           Card Number
           <Cleave
             placeholder="0000 0000 0000 0000"
@@ -34,12 +27,12 @@ export default function PaymentForms(
             onChange={handleCardNum}
           />
         </InputLabel>
-        <Box>
-          <img src={cardImg} alt="card image" />
+        <Box className={classes.imgWrapper}>
+          <img className={classes.image} src={cardImg} alt="card image" />
         </Box>
       </Box>
-      <Box>
-        <InputLabel htmlFor={"expiryDate"}>
+      <Box className={classes.wrapper}>
+        <InputLabel className={classes.label} htmlFor={"expiryDate"}>
           Expiry Date
           <Cleave
             placeholder="MM / YY"
@@ -47,10 +40,10 @@ export default function PaymentForms(
             onChange={(e) => setExpire(e.target.value)}
           />
         </InputLabel>
-        <InputLabel htmlFor={"cvc"}>
+        <InputLabel className={classes.label} htmlFor={"cvc"}>
           CVC
           <Cleave
-            placeholder="CVV"
+            placeholder="000"
             options={{
               blocks: [3],
               numericOnly: true,

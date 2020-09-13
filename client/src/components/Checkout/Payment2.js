@@ -3,11 +3,9 @@ import React, { useState } from "react";
 import { Redirect, useLocation } from "react-router-dom";
 import CheckIcon from "@material-ui/icons/CheckCircle";
 import ErrorIcon from "@material-ui/icons/Error";
-
-import { makeStyles } from "@material-ui/core/styles";
-import { useStyles, iconStyle } from "./PaymentStyles";
+import { iconStyle, PageStyle } from "./PaymentStyles";
 import Modal from "../common/Modal/Modal";
-import { Container, Button, Divider } from "@material-ui/core";
+import { Container, Button, Divider, Box } from "@material-ui/core";
 
 // import PaymentForm from "./PaymentForm";
 import PaymentForm from "./PaymentForm2";
@@ -16,10 +14,8 @@ import BookingInfo from "./BookingInfo";
 import InfoForm from "./InfoForm";
 
 function Payment() {
-  const { state } = useLocation();
-
   const IconStyle = iconStyle();
-  console.log(state);
+  const pageStyle = PageStyle();
 
   //Payment States
   const [firstName, setFirstName] = useState("");
@@ -97,48 +93,52 @@ function Payment() {
   }
 
   return (
-    <Container>
-      <h1>Payment</h1>
+    <Container className={pageStyle.root}>
+      <h1 className={pageStyle.pageTitle}>Payment</h1>
       <BookingInfo />
       <Divider />
-      <InfoForm
-        firstName={firstName}
-        lastName={lastName}
-        email={email}
-        address={address}
-        city={city}
-        phoneNum={phoneNum}
-        zipcode={zipcode}
-        setAddress={setAddress}
-        setCity={setCity}
-        setZipCode={setZipCode}
-        setLastName={setLastName}
-        setFirstName={setFirstName}
-        setPhoneNum={setPhoneNum}
-        setEmail={setEmail}
-      />
-
+      <Box className={pageStyle.wrapper}>
+        <h2 className={pageStyle.header}>Account Information</h2>
+        <InfoForm
+          firstName={firstName}
+          lastName={lastName}
+          email={email}
+          address={address}
+          city={city}
+          phoneNum={phoneNum}
+          zipcode={zipcode}
+          setAddress={setAddress}
+          setCity={setCity}
+          setZipCode={setZipCode}
+          setLastName={setLastName}
+          setFirstName={setFirstName}
+          setPhoneNum={setPhoneNum}
+          setEmail={setEmail}
+        />
+      </Box>
       <Divider />
-
-      <PaymentForm
-        handleCardNum={handleCardNum}
-        onCreditCardTypeChanged={onCreditCardTypeChanged}
-        cardNum={cardNum}
-        cardImg={cardImg}
-        setType={setType}
-        setCardImg={setCardImg}
-        setCvc={setCvc}
-        setExpire={setExpire}
-      />
-
-      <Button
-        onClick={() => setShowModal(true)}
-        className="payBtn"
-        type="submit"
-      >
-        Finish & Pay
-      </Button>
-
+      <Box className={pageStyle.wrapper}>
+        <h2 className={pageStyle.header}>Payment Method</h2>
+        <PaymentForm
+          handleCardNum={handleCardNum}
+          onCreditCardTypeChanged={onCreditCardTypeChanged}
+          cardNum={cardNum}
+          cardImg={cardImg}
+          setType={setType}
+          setCardImg={setCardImg}
+          setCvc={setCvc}
+          setExpire={setExpire}
+        />
+      </Box>
+      <Box className={pageStyle.btnCtn}>
+        <Button
+          onClick={() => setShowModal(true)}
+          className={pageStyle.btn}
+          type="submit"
+        >
+          Finish & Pay
+        </Button>
+      </Box>
       <Modal onClose={() => controlCloseModal(paymentSuccess)} open={showModal}>
         {paymentSuccess ? (
           <div className="modal__container">
