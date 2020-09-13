@@ -9,8 +9,6 @@ const boxContainer = {
   justifyContent: "space-between",
   alignItems: "center",
   marginBottom: "20px",
-  //width: "700px",
-  //height: "200px",
 };
 
 const infoContainer = {
@@ -21,9 +19,7 @@ const infoContainer = {
   paddingLeft: "25px",
   paddingTop: "20px",
   paddingBottom: "20px",
-  //marginLeft: "5px",
-  //marginRight: "5px",
-  backgroundColor: "#EAEAEA",
+  backgroundColor: "#9db0c6",
   color: "black",
   borderRadius: "10px",
   boxSizing: "border-box",

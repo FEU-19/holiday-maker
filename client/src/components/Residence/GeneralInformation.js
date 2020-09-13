@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback } from "react";
 
 // Style variables
 const boxContainer = {
-  //width: "600px",
   padding: "30px 30px 50px 30px",
   width:"1305.280",
 };
@@ -11,10 +10,9 @@ const title = {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  //width: "200px",
   width: '319px',
   height: "35px",
-  backgroundColor: "lightgrey",
+  backgroundColor: "#9db0c6",
   color: "#464646",
   borderBottom: "1px solid #9a9a9a",
   borderRadius: "4px 4px 0 0",
@@ -25,10 +23,7 @@ const contentContainer = {
   flexDirection: "row",
   flexWrap: "nowrap",
   justifyContent: "space-between",
-  //alignSelf: "flex-start",
-  //justifyContent: "center",
-  //width: "600px",
-  backgroundColor: "#EAEAEA",
+  backgroundColor: "#9db0c6",
   color: "#464646",
   borderRadius: "0 0 4px 4px",
 };
@@ -41,11 +36,10 @@ const content = {
 };
 
 const headInfo = {
-  //width: "600px",
   padding: "30px 40px 20px 40px",
   borderRadius: "0 4px 0 0",
   color: "#464646",
-  backgroundColor: "#EAEAEA",
+  backgroundColor: "#9db0c6",
   boxSizing: "border-box",
 };
 
@@ -59,12 +53,6 @@ const subTitle = {
   padding: "0 0 10px 0",
   fontWeight: "bold",
 };
-
-/*const subTitleBeds = {
-  margin: "0",
-  padding: "20px 0 10px 0",
-  fontWeight: "bold",
-};*/
 
 function getRoomInfo(key, generalInfo) {
   const tempObject = generalInfo.rooms.reduce((acc, cur) => {

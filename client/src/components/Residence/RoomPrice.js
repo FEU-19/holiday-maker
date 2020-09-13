@@ -6,7 +6,8 @@ const useStyle = makeStyles(() => ({
   card: {
     maxWidth: 345,
     margin: 10,
-    backgroundColor: "rgb(234, 234, 234)",
+    //backgroundColor: "rgb(234, 234, 234)",
+    backgroundColor: "#9db0c6",
     display: "flex",
     flexDirection: "column",
     //justifyContent: "space-between",

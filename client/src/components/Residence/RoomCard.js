@@ -48,6 +48,7 @@ const useStyle = makeStyles(() => ({
     margin: 10,
     display: "flex",
     alignItems: "center",
+    color: "#4ab1bb",
   },
   options: {
     margin: 10,
