@@ -56,7 +56,7 @@ function BookingInfo() {
           style={{
             alignSelf: "flex-end",
             marginRight: "40px",
-            color: "#162c72",
+            color: "#E55B5B",
           }}
         >
           Total: 42200 kr

@@ -19,6 +19,7 @@ export default function PaymentForms({
         <InputLabel className={classes.label} htmlFor={"cardNumber"}>
           Card Number
           <Cleave
+            className={classes.inputCardNum}
             placeholder="0000 0000 0000 0000"
             options={{
               creditCard: true,
@@ -35,6 +36,7 @@ export default function PaymentForms({
         <InputLabel className={classes.label} htmlFor={"expiryDate"}>
           Expiry Date
           <Cleave
+            className={classes.inputDate}
             placeholder="MM / YY"
             options={{ date: true, datePattern: ["m", "d"] }}
             onChange={(e) => setExpire(e.target.value)}
@@ -43,6 +45,7 @@ export default function PaymentForms({
         <InputLabel className={classes.label} htmlFor={"cvc"}>
           CVC
           <Cleave
+            className={classes.inputCVC}
             placeholder="000"
             options={{
               blocks: [3],

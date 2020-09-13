@@ -14,17 +14,20 @@ export const PageStyle = makeStyles(() => ({
     marginBottom: 30,
   },
   pageTitle: {
-    color: "#162c72", // darkBlue
+    /*color: "#162c72", // darkBlue */
+    color: "#E57D7C", // warm-pink
     textAlign: "center",
   },
   header: {
-    color: "#4ab0bd", // lightGreen
+    /*color: "#4ab0bd", // lightGreen */
+    color: "#9B7F7E", //warm sandy
   },
   btnCtn: {
     textAlign: "center",
   },
   btn: {
-    backgroundColor: "#162c72", // darkBlue
+    /*backgroundColor: "#162c72", // darkBlue */
+    backgroundColor: "#6B8D97", // warm greenBlue
     color: "white",
   },
 }));
@@ -55,34 +58,57 @@ export const InputStyle = makeStyles(() => ({
 
 export const paymentFormStyle = makeStyles((theme) => ({
   form: {
-    width: "50%",
+    width: "350px",
     height: "100px",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    alignItems: "flex-start",
-    border: "1px solid black",
+    border: "1px solid #162c72",
     margin: "0 auto",
     borderRadius: "10px",
-    padding: "10px",
+    padding: "20px",
   },
 
   wrapper: {
     display: "flex",
-    justifyContent: "space-around",
+    width: "100%",
+    justifyContent: "space-between",
   },
   imgWrapper: {
-    width: "10%",
+    width: "130px",
     height: "50px",
     display: "flex",
     justifyContent: "flex-end",
+    marginTop: "5px",
   },
   image: {
     width: "100%",
     objectFit: "contain",
   },
   label: {
-    width: "50%",
+    margin: "5px",
+    width: "130px",
+    maxWidth: "180px",
+    display: "flex",
+    flexDirection: "column",
+  },
+  inputCardNum: {
+    width: "160px",
+    margin: "5px 0 5px 0",
+    lineHeight: "16px",
+    fontSize: "16px",
+  },
+  inputDate: {
+    width: "60px",
+    margin: "5px 0 5px 0",
+    lineHeight: "16px",
+    fontSize: "16px",
+  },
+  inputCVC: {
+    width: "30px",
+    margin: "5px 0 5px 0",
+    lineHeight: "16px",
+    fontSize: "16px",
   },
 }));
 
@@ -153,6 +179,9 @@ export const iconStyle = makeStyles(() => ({
 }));
 
 // the following code need to convert to material ui component
+/* booking info  beach style
+
+
 const Title = styled.h2`
   color: #4ab1bb;
 `;
@@ -165,7 +194,7 @@ const SmlHR = styled.hr`
   width: 90%;
 `;
 
-// booking info
+
 const BookingInfoDiv = styled.div`
   display: flex;
   flex-direction: column;
@@ -179,6 +208,7 @@ const BookingInfoContainer = styled.div`
   justify-content: center;
   flex-direction: column;
 `;
+
 
 const BookingInfoBoxDiv = styled.div`
   display: flex;
@@ -198,6 +228,82 @@ const BookingInfoTextAlign = styled.div`
 
 const BookingInfoTitle = styled.h3`
   color: #162c72;
+  display: flex;
+  align-items: center;
+  width: 100px;
+`;
+
+const BookingInfoList = styled.ul`
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 10px auto;
+`;
+
+const BookingInfoItems = styled.li`
+  width: 46%;
+  text-align: left;
+  margin-top: 5px;
+`;
+const BookingInfoText = styled.p`
+  font-weight: 700;
+  align-self: flex-end;
+  margin-right: 40px;
+  color: whitesmoke;
+  font-weight: 700;
+`;
+
+
+*/
+
+// warm beach style
+
+const Title = styled.h2`
+  color: #9b7f7e;
+`;
+
+const SmlHR = styled.hr`
+  border: none;
+  background-color: whitesmoke;
+  height: 0.5px;
+  margin: 0px auto;
+  width: 90%;
+`;
+
+const BookingInfoDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const BookingInfoContainer = styled.div`
+  display: flex;
+  width: 80%;
+  justify-content: center;
+  flex-direction: column;
+`;
+
+// #6B8D97 greenblue
+const BookingInfoBoxDiv = styled.div`
+  display: flex;
+  flex: 1;
+  align-items: center;
+  flex-direction: column;
+  margin: 10px;
+  border-radius: 10px;
+  background-color: #6b8d97;
+  padding: 0 15px;
+  box-shadow: 0px 1px 1px grey;
+`;
+
+const BookingInfoTextAlign = styled.div`
+  text-align: left;
+`;
+
+const BookingInfoTitle = styled.h3`
+  color: #e55b5b;
   display: flex;
   align-items: center;
   width: 100px;
