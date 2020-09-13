@@ -285,3 +285,15 @@ export const InputStyles = makeStyles(() => ({
     },
   },
 }));
+
+// Modal icon style
+export const iconStyle = makeStyles(() => ({
+  errorIcon: {
+    color: "red",
+    fontSize: "5rem",
+  },
+  checkIcon: {
+    color: "green",
+    fontSize: "5rem",
+  },
+}));
