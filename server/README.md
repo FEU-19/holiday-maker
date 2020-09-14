@@ -23,7 +23,7 @@
 # API Specifikation
 <br>
 
-### **GET** */flight-bookings/*
+### **GET** */flights/*
 <br>
 
 > ***Query params:***
@@ -106,3 +106,4 @@
 > 	}
 > }
 > ```
+

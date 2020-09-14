@@ -1,26 +1,28 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
-import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import AppBar from "@material-ui/core/AppBar";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
-import PropTypes from "prop-types";
+import React, { useState, useEffect } from 'react';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+import PropTypes from 'prop-types';
 
 import RegistrationComp from "./Registration/RegistrationComp";
 import LoginComp from "./Login/Login";
 
-const LoginModal = () => {
+import { cookieFinder } from "../../utils/findCookie"
+
+const LoginModal = () =>{
   const [open, setOpen] = useState(false);
-  const [cookie, setCookie] = useState(document.cookie);
+  const [cookie, setCookie] = useState(false);
   const [value, setValue] = useState(0);
 
   useEffect(() => {
-    setCookie(document.cookie);
-  }, [open]);
+    setCookie(cookieFinder());
+  }, [open])
 
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -86,7 +88,7 @@ const LoginModal = () => {
     e.preventDefault();
     let cookie = document.cookie;
     instance
-      .post("http://localhost:3002/api/logout/", { cookie }, options)
+      .post("http://localhost:8080/api/logout/", { cookie }, options)
       .then((res) => {
         setCookie(null);
       })
