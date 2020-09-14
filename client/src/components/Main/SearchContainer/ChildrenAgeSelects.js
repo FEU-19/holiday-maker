@@ -48,7 +48,7 @@ class ChildrenAgeSelects extends React.Component {
   renderMenuItems() {
     let x = [];
 
-    for( let i = 1; i <= 17; i++) {
+    for( let i = 0; i <= 17; i++) {
       x.push(
         <MenuItem key={ 'ageMenu-' + i + Date.now() } value={ i }>{ i }</MenuItem>
       );
@@ -72,6 +72,7 @@ class ChildrenAgeSelects extends React.Component {
           onChange= { (e) => this.onChange(e, i) }
           aria-label={ "Select age of child" }
           id={ "selectAgeOfChild" + i }
+          required
         >
           <MenuItem key={ "AgeMenuLabel-" + i + Date.now() } disabled>Age</MenuItem>
           { this.state.MenuItems }
