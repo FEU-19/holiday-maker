@@ -4,7 +4,7 @@ export default function filterAmountOfTravelers(c, adults, children) {
   let amountOfTravelers = null;
 
   // removes whitespace
-  childrenOverAgeOfThree = children.filter(data => typeof data === 'number');
+  childrenOverAgeOfThree = children.filter(child => typeof child === 'number');
 
   // removes children under the age of 3
   for (let i = 0; i < childrenOverAgeOfThree.length; i++) {
@@ -13,6 +13,7 @@ export default function filterAmountOfTravelers(c, adults, children) {
     }
   }
 
+  // total amount of travelers
   amountOfTravelers = adults + childrenOverAgeOfThree.length;
 
   // removes rooms that do not contain enough beds
