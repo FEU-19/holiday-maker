@@ -1,18 +1,20 @@
 import React from "react";
 
-import { InputContainer } from "./PaymentStyles";
+import { InputContainer, InputStyle } from "./PaymentStyles";
 import TextField from "@material-ui/core/TextField";
 
-function TextInput({ label, onchange, value }) {
+function TextInput({ label, onchange, value }, props) {
+  const inputStyles = InputStyle();
+
   return (
-    <InputContainer>
-      <TextField
-        id="standard-basic"
-        label={label}
-        value={value}
-        onChange={onchange}
-      />
-    </InputContainer>
+    <TextField
+      id="standard-basic"
+      label={label}
+      value={value}
+      onChange={onchange}
+      {...props}
+      className={inputStyles.input}
+    />
   );
 }
 
