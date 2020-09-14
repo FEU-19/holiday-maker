@@ -49,7 +49,7 @@ const ButtonContainer = styled(Grid)`
   padding: 10px;
 `;
 
-const SearchContainer = ({ setFilteredDataCB, setSearching }) => {
+const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) => {
   const [residentData, setResidentData] = useState([{}]);
   const [city, setCity] = useState("");
   const [checkedKidsClub, setCheckedKidsclub] = useState("none");
@@ -82,6 +82,22 @@ const SearchContainer = ({ setFilteredDataCB, setSearching }) => {
   function onSubmit(e) {
     e.preventDefault();
 
+    let queryParams = {
+      city: city ? city : 'none',
+      checkedKidsClub,
+      checkedNightEntertainment,
+      checkedRestaurant,
+      checkedPool,
+      distanceBeach: distanceBeach ? distanceBeach : 'none',
+      distanceCity: distanceCity ? distanceCity : 'none',
+      amountOfAdults,
+      amountOfChildren,
+      ageOfChildren,
+      date
+    };
+
+    setQueryParams(queryParams);
+    
     let c = [...residentData];
 
     c = filterAmountOfTravelers(c, amountOfAdults, ageOfChildren);
@@ -92,7 +108,7 @@ const SearchContainer = ({ setFilteredDataCB, setSearching }) => {
     c = filterRestaurant(c, checkedRestaurant);
     c = filterDistanceBeach(c, distanceBeach);
     c = filterDistanceCity(c, distanceCity);
-    c = filterDate(c, date)
+    // c = filterDate(c, date)
 
     setFilteredDataCB(c);
     setSearching(true);

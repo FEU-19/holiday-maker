@@ -17,6 +17,7 @@ const Main = () => {
   const [filteredData, setFilteredData] = useState([]);
   const [searching, setSearching] = useState(false);
   const [sortOn, setSortOn] = useState('');
+  const [queryParams, setQueryParams] = useState({});
 
   function setFilteredDataCB(data) {
     setFilteredData(data);
@@ -26,9 +27,9 @@ const Main = () => {
     <>
       <HeaderComp />
       <Container>
-        <SearchContainer setFilteredDataCB={setFilteredDataCB} setSearching={setSearching} />
+        <SearchContainer setFilteredDataCB={setFilteredDataCB} setSearching={setSearching} setQueryParams={setQueryParams} />
         <SortContainer filteredData={filteredData} setSortOn={setSortOn} sortOn={sortOn}  />
-        <ContentContainer filteredData={filteredData} sortOn={sortOn} searching={searching} />
+        <ContentContainer filteredData={filteredData} sortOn={sortOn} searching={searching} queryParams={queryParams} />
       </Container>
     </>
   );
