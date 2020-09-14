@@ -8,12 +8,9 @@ import { iconStyle, PageStyle, BookingInfoStyle } from "./PaymentStyles";
 import Modal from "../common/Modal/Modal";
 import { Container, Button, Divider, Box, Typography } from "@material-ui/core";
 
-// import PaymentForm from "./PaymentForm";
 import PaymentForm from "./PaymentForm";
-
-// import BookingInfo from "./BookingInfo";
 import InfoForm from "./InfoForm";
-import BookingInfo2 from "./BookingInfo2";
+import BookingInfo from "./BookingInfo";
 
 function Payment() {
   const IconStyle = iconStyle();
@@ -141,8 +138,8 @@ function Payment() {
       <Typography variant="h4" className={pageStyle.pageTitle}>
         Payment
       </Typography>
-      {/* <BookingInfo /> */}
-      <BookingInfo2 />
+
+      <BookingInfo />
       <Divider />
       <Box className={pageStyle.wrapper}>
         <Typography variant="h5" className={style.InfoTitle}>
