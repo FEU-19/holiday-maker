@@ -1,36 +1,35 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
+const jwt = require("jsonwebtoken");
 
-exports.createLogout = async (req, res) =>{
-  let userId = req.body.userId;
+exports.read = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("-password");
+    res.json(user);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+};
 
-  res.clearCookie("access_token", "Bearer" + userId).end();
-}
+exports.createLogout = async (req, res) => {};
 
 exports.createLogin = async (req, res) => {
-  const {
-    email,
-    password
-  } = req.body.user;
+  const { email, password } = req.body.user;
   if (!email || !password) {
     return res.status(400).json({
-      error: [{
-        msg: "Invalid Credentials",
-      }]
+      error: [{ msg: "Invalid Credentials" }],
     });
   }
 
   try {
-    let user = await User.findOne({
+    const user = await User.findOne({
       email,
     });
-    console.log(user);
 
     if (!user) {
       return res.status(400).json({
-        error: [{
-          msg: "Invalid Credentials",
-        }]
+        error: [{ msg: "Invalid Credentials" }],
       });
     }
 
@@ -38,23 +37,23 @@ exports.createLogin = async (req, res) => {
 
     if (!isMatch) {
       return res.status(400).json({
-        error: [{
-          msg: "Invalid Credentials",
-        }]
+        error: [{ msg: "Invalid Credentials" }],
       });
     }
 
-    res.status(200)
-    res.cookie("access_token", "Bearer" + user.id, {
-      expires: new Date(Date.now() + 8 * 3600000),
-    })
-    res.send("fungerar")
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
 
+    res.json({
+      token,
+      user: {
+        id: user._id,
+      },
+    });
   } catch (err) {
     console.error(err.message);
-    res.status(500).send("Server error");
+    return res.status(500).send("Server error");
   }
-}
+};
 
 exports.create = async (req, res) => {
   const {
@@ -68,26 +67,30 @@ exports.create = async (req, res) => {
     phoneNumber,
     socialSecurityNumber,
     password,
-    confirmPassword,
   } = req.body;
 
-  if (!email || !password) {
+  if (
+    !email ||
+    !password ||
+    !surname ||
+    !street ||
+    !zipCode ||
+    !city ||
+    !country ||
+    !phoneNumber ||
+    !socialSecurityNumber ||
+    !firstName
+  ) {
     return res.status(400).json({
-      error: [{
-        msg: "Please fill all of the existing fields",
-      }],
+      error: [{ msg: "Please fill all of the existing fields" }],
     });
   }
 
   try {
-    let user = await User.findOne({
-      email
-    });
+    let user = await User.findOne({ email });
     if (user) {
       return res.status(400).json({
-        error: [{
-          msg: "User already exists",
-        }],
+        error: [{ msg: "User already exists" }],
       });
     }
 
@@ -108,17 +111,38 @@ exports.create = async (req, res) => {
     user.password = await bcrypt.hash(password, salt);
 
     await user.save();
-    res.status(201).json({
+
+    return res.status(201).json({
       msg: "Account was created",
     });
   } catch (err) {
     console.error(err.message);
-    res.status(500).json({
+    return res.status(500).json({
       msg: "Server error",
     });
   }
 };
 
-exports.read = (req, res) => {
-  res.send("OK");
+exports.createToken = async (req, res) => {
+  try {
+    const token = req.header("x-auth-token");
+    if (!token) return res.json(false);
+
+    const verified = jwt.verify(token, process.env.JWT_SECRET);
+    if (!verified) return res.json(false);
+
+    const user = await User.findById(verified.id);
+    if (!user) return res.json(false);
+
+    return res.json(true);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+exports.read = async (req, res) => {
+  const user = await User.findById(req.user);
+  res.json({
+    id: user._id,
+  });
 };

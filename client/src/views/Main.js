@@ -1,14 +1,32 @@
-import React from "react";
-import MyBookings from "../components/MyBookings/MyBookings"
-
-import LoginModal from "../components/modals/LoginModal";
+import React, { useState } from "react";
+import styled from "styled-components";
+import SearchContainer from "../components/Main/SearchContainer/SearchContainer";
+import ContentContainer from "../components/Main/ContentContainer/ContentContainer";
+import HeaderComp from "../components/common/Header/Header";
+// stor bokstav på variabler i styled components
+const Container = styled.main`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid black;
+`;
 
 const Main = () => {
-  return <div>
-    Index Page
-    <LoginModal />
-    <MyBookings />
-  </div>;
+  const [filteredData, setFilteredData] = useState([]);
+
+  function setFilteredDataCB(data) {
+    setFilteredData(data);
+  }
+
+  return (
+    <>
+      <HeaderComp />
+      <Container>
+        <SearchContainer setFilteredDataCB={setFilteredDataCB} />
+        <ContentContainer filteredData={filteredData} />
+      </Container>
+    </>
+  );
 };
 
 export default Main;

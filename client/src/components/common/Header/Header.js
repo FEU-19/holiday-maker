@@ -1,11 +1,11 @@
 import React from "react";
-import LoginButton from "./LoginButton";
-import RegisterButton from "./components/Registration/RegisterButton"
+import LoginModal from "../../modals/LoginModal"
+import MyBookings from "../../MyBookings/MyBookings"
 
 const Header = () => {
   return <header>
-      <LoginButton />
-      <RegisterButton />
+    <LoginModal />
+    <MyBookings />
   </header>;
 };
 
