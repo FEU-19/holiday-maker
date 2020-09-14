@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import { Button } from "@material-ui/core";
 import CheckIcon from "@material-ui/icons/Check";
+import StarRateIcon from '@material-ui/icons/StarRate';
 
 
 // Functions
@@ -23,17 +24,20 @@ const useStyles = makeStyles((theme) => ({
     height: 200,
   },
   image: {
-    width: 150,
-    height: 150,
+    width: 200,
+    height: 170,
+    marginLeft: 30,
+    marginRight: 30,
   },
   img: {
     maxWidth: '100%',
     maxHeight: '100%',
+    borderRadius: 2,
   },
+  button: {
+    marginTop: 30,
+  }
 }));
-
-
-
 
 const ContentContainer = ({ filteredData, sortOn }) => {
   const [sortedData, setSortedData] = useState([]);
@@ -73,7 +77,39 @@ const ContentContainer = ({ filteredData, sortOn }) => {
                     {hotel.name}
                   </Typography>
                   <Typography variant="body2" gutterBottom>
-                    {hotel.rating}
+                    {hotel.rating === 1 && (
+                      <StarRateIcon />
+                    )}
+                    {hotel.rating === 2 && (
+                      <>
+                        <StarRateIcon />
+                        <StarRateIcon />
+                      </>
+                    )}
+                    {hotel.rating === 3 && (
+                      <>
+                        <StarRateIcon />
+                        <StarRateIcon />
+                        <StarRateIcon />
+                      </>
+                    )}
+                    {hotel.rating === 4 && (
+                      <>
+                        <StarRateIcon />
+                        <StarRateIcon />
+                        <StarRateIcon />
+                        <StarRateIcon />
+                      </>
+                    )}
+                    {hotel.rating === 5 && (
+                      <>
+                        <StarRateIcon />
+                        <StarRateIcon />
+                        <StarRateIcon />
+                        <StarRateIcon />
+                        <StarRateIcon />
+                      </>
+                    )}
                   </Typography>
                   <Typography variant="body2">
                     City: {hotel.city}
@@ -87,26 +123,26 @@ const ContentContainer = ({ filteredData, sortOn }) => {
                 </Grid>
                 <Grid item xs={12} sm={4}>
                   {hotel.restaurant && (
-                    <p>
+                    <Typography variant="body2">
                       <CheckIcon /> Restaurant
-                    </p>
+                    </Typography>
                   )}
                   {hotel.pool && (
-                    <p>
-                      <CheckIcon /> Pool
-                    </p>
+                    <Typography variant="body2">
+                      <CheckIcon/> Pool
+                    </Typography>
                   )}
                   {hotel.kidsClub && (
-                    <p>
+                    <Typography variant="body2">
                       <CheckIcon /> Kids club
-                    </p>
+                    </Typography>
                   )}
                   {hotel.nightEntertainment && (
-                    <p>
+                    <Typography variant="body2">
                       <CheckIcon/> Evening entertainment
-                    </p>
+                    </Typography>
                   )}
-                    <Button
+                    <Button className={classes.button}
                       variant="contained"
                       color="default"
                     >
@@ -116,8 +152,8 @@ const ContentContainer = ({ filteredData, sortOn }) => {
                       More Info
                       </Link>
                     </Button>
-                  </Grid>
                 </Grid>
+              </Grid>
             </Paper>
           </div>
         );
