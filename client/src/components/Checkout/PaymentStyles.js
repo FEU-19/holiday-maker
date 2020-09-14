@@ -259,6 +259,80 @@ const BookingInfoText = styled.p`
 
 // warm beach style
 
+// BookingInfo
+export const BookingInfoStyle = makeStyles(() => ({
+  box: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  container: {
+    display: "flex",
+    width: "80%",
+    justifyContent: "center",
+    flexDirection: "column",
+  },
+
+  title: {
+    color: "#e55b5b",
+    display: "flex",
+    alignItems: "center",
+    width: "100px",
+    margin: "2% 0",
+  },
+
+  boxDiv: {
+    display: "flex",
+    flex: "1",
+    alignItems: "center",
+    flexDirection: "column",
+    marginBottom: "5%",
+    borderRadius: "10px",
+    backgroundColor: "#6b8d97",
+    padding: "10px 15px",
+    boxShadow: "0px 1px 1px grey",
+  },
+
+  ul: {
+    width: "100%",
+    display: "flex",
+    flexWrap: "wrap",
+    listStyle: "none",
+    margin: "10px auto",
+    marginTop: "0",
+  },
+
+  li: {
+    width: "46%",
+    textAlign: "left",
+    marginTop: "5px",
+  },
+
+  hr: {
+    border: "none",
+    backgroundColor: "white",
+    height: "0.5px",
+    margin: "0px auto",
+    width: "90%",
+  },
+
+  p: {
+    fontWeight: "700",
+    alignSelf: "flex-end",
+    marginRight: "40px",
+    color: "whitesmoke",
+    fontWeight: "700",
+    padding: " 10px 0",
+  },
+
+  InfoTitle: {
+    color: "#9b7f7e",
+    margin: "5% auto",
+  },
+}));
+
 const Title = styled.h2`
   color: #9b7f7e;
 `;
@@ -271,74 +345,74 @@ const SmlHR = styled.hr`
   width: 90%;
 `;
 
-const BookingInfoDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
+// const BookingInfoDiv = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+// `;
 
-const BookingInfoContainer = styled.div`
-  display: flex;
-  width: 80%;
-  justify-content: center;
-  flex-direction: column;
-`;
+// const BookingInfoContainer = styled.div`
+//   display: flex;
+//   width: 80%;
+//   justify-content: center;
+//   flex-direction: column;
+// `;
 
-// #6B8D97 greenblue
-const BookingInfoBoxDiv = styled.div`
-  display: flex;
-  flex: 1;
-  align-items: center;
-  flex-direction: column;
-  margin: 10px;
-  border-radius: 10px;
-  background-color: #6b8d97;
-  padding: 0 15px;
-  box-shadow: 0px 1px 1px grey;
-`;
+// // #6B8D97 greenblue
+// const BookingInfoBoxDiv = styled.div`
+//   display: flex;
+//   flex: 1;
+//   align-items: center;
+//   flex-direction: column;
+//   margin: 10px;
+//   border-radius: 10px;
+//   background-color: #6b8d97;
+//   padding: 0 15px;
+//   box-shadow: 0px 1px 1px grey;
+// `;
 
-const BookingInfoTextAlign = styled.div`
-  text-align: left;
-`;
+// const BookingInfoTextAlign = styled.div`
+//   text-align: left;
+// `;
 
-const BookingInfoTitle = styled.h3`
-  color: #e55b5b;
-  display: flex;
-  align-items: center;
-  width: 100px;
-`;
+// const BookingInfoTitle = styled.h3`
+//   color: #e55b5b;
+//   display: flex;
+//   align-items: center;
+//   width: 100px;
+// `;
 
-const BookingInfoList = styled.ul`
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-  margin: 10px auto;
-`;
+// const BookingInfoList = styled.ul`
+//   width: 100%;
+//   display: flex;
+//   flex-wrap: wrap;
+//   list-style: none;
+//   margin: 10px auto;
+// `;
 
-const BookingInfoItems = styled.li`
-  width: 46%;
-  text-align: left;
-  margin-top: 5px;
-`;
-const BookingInfoText = styled.p`
-  font-weight: 700;
-  align-self: flex-end;
-  margin-right: 40px;
-  color: whitesmoke;
-  font-weight: 700;
-`;
+// const BookingInfoItems = styled.li`
+//   width: 46%;
+//   text-align: left;
+//   margin-top: 5px;
+// `;
+// const BookingInfoText = styled.p`
+//   font-weight: 700;
+//   align-self: flex-end;
+//   margin-right: 40px;
+//   color: whitesmoke;
+//   font-weight: 700;
+// `;
 
 export {
   Title,
   SmlHR,
-  BookingInfoDiv,
-  BookingInfoContainer,
-  BookingInfoBoxDiv,
-  BookingInfoTextAlign,
-  BookingInfoTitle,
-  BookingInfoText,
-  BookingInfoList,
-  BookingInfoItems,
+  // BookingInfoDiv,
+  // BookingInfoContainer,
+  // BookingInfoBoxDiv,
+  // BookingInfoTextAlign,
+  // BookingInfoTitle,
+  // BookingInfoText,
+  // BookingInfoList,
+  // BookingInfoItems,
 };
