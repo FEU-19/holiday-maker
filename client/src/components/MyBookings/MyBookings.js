@@ -11,17 +11,17 @@ import CardContent from '@material-ui/core/CardContent';
 import axios from "axios";
 
 const objekt = [{
-    _id: 'mongoose.Schema.Types.ObjectID',
+    _id: 'Booking Id1',
     userId: 'mongoose.Schema.Types.ObjectID',
-    adults: "2",
-    children: 'Number',
-    hotel: 'mongoose.Schema.Types.ObjectID',
+    adults: 2,
+    children: 3,
+    hotel: 'Hotel name placeholder1',
     totalPrice: 'Number',
     rooms: [{
         _id: 'mongoose.Schema.Types.ObjectID',
         roomNumber: 'String',
         option: 'String',
-        extraBed: 'yes',
+        extraBed: 'No',
         price: '2000kr'
     }],
     bookingDates: {
@@ -34,24 +34,24 @@ const objekt = [{
         price: 'Number'
     }
 }, {
-    _id: 'mongoose.Schema.Types.ObjectID',
+    _id: 'Booking Id2',
     userId: 'mongoose.Schema.Types.ObjectID',
-    adults: "2",
-    children: '5',
-    hotel: 'mongoose.Schema.Types.ObjectID',
+    adults: 2,
+    children: 1,
+    hotel: 'Hotel name placeholder2',
     totalPrice: '100$',
     rooms: [{
         _id: 'mongoose.Schema.Types.ObjectID',
         roomNumber: 'String',
         option: 'String',
-        extraBed: 'yes',
+        extraBed: 'Yes',
         price: '1000kr'
     }],
     bookingDates: {
         start: 'new Date.toISOString()',
         end: 'new Date.toISOString()'
     },
-    flight: 'null' | {
+    flight:  {
         departureDate: 'new Date.toISOString()',
         returnDate: 'new Date.toISOString()',
         price: 'Number'
@@ -64,20 +64,14 @@ const useStyles = makeStyles((theme) => ({
     },
     heading: {
       fontSize: theme.typography.pxToRem(15),
-      flexBasis: '33.33%',
-      flexShrink: 0,
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginLeft: '17%',
     },
     secondaryHeading: {
       fontSize: theme.typography.pxToRem(15),
       color: theme.palette.text.secondary,
-      flexBasis: '33.33%',
-      flexShrink: 0,
-
-    },
-    bullet: {
-      display: 'inline-block',
-      margin: '0 2px',
-      transform: 'scale(0.8)',
     },
     title: {
       fontSize: 14,
@@ -94,10 +88,8 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'center',
         alignItems: 'center',
         marginLeft: '50%',
-    }
+    },
   }));
-
-  
 
 const MyBookings = () => {
     const [myBookings, setMyBookings] = useState({});
@@ -121,49 +113,36 @@ const MyBookings = () => {
         }
     }
     
-
-    const classes = useStyles();
-    const bull = <span className={classes.bullet}>•</span>;
+  const classes = useStyles();
 
   return (
     <div className={classes.root}>  
             <Button onClick={showMyBookings} >My Bookings </Button>
             {objekt.map(myBooking => 
                 <Accordion>
-                    
-                    <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
-                    >
-                    <Typography className={classes.heading}>{myBooking.hotel}</Typography>
-                    <Typography className={classes.secondaryHeading}>{myBooking.bookingDates.start}</Typography>
-                    <Typography className={classes.secondaryHeading}>{myBooking._id}</Typography>
-
+                    <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content"id="panel1a-header">
+                      <Typography className={classes.heading}>{myBooking.hotel}</Typography>
+                      <Typography className={classes.heading}>{myBooking.bookingDates.start}</Typography>
+                      <Typography className={classes.heading}>{myBooking._id}</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                    <Typography className={classes.flex} >
+                      <Typography className={classes.flex} >
                         <Card className={classes.rootTwo}>
                             <CardContent>
-                                <Typography className={classes.title} color="textSecondary" gutterBottom>
-                               
-                                </Typography>
-                                <Typography variant="h5" component="h2">
-                                {myBooking.rooms.roomNumber}
+                                <Typography  >
+                                  <h2>Information</h2>
                                 </Typography>
                                 <Typography className={classes.pos} color="textSecondary">
-                                    {myBooking.rooms.length}
-                                    {myBooking.rooms[0].extraBed}
-                    
-                                </Typography>
-                                <Typography variant="body2" component="p">
-                              
-                                <br />
-                                {'"a benevolent smile"'}
+                                  <p>User Name/Id: {myBooking.userId}</p>
+                                  <p>Total Rooms: {myBooking.rooms.length}</p>
+                                  <p>Total People: {myBooking.adults + myBooking.children}</p>
+                                  <p>Departure Date: {myBooking.flight.departureDate}</p>
+                                  <p>Return Date: {myBooking.flight.returnDate}</p>
+                                  <p>Extra Bed:  {myBooking.rooms[0].extraBed}</p> 
                                 </Typography>
                             </CardContent>
                         </Card>
-                    </Typography>
+                      </Typography>
                     </AccordionDetails>
                 </Accordion>
             )}
