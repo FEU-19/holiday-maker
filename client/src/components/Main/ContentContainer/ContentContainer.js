@@ -91,8 +91,6 @@ const ContentContainer = ({ filteredData, sortOn, searching }) => {
     }
   }, [sortOn, filteredData])
 
-  console.log(filteredData)
-
   return (
     <div className={classes.root}>
       {sortedData.map((hotel) => {
