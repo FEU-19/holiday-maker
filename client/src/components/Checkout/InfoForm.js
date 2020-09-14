@@ -23,33 +23,52 @@ const InfoForm = ({
         <TextInput
           className={InfoStyle.input}
           label="First name"
-          onChange={handleChange}
+          onchange={handleChange}
+          name="firstName"
           value={firstName}
         />
         <TextInput
           className={InfoStyle.input}
           label="Last name"
-          onChange={handleChange}
+          onchange={handleChange}
+          name="surname"
           value={lastName}
         />
         <TextInput
           className={InfoStyle.input}
           label="E-mail"
-          onChange={handleChange}
+          onchange={handleChange}
+          name="email"
           value={email}
         />
         <TextInput
           className={InfoStyle.input}
           label="Mobile"
-          onChange={handleChange}
+          onchange={handleChange}
+          name="phoneNumber"
           value={phoneNum}
         />
 
-        <TextInput label="Adress" onChange={handleChange} value={address} />
-        <TextInput label="City" onChange={handleChange} value={city} />
-        <TextInput label="Zip code" onChange={handleChange} value={zipcode} />
+        <TextInput
+          label="Adress"
+          onchange={handleChange}
+          name="adress"
+          value={address}
+        />
+        <TextInput
+          label="City"
+          name="city"
+          onchange={handleChange}
+          value={city}
+        />
+        <TextInput
+          label="Zip code"
+          name="zipCode"
+          onchange={handleChange}
+          value={zipcode}
+        />
 
-        <CountryDropdownList myCountry={country} />
+        <CountryDropdownList handleChange={handleChange} myCountry={country} />
       </Box>
     </form>
   );

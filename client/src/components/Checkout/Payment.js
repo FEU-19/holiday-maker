@@ -26,7 +26,7 @@ function Payment() {
     phoneNumber: "",
     city: "",
     adress: "",
-    country: "Sweden",
+    country: "",
   });
 
   const [credit, setCredit] = useState({
@@ -36,9 +36,9 @@ function Payment() {
   });
   const [cardImg, setCardImg] = useState("");
   const [type, setType] = useState("");
+  let userId = "5f5aa3bc7bd3af45e0c97964";
 
   useEffect(() => {
-    let userId = "5f5aa3bc7bd3af45e0c97964";
     axios
       .get(`http://localhost:8080/api/users/${userId}`)
       .then((response) => {
@@ -51,6 +51,7 @@ function Payment() {
           phoneNumber: user.phoneNumber,
           city: user.city,
           adress: "copacana fixa adressfält!!!",
+          country: "Sweden",
         };
 
         return data;
@@ -156,7 +157,7 @@ function Payment() {
       <Box className={pageStyle.wrapper}>
         <h2 className={pageStyle.header}>Payment Method</h2>
         <PaymentForm
-          handleChange={handleCredit}
+          handleCredit={handleCredit}
           onCreditCardTypeChanged={onCreditCardTypeChanged}
           cardNum={credit.creditCard}
           cvc={credit.cvc}

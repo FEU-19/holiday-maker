@@ -6,7 +6,7 @@ import Cleave from "cleave.js/react";
 
 export default function PaymentForms({
   onCreditCardTypeChanged,
-  handleChange,
+  handleCredit,
   cvc,
   expire,
   cardNum,
@@ -28,7 +28,7 @@ export default function PaymentForms({
               creditCard: true,
               onCreditCardTypeChanged,
             }}
-            onChange={handleChange}
+            onChange={handleCredit}
           />
         </InputLabel>
         <Box className={classes.imgWrapper}>
@@ -44,7 +44,7 @@ export default function PaymentForms({
             placeholder="MM / YY"
             value={expire}
             options={{ date: true, datePattern: ["m", "d"] }}
-            onChange={handleChange}
+            onChange={handleCredit}
           />
         </InputLabel>
         <InputLabel className={classes.label} htmlFor={"cvc"}>
@@ -58,7 +58,7 @@ export default function PaymentForms({
               blocks: [3],
               numericOnly: true,
             }}
-            onChange={handleChange}
+            onChange={handleCredit}
           />
         </InputLabel>
       </Box>
