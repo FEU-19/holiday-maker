@@ -4,6 +4,7 @@ import Main from "./views/Main";
 import Checkout from "./views/Checkout";
 import DropDown from "./components/common/DropDown/DropDown";
 import Residence from "./views/Residence";
+import Flight from "./views/Flight";
 
 // To add more routes use format as below and add to the routes array
 const routes = [
@@ -11,6 +12,7 @@ const routes = [
   { path: "/checkout/", component: Checkout },
   { path: "/residence/:hotelId", component: Residence },
   { path: "/dropdown/:id", component: DropDown },
+  { path: "/flight/", component: Flight },
 ];
 
 function AppRouter() {
