@@ -19,8 +19,8 @@ const theme = createMuiTheme({
   },
 });
 
-function Country_DropdownList() {
-  const [country, setCountry] = useState("");
+function Country_DropdownList({ myCountry }) {
+  const [country, setCountry] = useState({ name: myCountry });
 
   const useStyles = makeStyles((theme) => ({
     formControl: {

@@ -6,9 +6,10 @@ import Cleave from "cleave.js/react";
 
 export default function PaymentForms({
   onCreditCardTypeChanged,
-  handleCardNum,
-  setExpire,
-  setCvc,
+  handleChange,
+  cvc,
+  expire,
+  cardNum,
   cardImg,
 }) {
   const classes = paymentFormStyle();
@@ -20,16 +21,18 @@ export default function PaymentForms({
           Card Number
           <Cleave
             className={classes.inputCardNum}
+            name="creditCard"
             placeholder="0000 0000 0000 0000"
+            value={cardNum}
             options={{
               creditCard: true,
               onCreditCardTypeChanged,
             }}
-            onChange={handleCardNum}
+            onChange={handleChange}
           />
         </InputLabel>
         <Box className={classes.imgWrapper}>
-          <img className={classes.image} src={cardImg} alt="card image" />
+          <img className={classes.image} src={cardImg} />
         </Box>
       </Box>
       <Box className={classes.wrapper}>
@@ -37,21 +40,25 @@ export default function PaymentForms({
           Expiry Date
           <Cleave
             className={classes.inputDate}
+            name="expire"
             placeholder="MM / YY"
+            value={expire}
             options={{ date: true, datePattern: ["m", "d"] }}
-            onChange={(e) => setExpire(e.target.value)}
+            onChange={handleChange}
           />
         </InputLabel>
         <InputLabel className={classes.label} htmlFor={"cvc"}>
           CVC
           <Cleave
             className={classes.inputCVC}
+            name="cvc"
             placeholder="000"
+            value={cvc}
             options={{
               blocks: [3],
               numericOnly: true,
             }}
-            onChange={(e) => setCvc(e.target.value)}
+            onChange={handleChange}
           />
         </InputLabel>
       </Box>
