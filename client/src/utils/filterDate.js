@@ -4,11 +4,11 @@ import getDateArray from './getDateArrayInterval';
 
 export default function filterDate (residents, date) {
  let newResidents = residents;
+ let collisions = 0;
  let dateInterval = getDateArray(new Date(date.start), new Date(date.end))
   for (let [i, resident] of newResidents.entries()) {
     let rooms = resident.rooms;
     for (let [j, room] of rooms.entries()) {
-      let collisions = 0;
       for (let occupiedDate of room.occupiedDates) {
           let start = occupiedDate.start;
           let end = occupiedDate.end;
@@ -24,6 +24,7 @@ export default function filterDate (residents, date) {
 
       if (collisions > 0) {
         newResidents[i].rooms.splice(j, 1);
+        collisions++;
       }
     }
   }

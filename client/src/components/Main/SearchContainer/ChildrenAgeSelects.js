@@ -12,7 +12,6 @@ class ChildrenAgeSelects extends React.Component {
       selects: <></>,
       MenuItems: <></>,
       childrenAgeArr: [],
-      indexForKey: 0,
     };
 
     this.onChange = this.onChange.bind(this);
@@ -23,15 +22,6 @@ class ChildrenAgeSelects extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // for (let [i, age] of this.state.childrenAgeArr.entries()) {
-    //   // console.log('loop');
-    //   // console.log(prevState.childrenAgeArr[i], this.state.childrenAgeArr[i]);
-    //   if(prevState.childrenAgeArr[i] !== this.state.childrenAgeArr[i]) {
-    //     // console.log('det händer något');
-    //     this.renderSelects();
-    //   }
-    // }
-
     if(prevProps.amountOfChildren === this.props.amountOfChildren) return;
 
     if(prevProps.amountOfChildren > this.props.amountOfChildren) {
@@ -74,22 +64,18 @@ class ChildrenAgeSelects extends React.Component {
     for(let i = 0; i < this.props.amountOfChildren; i++) {
       if(isNaN(arr[i]) && arr[i] !== "") arr[i] = "";
 
-      this.setState({ indexForKey: i });
-
       x.push(
-        <>
-          <Select
-            key={ "ageSelect-" + i + Date.now() }
-            displayEmpty
-            value={ this.state.childrenAgeArr[i] }
-            onChange= { (e) => this.onChange(e, i) }
-            aria-label={ "Select age of child" }
-            id={ "selectAgeOfChild" + i }
-          >
-            <MenuItem key={ "AgeMenuLabel-" + i + Date.now() } disabled>Age</MenuItem>
-            { this.state.MenuItems }
-          </Select>
-        </>
+        <Select
+          key={ "ageSelect-" + i + Date.now() }
+          displayEmpty
+          value={ this.state.childrenAgeArr[i] }
+          onChange= { (e) => this.onChange(e, i) }
+          aria-label={ "Select age of child" }
+          id={ "selectAgeOfChild" + i }
+        >
+          <MenuItem key={ "AgeMenuLabel-" + i + Date.now() } disabled>Age</MenuItem>
+          { this.state.MenuItems }
+        </Select>
       );
     }
 
