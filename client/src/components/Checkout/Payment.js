@@ -1,35 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { Redirect, useLocation } from "react-router-dom";
 import axios from "axios";
 
+import { Redirect, useLocation } from "react-router-dom";
 import CheckIcon from "@material-ui/icons/CheckCircle";
 import ErrorIcon from "@material-ui/icons/Error";
-import CloseIcon from "@material-ui/icons/Close";
-import { ModalStyle } from "./PaymentStyles";
+import { iconStyle, PageStyle } from "./PaymentStyles";
+import Modal from "../common/Modal/Modal";
+import { Container, Button, Divider, Box } from "@material-ui/core";
 
-import { makeStyles } from "@material-ui/core/styles";
-
-// import Modal from "../common/Modal/Modal";
-import { Modal, Box } from "@material-ui/core";
-
-import {
-  PaymentPage,
-  PaymentContainer,
-  H1,
-  Title,
-  HR,
-  InfoForm,
-  FormDiv,
-  InputContainer,
-  PayBtn,
-} from "./PaymentStyles";
-
-import TextInput from "./TextInput";
+// import PaymentForm from "./PaymentForm";
 import PaymentForm from "./PaymentForm";
-import CountryDropdownList from "./CountryDropdownList";
+
 import BookingInfo from "./BookingInfo";
+import InfoForm from "./InfoForm";
 
 function Payment() {
+  const IconStyle = iconStyle();
+  const pageStyle = PageStyle();
+
   const [user, setUser] = useState({
     firstName: "",
     surname: "",
@@ -38,28 +26,30 @@ function Payment() {
     phoneNumber: "",
     city: "",
     adress: "",
+    country: "Sweden",
   });
+
+  const [credit, setCredit] = useState({
+    creditCard: "",
+    expire: "",
+    cvc: "",
+  });
+  const [cardImg, setCardImg] = useState("");
+  const [type, setType] = useState("");
 
   useEffect(() => {
     let userId = "5f5aa3bc7bd3af45e0c97964";
     axios
       .get(`http://localhost:8080/api/users/${userId}`)
       .then((response) => {
-        const {
-          firstName,
-          surname,
-          email,
-          zipCode,
-          phoneNumber,
-          city,
-        } = response.data.data;
+        let user = response.data.data;
         const data = {
-          firstName,
-          surname,
-          email,
-          zipCode,
-          phoneNumber,
-          city,
+          firstName: user.firstName,
+          surname: user.surname,
+          email: user.email,
+          zipCode: user.zipCode,
+          phoneNumber: user.phoneNumber,
+          city: user.city,
           adress: "copacana fixa adressfält!!!",
         };
 
@@ -69,24 +59,8 @@ function Payment() {
         setUser(data);
       });
   }, []);
-  const { state } = useLocation();
 
-  console.log(state);
-
-  const useStyles = makeStyles((theme) => ({
-    root: {
-      "& > *": {
-        margin: theme.spacing(1),
-        width: "25ch",
-      },
-    },
-  }));
-
-  const classes = useStyles();
-  const modalStyle = ModalStyle();
-
-  //Payment States
-
+  // User data.
   function handleChange(e) {
     let userData = {
       ...user,
@@ -94,6 +68,50 @@ function Payment() {
     };
 
     setUser(userData);
+  }
+
+  // Cleave credit
+  function handleCredit(e) {
+    let creditData = {
+      ...credit,
+      [e.target.name]: e.target.value,
+    };
+    if (!creditData.creditCard) setCardImg("");
+    setCredit(creditData);
+  }
+
+  function onCreditCardTypeChanged(type) {
+    setType(type);
+
+    const visaCard = "https://i.ibb.co/vVYd6Xq/visa-3-226460.png";
+
+    const masterCard = "https://i.ibb.co/HFg4VgG/Master-Card.png";
+
+    const maestroCard = "https://i.ibb.co/vQm4yLR/21-credit-512.png";
+
+    const AMEX = "https://i.ibb.co/FXP29n4/American-Express-copy.png";
+
+    const discover =
+      "https://i.ibb.co/bXPV1nH/atm-card-credit-card-debit-card-discover-icon-discover-card-png-512-512.png";
+
+    const JCB = "https://i.ibb.co/5nhStm0/cropped-favicon.png";
+
+    const dinnersCard = "https://i.ibb.co/WVqdBMS/Diners-Club1950.png";
+
+    const instaPay =
+      "https://i.ibb.co/1Jmrn7Q/Xs-Gvw5zw-KGRs4-S6o3ma4ika8-WXk-cdw-Jaj-EEZhx-Ul-PCJGnj-Bt-Mu-HAXQRjd-PQh-Md-Er-Po-B.png";
+
+    const UATP = "https://i.ibb.co/kJ2BGzZ/website-UATPLogo.png";
+
+    type === "visa" && setCardImg(visaCard);
+    type === "mastercard" && setCardImg(masterCard);
+    type === "amex" && setCardImg(AMEX);
+    type === "diners" && setCardImg(dinnersCard);
+    type === "jcb" && setCardImg(JCB);
+    type === "uatp" && setCardImg(UATP);
+    type === "discover" && setCardImg(discover);
+    type === "maestro" && setCardImg(maestroCard);
+    type === "instapayment" && setCardImg(instaPay);
   }
 
   // Check if payment confirmed
@@ -114,103 +132,64 @@ function Payment() {
     // url needs to change to booking details page
     return <Redirect to="/" />;
   }
-  console.log(user);
 
   return (
-    <PaymentPage className={classes.root} noValidate autoComplete="off">
-      <PaymentContainer>
-        <H1>Payment</H1>
-        <InfoForm>
-          <TextInput
-            name="firstName"
-            label="First name"
-            value={user.firstName}
-            onchange={handleChange}
-          />
-          <TextInput
-            name="surname"
-            label="Last name"
-            onchange={handleChange}
-            value={user.surname}
-          />
-          <TextInput
-            name="email"
-            label="E-mail name"
-            onchange={handleChange}
-            value={user.email}
-          />
-          <TextInput
-            name="phoneNumber"
-            label="Phone number"
-            onchange={handleChange}
-            value={user.phoneNumber}
-          />
-        </InfoForm>
-        <br />
-        <HR />
-        <InfoForm>
-          <InputContainer>
-            <CountryDropdownList />
-          </InputContainer>
-
-          <TextInput
-            name="city"
-            label="City"
-            onchange={handleChange}
-            value={user.city}
-          />
-          <TextInput
-            name="zipCode"
-            label="Zip code"
-            onchange={handleChange}
-            value={user.zipCode}
-          />
-          <TextInput
-            name="adress"
-            label="Adress"
-            onchange={handleChange}
-            value={user.adress}
-          />
-        </InfoForm>
-
-        <HR />
-
-        <PaymentForm />
-
-        <PayBtn
+    <Container className={pageStyle.root}>
+      <h1 className={pageStyle.pageTitle}>Payment</h1>
+      <BookingInfo />
+      <Divider />
+      <Box className={pageStyle.wrapper}>
+        <h2 className={pageStyle.header}>Account Information</h2>
+        <InfoForm
+          firstName={user.firstName}
+          lastName={user.surname}
+          email={user.email}
+          address={user.adress}
+          city={user.city}
+          phoneNum={user.phoneNumber}
+          zipcode={user.zipCode}
+          handleChange={handleChange}
+          country={user.country}
+        />
+      </Box>
+      <Divider />
+      <Box className={pageStyle.wrapper}>
+        <h2 className={pageStyle.header}>Payment Method</h2>
+        <PaymentForm
+          handleChange={handleCredit}
+          onCreditCardTypeChanged={onCreditCardTypeChanged}
+          cardNum={credit.creditCard}
+          cvc={credit.cvc}
+          expire={credit.expire}
+          cardImg={cardImg}
+        />
+      </Box>
+      <Box className={pageStyle.btnCtn}>
+        <Button
           onClick={() => setShowModal(true)}
-          className="payBtn"
+          className={pageStyle.btn}
           type="submit"
         >
           Finish & Pay
-        </PayBtn>
-      </PaymentContainer>
-
+        </Button>
+      </Box>
       <Modal onClose={() => controlCloseModal(paymentSuccess)} open={showModal}>
-        <Box className={modalStyle.content}>
-          <button className={modalStyle.closeBtn}>
-            <CloseIcon
-              className={modalStyle.closeIcon}
-              onClick={() => controlCloseModal(paymentSuccess)}
-            />
-          </button>
-          {paymentSuccess ? (
-            <div className="modal__container">
-              <CheckIcon className={modalStyle.checkIcon} />
-              <h1>Thank you!</h1>
-              <h2>for booking with Holiday Maker.</h2>
-              <p>Booking confirmation has been sent to your email.</p>
-            </div>
-          ) : (
-            <div className="modal__container">
-              <ErrorIcon className={modalStyle.errorIcon} />
-              <h1>Error!</h1>
-              <h3>Your payment hasn't been confirmed, please try again.</h3>
-            </div>
-          )}
-        </Box>
+        {paymentSuccess ? (
+          <div className="modal__container">
+            <CheckIcon className={IconStyle.checkIcon} />
+            <h1>Thank you!</h1>
+            <h2>for booking with Holiday Maker.</h2>
+            <p>Invoice will be sent by post to the address provided.</p>
+          </div>
+        ) : (
+          <div className="modal__container">
+            <ErrorIcon className={IconStyle.errorIcon} />
+            <h1>Oops Something went wrong!</h1>
+            <h3>Your payment hasn't been confirmed, please try again.</h3>
+          </div>
+        )}
       </Modal>
-    </PaymentPage>
+    </Container>
   );
 }
 
