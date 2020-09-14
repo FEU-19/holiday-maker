@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import SearchContainer from "../components/Main/SearchContainer/SearchContainer";
 import ContentContainer from "../components/Main/ContentContainer/ContentContainer";
+import ChangeBookingModal from '../components/modals/ChangeBooking/ChangeBookingModal';
 import HeaderComp from "../components/common/Header/Header";
 // stor bokstav på variabler i styled components
 const Container = styled.main`
@@ -22,6 +23,7 @@ const Main = () => {
   return (
     <>
       <HeaderComp />
+      <ChangeBookingModal />
       <Container>
         <SearchContainer setFilteredDataCB={setFilteredDataCB} />
         <ContentContainer filteredData={filteredData} />
