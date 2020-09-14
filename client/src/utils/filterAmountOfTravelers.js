@@ -11,11 +11,11 @@ export default function filterAmountOfTravelers(c, adults, children) {
 
   amountOfTravelers = adults + children.length;
 
-  // removes rooms which does not contain enough beds
+  // removes rooms that do not contain enough beds
   for (let i = 0; i < data.length; i++) {
     data[i].rooms = data[i].rooms.filter(room => room.beds >= amountOfTravelers);
   }
 
-  // removes hotels 
+  // removes hotels that do not match the criteria
   return data.filter(hotel => hotel.rooms.length !== 0);
 };
