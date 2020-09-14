@@ -31,7 +31,7 @@ export default function DatePicker({ residentData, date, setDate }) {
           mr='10px'
           value={startDate}
           minDate={new Date('2020-06-01')}
-          maxDate={new Date('2020-07-31')}
+          maxDate={endDate}
           onChange={date => handleStartChange(date)}
           KeyboardButtonProps={{
             'aria-label': 'change date',
@@ -47,7 +47,7 @@ export default function DatePicker({ residentData, date, setDate }) {
           id="date-picker-inline-end"
           label="End"
           value={endDate}
-          minDate={new Date('2020-06-01')}
+          minDate={startDate}
           maxDate={new Date('2020-07-31')}
           onChange={date => handleEndChange(date)}
           KeyboardButtonProps={{
