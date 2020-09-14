@@ -6,6 +6,7 @@ const getAveragePrice = (hotel) => {
   }
 
   return Math.floor(averagePrice / hotel.rooms.length)
+  
 }
 
 export default getAveragePrice;

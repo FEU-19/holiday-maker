@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const ContentContainer = ({ filteredData, sortOn , getAveragePrice }) => {
+const ContentContainer = ({ filteredData, sortOn}) => {
   const [sortedData, setSortedData] = useState([]);
   const classes = useStyles();
 
@@ -66,7 +66,7 @@ const ContentContainer = ({ filteredData, sortOn , getAveragePrice }) => {
     }
   }, [sortOn, filteredData])
 
-  console.log(getAveragePrice);
+
   return (
     <div className={classes.root}>
       {sortedData.map((hotel) => {
@@ -128,7 +128,7 @@ const ContentContainer = ({ filteredData, sortOn , getAveragePrice }) => {
                     Distance to the center {hotel.distanceToCity} m.
                   </Typography>
                   <Typography variant="body2" color="textSecondary">
-                    Average price for a room {getAveragePrice}.
+                    Average price for a room {getAveragePrice(hotel)} sek.
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={4}>
