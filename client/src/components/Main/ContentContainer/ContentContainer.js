@@ -42,10 +42,7 @@ const useStyles = makeStyles((theme) => ({
   link: {
     textDecoration: 'none',
     color: 'black',
-  }
-}));
-
-const ContentContainer = ({ filteredData, sortOn}) => {
+  },
 
   noResult: {
     display: 'flex',
