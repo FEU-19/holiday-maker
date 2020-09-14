@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const ContentContainer = ({ filteredData, sortOn, searching }) => {
+const ContentContainer = ({ filteredData, sortOn, searching, queryParams }) => {
   const [sortedData, setSortedData] = useState([]);
   const classes = useStyles();
 
@@ -174,7 +174,7 @@ const ContentContainer = ({ filteredData, sortOn, searching }) => {
             color="default"
             >
               <Link
-                to={{ pathname: `/residence/${hotel._id}`, state: { hotel } }}
+                to={{ pathname: `/residence/${hotel._id}`, state: { hotel, queryParams } }}
                 >
                   More Info
                 </Link>
