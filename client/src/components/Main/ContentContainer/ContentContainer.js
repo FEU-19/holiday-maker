@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
-import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -14,7 +13,6 @@ import CancelIcon from '@material-ui/icons/Cancel';
 // Functions
 import sortRating from "../../../utils/sortRating.js";
 import sortPrice from "../../../utils/sortPrice.js";
-import getAveragePrice from "../../../utils/getAveragePrice.js";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -80,16 +78,14 @@ const ContentContainer = ({ filteredData, sortOn, searching }) => {
     if (!sortOn) return setSortedData([...filteredData]);
 
     if (sortOn === 'Price low to high') {
-      console.log("sortOn price")
       setSortedData(sortPrice(sortedData, true));
     }
 
     if (sortOn === 'Rating high to low') {
-            console.log("sortOn rating")
-
       setSortedData(sortRating(sortedData, true));
     }
-  }, [sortOn, filteredData])
+    // eslint-disable-next-line
+  }, [sortOn, filteredData, setSortedData])
 
   return (
     <div className={classes.root}>
