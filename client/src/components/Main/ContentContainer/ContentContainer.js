@@ -13,6 +13,7 @@ import CancelIcon from '@material-ui/icons/Cancel';
 // Functions
 import sortRating from "../../../utils/sortRating.js";
 import sortPrice from "../../../utils/sortPrice.js";
+import getAveragePrice from "../../../utils/getAveragePrice.js";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,6 +39,14 @@ const useStyles = makeStyles((theme) => ({
   button: {
     marginTop: 30,
   },
+  link: {
+    textDecoration: 'none',
+    color: 'black',
+  }
+}));
+
+const ContentContainer = ({ filteredData, sortOn}) => {
+
   noResult: {
     display: 'flex',
     flexDirection: 'column',
@@ -66,6 +75,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ContentContainer = ({ filteredData, sortOn, searching, queryParams }) => {
+  
   const [sortedData, setSortedData] = useState([]);
   const classes = useStyles();
 
@@ -86,6 +96,7 @@ const ContentContainer = ({ filteredData, sortOn, searching, queryParams }) => {
     }
     // eslint-disable-next-line
   }, [sortOn, filteredData, setSortedData])
+
 
   return (
     <div className={classes.root}>
@@ -109,9 +120,9 @@ const ContentContainer = ({ filteredData, sortOn, searching, queryParams }) => {
                     )}
                     {hotel.rating === 2 && (
                       <>
-                      <StarRateIcon />
-                      <StarRateIcon />
-                    </>
+                        <StarRateIcon />
+                        <StarRateIcon />
+                     </>
                   )}
                   {hotel.rating === 3 && (
                     <>
@@ -146,6 +157,9 @@ const ContentContainer = ({ filteredData, sortOn, searching, queryParams }) => {
           </Typography>
           <Typography variant="body2" color="textSecondary">
             Distance to the center {hotel.distanceToCity} m.
+          </Typography>
+          <Typography variant="body2" color="textSecondary">
+            Average price for a room {getAveragePrice(hotel)} sek.
           </Typography>
         </Grid>
         <Grid item xs={12} sm={4}>
@@ -193,7 +207,6 @@ const ContentContainer = ({ filteredData, sortOn, searching, queryParams }) => {
     </div>
     : null }
   </div>
-
-);
+ );
 };
 export default ContentContainer;
