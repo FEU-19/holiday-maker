@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
@@ -9,6 +9,9 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import axios from "axios";
+import { Redirect } from 'react-router-dom';
+
+
 
 const objekt = [{
     _id: 'Booking Id1',
@@ -91,33 +94,14 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-const MyBookings = () => {
-    const [myBookings, setMyBookings] = useState({});
-    const [clickedBookings, setClickedBookings] = useState(false);
-    
-    const showMyBookings = () => {
-
-        setClickedBookings(true);
-
-        if(clickedBookings) {
-            console.log("myBookings");
-
-            let url = "";
-            axios
-                .get(url)
-                .then((res) => {
-                  console.log(res.data.adults);
-                  //myBookings.push(res.data);
-                  setMyBookings(res.data);
-                })
-        }
-    }
+const MyBookings = (props) => {
+  const [myBookings, setMyBookings] = useState({});
+  const [clickedBookings, setClickedBookings] = useState(false);
     
   const classes = useStyles();
 
   return (
     <div className={classes.root}>  
-            <Button onClick={showMyBookings} >My Bookings </Button>
             {objekt.map(myBooking => 
                 <Accordion>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content"id="panel1a-header">
