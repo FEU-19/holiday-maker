@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const controllers = require("../controllers/orders");
 
-router.post("/residents/", controllers.create);
-router.get("/residents/", controllers.read);
+router.post("/orders/", controllers.create);
+router.get("/orders/", controllers.read);
 
 module.exports = router;

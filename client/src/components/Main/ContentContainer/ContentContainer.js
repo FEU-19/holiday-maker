@@ -1,5 +1,6 @@
 import React from "react";
-import styled from 'styled-components';
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   border: 1px solid grey;
@@ -8,7 +9,7 @@ const Container = styled.div`
   min-height: 400px;
   display: flex;
   flex-direction: column;
-  margin-bottom:7px;
+  margin-bottom: 7px;
 
   .map-container {
     border: 1px solid black;
@@ -17,7 +18,7 @@ const Container = styled.div`
     align-items: center;
     width: 100%;
   }
-`
+`;
 
 // *************************************************************
 //
@@ -26,22 +27,25 @@ const Container = styled.div`
 // *************************************************************
 
 const ContentContainer = ({ filteredData }) => {
-  console.log(filteredData)
-
   return (
     <Container>
-      {filteredData.map(hotel => {
+      {filteredData.map((hotel) => {
         return (
           <div className="map-container" key={hotel._id}>
-            <p>hotelname: {hotel.name}</p>
-            <p><b>*** Placeholders ***</b></p>
+            <Link
+              to={{ pathname: `/residence/${hotel._id}`, state: { hotel } }}
+            >
+              hotelname: {hotel.name}
+            </Link>
+            <p>
+              <b>*** Placeholders ***</b>
+            </p>
             <p>city: {hotel.city}</p>
           </div>
-        )
+        );
       })}
     </Container>
-  )
+  );
 };
-  
-  export default ContentContainer;
-  
+
+export default ContentContainer;
