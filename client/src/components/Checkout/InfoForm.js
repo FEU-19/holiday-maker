@@ -10,15 +10,10 @@ const InfoForm = ({
   lastName,
   email,
   phoneNum,
-  setCity,
   city,
   zipcode,
-  setZipCode,
-  setAddress,
-  setFirstName,
-  setLastName,
-  setEmail,
-  setPhoneNum,
+  handleChange,
+  country,
 }) => {
   const InfoStyle = InfoFormStyle();
 
@@ -28,45 +23,33 @@ const InfoForm = ({
         <TextInput
           className={InfoStyle.input}
           label="First name"
-          onchange={(e) => setFirstName(e.target.value)}
+          onChange={handleChange}
           value={firstName}
         />
         <TextInput
           className={InfoStyle.input}
           label="Last name"
-          onchange={(e) => setLastName(e.target.value)}
+          onChange={handleChange}
           value={lastName}
         />
         <TextInput
           className={InfoStyle.input}
           label="E-mail"
-          onchange={(e) => setEmail(e.target.value)}
+          onChange={handleChange}
           value={email}
         />
         <TextInput
           className={InfoStyle.input}
           label="Mobile"
-          onchange={(e) => setPhoneNum(e.target.value)}
+          onChange={handleChange}
           value={phoneNum}
         />
 
-        <TextInput
-          label="Adress"
-          onchange={(e) => setAddress(e.target.value)}
-          value={address}
-        />
-        <TextInput
-          label="City"
-          onchange={(e) => setCity(e.target.value)}
-          value={city}
-        />
-        <TextInput
-          label="Zip code"
-          onchange={(e) => setZipCode(e.target.value)}
-          value={zipcode}
-        />
+        <TextInput label="Adress" onChange={handleChange} value={address} />
+        <TextInput label="City" onChange={handleChange} value={city} />
+        <TextInput label="Zip code" onChange={handleChange} value={zipcode} />
 
-        <CountryDropdownList />
+        <CountryDropdownList myCountry={country} />
       </Box>
     </form>
   );

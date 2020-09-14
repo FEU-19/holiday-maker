@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 import { Redirect, useLocation } from "react-router-dom";
 import CheckIcon from "@material-ui/icons/CheckCircle";
@@ -17,27 +18,67 @@ function Payment() {
   const IconStyle = iconStyle();
   const pageStyle = PageStyle();
 
-  //Payment States
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phoneNum, setPhoneNum] = useState("");
-  const [city, setCity] = useState("");
-  const [zipcode, setZipCode] = useState("");
-  const [address, setAddress] = useState("");
+  const [user, setUser] = useState({
+    firstName: "",
+    surname: "",
+    email: "",
+    zipCode: "",
+    phoneNumber: "",
+    city: "",
+    adress: "",
+    country: "Sweden",
+  });
 
-  const [cardNum, setCardNum] = useState("");
-  const [expire, setExpire] = useState("");
-  const [cvc, setCvc] = useState("");
-  const [type, setType] = useState("");
+  const [credit, setCredit] = useState({
+    creditCard: "",
+    expire: "",
+    cvc: "",
+  });
   const [cardImg, setCardImg] = useState("");
+  const [type, setType] = useState("");
 
-  // cleave payment function
-  const handleCardNum = (e) => {
-    setCardNum(e.target.value);
+  useEffect(() => {
+    let userId = "5f5aa3bc7bd3af45e0c97964";
+    axios
+      .get(`http://localhost:8080/api/users/${userId}`)
+      .then((response) => {
+        let user = response.data.data;
+        const data = {
+          firstName: user.firstName,
+          surname: user.surname,
+          email: user.email,
+          zipCode: user.zipCode,
+          phoneNumber: user.phoneNumber,
+          city: user.city,
+          adress: "copacana fixa adressfält!!!",
+        };
 
-    if (e.target.value === "") setCardImg("");
-  };
+        return data;
+      })
+      .then((data) => {
+        setUser(data);
+      });
+  }, []);
+
+  // User data.
+  function handleChange(e) {
+    let userData = {
+      ...user,
+      [e.target.name]: e.target.value,
+    };
+
+    setUser(userData);
+  }
+
+  // Cleave credit
+  function handleCredit(e) {
+    let creditData = {
+      ...credit,
+      [e.target.name]: e.target.value,
+    };
+    if (!creditData.creditCard) setCardImg("");
+    setCredit(creditData);
+  }
 
   function onCreditCardTypeChanged(type) {
     setType(type);
@@ -100,34 +141,27 @@ function Payment() {
       <Box className={pageStyle.wrapper}>
         <h2 className={pageStyle.header}>Account Information</h2>
         <InfoForm
-          firstName={firstName}
-          lastName={lastName}
-          email={email}
-          address={address}
-          city={city}
-          phoneNum={phoneNum}
-          zipcode={zipcode}
-          setAddress={setAddress}
-          setCity={setCity}
-          setZipCode={setZipCode}
-          setLastName={setLastName}
-          setFirstName={setFirstName}
-          setPhoneNum={setPhoneNum}
-          setEmail={setEmail}
+          firstName={user.firstName}
+          lastName={user.surname}
+          email={user.email}
+          address={user.adress}
+          city={user.city}
+          phoneNum={user.phoneNumber}
+          zipcode={user.zipCode}
+          handleChange={handleChange}
+          country={user.country}
         />
       </Box>
       <Divider />
       <Box className={pageStyle.wrapper}>
         <h2 className={pageStyle.header}>Payment Method</h2>
         <PaymentForm
-          handleCardNum={handleCardNum}
+          handleChange={handleCredit}
           onCreditCardTypeChanged={onCreditCardTypeChanged}
-          cardNum={cardNum}
+          cardNum={credit.creditCard}
+          cvc={credit.cvc}
+          expire={credit.expire}
           cardImg={cardImg}
-          setType={setType}
-          setCardImg={setCardImg}
-          setCvc={setCvc}
-          setExpire={setExpire}
         />
       </Box>
       <Box className={pageStyle.btnCtn}>
