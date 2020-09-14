@@ -12,6 +12,8 @@ import StarRateIcon from '@material-ui/icons/StarRate';
 
 // Functions
 import sortRating from "../../../utils/sortRating.js";
+import sortPrice from "../../../utils/sortPrice.js";
+import getAveragePrice from "../../../utils/getAveragePrice.js";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,10 +38,14 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     marginTop: 30,
+  },
+  link: {
+    textDecoration: 'none',
+    color: 'black',
   }
 }));
 
-const ContentContainer = ({ filteredData, sortOn }) => {
+const ContentContainer = ({ filteredData, sortOn , getAveragePrice }) => {
   const [sortedData, setSortedData] = useState([]);
   const classes = useStyles();
 
@@ -60,6 +66,7 @@ const ContentContainer = ({ filteredData, sortOn }) => {
     }
   }, [sortOn, filteredData])
 
+  console.log(getAveragePrice);
   return (
     <div className={classes.root}>
       {sortedData.map((hotel) => {
@@ -109,7 +116,7 @@ const ContentContainer = ({ filteredData, sortOn }) => {
                         <StarRateIcon />
                         <StarRateIcon />
                       </>
-                    )}
+                   )}
                   </Typography>
                   <Typography variant="body2">
                     City: {hotel.city}
@@ -119,6 +126,9 @@ const ContentContainer = ({ filteredData, sortOn }) => {
                   </Typography>
                   <Typography variant="body2" color="textSecondary">
                     Distance to the center {hotel.distanceToCity} m.
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary">
+                    Average price for a room {getAveragePrice}.
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={4}>
@@ -146,7 +156,7 @@ const ContentContainer = ({ filteredData, sortOn }) => {
                       variant="contained"
                       color="default"
                     >
-                      <Link
+                      <Link className={classes.link}
                         to={{ pathname: `/residence/${hotel._id}`, state: { hotel } }}
                       >
                       More Info
