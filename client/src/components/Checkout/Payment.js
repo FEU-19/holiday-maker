@@ -1,66 +1,132 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-import { Redirect } from "react-router-dom";
+import { Redirect, useLocation } from "react-router-dom";
+import CheckIcon from "@material-ui/icons/CheckCircle";
+import ErrorIcon from "@material-ui/icons/Error";
+import { iconStyle, PageStyle } from "./PaymentStyles";
+import Modal from "../common/Modal/Modal";
+import { Container, Button, Divider, Box } from "@material-ui/core";
 
-import { makeStyles } from "@material-ui/core/styles";
-
-// import Modal from "../common/Modal/Modal";
-import { Modal, Button, Box } from "@material-ui/core";
-import DoneIcon from "@material-ui/icons/Done";
-import CancelIcon from "@material-ui/icons/Cancel";
-
-import {
-  PaymentPage,
-  PaymentContainer,
-  H1,
-  HR,
-  InfoForm,
-  InputContainer,
-  PayBtn,
-} from "./PaymentStyles";
-import TextInput from "./TextInput";
+// import PaymentForm from "./PaymentForm";
 import PaymentForm from "./PaymentForm";
-import CountryDropdownList from "./CountryDropdownList";
+
+import BookingInfo from "./BookingInfo";
+import InfoForm from "./InfoForm";
 
 function Payment() {
-  const useStyles = makeStyles((theme) => ({
-    root: {
-      "& > *": {
-        margin: theme.spacing(1),
-        width: "25ch",
-      },
-    },
-  }));
+  const IconStyle = iconStyle();
+  const pageStyle = PageStyle();
 
-  const classes = useStyles();
+  const [user, setUser] = useState({
+    firstName: "",
+    surname: "",
+    email: "",
+    zipCode: "",
+    phoneNumber: "",
+    city: "",
+    adress: "",
+    country: "",
+  });
 
-  //Payment States
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phoneNum, setPhoneNum] = useState("");
-  const [city, setCity] = useState("");
-  const [zipcode, setZipCode] = useState("");
-  const [adress, setAdress] = useState("");
-
-  // PaymentForm States
-  const [cardNum, setCardNum] = useState("");
-  const [expire, setExpire] = useState("");
-  const [cvc, setCvc] = useState("");
+  const [credit, setCredit] = useState({
+    creditCard: "",
+    expire: "",
+    cvc: "",
+  });
+  const [cardImg, setCardImg] = useState("");
   const [type, setType] = useState("");
+  let userId = "5f5aa3bc7bd3af45e0c97964";
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8080/api/users/${userId}`)
+      .then((response) => {
+        let user = response.data.data;
+        const data = {
+          firstName: user.firstName,
+          surname: user.surname,
+          email: user.email,
+          zipCode: user.zipCode,
+          phoneNumber: user.phoneNumber,
+          city: user.city,
+          adress: "copacana fixa adressfält!!!",
+          country: "Sweden",
+        };
+
+        return data;
+      })
+      .then((data) => {
+        setUser(data);
+      });
+  }, []);
+
+  // User data.
+  function handleChange(e) {
+    let userData = {
+      ...user,
+      [e.target.name]: e.target.value,
+    };
+
+    setUser(userData);
+  }
+
+  // Cleave credit
+  function handleCredit(e) {
+    let creditData = {
+      ...credit,
+      [e.target.name]: e.target.value,
+    };
+    if (!creditData.creditCard) setCardImg("");
+    setCredit(creditData);
+  }
+
+  function onCreditCardTypeChanged(type) {
+    setType(type);
+
+    const visaCard = "https://i.ibb.co/vVYd6Xq/visa-3-226460.png";
+
+    const masterCard = "https://i.ibb.co/HFg4VgG/Master-Card.png";
+
+    const maestroCard = "https://i.ibb.co/vQm4yLR/21-credit-512.png";
+
+    const AMEX = "https://i.ibb.co/FXP29n4/American-Express-copy.png";
+
+    const discover =
+      "https://i.ibb.co/bXPV1nH/atm-card-credit-card-debit-card-discover-icon-discover-card-png-512-512.png";
+
+    const JCB = "https://i.ibb.co/5nhStm0/cropped-favicon.png";
+
+    const dinnersCard = "https://i.ibb.co/WVqdBMS/Diners-Club1950.png";
+
+    const instaPay =
+      "https://i.ibb.co/1Jmrn7Q/Xs-Gvw5zw-KGRs4-S6o3ma4ika8-WXk-cdw-Jaj-EEZhx-Ul-PCJGnj-Bt-Mu-HAXQRjd-PQh-Md-Er-Po-B.png";
+
+    const UATP = "https://i.ibb.co/kJ2BGzZ/website-UATPLogo.png";
+
+    type === "visa" && setCardImg(visaCard);
+    type === "mastercard" && setCardImg(masterCard);
+    type === "amex" && setCardImg(AMEX);
+    type === "diners" && setCardImg(dinnersCard);
+    type === "jcb" && setCardImg(JCB);
+    type === "uatp" && setCardImg(UATP);
+    type === "discover" && setCardImg(discover);
+    type === "maestro" && setCardImg(maestroCard);
+    type === "instapayment" && setCardImg(instaPay);
+  }
 
   // Check if payment confirmed
-  const [paymentSuccess, setPaymentSuccess] = useState(false);
+  const [paymentSuccess, setPaymentSuccess] = useState(true);
 
   const [redirect, setRedirect] = useState(false);
 
   // Close modal
   const [showModal, setShowModal] = useState(false);
 
-  const controlCloseModal = (status) => {
-    setShowModal(false);
+  const controlCloseModal = () => {
+    setShowModal(!showModal);
     // if payment is sucessful redirect to booking details page
-    status ? setRedirect(true) : setRedirect(false);
+    true ? setRedirect(true) : setRedirect(false);
   };
 
   if (redirect) {
@@ -69,95 +135,62 @@ function Payment() {
   }
 
   return (
-    <PaymentPage className={classes.root} noValidate autoComplete="off">
-      <PaymentContainer>
-        <H1>Payment</H1>
-        <InfoForm>
-          <TextInput
-            label="First name"
-            onchange={(e) => setFirstName(e.target.value)}
-            value={firstName}
-          />
-          <TextInput
-            label="Last name"
-            onchange={(e) => setLastName(e.target.value)}
-            value={lastName}
-          />
-          <TextInput
-            label="E-mail name"
-            onchange={(e) => setEmail(e.target.value)}
-            value={email}
-          />
-          <TextInput
-            label="Phone number"
-            onchange={(e) => setPhoneNum(e.target.value)}
-            value={phoneNum}
-          />
-        </InfoForm>
-        <br />
-        <HR />
-
-        <InfoForm>
-          <InputContainer>
-            <CountryDropdownList />
-          </InputContainer>
-
-          <TextInput
-            label="City"
-            onchange={(e) => setCity(e.target.value)}
-            value={city}
-          />
-          <TextInput
-            label="Zip code"
-            onchange={(e) => setZipCode(e.target.value)}
-            value={zipcode}
-          />
-          <TextInput
-            label="Adress"
-            onchange={(e) => setAdress(e.target.value)}
-            value={adress}
-          />
-        </InfoForm>
-
-        <br />
-        <HR />
-
-        <PaymentForm
-          setCardNum={setCardNum}
-          setExpire={setExpire}
-          setCvc={setCvc}
-          setType={setType}
+    <Container className={pageStyle.root}>
+      <h1 className={pageStyle.pageTitle}>Payment</h1>
+      <BookingInfo />
+      <Divider />
+      <Box className={pageStyle.wrapper}>
+        <h2 className={pageStyle.header}>Account Information</h2>
+        <InfoForm
+          firstName={user.firstName}
+          lastName={user.surname}
+          email={user.email}
+          address={user.adress}
+          city={user.city}
+          phoneNum={user.phoneNumber}
+          zipcode={user.zipCode}
+          handleChange={handleChange}
+          country={user.country}
         />
-
-        <PayBtn
+      </Box>
+      <Divider />
+      <Box className={pageStyle.wrapper}>
+        <h2 className={pageStyle.header}>Payment Method</h2>
+        <PaymentForm
+          handleCredit={handleCredit}
+          onCreditCardTypeChanged={onCreditCardTypeChanged}
+          cardNum={credit.creditCard}
+          cvc={credit.cvc}
+          expire={credit.expire}
+          cardImg={cardImg}
+        />
+      </Box>
+      <Box className={pageStyle.btnCtn}>
+        <Button
           onClick={() => setShowModal(true)}
-          className="payBtn"
+          className={pageStyle.btn}
           type="submit"
         >
           Finish & Pay
-        </PayBtn>
-      </PaymentContainer>
-
+        </Button>
+      </Box>
       <Modal onClose={() => controlCloseModal(paymentSuccess)} open={showModal}>
-        <Box>
-          {paymentSuccess && (
-            <div className="modal__container">
-              <DoneIcon className="doneIcon" />
-              <h1>Thank you!</h1>
-              <h2>for booking with Holiday Maker.</h2>
-              <p>Booking confirmation has been sent to your email.</p>
-            </div>
-          )}
-          {!paymentSuccess && (
-            <div className="modal__container">
-              <CancelIcon className="cancelIcon" />
-              <h1>Error!</h1>
-              <h3>Your payment hasn't been confirmed, please try again.</h3>
-            </div>
-          )}
-        </Box>
+        {paymentSuccess ? (
+          <div className="modal__container">
+            <CheckIcon className={IconStyle.checkIcon} />
+            <h1>Thank you!</h1>
+            <h2>for booking with Holiday Maker.</h2>
+            <p>Invoice will be sent by post to the address provided.</p>
+          </div>
+        ) : (
+          <div className="modal__container">
+            <ErrorIcon className={IconStyle.errorIcon} />
+            <h1>Oops Something went wrong!</h1>
+            <h3>Your payment hasn't been confirmed, please try again.</h3>
+          </div>
+        )}
       </Modal>
-    </PaymentPage>
+    </Container>
   );
 }
 
