@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 import {
   PayForm,
-  Table,
   ImgContainer,
   IMG,
   CarNumContainer,
@@ -10,9 +9,16 @@ import {
   EXPCVCContainer,
   EXPCVCDiv,
   EXPCVCInput,
+  Title,
+  PayLabel,
 } from "./PaymentStyles";
 
-function PaymentForm({ setCardNum, setExpire, setCvc, setType }) {
+function PaymentForm() {
+  // PaymentForm States
+  const [cardNum, setCardNum] = useState("");
+  const [expire, setExpire] = useState("");
+  const [cvc, setCvc] = useState("");
+  const [type, setType] = useState("");
   const [cardImg, setCardImg] = useState("");
 
   const handleCardNum = (e) => {
@@ -57,53 +63,46 @@ function PaymentForm({ setCardNum, setExpire, setCvc, setType }) {
 
   return (
     <PayForm>
-      <Table>
-        <tbody>
-          <tr>
-            <CarNumContainer>
-              <p>Card number</p>
-              <CardNum
-                placeholder="0000 0000 0000 0000"
-                options={{
-                  creditCard: true,
-                  onCreditCardTypeChanged,
-                }}
-                onChange={handleCardNum}
-              />
-              <ImgContainer>
-                <IMG src={cardImg} />
-              </ImgContainer>
-            </CarNumContainer>
-          </tr>
+      <Title>Payment Method</Title>
+      <CarNumContainer>
+        <PayLabel>Card Number</PayLabel>
+        <CardNum
+          placeholder="0000 0000 0000 0000"
+          options={{
+            creditCard: true,
+            onCreditCardTypeChanged,
+          }}
+          onChange={handleCardNum}
+        />
+        <ImgContainer>
+          <IMG src={cardImg} />
+        </ImgContainer>
+      </CarNumContainer>
 
-          <tr>
-            <EXPCVCContainer className="exp-cvc__container">
-              <EXPCVCDiv>
-                <p>Expire</p>
-                <EXPCVCInput
-                  placeholder="MM/YY"
-                  options={{ date: true, datePattern: ["m", "d"] }}
-                  onChange={(e) => setExpire(e.target.value)}
-                  className="exp-cvc__input"
-                />
-              </EXPCVCDiv>
+      <EXPCVCContainer className="exp-cvc__container">
+        <EXPCVCDiv>
+          <PayLabel>Expire</PayLabel>
+          <EXPCVCInput
+            placeholder="MM / YY"
+            options={{ date: true, datePattern: ["m", "d"] }}
+            onChange={(e) => setExpire(e.target.value)}
+            className="exp-cvc__input"
+          />
+        </EXPCVCDiv>
 
-              <EXPCVCDiv>
-                <p>CVC</p>
-                <EXPCVCInput
-                  placeholder="CVV"
-                  options={{
-                    blocks: [3],
-                    numericOnly: true,
-                  }}
-                  onChange={(e) => setCvc(e.target.value)}
-                  className="exp-cvc__input"
-                />
-              </EXPCVCDiv>
-            </EXPCVCContainer>
-          </tr>
-        </tbody>
-      </Table>
+        <EXPCVCDiv>
+          <PayLabel>CVC</PayLabel>
+          <EXPCVCInput
+            placeholder="CVV"
+            options={{
+              blocks: [3],
+              numericOnly: true,
+            }}
+            onChange={(e) => setCvc(e.target.value)}
+            className="exp-cvc__input"
+          />
+        </EXPCVCDiv>
+      </EXPCVCContainer>
     </PayForm>
   );
 }

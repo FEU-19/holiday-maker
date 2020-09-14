@@ -16,14 +16,18 @@ import {
   PaymentPage,
   PaymentContainer,
   H1,
+  Title,
   HR,
   InfoForm,
+  FormDiv,
   InputContainer,
   PayBtn,
 } from "./PaymentStyles";
+
 import TextInput from "./TextInput";
 import PaymentForm from "./PaymentForm";
 import CountryDropdownList from "./CountryDropdownList";
+import BookingInfo from "./BookingInfo";
 
 function Payment() {
   const [user, setUser] = useState({
@@ -92,11 +96,6 @@ function Payment() {
     setUser(userData);
   }
 
-  const [cardNum, setCardNum] = useState("");
-  const [expire, setExpire] = useState("");
-  const [cvc, setCvc] = useState("");
-  const [type, setType] = useState("");
-
   // Check if payment confirmed
   const [paymentSuccess, setPaymentSuccess] = useState(true);
 
@@ -121,6 +120,7 @@ function Payment() {
     <PaymentPage className={classes.root} noValidate autoComplete="off">
       <PaymentContainer>
         <H1>Payment</H1>
+<<<<<<< HEAD
         <InfoForm>
           <TextInput
             name="firstName"
@@ -148,9 +148,12 @@ function Payment() {
           />
         </InfoForm>
         <br />
+=======
+        <BookingInfo />
+>>>>>>> f5855995a6c2ec5e025530231d7c0d77c41ab0cd
         <HR />
-
         <InfoForm>
+<<<<<<< HEAD
           <InputContainer>
             <CountryDropdownList />
           </InputContainer>
@@ -173,17 +176,57 @@ function Payment() {
             onchange={handleChange}
             value={user.adress}
           />
+=======
+          <Title>Account Information</Title>
+          <FormDiv>
+            <TextInput
+              label="First name"
+              onchange={(e) => setFirstName(e.target.value)}
+              value={firstName}
+            />
+            <TextInput
+              label="Last name"
+              onchange={(e) => setLastName(e.target.value)}
+              value={lastName}
+            />
+            <TextInput
+              label="E-mail"
+              onchange={(e) => setEmail(e.target.value)}
+              value={email}
+            />
+            <TextInput
+              label="Mobile"
+              onchange={(e) => setPhoneNum(e.target.value)}
+              value={phoneNum}
+            />
+          </FormDiv>
+          <FormDiv className="">
+            <InputContainer>
+              <CountryDropdownList />
+            </InputContainer>
+
+            <TextInput
+              label="City"
+              onchange={(e) => setCity(e.target.value)}
+              value={city}
+            />
+            <TextInput
+              label="Zip code"
+              onchange={(e) => setZipCode(e.target.value)}
+              value={zipcode}
+            />
+            <TextInput
+              label="Adress"
+              onchange={(e) => setAdress(e.target.value)}
+              value={adress}
+            />
+          </FormDiv>
+>>>>>>> f5855995a6c2ec5e025530231d7c0d77c41ab0cd
         </InfoForm>
 
-        <br />
         <HR />
 
-        <PaymentForm
-          setCardNum={setCardNum}
-          setExpire={setExpire}
-          setCvc={setCvc}
-          setType={setType}
-        />
+        <PaymentForm />
 
         <PayBtn
           onClick={() => setShowModal(true)}

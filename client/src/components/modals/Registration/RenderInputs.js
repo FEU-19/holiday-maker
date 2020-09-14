@@ -49,7 +49,7 @@ const RenderInputs = ({ handleSubmit, newUser, handleInput }) => {
           minLength="1"
           maxLength="30"
         />
-              
+            
         <TextField
           id="surname"
           label="Last name"
@@ -169,7 +169,7 @@ const RenderInputs = ({ handleSubmit, newUser, handleInput }) => {
           required
           minLength="1"
           maxLength="12"
-        />
+        /> 
                    
         <Button type="submit" variant="contained" color="primary">
           Register

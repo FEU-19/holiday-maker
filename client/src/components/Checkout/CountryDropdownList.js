@@ -1,20 +1,40 @@
 import React, { useState } from "react";
-
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
+
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
+
+const theme = createMuiTheme({
+  overrides: {
+    // Style sheet name ⚛️
+    MuiInputLabel: {
+      // Name of the rule
+      root: {
+        // Some CSS
+        color: "#162c72",
+      },
+    },
+  },
+});
 
 function Country_DropdownList() {
   const [country, setCountry] = useState("");
 
   const useStyles = makeStyles((theme) => ({
     formControl: {
-      margin: theme.spacing(1),
-      minWidth: 120,
+      width: `${40}%`,
+      flex: 1,
+      marginTop: 9,
+      marginLeft: 10,
+
+      padding: 0,
+      backgroundColor: "transparent",
     },
     selectEmpty: {
-      marginTop: theme.spacing(2),
+      marginTop: theme.spacing(1),
+      backgroundColor: "transparent",
     },
   }));
 
@@ -26,8 +46,9 @@ function Country_DropdownList() {
 
   return (
     <FormControl className={classes.formControl}>
-      <InputLabel htmlFor="country">Country</InputLabel>
-
+      <ThemeProvider theme={theme}>
+        <InputLabel htmlFor="country">Country</InputLabel>
+      </ThemeProvider>
       <Select native value={country.name} onChange={handleChange}>
         <option aria-label="None" value="" />
         <option value="Afganistan">Afghanistan</option>
