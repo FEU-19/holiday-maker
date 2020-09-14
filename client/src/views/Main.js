@@ -15,6 +15,7 @@ const Container = styled.main`
 
 const Main = () => {
   const [filteredData, setFilteredData] = useState([]);
+  const [searching, setSearching] = useState(false);
   const [sortOn, setSortOn] = useState('');
 
   function setFilteredDataCB(data) {
@@ -25,9 +26,9 @@ const Main = () => {
     <>
       <HeaderComp />
       <Container>
-        <SearchContainer setFilteredDataCB={setFilteredDataCB} />
-        <SortContainer filteredData={filteredData} setSortOn={setSortOn} sortOn={sortOn} />
-        <ContentContainer filteredData={filteredData} sortOn={sortOn} />
+        <SearchContainer setFilteredDataCB={setFilteredDataCB} setSearching={setSearching} />
+        <SortContainer filteredData={filteredData} setSortOn={setSortOn} sortOn={sortOn}  />
+        <ContentContainer filteredData={filteredData} sortOn={sortOn} searching={searching} />
       </Container>
     </>
   );
