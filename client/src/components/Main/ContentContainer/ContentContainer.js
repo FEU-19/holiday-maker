@@ -188,13 +188,11 @@ const ContentContainer = ({ filteredData, sortOn, searching }) => {
     );
   })}
   {!sortedData.length && searching ?
-
     <div className={classes.noResult}>
       <Typography> No available hotels </Typography>
       <hr></hr>
       <CancelIcon></CancelIcon>
     </div>
-
     : null }
   </div>
 
