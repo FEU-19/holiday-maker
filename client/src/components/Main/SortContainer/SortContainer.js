@@ -16,7 +16,6 @@ export default function SortContainer({ filteredData, sortOn, setSortOn }) {
 
   function onChange(e) {
     if (e.target.value === 'None') return setSortOn('');
-
     setSortOn(e.target.value);
   }
 

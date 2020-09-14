@@ -134,8 +134,8 @@ const SearchContainer = ({ setFilteredDataCB, setSearching }) => {
             />
           </Grid>
           <Grid item xs={2}>
-            <ChildrenAgeSelects
-              amountOfChildren={amountOfChildren}
+            <ChildrenAgeSelects 
+              amountOfChildren={amountOfChildren} 
               setAgeOfChildren={setAgeOfChildren}
             />
           </Grid>

@@ -1,5 +1,5 @@
 const sortRating = (data, boolean) => {
-  let newData = data;
+  let newData = [...data];
 
   if(boolean !== true) return data;
 
