@@ -26,6 +26,7 @@ import filterPool from "../../../utils/filterPool";
 import filterRestaurant from "../../../utils/filterRestaurant";
 import filterDistanceBeach from "../../../utils/filterDistanceBeach";
 import filterDistanceCity from "../../../utils/filterDistanceCity";
+import filterDate from "../../../utils/filterDate";
 
 const Container = styled.div`
   width: 90vw;
@@ -62,8 +63,8 @@ const SearchContainer = ({ setFilteredDataCB }) => {
   const [distanceBeach, setDistanceBeach] = useState(0);
   const [amountOfAdults, setAmountOfAdults] = useState(1);
   const [date, setDate] = useState({
-    start: "2020-06-02T10:30:00.000Z",
-    end: "2020-06-08T10:00:00.000Z",
+    start: "2020-06-02T00:00:00.000Z",
+    end: "2020-06-08T00:00:00.000Z",
   });
 
   useEffect(() => {
@@ -89,6 +90,7 @@ const SearchContainer = ({ setFilteredDataCB }) => {
     c = filterRestaurant(c, checkedRestaurant);
     c = filterDistanceBeach(c, distanceBeach);
     c = filterDistanceCity(c, distanceCity);
+    c = filterDate(c, date)
 
     setFilteredDataCB(c);
   }

@@ -16,11 +16,11 @@ const Container = styled.main`
 const Main = () => {
   const [filteredData, setFilteredData] = useState([]);
   const [sortOn, setSortOn] = useState('');
-  
+
   function setFilteredDataCB(data) {
     setFilteredData(data);
   }
-  
+
   return (
     <>
       <HeaderComp />
