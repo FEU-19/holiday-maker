@@ -49,7 +49,7 @@ const ButtonContainer = styled(Grid)`
   padding: 10px;
 `;
 
-const SearchContainer = ({ setFilteredDataCB }) => {
+const SearchContainer = ({ setFilteredDataCB, setSearching }) => {
   const [residentData, setResidentData] = useState([{}]);
   const [city, setCity] = useState("");
   const [checkedKidsClub, setCheckedKidsclub] = useState("none");
@@ -95,6 +95,7 @@ const SearchContainer = ({ setFilteredDataCB }) => {
     c = filterDate(c, date)
 
     setFilteredDataCB(c);
+    setSearching(true);
   }
 
   return (
@@ -133,8 +134,8 @@ const SearchContainer = ({ setFilteredDataCB }) => {
             />
           </Grid>
           <Grid item xs={2}>
-            <ChildrenAgeSelects 
-              amountOfChildren={amountOfChildren} 
+            <ChildrenAgeSelects
+              amountOfChildren={amountOfChildren}
               setAgeOfChildren={setAgeOfChildren}
             />
           </Grid>
