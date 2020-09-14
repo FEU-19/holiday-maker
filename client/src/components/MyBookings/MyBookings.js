@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import { Redirect } from 'react-router-dom';
 import axios from "axios";
 
 const objekt = [{
@@ -118,33 +119,37 @@ const MyBookings = () => {
   return (
     <div className={classes.root}>  
             <Button onClick={showMyBookings} >My Bookings </Button>
-            {objekt.map(myBooking => 
-                <Accordion>
-                    <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content"id="panel1a-header">
-                      <Typography className={classes.heading}>{myBooking.hotel}</Typography>
-                      <Typography className={classes.heading}>{myBooking.bookingDates.start}</Typography>
-                      <Typography className={classes.heading}>{myBooking._id}</Typography>
+            <Button onClick={showMyBookings} >Main </Button>
+            {objekt.map( function(myBooking, index) {
+              return (
+                <Accordion key={index}>
+                    <AccordionSummary key={index} expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content"id="panel1a-header">
+                      <Typography key={index} className={classes.heading}>{myBooking.hotel}</Typography>
+                      <Typography key={index} className={classes.heading}>{myBooking.bookingDates.start}</Typography>
+                      <Typography key={index} className={classes.heading}>{myBooking._id}</Typography>
                     </AccordionSummary>
-                    <AccordionDetails>
-                      <Typography className={classes.flex} >
-                        <Card className={classes.rootTwo}>
-                            <CardContent>
-                                <Typography  >
-                                  <h2>Information</h2>
+                    <AccordionDetails key={index}>
+                      <Typography key={index} className={classes.flex} >
+                        <Card key={index} className={classes.rootTwo}>
+                            <CardContent key={index}>
+                                <Typography key={index}>
+                                  <h2 key={index}>Information</h2>
                                 </Typography>
-                                <Typography className={classes.pos} color="textSecondary">
-                                  <p>User Name/Id: {myBooking.userId}</p>
-                                  <p>Total Rooms: {myBooking.rooms.length}</p>
-                                  <p>Total People: {myBooking.adults + myBooking.children}</p>
-                                  <p>Departure Date: {myBooking.flight.departureDate}</p>
-                                  <p>Return Date: {myBooking.flight.returnDate}</p>
-                                  <p>Extra Bed:  {myBooking.rooms[0].extraBed}</p> 
+                                <Typography key={index} className={classes.pos} color="textSecondary">
+                                  <p key={index}>User Name/Id: {myBooking.userId}</p>
+                                  <p key={index}>Total Rooms: {myBooking.rooms.length}</p>
+                                  <p key={index}>Total People: {myBooking.adults + myBooking.children}</p>
+                                  <p key={index}>Departure Date: {myBooking.flight.departureDate}</p>
+                                  <p key={index}>Return Date: {myBooking.flight.returnDate}</p>
+                                  <p key={index}>Extra Bed:  {myBooking.rooms[0].extraBed}</p> 
                                 </Typography>
                             </CardContent>
                         </Card>
                       </Typography>
                     </AccordionDetails>
                 </Accordion>
+                )
+            }
             )}
         </div>
   )

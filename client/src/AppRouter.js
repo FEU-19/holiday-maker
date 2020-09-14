@@ -14,7 +14,7 @@ const routes = [
   { path: "/checkout/", component: Checkout },
   { path: "/residence/:hotelId", component: Residence },
   { path: "/dropdown/:id", component: DropDown },
-  { path: "/mybookings/:id", component: MyBookings },
+  { path: "/mybookings/", component: MyBookings },
 ];
 
 function AppRouter() {
