@@ -2,12 +2,11 @@ const bcrypt = require("bcrypt");
 const User = require("../models/User");
 const getCookie = require("../middleware/CookieFinder");
 
-exports.createLogout = async (req, res) => {
-  const { cookie } = req.body;
-  const userId = cookie.split("=Bearer")[1];
-  getCookie(req, res);
-  res.clearCookie("access_token", `Bearer${userId}`).end();
-};
+exports.createLogout = async (req, res) =>{
+  const { userId } = req.body;
+
+  res.clearCookie("holidayMakerCookie", `Bearer${userId}`).end();
+}
 
 exports.createLogin = async (req, res) => {
   const { email, password } = req.body.user;
@@ -37,7 +36,7 @@ exports.createLogin = async (req, res) => {
     }
 
     res.status(200);
-    res.cookie("access_token", `Bearer${user.id}`, {
+    res.cookie("holidayMakerCookie", `Bearer${user.id}`, {
       expires: new Date(Date.now() + 8 * 3600000),
     });
     return res.send();
@@ -112,4 +111,11 @@ exports.create = async (req, res) => {
       msg: "Server error",
     });
   }
+};
+
+exports.readOne = async (req, res) => {
+  const { userId } = req.params;
+  const user = await User.findById(userId);
+  if (!user) return res.status(404).send({ error: "Couldn't find user." });
+  return res.status(200).send({ data: user });
 };
