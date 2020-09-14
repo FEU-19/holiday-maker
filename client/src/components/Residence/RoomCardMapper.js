@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import RoomCard from "./RoomCard";
-import { Button, makeStyles, ThemeProvider } from "@material-ui/core";
+import { Button, makeStyles } from "@material-ui/core";
 import { Redirect } from "react-router-dom";
 
 const useStyle = makeStyles({
