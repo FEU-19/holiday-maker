@@ -3,15 +3,16 @@ const Order = require("../models/Order");
 exports.deleteBooking = async (req, res) => {
   const orderId = req.params.orderId;
 
-  if(!orderId){
+  if (!orderId) {
     res.status(400).json({
       error: [{ msg: "no order was sent" }],
     });
   }
-
+  console.log(orderId);
   let foundOrder = await Order.findOne({ _id: orderId });
+  console.log(foundOrder);
 
-  if(!foundOrder){
+  if (!foundOrder) {
     res.status(404).json({
       error: [{ msg: "booking not found" }],
     });
@@ -53,13 +54,13 @@ exports.changeBooking = async (req, res) => {
 
   let foundOrder = await Order.findOne({ _id: orderId });
 
-  if(!foundOrder){
+  if (!foundOrder) {
     res.status(404).json({
       error: [{ msg: "booking not found" }],
     });
   }
 
-  try{
+  try {
     let order = {
       userId: userId,
       adults: adults,
@@ -70,17 +71,21 @@ exports.changeBooking = async (req, res) => {
       bookingNumber: bookingNumber,
       totalPrice: totalPrice,
     };
-  
-    await Order.findByIdAndUpdate(orderId, { $set: order }, { new: true },(err) => {
-      console.log(error);
-    });
-  
+
+    await Order.findByIdAndUpdate(
+      orderId,
+      { $set: order },
+      { new: true },
+      (err) => {
+        console.log(error);
+      }
+    );
+
     return res.status(201).send(order);
-  }catch(err){
+  } catch (err) {
     console.error(err.message);
     return res.status(500).json({
       msg: "Server error",
     });
   }
-
-}
+};

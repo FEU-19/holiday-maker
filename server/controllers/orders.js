@@ -45,6 +45,7 @@ exports.create = async (req, res) => {
   });
 };
 
-exports.read = (_req, res) => {
-  res.send("OK");
+exports.read = async (req, res) => {
+  const orders = await Order.find({ userId: req.user });
+  res.send({ data: orders });
 };
