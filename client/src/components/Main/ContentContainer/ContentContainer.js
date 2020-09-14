@@ -47,17 +47,20 @@ const ContentContainer = ({ filteredData, sortOn }) => {
 
   useEffect(() => {
     setSortedData([...filteredData]);
-  }, [filteredData])
+  }, [sortOn, filteredData])
 
   useEffect(() => {
     // If the option 'None' was selected
     if (!sortOn) return setSortedData([...filteredData]);
 
     if (sortOn === 'Price low to high') {
+      console.log("sortOn price")
       setSortedData(sortPrice(sortedData, true));
     }
 
     if (sortOn === 'Rating high to low') {
+            console.log("sortOn rating")
+
       setSortedData(sortRating(sortedData, true));
     }
   }, [sortOn, filteredData])
