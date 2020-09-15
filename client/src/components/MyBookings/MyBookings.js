@@ -156,13 +156,13 @@ const MyBookings = (props) => {
                                   Departure Date: {"lmao"}
                                   Return Date: {"lmao"}
                                   Extra Bed:  {myBooking.rooms[0].extraBed}
-                                  <ContainerButtons 
+                                </Typography>
+                                <ContainerButtons 
                                     setUpdate={setUpdate} 
                                     update={update} 
                                     orderId={myBooking._id} 
                                     wholeNewObject={myBooking}
                                   />
-                                </Typography>
                             </CardContent>
                         </Card>
                     </AccordionDetails>

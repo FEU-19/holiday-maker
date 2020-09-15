@@ -53,8 +53,6 @@ const ContainerButtons = (props) => {
       });
   };
 
-
-
   return (
     <div>
       <button onClick={handleDelete}>Delete</button>
