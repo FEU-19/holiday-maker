@@ -26,33 +26,32 @@ const useStyle = makeStyles(() => ({
 }));
 
 const RoomPrice = ({
-  roomType,
-  selected,
-  price,
-  extraBed,
-  chooseRoom,
-  roomInfo,
+ roomType,
+ selected,
+ price,
+ extraBed,
+ chooseRoom,
+ roomInfo,
 }) => {
-  const classes = useStyle();
-  const selectedToInt = parseInt(selected) || 0;
-  const extraBedToInt = parseInt(extraBed.extraBedPrice) || 0;
-  const totalPrice = price + selectedToInt + extraBedToInt;
-  //const finalPrice = roomType.price + price.extras;
-
-  return (
-    <Card className={classes.card}>
-      <CardHeader
-        className={classes.header}
-        title={totalPrice + ":-" + " SEK"}
-        //title = {selected}
-        subheader={"for 1 room for 1 night"}
-      />
-      <Typography className={classes.text} component="p">
-        Today's Price including taxes and fees
-      </Typography>
-      <Checkbox onChange={() => chooseRoom(roomInfo)} />
-    </Card>
-  );
+ const classes = useStyle();
+ const selectedToInt = parseInt(selected) || 0;
+ const extraBedToInt = parseInt(extraBed.extraBedPrice) || 0;
+ const totalPrice = price + selectedToInt + extraBedToInt;
+ //const finalPrice = roomType.price + price.extras;
+ return (
+  <Card className={classes.card}>
+   <CardHeader
+    className={classes.header}
+    title={totalPrice + ":- SEK"}
+    //title = {selected}
+    subheader={"for 1 room for 1 night"}
+   />
+   <Typography className={classes.text} component="p">
+    Today's Price including taxes and fees
+   </Typography>
+   <Checkbox onChange={() => chooseRoom(roomInfo)} />
+  </Card>
+ );
 };
 
 export default RoomPrice;
