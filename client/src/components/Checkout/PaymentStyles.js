@@ -189,7 +189,7 @@ export const BookingInfoStyle = makeStyles(() => ({
   },
 
   title: {
-    color: "#162C72",
+    color: "#4AB0BD",
     display: "flex",
     alignItems: "center",
     width: "100px",
@@ -206,7 +206,8 @@ export const BookingInfoStyle = makeStyles(() => ({
     borderRadius: "10px",
     backgroundColor: "#F5F5F5",
     padding: "10px 15px",
-    boxShadow: "0px 1px 1px grey",
+    boxShadow: "3px 3px 4px grey",
+    borderBottom: "3px solid #162C72",
   },
 
   ul: {
