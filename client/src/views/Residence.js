@@ -5,8 +5,8 @@ import ResidenceInformation from "../components/Residence/ResidenceInformation";
 import GeneralInformation from "../components/Residence/GeneralInformation";
 import HotelCarousel from "../components/Residence/HotelCarousel";
 import RoomCardMapper from "../components/Residence/RoomCardMapper";
-import ResidenceSpinner from "../components/Residence/ResidenceSpinner";
-import { useParams } from "react-router-dom";
+import StarRateIcon from '@material-ui/icons/StarRate';
+import { useParams, useLocation } from "react-router-dom";
 import axios from "axios";
 
 const useStyle = makeStyles(() => ({
@@ -35,30 +35,27 @@ const useStyle = makeStyles(() => ({
   }
 }));
 
-let wait = null;
-// Hotel ID will come as props from search team, but not yet implemented
+
 const Residence = () => {
-  const [shouldSpin, setShouldSpin] = useState(false);
   const classes = useStyle();
+
+  // ********* THIS SHOULD BE UNCOMMENTED ON MERGE WITH MASTER *********
+  // const {state} = useLocation();
+  // const data = state.hotel;
+  // *******************************************************************
+
+
+
+  // **************** ALL BELOW THIS LINE SHOULD BE REMOVED ON MERGE WITH MASTER *********************
   const [data, updateData] = useState(null);
   const { hotelId } = useParams();
 
-
   useEffect(() => {
-    wait = setTimeout(() => {
-      setShouldSpin(true);
-    },500);
-
     axios
       .get(`http://localhost:8080/api/residences/${hotelId}`)
       .then((response) => {
         updateData(response.data.data);
       })
-      .then(() => {
-       clearTimeout(wait);
-       wait = null;
-       setShouldSpin(false);
-     })
      .catch((error) => {
       console.error(
        "An error occured while retrieving data from the server",
@@ -67,17 +64,19 @@ const Residence = () => {
      });
     }, []);
 
+    if (!data){
+      return <div />
+    }
+  // **************** ALL ABOVE THIS LINE SHOULD BE REMOVED ON MERGE WITH MASTER *********************
 
-    if (!data && !shouldSpin){
-     return <div />;
-   }
 
-   if (shouldSpin){
-       return (
-         <div className={classes.spinner}>
-           <ResidenceSpinner />
-         </div>);
-   }
+  function starRating(rating){
+    let ratingArray = [];
+    for (let i = 0; i < rating; i++) {
+      ratingArray.push(<StarRateIcon key={i}/>);
+    }
+    return ratingArray;
+  }
 
   return (
     <div className={classes.article}>
