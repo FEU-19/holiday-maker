@@ -1,7 +1,7 @@
 import React from "react";
 
 import { paymentFormStyle } from "./PaymentStyles";
-import { Box, Button, InputLabel } from "@material-ui/core";
+import { Box, InputLabel } from "@material-ui/core";
 import Cleave from "cleave.js/react";
 
 export default function PaymentForms({
@@ -32,7 +32,7 @@ export default function PaymentForms({
           />
         </InputLabel>
         <Box className={classes.imgWrapper}>
-          <img className={classes.image} src={cardImg} />
+          <img className={classes.image} src={cardImg} alt="paycard-thumbnail" />
         </Box>
       </Box>
       <Box className={classes.wrapper}>

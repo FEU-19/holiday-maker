@@ -1,7 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-import styled from "styled-components"; // need to convert to material ui styles
-
 //Payment page
 export const PageStyle = makeStyles(() => ({
   wrapper: {
@@ -236,7 +234,6 @@ export const BookingInfoStyle = makeStyles(() => ({
     fontWeight: "700",
     alignSelf: "flex-end",
     marginRight: "40px",
-    fontWeight: "700",
     padding: " 10px 0",
   },
 

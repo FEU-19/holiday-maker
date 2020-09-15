@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState, useContext } from "react";
 
 import { Redirect, useLocation } from "react-router-dom";
 import CheckIcon from "@material-ui/icons/CheckCircle";
@@ -11,6 +10,8 @@ import { Container, Button, Divider, Box, Typography } from "@material-ui/core";
 import PaymentForm from "./PaymentForm";
 import InfoForm from "./InfoForm";
 import BookingInfo from "./BookingInfo";
+import UserContext from "../../context/userContext";
+import { onCreditCardTypeChanged } from "../../utils/handleCardImage";
 
 function Payment() {
   // styles
@@ -30,7 +31,8 @@ function Payment() {
   // flight and rooms state
   const { state } = useLocation();
 
-  // User data.
+  // User context
+  const { user } = useContext(UserContext);
 
   // Cleave credit
   function handleCredit(e) {
@@ -40,40 +42,6 @@ function Payment() {
     };
     if (!creditData.creditCard) setCardImg("");
     setCredit(creditData);
-  }
-
-  function onCreditCardTypeChanged(type) {
-    setType(type);
-
-    const visaCard = "https://i.ibb.co/vVYd6Xq/visa-3-226460.png";
-
-    const masterCard = "https://i.ibb.co/HFg4VgG/Master-Card.png";
-
-    const maestroCard = "https://i.ibb.co/vQm4yLR/21-credit-512.png";
-
-    const AMEX = "https://i.ibb.co/FXP29n4/American-Express-copy.png";
-
-    const discover =
-      "https://i.ibb.co/bXPV1nH/atm-card-credit-card-debit-card-discover-icon-discover-card-png-512-512.png";
-
-    const JCB = "https://i.ibb.co/5nhStm0/cropped-favicon.png";
-
-    const dinnersCard = "https://i.ibb.co/WVqdBMS/Diners-Club1950.png";
-
-    const instaPay =
-      "https://i.ibb.co/1Jmrn7Q/Xs-Gvw5zw-KGRs4-S6o3ma4ika8-WXk-cdw-Jaj-EEZhx-Ul-PCJGnj-Bt-Mu-HAXQRjd-PQh-Md-Er-Po-B.png";
-
-    const UATP = "https://i.ibb.co/kJ2BGzZ/website-UATPLogo.png";
-
-    type === "visa" && setCardImg(visaCard);
-    type === "mastercard" && setCardImg(masterCard);
-    type === "amex" && setCardImg(AMEX);
-    type === "diners" && setCardImg(dinnersCard);
-    type === "jcb" && setCardImg(JCB);
-    type === "uatp" && setCardImg(UATP);
-    type === "discover" && setCardImg(discover);
-    type === "maestro" && setCardImg(maestroCard);
-    type === "instapayment" && setCardImg(instaPay);
   }
 
   // Check if payment confirmed
@@ -107,17 +75,7 @@ function Payment() {
         <Typography variant="h5" className={style.InfoTitle}>
           Account Information
         </Typography>
-        <InfoForm
-          firstName={user.firstName}
-          lastName={user.surname}
-          email={user.email}
-          address={user.adress}
-          city={user.city}
-          phoneNum={user.phoneNumber}
-          zipcode={user.zipCode}
-          handleChange={handleChange}
-          country={user.country}
-        />
+        <InfoForm user={user} />
       </Box>
       <Divider />
       <Box className={pageStyle.wrapper}>
@@ -126,7 +84,7 @@ function Payment() {
         </Typography>
         <PaymentForm
           handleCredit={handleCredit}
-          onCreditCardTypeChanged={onCreditCardTypeChanged}
+          onCreditCardTypeChanged={() => onCreditCardTypeChanged(type, setType, setCardImg)}
           cardNum={credit.creditCard}
           cvc={credit.cvc}
           expire={credit.expire}
@@ -134,7 +92,14 @@ function Payment() {
         />
       </Box>
       <Box className={pageStyle.btnCtn}>
-        <Button onClick={() => setShowModal(true)} className={pageStyle.btn} type="submit">
+        <Button
+          onClick={() => {
+            setShowModal(true);
+            setPaymentSuccess(true);
+          }}
+          className={pageStyle.btn}
+          type="submit"
+        >
           Finish & Pay
         </Button>
       </Box>

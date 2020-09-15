@@ -28,7 +28,6 @@ function AppRouter() {
   useEffect(() => {
     const checkLoggedIn = async () => {
       let token = localStorage.getItem("auth-token");
-      console.log("heejj", token);
       if (token === null) {
         localStorage.setItem("auth-token", "");
         token = "";

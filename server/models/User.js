@@ -34,6 +34,8 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  bookmarkedQueries: [String],
+  bookmarkedHotels: [mongoose.Schema.Types.ObjectId],
 });
 
 module.exports = mongoose.model("user", UserSchema);

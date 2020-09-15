@@ -1,28 +1,12 @@
-import axios from "axios";
-<<<<<<< HEAD
-import React, { useState, useEffect } from 'react';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import PropTypes from 'prop-types';
-=======
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-import PropTypes from "prop-types";
->>>>>>> 54d0dc4979262e14f0b4b1092d81d0f50c52720a
 
 import RegistrationComp from "./Registration/RegistrationComp";
 import LoginComp from "./Login/Login";
@@ -33,17 +17,14 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-  
-  display:flex;
-  
-`
+  display: flex;
+`;
 
 const LoginModal = () => {
   const { userData, setUserData } = useContext(UserContext);
   const [open, setOpen] = useState(false);
-  const [cookie, setCookie] = useState(false);
   const [value, setValue] = useState(0);
-  const [redirect, setRedirect] = useState(false);
+  //   const [redirect, setRedirect] = useState(false);
 
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -64,12 +45,6 @@ const LoginModal = () => {
       </div>
     );
   }
-
-  TabPanel.propTypes = {
-    children: PropTypes.node,
-    index: PropTypes.any.isRequired,
-    value: PropTypes.any.isRequired,
-  };
 
   function a11yProps(index) {
     return {
@@ -105,14 +80,9 @@ const LoginModal = () => {
     localStorage.setItem("auth-token", "");
   };
 
-  const RedirectTo = (e) => {
-    setRedirect(true);
-  }
-
   return (
     <div>
       {!userData.user ? (
-        
         <Wrapper>
           <Button variant="outlined" color="primary">
             <Link to={{ pathname: "/" }}>Main</Link>
@@ -141,25 +111,14 @@ const LoginModal = () => {
             <Link to={{ pathname: "/mybookings" }}>My Bookings</Link>
           </Button>
 
-          
-            <Button className="login" variant="outlined" color="primary" onClick={(e) => onLogout(e)}>
-              <Link to={{ pathname: "/" }}>
-              Logout
-              </Link>
-            </Button>
+          <Button className="login" variant="outlined" color="primary" onClick={(e) => onLogout(e)}>
+            <Link to={{ pathname: "/" }}>Logout</Link>
+          </Button>
         </Wrapper>
       )}
-      <Dialog
-        open={open}
-        onClose={handleModalClose}
-        aria-labelledby="form-dialog-title"
-      >
+      <Dialog open={open} onClose={handleModalClose} aria-labelledby="form-dialog-title">
         <AppBar position="static">
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            aria-label="simple tabs example"
-          >
+          <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
             <Tab label="Login" {...a11yProps(0)} />
             <Tab label="Registration" {...a11yProps(1)} />
           </Tabs>

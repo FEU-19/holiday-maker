@@ -38,17 +38,6 @@ const Login = (props) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     if (user) {
-<<<<<<< HEAD
-      instance
-        .post("http://localhost:8080/api/login/", { user }, props.options)
-        .then((res) => {
-          props.handleModalClose();
-        })
-        .catch((err) => {
-          console.log(err);
-          setOpen(true);
-          //   setErrorMsg(err.response.data.error[0].msg);
-=======
       try {
         const loginRes = await axios.post("http://localhost:8080/api/login", {
           user,
@@ -57,7 +46,6 @@ const Login = (props) => {
         setUserData({
           token: loginRes.data.token,
           user: loginRes.data.user,
->>>>>>> 54d0dc4979262e14f0b4b1092d81d0f50c52720a
         });
         localStorage.setItem("auth-token", loginRes.data.token);
         props.handleModalClose();
