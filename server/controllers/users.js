@@ -112,3 +112,10 @@ exports.create = async (req, res) => {
     });
   }
 };
+
+exports.readOne = async (req, res) => {
+  const { userId } = req.params;
+  const user = await User.findById(userId);
+  if (!user) return res.status(404).send({ error: "Couldn't find user." });
+  return res.status(200).send({ data: user });
+};
