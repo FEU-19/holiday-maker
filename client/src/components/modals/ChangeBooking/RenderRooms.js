@@ -4,81 +4,17 @@ import { Radio } from "@material-ui/core";
 import RenderFoodOption from "./RenderFoodOption";
 import DatePicker from "../../Main/SearchContainer/DatePicker";
 
-export default function RenderRooms(bookings) {
-    console.log(bookings);
-  return (
-    <p>Hej</p>
+export default function RenderRooms({ bookings, hotel }) {
+  console.log(bookings);
+// mappa bokning 
+const bookedRooms = bookings.rooms
+// 
+  const booking = bookings.map((booking) => {
+    console.log('I have x rooms in my booking ',booking );
+    const room = booking.map(room => {
+      
+    })
+  });
 
-
-   
-
-
-    //   <FormControlLabel
-    //   style={{ borderTop: "1px solid #ccd9dd" }}
-    //   value={roomInfo.allInclusive.toString()}
-    //   control={<Radio color="default" />}
-    //   disabled={roomInfo.allInclusive ? "" : "disabled"}
-    //   label={
-    //     roomInfo.allInclusive ? (
-    //       <p style={{ paddingRight: "10vw" }}>
-    //         All Inclusive: {roomInfo.allInclusive + ":-"}
-    //       </p>
-    //     ) : (
-    //       <p style={{ paddingRight: "10vw" }}>
-    //         All Inclusive: {"N/A"}
-    //       </p>
-    //     )
-    //   }
-    //   labelPlacement="start"
-    // />
-    // <FormControlLabel
-    //   style={{ borderTop: "1px solid #ccd9dd" }}
-    //   value={roomInfo.fullBoard.toString()}
-    //   control={<Radio color="default" />}
-    //   disabled={roomInfo.fullBoard ? "" : "disabled"}
-    //   label={
-    //     roomInfo.fullBoard ? (
-    //       <p style={{ paddingRight: "10vw" }}>
-    //         Half Board: {roomInfo.fullBoard + ":-"}
-    //       </p>
-    //     ) : (
-    //       <p style={{ paddingRight: "10vw" }}>
-    //         Full Board: {"N/A"}
-    //       </p>
-    //     )
-    //   }
-    //   labelPlacement="start"
-    // />
-    // <FormControlLabel
-    //   style={{ borderTop: "1px solid #ccd9dd" }}
-    //   value={roomInfo.halfBoard.toString()}
-    //   control={<Radio color="default" />}
-    //   disabled={roomInfo.halfBoard ? "" : "disabled"}
-    //   label={
-    //     roomInfo.halfBoard ? (
-    //       <p style={{ paddingRight: "10vw" }}>
-    //         Half Board: {roomInfo.halfBoard + ":-"}
-    //       </p>
-    //     ) : (
-    //       <p style={{ paddingRight: "10vw" }}>
-    //         Half Board: {"N/A"}
-    //       </p>
-    //     )
-    //   }
-    //   labelPlacement="start"
-    // />
-    // <FormControlLabel
-    //   style={{ borderTop: "1px solid #ccd9dd" }}
-    //   value={roomInfo.selfCatering.toString()}
-    //   control={<Radio color="default" />}
-    //   label={
-    //     roomInfo.selfCatering || (
-    //       <p style={{ paddingRight: "10vw" }}>
-    //         Self Catering: {roomInfo.selfCatering + ":-"}
-    //       </p>
-    //     )
-    //   }
-    //   labelPlacement="start"
-    // />
-  );
+  return <p>Hej</p>;
 }
