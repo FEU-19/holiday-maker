@@ -216,7 +216,6 @@ export const BookingInfoStyle = makeStyles(() => ({
     listStyle: "none",
     margin: "10px auto",
     marginTop: "0",
-    // color: "grey",
   },
 
   li: {
@@ -237,7 +236,6 @@ export const BookingInfoStyle = makeStyles(() => ({
     fontWeight: "700",
     alignSelf: "flex-end",
     marginRight: "40px",
-    // color: "grey",
     fontWeight: "700",
     padding: " 10px 0",
   },
