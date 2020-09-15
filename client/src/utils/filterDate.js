@@ -10,7 +10,8 @@ export default function filterDate (hotels, date) {
         if (acc) return acc;
         let temp = false;
 
-        const occupiedInterval = getDateArray(new Date(start), new Date(end))
+        
+        getDateArray(new Date(start), new Date(end))
         .map((occ) => {
           return dateInterval.map((uDate) => {
             if (uDate.getDate() === occ.getDate() && uDate.getMonth() === occ.getMonth()) {

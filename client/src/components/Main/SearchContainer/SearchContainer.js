@@ -114,7 +114,7 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
 
     setFilteredDataCB(c);
     setSearching(true);
-    console.log(c);
+
   }
 
   return (
