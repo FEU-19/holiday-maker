@@ -11,12 +11,10 @@ import { isWithinInterval } from "date-fns";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: 150,
-
   },
   formControl: {
     margin: theme.spacing(1),
     minWidth: 150,
-    color: 'white',
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
@@ -24,10 +22,9 @@ const useStyles = makeStyles((theme) => ({
   select: {
     fontWeight: 500,
     background: 'white',
-    icon: {
-      background: '#162C72',
-    }
-
+  },
+  icon: {
+    fill: '#162C72',
   },
   menuItem: {
     fontSize: 20, // font size i drop down kommer jag ej åt
@@ -63,7 +60,7 @@ const SelectCity = ({ residentData, city, setCity }) => {
       <Box className={classes.border} border={3}>
         <FormControl classes={{ root: classes.root }} >
           <Select 
-            classes={{ select: classes.select }}
+            classes={{ select: classes.select, icon: classes.icon, menuItem: classes.menuItem }}
             value={city || 'City'}
             id="selectcity"
             onChange={handleChange}
@@ -71,7 +68,6 @@ const SelectCity = ({ residentData, city, setCity }) => {
             {uniqueCity.map((city, i) => {
               return (
                 <MenuItem
-                  classes={{menuItem: classes.menuItem}}
                   key={city + i}
                   value={city}
                   onChange={handleChange}
@@ -80,7 +76,6 @@ const SelectCity = ({ residentData, city, setCity }) => {
               )
             })}
           </Select>
-
         </FormControl>
       </Box>
 
