@@ -101,19 +101,19 @@ const LoginModal = () =>{
     <div>
       {!cookie ? (
         <div>
-          <Button variant="outlined" color="primary" onClick={handleModalOpen}>
+          <Button variant="outlined" color="#4AB0BD" onClick={handleModalOpen}>
             Login
           </Button>
           <Button
             variant="outlined"
-            color="primary"
+            color="#4AB0BD"
             onClick={handleModalRegistration}
           >
             Registration
           </Button>
         </div>
       ) : (
-        <Button variant="outlined" color="primary" onClick={(e) => onLogout(e)}>
+        <Button variant="outlined" color="#4AB0BD" onClick={(e) => onLogout(e)}>
           Logout
         </Button>
       )}
