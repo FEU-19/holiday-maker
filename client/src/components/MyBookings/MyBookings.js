@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
@@ -10,6 +10,8 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import { Redirect } from 'react-router-dom';
 import axios from "axios";
+
+
 
 const objekt = [{
     _id: 'Booking Id1',
@@ -92,56 +94,35 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-const MyBookings = () => {
-    const [myBookings, setMyBookings] = useState({});
-    const [clickedBookings, setClickedBookings] = useState(false);
-    
-    const showMyBookings = () => {
-
-        setClickedBookings(true);
-
-        if(clickedBookings) {
-            console.log("myBookings");
-
-            let url = "";
-            axios
-                .get(url)
-                .then((res) => {
-                  console.log(res.data.adults);
-                  //myBookings.push(res.data);
-                  setMyBookings(res.data);
-                })
-        }
-    }
+const MyBookings = (props) => {
+  const [myBookings, setMyBookings] = useState({});
+  const [clickedBookings, setClickedBookings] = useState(false);
     
   const classes = useStyles();
 
   return (
     <div className={classes.root}>  
-            <Button onClick={showMyBookings} >My Bookings </Button>
-            <Button onClick={showMyBookings} >Main </Button>
-            {objekt.map( function(myBooking, index) {
-              return (
-                <Accordion key={index}>
-                    <AccordionSummary key={index} expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content"id="panel1a-header">
-                      <Typography key={index} className={classes.heading}>{myBooking.hotel}</Typography>
-                      <Typography key={index} className={classes.heading}>{myBooking.bookingDates.start}</Typography>
-                      <Typography key={index} className={classes.heading}>{myBooking._id}</Typography>
+            {objekt.map(myBooking => 
+                <Accordion key={myBooking._id}>
+                    <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content"id="panel1a-header">
+                      <Typography className={classes.heading}>{myBooking.hotel}</Typography>
+                      <Typography className={classes.heading}>{myBooking.bookingDates.start}</Typography>
+                      <Typography className={classes.heading}>{myBooking._id}</Typography>
                     </AccordionSummary>
-                    <AccordionDetails key={index}>
-                      <Typography key={index} className={classes.flex} >
-                        <Card key={index} className={classes.rootTwo}>
-                            <CardContent key={index}>
-                                <Typography key={index}>
-                                  <h2 key={index}>Information</h2>
+                    <AccordionDetails >
+                      <Typography  className={classes.flex} >
+                        <Card  className={classes.rootTwo}>
+                            <CardContent >
+                                <Typography>
+                                  <h2 >Information</h2>
                                 </Typography>
-                                <Typography key={index} className={classes.pos} color="textSecondary">
-                                  <p key={index}>User Name/Id: {myBooking.userId}</p>
-                                  <p key={index}>Total Rooms: {myBooking.rooms.length}</p>
-                                  <p key={index}>Total People: {myBooking.adults + myBooking.children}</p>
-                                  <p key={index}>Departure Date: {myBooking.flight.departureDate}</p>
-                                  <p key={index}>Return Date: {myBooking.flight.returnDate}</p>
-                                  <p key={index}>Extra Bed:  {myBooking.rooms[0].extraBed}</p> 
+                                <Typography  className={classes.pos} color="textSecondary">
+                                  <p>User Name/Id: {myBooking.userId}</p>
+                                  <p>Total Rooms: {myBooking.rooms.length}</p>
+                                  <p>Total People: {myBooking.adults + myBooking.children}</p>
+                                  <p>Departure Date: {myBooking.flight.departureDate}</p>
+                                  <p>Return Date: {myBooking.flight.returnDate}</p>
+                                  <p>Extra Bed:  {myBooking.rooms[0].extraBed}</p> 
                                 </Typography>
                             </CardContent>
                         </Card>

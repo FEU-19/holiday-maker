@@ -6,7 +6,7 @@ import Checkout from "./views/Checkout";
 import DropDown from "./components/common/DropDown/DropDown";
 import Residence from "./views/Residence";
 import UserContext from "./context/userContext";
-import MyBookings from "./components/MyBookings/MyBookings";
+import MyBookings from "./views/MyBookings";
 
 // To add more routes use format as below and add to the routes array
 const routes = [
