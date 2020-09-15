@@ -29,9 +29,10 @@ import filterDistanceCity from "../../../utils/filterDistanceCity";
 import filterDate from "../../../utils/filterDate";
 
 const Container = styled.div`
-  width: 90vw;
+  width: 100vw;
   display: flex;
   justify-content: center;
+  background-color: #F5F5F5;
 `;
 
 const Form = styled.form`
@@ -123,7 +124,7 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
           spacing={1}
           justify="space-around"
         >
-          <Grid item xs={2}>
+          <Grid item xs={3}>
             <SelectCity
               residentData={residentData}
               city={city}

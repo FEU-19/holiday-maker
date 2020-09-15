@@ -11,6 +11,7 @@ const Container = styled.main`
   flex-direction: column;
   align-items: center;
   border: 2px solid black;
+  width: 100vw;
 `;
 
 const Main = () => {
