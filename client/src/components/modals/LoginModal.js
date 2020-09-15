@@ -1,8 +1,9 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
@@ -12,15 +13,24 @@ import PropTypes from "prop-types";
 
 import RegistrationComp from "./Registration/RegistrationComp";
 import LoginComp from "./Login/Login";
+import UserContext from "../../context/userContext";
+
+import { Link } from "react-router-dom";
+
+import styled from "styled-components";
+
+const Wrapper = styled.div`
+  
+  display:flex;
+  
+`
 
 const LoginModal = () => {
+  const { userData, setUserData } = useContext(UserContext);
   const [open, setOpen] = useState(false);
-  const [cookie, setCookie] = useState(document.cookie);
+  const [cookie, setCookie] = useState(false);
   const [value, setValue] = useState(0);
-
-  useEffect(() => {
-    setCookie(document.cookie);
-  }, [open]);
+  const [redirect, setRedirect] = useState(false);
 
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -73,47 +83,58 @@ const LoginModal = () => {
     setOpen(false);
   };
 
-  const options = {
-    xsrfCookieName: "XSRF-TOKEN",
-    xsrfHeaderName: "X-XSRF-TOKEN",
-  };
-
-  const instance = axios.create({
-    withCredentials: true,
-  });
-
   const onLogout = (e) => {
     e.preventDefault();
-    let cookie = document.cookie;
-    instance
-      .post("http://localhost:3002/api/logout/", { cookie }, options)
-      .then((res) => {
-        setCookie(null);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    setUserData({
+      token: undefined,
+      user: undefined,
+    });
+    localStorage.setItem("auth-token", "");
   };
+
+  const RedirectTo = (e) => {
+    setRedirect(true);
+  }
 
   return (
     <div>
-      {!cookie ? (
-        <div>
-          <Button variant="outlined" color="primary" onClick={handleModalOpen}>
+      {!userData.user ? (
+        
+        <Wrapper>
+          <Button variant="outlined" color="primary">
+            <Link to={{ pathname: "/" }}>Main</Link>
+          </Button>
+
+          <Button className="login" variant="outlined" color="primary" onClick={handleModalOpen}>
             Login
           </Button>
+
           <Button
+            className="login"
             variant="outlined"
             color="primary"
             onClick={handleModalRegistration}
           >
             Registration
           </Button>
-        </div>
+        </Wrapper>
       ) : (
-        <Button variant="outlined" color="primary" onClick={(e) => onLogout(e)}>
-          Logout
-        </Button>
+        <Wrapper>
+          <Button variant="outlined" color="primary">
+            <Link to={{ pathname: "/" }}>Main</Link>
+          </Button>
+
+          <Button variant="outlined" color="primary">
+            <Link to={{ pathname: "/mybookings" }}>My Bookings</Link>
+          </Button>
+
+          
+            <Button className="login" variant="outlined" color="primary" onClick={(e) => onLogout(e)}>
+              <Link to={{ pathname: "/" }}>
+              Logout
+              </Link>
+            </Button>
+        </Wrapper>
       )}
       <Dialog
         open={open}
@@ -131,7 +152,7 @@ const LoginModal = () => {
           </Tabs>
         </AppBar>
         <TabPanel value={value} index={0}>
-          <LoginComp handleModalClose={handleModalClose} options={options} />
+          <LoginComp handleModalClose={handleModalClose} />
         </TabPanel>
         <TabPanel value={value} index={1}>
           <RegistrationComp setValue={setValue} />
