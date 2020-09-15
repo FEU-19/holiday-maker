@@ -1,7 +1,7 @@
 const Order = require("../models/Order");
 
 exports.deleteBooking = async (req, res) => {
-  const orderId = req.params.orderId;
+  const { orderId } = req.params;
 
   if (!orderId) {
     res.status(400).json({
@@ -25,8 +25,27 @@ exports.deleteBooking = async (req, res) => {
   });
 };
 
+const mockData = {
+  bookingDates: {
+    start: "2020-06-01T11:46:29.258Z",
+    end: "2020-06-15T11:47:09.886Z",
+  },
+  _id: "5f60813ed87e4b922de1ff72",
+  userId: "5f5f64fb86170a41247bdf06",
+  bookingNumber: "1eg96c85t6vk14S8ljkn4953i",
+  rooms: [
+    {
+      _id: "5f588b8e7413ee42ec88e992",
+      price: 399,
+      option: "heheheh",
+      roomNumber: "666",
+    },
+  ],
+  hotel: "636173746c652076616e6961",
+};
+
 exports.changeBooking = async (req, res) => {
-  const orderId = req.params.orderId;
+  const { orderId } = req.params;
 
   if (!orderId) {
     res.status(400).json({
@@ -45,16 +64,19 @@ exports.changeBooking = async (req, res) => {
   }
 
   try {
-    await Order.findByIdAndUpdate(
-      orderId,
-      { $set: req.body },
-      { new: true },
-      (err) => {
-        console.log(err);
+    const test = await Order.findByIdAndUpdate(
+      { _id: orderId },
+      mockData,
+      (err, result) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(result);
+        }
       }
     );
 
-    return res.status(201).send(req.body);
+    return res.status(201).send(test);
   } catch (err) {
     console.error(err.message);
     return res.status(500).json({

@@ -12,7 +12,7 @@ import axios from "axios";
 
 import ContainerButtons from "./ContainerButtons";
 import getToken from "../../utils/getToken";
-
+/*
 const objekt = [
   {
     _id: "1",
@@ -68,7 +68,7 @@ const objekt = [
         price: 'Number'
     }
 }]
-
+*/
 const useStyles = makeStyles((theme) => ({
     root: {
       width: '100%',

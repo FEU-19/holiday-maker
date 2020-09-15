@@ -4,10 +4,10 @@ import getToken from "../../utils/getToken";
 
 const ContainerButtons = (props) => {
   const hårdkokt = {
-      _id: "1",
+      _id: "5f60813ed87e4b922de1ff72",
       userId: "5f588b8e7413ee42ec88e991",
-      adults: "1338",
-      children: "All of them",
+      adults: 3,
+      children: 1337,
       hotel: "caslte vania",
       totalPrice: "399",
       rooms: [
