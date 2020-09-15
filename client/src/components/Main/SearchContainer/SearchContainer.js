@@ -97,9 +97,9 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
       date,
       presentCrib: filterPresentCrib(ageOfChildren) || false
     };
-    
+
     setQueryParams(queryParams);
-    
+
     let c = [...residentData];
 
     c = filterAmountOfTravelers(c, amountOfAdults, ageOfChildren);
@@ -110,10 +110,11 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
     c = filterRestaurant(c, checkedRestaurant);
     c = filterDistanceBeach(c, distanceBeach);
     c = filterDistanceCity(c, distanceCity);
-    // c = filterDate(c, date)
+    c = filterDate(c, date)
 
     setFilteredDataCB(c);
     setSearching(true);
+    console.log(c);
   }
 
   return (
@@ -152,8 +153,8 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
             />
           </Grid>
           <Grid item xs={2}>
-            <ChildrenAgeSelects 
-              amountOfChildren={amountOfChildren} 
+            <ChildrenAgeSelects
+              amountOfChildren={amountOfChildren}
               setAgeOfChildren={setAgeOfChildren}
             />
           </Grid>
