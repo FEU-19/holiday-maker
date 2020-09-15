@@ -12,6 +12,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import axios from "axios";
 
 import ContainerButtons from "./ContainerButtons";
+import getToken from "../../utils/getToken";
 
 const objekt = [
   {
@@ -103,14 +104,34 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 const MyBookings = (props) => {
-  const [myBookings, setMyBookings] = useState({});
+  const [myBookings, setMyBookings] = useState([]);
   const [clickedBookings, setClickedBookings] = useState(false);
-    
+  const [update, setUpdate] = useState(0);
+
   const classes = useStyles();
+
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/api/orders/", {
+        headers: { "x-auth-token": getToken() },
+      })
+      .then((res) => {
+        console.log(res);
+        setMyBookings(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [update]);
+
+  if(!myBookings){
+    return(<p>loading..</p>)
+  }
   
   return (
     <div className={classes.root}>  
-            {objekt.map(myBooking => 
+            {myBookings.map(myBooking => 
                 <Accordion key={myBooking._id}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content"id="panel1a-header">
                       <Typography className={classes.heading}>{myBooking.hotel}</Typography>
@@ -125,12 +146,18 @@ const MyBookings = (props) => {
                                   Information
                                 </Typography>
                                 <Typography  className={classes.pos} color="textSecondary" variant={"body2"} component={"p"}>
-                                  User Name/Id: {myBooking.userId}
+                                  User Name/Id: {myBooking.hotel}
                                   Total Rooms: {myBooking.rooms.length}
                                   Total People: {myBooking.adults + myBooking.children}
-                                  Departure Date: {myBooking.flight.departureDate}
-                                  Return Date: {myBooking.flight.returnDate}
+                                  Departure Date: {"lmao"}
+                                  Return Date: {"lmao"}
                                   Extra Bed:  {myBooking.rooms[0].extraBed}
+                                  <ContainerButtons 
+                                    setUpdate={setUpdate} 
+                                    update={update} 
+                                    orderId={myBooking._id} 
+                                    wholeNewObject={myBooking}
+                                  />
                                 </Typography>
                             </CardContent>
                         </Card>

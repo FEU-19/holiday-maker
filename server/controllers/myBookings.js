@@ -9,7 +9,7 @@ exports.deleteBooking = async (req, res) => {
     });
   }
   console.log(orderId);
-  let foundOrder = await Order.findOne({ _id: orderId });
+  const foundOrder = await Order.findOne({ _id: orderId });
   console.log(foundOrder);
 
   if (!foundOrder) {
@@ -26,33 +26,17 @@ exports.deleteBooking = async (req, res) => {
 };
 
 exports.changeBooking = async (req, res) => {
-  const {
-    userId,
-    adults,
-    children,
-    hotel,
-    rooms,
-    bookingDates,
-    bookingNumber,
-    totalPrice,
-  } = req.body;
+  const orderId = req.params.orderId;
 
-  if (
-    !userId ||
-    !adults ||
-    !children ||
-    !hotel ||
-    !rooms ||
-    !bookingDates ||
-    !bookingNumber ||
-    !totalPrice
-  ) {
-    return res.status(400).json({
-      error: [{ msg: "Please fill all of the existing fields" }],
+  if (!orderId) {
+    res.status(400).json({
+      error: [{ msg: "no order was sent" }],
     });
   }
 
-  let foundOrder = await Order.findOne({ _id: orderId });
+  const foundOrder = await Order.findOne({ _id: orderId });
+
+  console.log(foundOrder);
 
   if (!foundOrder) {
     res.status(404).json({
@@ -61,27 +45,16 @@ exports.changeBooking = async (req, res) => {
   }
 
   try {
-    let order = {
-      userId: userId,
-      adults: adults,
-      children: children,
-      hotel: hotel,
-      rooms: rooms,
-      bookingDates: bookingDates,
-      bookingNumber: bookingNumber,
-      totalPrice: totalPrice,
-    };
-
     await Order.findByIdAndUpdate(
       orderId,
-      { $set: order },
+      { $set: req.body },
       { new: true },
       (err) => {
-        console.log(error);
+        console.log(err);
       }
     );
 
-    return res.status(201).send(order);
+    return res.status(201).send(req.body);
   } catch (err) {
     console.error(err.message);
     return res.status(500).json({
