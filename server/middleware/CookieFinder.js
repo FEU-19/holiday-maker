@@ -16,8 +16,6 @@ const getCookie = function (req, res) {
   if (!user) {
     res.send("User does not exist");
   }
-
-  console.log("its okej");
 };
 
 module.exports = getCookie;

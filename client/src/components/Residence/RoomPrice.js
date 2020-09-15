@@ -44,6 +44,7 @@ const RoomPrice = ({
     <Card className={classes.card}>
       <CardHeader
         className={classes.header}
+        // eslint-disable-next-line
         title={totalPrice + ":-" + " SEK"}
         //title = {selected}
         subheader={"for 1 room for 1 night"}

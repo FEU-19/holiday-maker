@@ -1,0 +1,1 @@
+export const sortValues = ['None', 'Price low to high', 'Rating high to low'];

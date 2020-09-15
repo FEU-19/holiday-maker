@@ -14,7 +14,7 @@ const useStyles = makeStyles({
 const HotelCarousel = ({dataImage}) =>{
     const [images, updateImages] = useState([])
     const [currentPicIndex, updatePicIndex] = useState(0)
-    
+
     useEffect(()=>{
       let picArray = dataImage.rooms.map(item => item.images)
       updateImages(picArray)
