@@ -23,7 +23,7 @@ const SelectDistanceCity = ({distanceCity, setDistanceCity}) => {
 
   return (
     <>
-      <InputLabel id="selectDistanceCity">Distance to city</InputLabel>
+      <InputLabel id="selectDistanceCity">Distance to the center</InputLabel>
       <Select
         aria-label="Select Distance To City"
         displayEmpty
@@ -31,12 +31,12 @@ const SelectDistanceCity = ({distanceCity, setDistanceCity}) => {
         value={ distanceCity }
         onChange={ handleChange }
       >
-        <MenuItem disabled>Distance</MenuItem>
+        <MenuItem disabled>No longer than:</MenuItem>
         {
           distanceInterval.map((distance, index) =>
             distance
             ? <MenuItem value={ distance } key={index}>{ "< " + distance } m</MenuItem>
-            : <MenuItem value={ distance } key={index}>None</MenuItem>
+            : <MenuItem value={ distance } key={index}>N/A</MenuItem>
           )
         }
 

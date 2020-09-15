@@ -31,8 +31,8 @@ function ModalDialogButton({ images }) {
   return (
     <div>
       <br />
-      <Button  className = {classes.button} 
-        variant="outlined"  
+      <Button  className = {classes.button}
+        variant="outlined"
         onClick={handleClickOpen}>
         Show room images
       </Button>
