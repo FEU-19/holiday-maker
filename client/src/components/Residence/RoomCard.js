@@ -26,6 +26,8 @@ const useStyle = makeStyles(() => ({
     margintop: 20,
     marginLeft: "3vw",
     marginRight: "3vw",
+    backgroundColor: " #F5F5F5",
+    boxShadow: "3px 3px 4px #162C72",
   },
   title: {
     marginTop: 5,
@@ -33,6 +35,7 @@ const useStyle = makeStyles(() => ({
     fontSize: 16,
     fontWeight: "bolder",
     textAlign: "center",
+    color: "#000000",
   },
   content: {
     minWidth: 500,
@@ -45,15 +48,15 @@ const useStyle = makeStyles(() => ({
     flexDirection: "column",
   },
   icons: {
-    margin: 10,
+    margin: "0.5vw",
     display: "flex",
     alignItems: "center",
-    color: "#4ab1bb",
+    color: "#4AB0BD",
   },
   options: {
     margin: 10,
     borderTopWidth: 1,
-    borderColor: "#ccd9dd",
+    borderColor: "#4AB0BD",
     borderStyle: "solid",
   },
 }));
@@ -63,6 +66,9 @@ const RoomCard = ({ roomInfo, chooseRoom }) => {
   const [value, setValue] = useState({ selected: "" });
   const [extraBedValue, setExtraBedValue] = useState({ extraBedValue: "" });
 
+  const rooms = roomInfo;
+  console.log(rooms);
+  
   const handleChange = (e) => {
     setValue({ selected: e.target.value });
   };
@@ -120,7 +126,7 @@ const RoomCard = ({ roomInfo, chooseRoom }) => {
               <Typography className={classes.title}>Options</Typography>
               <FormControlLabel
                 value={roomInfo.extraBed}
-                control={<Checkbox color="default" />}
+                control={<Checkbox color="primary" />}
                 onChange={handleCheck}
                 label={
                   <p style={{ paddingRight: "10vw" }}>
@@ -138,7 +144,7 @@ const RoomCard = ({ roomInfo, chooseRoom }) => {
                 <FormControlLabel
                   style={{ borderTop: "1px solid #ccd9dd" }}
                   value={roomInfo.allInclusive.toString()}
-                  control={<Radio color="default" />}
+                  control={<Radio color="primary" />}
                   disabled={roomInfo.allInclusive ? "" : "disabled"}
                   label={
                     roomInfo.allInclusive ? (
@@ -156,7 +162,7 @@ const RoomCard = ({ roomInfo, chooseRoom }) => {
                 <FormControlLabel
                   style={{ borderTop: "1px solid #ccd9dd" }}
                   value={roomInfo.fullBoard.toString()}
-                  control={<Radio color="default" />}
+                  control={<Radio color="primary" />}
                   disabled={roomInfo.fullBoard ? "" : "disabled"}
                   label={
                     roomInfo.fullBoard ? (
@@ -174,7 +180,7 @@ const RoomCard = ({ roomInfo, chooseRoom }) => {
                 <FormControlLabel
                   style={{ borderTop: "1px solid #ccd9dd" }}
                   value={roomInfo.halfBoard.toString()}
-                  control={<Radio color="default" />}
+                  control={<Radio color="primary" />}
                   disabled={roomInfo.halfBoard ? "" : "disabled"}
                   label={
                     roomInfo.halfBoard ? (
@@ -192,7 +198,7 @@ const RoomCard = ({ roomInfo, chooseRoom }) => {
                 <FormControlLabel
                   style={{ borderTop: "1px solid #ccd9dd" }}
                   value={roomInfo.selfCatering.toString()}
-                  control={<Radio color="default" />}
+                  control={<Radio color="primary" />}
                   label={
                     roomInfo.selfCatering || (
                       <p style={{ paddingRight: "10vw" }}>

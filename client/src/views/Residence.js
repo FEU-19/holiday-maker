@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { Typography } from "@material-ui/core";
 import ResidenceInformation from "../components/Residence/ResidenceInformation";
 import GeneralInformation from "../components/Residence/GeneralInformation";
 import HotelCarousel from "../components/Residence/HotelCarousel";
@@ -18,6 +19,8 @@ const useStyle = makeStyles(() => ({
   },
   title: {
     textAlign: "center",
+    color: "#F23622",
+    padding: "2vw",
   },
   info: {
     padding: "2vw",
@@ -79,7 +82,7 @@ const Residence = () => {
   return (
     <div className={classes.article}>
       <div className={classes.titlecontainer}>
-        <h1 className={classes.title}>{data.name}</h1>
+        <Typography variant = "h3" className={classes.title}>{data.name}</Typography>
         <HotelCarousel dataImage={data} />
         <div className={classes.info}>
           <ResidenceInformation info={data} />

@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
+import { Typography } from "@material-ui/core";
+
 
 // Style variables
 const boxContainer = {
@@ -12,8 +14,7 @@ const title = {
   alignItems: "center",
   width: '319px',
   height: "35px",
-  backgroundColor: "#9db0c6",
-  color: "#464646",
+  backgroundColor: "#F5F5F5",
   borderBottom: "1px solid #9a9a9a",
   borderRadius: "4px 4px 0 0",
 };
@@ -23,23 +24,20 @@ const contentContainer = {
   flexDirection: "row",
   flexWrap: "nowrap",
   justifyContent: "space-between",
-  backgroundColor: "#9db0c6",
-  color: "#464646",
+  backgroundColor: "#F5F5F5",
   borderRadius: "0 0 4px 4px",
 };
 
 const content = {
   width: "300px",
   padding: "0 20px 20px 40px",
-  color: "#464646",
   boxSizing: "border-box",
 };
 
 const headInfo = {
   padding: "30px 40px 20px 40px",
   borderRadius: "0 4px 0 0",
-  color: "#464646",
-  backgroundColor: "#9db0c6",
+  backgroundColor: "#F5F5F5",
   boxSizing: "border-box",
 };
 
@@ -119,7 +117,7 @@ const GeneralInformation = ({ generalInfo }) => {
           className="residence__generalInformationContainer__title"
           style={title}
         >
-          <h4>Residence Overview</h4>
+          <Typography variant = "h6">Residence Overview</Typography>
         </div>
         <div
           className="residence__generalInformationContainer__headInfo"
@@ -148,12 +146,12 @@ const GeneralInformation = ({ generalInfo }) => {
               );
             })}
             </div>
-            <div className="residence__generalInformationContainer__contentContainer__content" style={content}>
+            <Typography className="residence__generalInformationContainer__contentContainer__content" style={content}>
             <p style={subTitle}>Beds</p>
             <p style={textReset}>{info.totalBeds} Beds</p>
             <p style={textReset}>{info.totalExtraBeds} Extra beds</p>
-          </div>
-          <div
+          </Typography>
+          <Typography
             className="residence__generalInformationContainer__contentContainer__content"
             style={content}
           >
@@ -166,7 +164,7 @@ const GeneralInformation = ({ generalInfo }) => {
                 </p>
               );
             })}
-          </div>
+          </Typography>
         </div>
       </div>
     </div>

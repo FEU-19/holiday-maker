@@ -6,19 +6,17 @@ const useStyle = makeStyles(() => ({
   card: {
     maxWidth: 345,
     margin: 10,
-    //backgroundColor: "rgb(234, 234, 234)",
-    backgroundColor: "#9db0c6",
+    backgroundColor: "#F5F5F5",
     display: "flex",
     flexDirection: "column",
-    //justifyContent: "space-between",
     alignItems: "flex-end",
+    boxShadow:  "3px 3px 4px #162C72",
   },
   header: {
     textAlign: "right",
     paddingBottom: 0,
   },
   text: {
-    //margin: 20,
     padding: 16,
     paddingTop:0,
     fontSize: 16,

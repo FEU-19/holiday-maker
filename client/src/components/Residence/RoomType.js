@@ -15,22 +15,24 @@ const useStyle = makeStyles(() => ({
     maxWidth: 345,
     minWidth: 316,
     margin: 10,
-    //backgroundColor: "rgb(234, 234, 234)",
-    backgroundColor: "#9db0c6",
+    backgroundColor: "#F5F5F5",
+    boxShadow: "3px 3px 4px #162C72",
   },
   media: {
     height: 0,
     paddingTop: "56.25%",
-    margin: 20,
+    margin: 15,
+    marginTop: 0,
+    borderRadius: "4px",
   },
   container: {
     margin: "0 auto",
-    padding: "20px",
+    //padding: "20px",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     overflow: "auto",
-    paddingBottom: 15,
+    //paddingBottom: 15,
  }
 }));
 

@@ -5,9 +5,14 @@ import { makeStyles } from "@material-ui/core";
 
 const useStyle = makeStyles(() => ({
   button: {
-    backgroundColor: "#162C72",
+    backgroundColor: "#F23622",
     color: "#FFFFFF",
-  }
+    "&:hover": {
+      backgroundColor: "#F23622",
+      color: "#FFFFFF",
+      opacity: "0.8",
+    },
+  },
 }))
 
 function ModalDialogButton({ images }) {
@@ -26,7 +31,9 @@ function ModalDialogButton({ images }) {
   return (
     <div>
       <br />
-      <Button  className = {classes.button} variant="outlined"  onClick={handleClickOpen}>
+      <Button  className = {classes.button} 
+        variant="outlined"  
+        onClick={handleClickOpen}>
         Show room images
       </Button>
       <SimpleDialog
