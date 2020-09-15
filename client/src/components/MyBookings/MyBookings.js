@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import Accordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
@@ -8,10 +7,6 @@ import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import DialogTitle from '@material-ui/core/DialogTitle';
-import axios from "axios";
-
-import ContainerButtons from "./ContainerButtons";
 
 const objekt = [
   {
@@ -93,6 +88,10 @@ const useStyles = makeStyles((theme) => ({
     rootTwo: {
       minWidth: 275,
       transform: 'translate(-50%, 0)',
+      display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginLeft: '50%',
     },
     flex: {
         display: 'flex',
@@ -118,23 +117,26 @@ const MyBookings = (props) => {
                       <Typography className={classes.heading}>{myBooking._id}</Typography>
                     </AccordionSummary>
                     <AccordionDetails >
-                      <Typography className={classes.flex} >
                         <Card className={classes.rootTwo}>
                             <CardContent >
-                                <Typography variant={"h5"} component={"h2"}>
+                                <Typography>
                                   Information
                                 </Typography>
-                                <Typography  className={classes.pos} color="textSecondary" variant={"body2"} component={"p"}>
+                                <Typography  className={classes.pos} color="textSecondary">
                                   User Name/Id: {myBooking.userId}
+                                  <br></br>
                                   Total Rooms: {myBooking.rooms.length}
+                                  <br></br>
                                   Total People: {myBooking.adults + myBooking.children}
+                                  <br></br>
                                   Departure Date: {myBooking.flight.departureDate}
+                                  <br></br>
                                   Return Date: {myBooking.flight.returnDate}
+                                  <br></br>
                                   Extra Bed:  {myBooking.rooms[0].extraBed}
                                 </Typography>
                             </CardContent>
                         </Card>
-                      </Typography>
                     </AccordionDetails>
                 </Accordion>
                 )
