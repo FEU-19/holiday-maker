@@ -70,7 +70,7 @@ const Residence = () => {
   function starRating(rating){
     let ratingArray = [];
     for (let i = 0; i < rating; i++) {
-      ratingArray.push(<StarRateIcon />);
+      ratingArray.push(<StarRateIcon key={i}/>);
     }
     return ratingArray;
   }
