@@ -31,10 +31,11 @@ export default function RenderFoodOptions({ roomInfo, roomOption }) {
         name="price"
         value={selected}
         onChange={handleChange}
+        defaultValue={roomOption}
        >
       <FormControlLabel
         style={{ borderTop: "1px solid #ccd9dd" }}
-        value={"all-inclusive", roomInfo.allInclusive.toString()}
+        value={roomInfo.allInclusive.toString()}
         control={<CustomRadio />}
         disabled={!roomInfo.allInclusive}
         label={

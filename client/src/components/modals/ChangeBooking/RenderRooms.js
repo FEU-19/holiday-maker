@@ -30,7 +30,8 @@ export default function RenderRooms({ bookings, hotel }) {
   return (
     <div>
       {bookedRooms.map((room, index) => {
-        console.log("This is my option ", room.option);
+        console.log("This is my option ", room);
+        
         const hotelRoom = findTheHotelRoomInHotel(room._id.$oid);
         // console.log("only the matching hotelRoom ", hotelRoom);
 
@@ -55,7 +56,7 @@ export default function RenderRooms({ bookings, hotel }) {
                 // onChange={handleChange}
               /> */}
 
-            <RenderFoodOption roomInfo={hotelRoom} roomOption={room.option}/>
+            <RenderFoodOption roomInfo={hotelRoom} roomOption={room.price}/>
           </React.Fragment>
         );
       })}
