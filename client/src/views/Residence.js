@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useLocation } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import ResidenceInformation from "../components/Residence/ResidenceInformation";
 import GeneralInformation from "../components/Residence/GeneralInformation";
@@ -7,6 +7,7 @@ import RoomCardMapper from "../components/Residence/RoomCardMapper";
 import ResidenceSpinner from "../components/Residence/ResidenceSpinner";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+
 
 const useStyle = makeStyles(() => ({
   article: {
@@ -32,9 +33,19 @@ const useStyle = makeStyles(() => ({
   }
 }));
 
+
+
+
+
 let wait = null;
 // Hotel ID will come as props from search team, but not yet implemented
 const Residence = () => {
+  const {state} = useLocation();
+  const hotel = state.hotel;
+  console.log(hotel);
+  console.log(state);
+
+
   const [shouldSpin, setShouldSpin] = useState(false);
   const classes = useStyle();
   const [data, updateData] = useState(null);
