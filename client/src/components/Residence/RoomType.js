@@ -15,8 +15,7 @@ const useStyle = makeStyles(() => ({
   maxWidth: 345,
   minWidth: 316,
   margin: 10,
-  backgroundColor: "rgb(234, 234, 234)",
-  boxShadow: "3px 6px 7px #263d69",
+  backgroundColor: "#e8e8e8",
  },
  media: {
   height: 0,
@@ -38,7 +37,7 @@ const RoomType = ({ roomType }) => {
  const classes = useStyle();
 
  return (
-  <Card elevation={10} className={classes.card}>
+  <Card elevation={0} className={classes.card}>
    <CardHeader className={classes.header} title={roomType.type} />
    <CardMedia
     className={classes.media}

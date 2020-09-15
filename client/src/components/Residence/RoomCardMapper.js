@@ -37,8 +37,8 @@ const RoomCardMapper = ({ allRooms }) => {
    {redirect && (
     <Redirect to={{ pathname: "/checkout", state: { rooms: chosenRooms } }} />
    )}
-   {allRooms.map((room) => {
-    return <RoomCard key={uuidv4()} roomInfo={room} chooseRoom={chooseRoom} />;
+   {allRooms.map((room, index) => {
+    return <RoomCard key={index} roomInfo={room} chooseRoom={chooseRoom} />;
    })}
    <Button
     color="primary"
