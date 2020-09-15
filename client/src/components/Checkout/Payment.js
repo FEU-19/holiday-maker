@@ -37,29 +37,18 @@ function Payment() {
   const [type, setType] = useState("");
   const { state } = useLocation();
 
-  let userId = "5f5aa3bc7bd3af45e0c97964";
+  let userId = "5f5f64fb86170a41247bdf06";
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:8080/api/users/${userId}`)
-      .then((response) => {
-        let user = response.data.data;
-        const data = {
-          firstName: user.firstName,
-          surname: user.surname,
-          email: user.email,
-          zipCode: user.zipCode,
-          phoneNumber: user.phoneNumber,
-          city: user.city,
-          adress: "copacana fixa adressfält!!!",
-          country: "Sweden",
-        };
+    axios.get(`http://localhost:8080/api/users/${userId}`).then((response) => {
+      const user = response.data.data;
 
-        return data;
-      })
-      .then((data) => {
-        setUser(data);
+      setUser({
+        ...user,
+        adress: "copacana fixa adressfält!!!",
+        country: "Sweden",
       });
+    });
   }, []);
 
   // User data.
@@ -174,11 +163,7 @@ function Payment() {
         />
       </Box>
       <Box className={pageStyle.btnCtn}>
-        <Button
-          onClick={() => setShowModal(true)}
-          className={pageStyle.btn}
-          type="submit"
-        >
+        <Button onClick={() => setShowModal(true)} className={pageStyle.btn} type="submit">
           Finish & Pay
         </Button>
       </Box>

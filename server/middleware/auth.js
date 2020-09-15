@@ -15,7 +15,7 @@ const authorizeUser = async function (req, res, next) {
     res.send("User does not exist");
   }
 
-  req.body.user = user;
+  req.user = user;
 
   next();
 };

@@ -1,12 +1,11 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
-const getCookie = require("../middleware/CookieFinder");
+// const getCookie = require("../middleware/CookieFinder");
 
-exports.createLogout = async (req, res) =>{
-  const { userId } = req.body;
-
-  res.clearCookie("holidayMakerCookie", `Bearer${userId}`).end();
-}
+exports.createLogout = async (req, res) => {
+  //   const { userId } = req.body;
+  //   res.clearCookie("holidayMakerCookie", `Bearer${userId}`).end();
+};
 
 exports.createLogin = async (req, res) => {
   const { email, password } = req.body.user;

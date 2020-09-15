@@ -20,9 +20,12 @@ exports.create = async (req, res) => {
   orderData.hotel = data.hotel;
 
   const order = new Order(orderData);
-  order.save((err) => {
-    if (err) res.status(500).send({ error: err.message });
-  });
+
+  try {
+    await order.save();
+  } catch (err) {
+    return res.status(409).send({ error: err.message });
+  }
 
   const roomNs = [];
   data.rooms.forEach((room) => {
@@ -36,10 +39,12 @@ exports.create = async (req, res) => {
     }
   });
 
-  hotel.save((err) => {
-    if (err) res.status(500).send({ error: err.message });
-    res.status(201).json(orderData);
-  });
+  try {
+    await hotel.save();
+  } catch (err) {
+    return res.status(500).send({ error: err.message });
+  }
+  return res.status(201).json(orderData);
 };
 
 exports.read = async (req, res) => {

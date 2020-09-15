@@ -44,8 +44,9 @@ const Login = (props) => {
           props.handleModalClose();
         })
         .catch((err) => {
+          console.log(err);
           setOpen(true);
-          setErrorMsg(err.response.data.error[0].msg);
+          //   setErrorMsg(err.response.data.error[0].msg);
         });
     }
   };
@@ -75,20 +76,11 @@ const Login = (props) => {
           value={user.password}
           onChange={onChangeUser}
         />
-        <Button
-          className="loginBtn"
-          type="submit"
-          variant="contained"
-          color="primary"
-        >
+        <Button className="loginBtn" type="submit" variant="contained" color="primary">
           Login
         </Button>
         {open ? (
-          <SimpleDialog
-            selectedvalue={errorMsg}
-            open={open}
-            onClose={handleClose}
-          >
+          <SimpleDialog selectedvalue={errorMsg} open={open} onClose={handleClose}>
             {errorMsg}
           </SimpleDialog>
         ) : null}
