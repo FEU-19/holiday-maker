@@ -81,7 +81,7 @@ const Residence = () => {
   return (
     <div className={classes.article}>
       <div className={classes.titlecontainer}>
-        <Typography variant = "h3" className={classes.title}>{data.name}</Typography>
+        <Typography variant = "h3" className={classes.title}>{data.name} {starRating(data.rating)}</Typography>
         <HotelCarousel dataImage={data} />
         <div className={classes.info}>
           <ResidenceInformation info={data} />
