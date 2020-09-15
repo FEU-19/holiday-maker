@@ -13,39 +13,54 @@ const FooterCont = styled.footer`
   background-color: #162c72;
   color: white;
   padding: 20px;
+  position: relative;
   border-radius: 1px;
-
   .MuiGrid-spacing-xs-2 > .MuiGrid-item{
       padding: 1px 10px 0px 0px;
   }
 
 `;
 
+const Logo = styled.img`
+  object-fit: contain;
+  max-width: 43%;
+  max-height: 43%;
+  width: auto;
+  height: auto;
+  padding-left: 0px;
+  position: absolute;
+`;
+
 const Footer = () => {
   return (
     <FooterCont>
       <Grid container spacing={2}>
-      <Grid item xs={12} sm={12} align="center">
-          <Typography variant="subtitle1" >Copyright by HolidayMaker 2020</Typography>
-        </Grid>
         <Grid item xs={1} sm={1} align="right">
-          <InstagramIcon></InstagramIcon>
+          <InstagramIcon style={{
+            color: "#F23622"
+          }}></InstagramIcon>
         </Grid>
         <Grid item xs={4} sm={11}>
           <Typography variant="body1">
             holidaymaker
           </Typography>
         </Grid>
-        
+
          <Grid item xs={1} sm={1} align="right">
-          <TwitterIcon></TwitterIcon>
+          <TwitterIcon style={{
+            color: "#F23622"
+          }}></TwitterIcon>
         </Grid>
-        <Grid item xs={4} sm={11}>
+        <Grid item xs={4} sm={3}>
           <Typography variant="body1">
             holidaymaker
           </Typography>
+        </Grid>
+        <Grid item xs={12} sm={8} align="right">
+          <Typography variant="caption" >Copyright by Holidaymaker 2020</Typography>
         </Grid>
       </Grid>
+      <Logo src={process.env.PUBLIC_URL + '/Holidaymaker-logo-BIG.png'} />
     </FooterCont>
   );
 };
