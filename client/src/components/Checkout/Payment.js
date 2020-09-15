@@ -4,19 +4,18 @@ import axios from "axios";
 import { Redirect, useLocation } from "react-router-dom";
 import CheckIcon from "@material-ui/icons/CheckCircle";
 import ErrorIcon from "@material-ui/icons/Error";
-import { iconStyle, PageStyle } from "./PaymentStyles";
+import { iconStyle, PageStyle, BookingInfoStyle } from "./PaymentStyles";
 import Modal from "../common/Modal/Modal";
-import { Container, Button, Divider, Box } from "@material-ui/core";
+import { Container, Button, Divider, Box, Typography } from "@material-ui/core";
 
-// import PaymentForm from "./PaymentForm";
 import PaymentForm from "./PaymentForm";
-
-import BookingInfo from "./BookingInfo";
 import InfoForm from "./InfoForm";
+import BookingInfo from "./BookingInfo";
 
 function Payment() {
   const IconStyle = iconStyle();
   const pageStyle = PageStyle();
+  const style = BookingInfoStyle();
 
   const [user, setUser] = useState({
     firstName: "",
@@ -136,11 +135,16 @@ function Payment() {
 
   return (
     <Container className={pageStyle.root}>
-      <h1 className={pageStyle.pageTitle}>Payment</h1>
+      <Typography variant="h4" className={pageStyle.pageTitle}>
+        Payment
+      </Typography>
+
       <BookingInfo />
       <Divider />
       <Box className={pageStyle.wrapper}>
-        <h2 className={pageStyle.header}>Account Information</h2>
+        <Typography variant="h5" className={style.InfoTitle}>
+          Account Information
+        </Typography>
         <InfoForm
           firstName={user.firstName}
           lastName={user.surname}
@@ -155,7 +159,9 @@ function Payment() {
       </Box>
       <Divider />
       <Box className={pageStyle.wrapper}>
-        <h2 className={pageStyle.header}>Payment Method</h2>
+        <Typography variant="h5" className={style.InfoTitle}>
+          Payment Method
+        </Typography>
         <PaymentForm
           handleCredit={handleCredit}
           onCreditCardTypeChanged={onCreditCardTypeChanged}
