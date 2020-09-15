@@ -13,7 +13,7 @@ import SelectAmountOfChildren from "../../Main/SearchContainer/SelectAmountOfChi
 import DatePicker from "../../Main/SearchContainer/DatePicker";
 
 import ChildrenAgeSelects from "../../Main/SearchContainer/ChildrenAgeSelects";
-// import RenderFoodOption from "./RenderFoodOption";
+
 import RenderRooms from './RenderRooms';
 
 
@@ -32,14 +32,14 @@ export default function ChangeBookingModal() {
     "bookingNumber": "k7cSt78z9k9v9n261lrv5364e",
     "rooms": [{
         "_id": {
-            "$oid": "5f5889d8daa2064fd4eb8a43"  
+            "$oid": "5f5b7e5b36ac0355705b8088"  
         },
         "price": 3672,
         "option": "all-inclusive",
         "roomNumber": "100"
     }, {
       "_id": {
-          "$oid": "5f5889d8daa2064fd4eb8a43"
+          "$oid": "5f5b7e5b36ac0355705b808d"
       },
       "price": 3672,
       "option": "all-inclusive",
@@ -63,7 +63,7 @@ export default function ChangeBookingModal() {
       .get(`http://localhost:8080/api/residences/${hotelId}`)
       .then((res) => {
         console.log(res);
-        console.log(res.data.data.name);
+        
         setHotel(res.data.data);
 
       })
@@ -119,7 +119,7 @@ export default function ChangeBookingModal() {
           // value={selected}
           // onChange={handleChange}
         > 
-        {/* <RenderFoodOption /> */}
+        
         </RadioGroup>
 
         <Button onClick={handleClose} color="primary">

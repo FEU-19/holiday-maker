@@ -1,76 +1,99 @@
-import React from "react";
+import React, { useState } from "react";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import { Radio } from "@material-ui/core";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { Radio, RadioGroup } from "@material-ui/core";
 
-export default function RenderFoodOptions() {
+
+const CustomRadio = withStyles({
+  root: {
+    color: "#4AB0BD",
+    "&$selected": {
+      color: "#4AB0BD",
+    },
+  },
+  checked: {},
+})((props) => <Radio color="default" {...props} />);
+
+export default function RenderFoodOptions({ roomInfo, roomOption }) {
+  const [value, setValue] = useState({ selected: roomOption });
+
+  const { selected } = value;
+  const handleChange = (e) => {
+    setValue({ selected: e.target.value });
+   };
+   console.log( roomOption);
+   console.log(value);
+
   return (
-    <p>Hej</p>
-    //   <FormControlLabel
-    //   style={{ borderTop: "1px solid #ccd9dd" }}
-    //   value={roomInfo.allInclusive.toString()}
-    //   control={<Radio color="default" />}
-    //   disabled={roomInfo.allInclusive ? "" : "disabled"}
-    //   label={
-    //     roomInfo.allInclusive ? (
-    //       <p style={{ paddingRight: "10vw" }}>
-    //         All Inclusive: {roomInfo.allInclusive + ":-"}
-    //       </p>
-    //     ) : (
-    //       <p style={{ paddingRight: "10vw" }}>
-    //         All Inclusive: {"N/A"}
-    //       </p>
-    //     )
-    //   }
-    //   labelPlacement="start"
-    // />
-    // <FormControlLabel
-    //   style={{ borderTop: "1px solid #ccd9dd" }}
-    //   value={roomInfo.fullBoard.toString()}
-    //   control={<Radio color="default" />}
-    //   disabled={roomInfo.fullBoard ? "" : "disabled"}
-    //   label={
-    //     roomInfo.fullBoard ? (
-    //       <p style={{ paddingRight: "10vw" }}>
-    //         Half Board: {roomInfo.fullBoard + ":-"}
-    //       </p>
-    //     ) : (
-    //       <p style={{ paddingRight: "10vw" }}>
-    //         Full Board: {"N/A"}
-    //       </p>
-    //     )
-    //   }
-    //   labelPlacement="start"
-    // />
-    // <FormControlLabel
-    //   style={{ borderTop: "1px solid #ccd9dd" }}
-    //   value={roomInfo.halfBoard.toString()}
-    //   control={<Radio color="default" />}
-    //   disabled={roomInfo.halfBoard ? "" : "disabled"}
-    //   label={
-    //     roomInfo.halfBoard ? (
-    //       <p style={{ paddingRight: "10vw" }}>
-    //         Half Board: {roomInfo.halfBoard + ":-"}
-    //       </p>
-    //     ) : (
-    //       <p style={{ paddingRight: "10vw" }}>
-    //         Half Board: {"N/A"}
-    //       </p>
-    //     )
-    //   }
-    //   labelPlacement="start"
-    // />
-    // <FormControlLabel
-    //   style={{ borderTop: "1px solid #ccd9dd" }}
-    //   value={roomInfo.selfCatering.toString()}
-    //   control={<Radio color="default" />}
-    //   label={
-    //     roomInfo.selfCatering || (
-    //       <p style={{ paddingRight: "10vw" }}>
-    //         Self Catering: {roomInfo.selfCatering + ":-"}
-    //       </p>
-    //     )
-    //   }
-    //   labelPlacement="start"
-    // />
+    <>
+     <RadioGroup
+        aria-label="price"
+        name="price"
+        value={selected}
+        onChange={handleChange}
+       >
+      <FormControlLabel
+        style={{ borderTop: "1px solid #ccd9dd" }}
+        value={"all-inclusive", roomInfo.allInclusive.toString()}
+        control={<CustomRadio />}
+        disabled={!roomInfo.allInclusive}
+        label={
+          roomInfo.allInclusive ? (
+            <p style={{ paddingRight: "10vw" }}>
+              All Inclusive: {`${roomInfo.allInclusive}:-`}
+            </p>
+          ) : (
+            <p style={{ paddingRight: "10vw" }}>All Inclusive: N/A</p>
+          )
+        }
+        labelPlacement="start"
+      />
+      <FormControlLabel
+        style={{ borderTop: "1px solid #ccd9dd" }}
+        value={roomInfo.fullBoard.toString()}
+        control={<CustomRadio />}
+        disabled={!roomInfo.fullBoard}
+        label={
+          roomInfo.fullBoard ? (
+            <p style={{ paddingRight: "10vw" }}>
+              Full Board: {`${roomInfo.fullBoard}:-`}
+            </p>
+          ) : (
+            <p style={{ paddingRight: "10vw" }}>Full Board: N/A</p>
+          )
+        }
+        labelPlacement="start"
+      />
+      <FormControlLabel
+        style={{ borderTop: "1px solid #ccd9dd" }}
+        value={roomInfo.halfBoard.toString()}
+        control={<CustomRadio />}
+        disabled={!roomInfo.halfBoard}
+        label={
+          roomInfo.halfBoard ? (
+            <p style={{ paddingRight: "10vw" }}>
+              Half Board: {`${roomInfo.halfBoard}:-`}
+            </p>
+          ) : (
+            <p style={{ paddingRight: "10vw" }}>Half Board: N/A</p>
+          )
+        }
+        labelPlacement="start"
+      />
+      <FormControlLabel
+        style={{ borderTop: "1px solid #ccd9dd" }}
+        value= {roomInfo.selfCatering.toString()}
+        control={<CustomRadio />}
+        label={
+          roomInfo.selfCatering || (
+            <p style={{ paddingRight: "10vw" }}>
+              Self Catering: {`${roomInfo.selfCatering}:-`}
+            </p>
+          )
+        }
+        labelPlacement="start"
+      />
+      </RadioGroup>
+    </>
   );
 }
