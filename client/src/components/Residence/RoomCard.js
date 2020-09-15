@@ -82,7 +82,6 @@ const RoomCard = ({ roomInfo, chooseRoom }) => {
  const classes = useStyle();
  const [value, setValue] = useState({ selected: "uniqueValue" });
  const [extraBedValue, setExtraBedValue] = useState({ extraBedValue: "" });
-
  const handleChange = (e) => {
   setValue({ selected: e.target.value });
  };
@@ -96,7 +95,6 @@ const RoomCard = ({ roomInfo, chooseRoom }) => {
  };
 
  const { selected } = value;
-
  return (
   <Card elevation={4} className={classes.card}>
    <RoomType roomType={roomInfo} />
@@ -109,9 +107,7 @@ const RoomCard = ({ roomInfo, chooseRoom }) => {
         <WifiIcon />
        </Grid>
        <Grid>
-        <Typography item xs={8}>
-         Free Wifi
-        </Typography>
+        <Typography xs={8}>Free Wifi</Typography>
        </Grid>
       </Grid>
       <Grid className={classes.icons}>
@@ -119,9 +115,7 @@ const RoomCard = ({ roomInfo, chooseRoom }) => {
         <FreeBreakfastIcon />
        </Grid>
        <Grid>
-        <Typography item xs={8}>
-         Free breakfast for 2 people
-        </Typography>
+        <Typography xs={8}>Free breakfast for 2 people</Typography>
        </Grid>
       </Grid>
       <Grid className={classes.icons}>
@@ -129,9 +123,7 @@ const RoomCard = ({ roomInfo, chooseRoom }) => {
         <DirectionsCar />
        </Grid>
        <Grid>
-        <Typography item xs={8}>
-         Free parking
-        </Typography>
+        <Typography xs={8}>Free parking</Typography>
        </Grid>
       </Grid>
      </Grid>
@@ -157,7 +149,7 @@ const RoomCard = ({ roomInfo, chooseRoom }) => {
          style={{ borderTop: "1px solid #ccd9dd" }}
          value={roomInfo.allInclusive.toString()}
          control={<CustomRadio />}
-         disabled={roomInfo.allInclusive ? "" : "disabled"}
+         disabled={roomInfo.allInclusive ? false : true}
          label={
           roomInfo.allInclusive ? (
            <p style={{ paddingRight: "10vw" }}>
@@ -173,7 +165,7 @@ const RoomCard = ({ roomInfo, chooseRoom }) => {
          style={{ borderTop: "1px solid #ccd9dd" }}
          value={roomInfo.fullBoard.toString()}
          control={<CustomRadio />}
-         disabled={roomInfo.fullBoard ? "" : "disabled"}
+         disabled={roomInfo.fullBoard ? false : true}
          label={
           roomInfo.fullBoard ? (
            <p style={{ paddingRight: "10vw" }}>
@@ -189,7 +181,7 @@ const RoomCard = ({ roomInfo, chooseRoom }) => {
          style={{ borderTop: "1px solid #ccd9dd" }}
          value="halfBoard"
          control={<CustomRadio />}
-         disabled={roomInfo.halfBoard ? "" : "disabled"}
+         disabled={roomInfo.halfBoard ? false : true}
          label={
           roomInfo.halfBoard ? (
            <p style={{ paddingRight: "10vw" }}>

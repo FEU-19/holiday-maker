@@ -40,12 +40,11 @@ const RoomPrice = ({
  const extraBedToInt = parseInt(extraBed.extraBedPrice) || 0;
  const totalPrice = price + selectedToInt + extraBedToInt;
  //const finalPrice = roomType.price + price.extras;
- console.log(selected);
  return (
   <Card className={classes.card}>
    <CardHeader
     className={classes.header}
-    title={totalPrice + ":-" + " SEK"}
+    title={totalPrice + ":- SEK"}
     //title = {selected}
     subheader={"for 1 room for 1 night"}
    />
