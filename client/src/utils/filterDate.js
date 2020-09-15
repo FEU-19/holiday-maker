@@ -1,23 +1,35 @@
-import getDateArray from './getDateArrayInterval';
+/**
+ *
+ * @param {*} residents of type [Hotel]
+ * @param {*} date of type occupiedDate
+ */
 
+export default function filterDate(hotels, date) {
+  const s = Date.parse(date.start);
+  const e = Date.parse(date.end);
 
-export default function filterDate (residents, date) {
-  let dateInterval = getDateArray(new Date(date.start), new Date(date.end))
-  for (let [i, resident] of residents.entries()) {
-    // eslint-disable-next-line
-    for (let [j, room] of resident.rooms.entries()) {
-      for (let occupiedDate of room.occupiedDates) {
-        let occupiedInterval = getDateArray(new Date(occupiedDate.start), new Date(occupiedDate.end))
-        for (let occDate of occupiedInterval) {
-          for (let userDate of dateInterval) {
-            if (userDate.getDate() === occDate.getDate() && userDate.getMonth() === occDate.getMonth()) {
-              residents.splice(i, 1);
-              break;
-            }
+  return hotels.map((hotel) => {
+    const rooms = hotel.rooms
+      .map((room) => {
+        const occupied = room.occupiedDates.reduce((acc, { start, end }) => {
+          if (acc) return acc;
+
+          const pStart = Date.parse(start);
+          const pEnd = Date.parse(end);
+
+          if ((s <= pStart && pStart <= e) || (s <= pEnd && pEnd <= e)) {
+            console.log(hotel.name, room.roomNumber);
+            console.log(start, date.start);
+            console.log(end, date.end);
+            return true;
           }
-        }
-      }
-    }
-  }
-  return residents;
+          return false;
+        }, false);
+
+        return occupied ? null : room;
+      }, false)
+      .filter(Boolean);
+
+    return { ...hotel, rooms };
+  });
 }

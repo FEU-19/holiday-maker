@@ -50,12 +50,10 @@ const ButtonContainer = styled(Grid)`
 `;
 
 const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) => {
-  const [residentData, setResidentData] = useState([{}]);
+  const [residentData, setResidentData] = useState([]);
   const [city, setCity] = useState("");
   const [checkedKidsClub, setCheckedKidsclub] = useState("none");
-  const [checkedNightEntertainment, setCheckedNightEntertainment] = useState(
-    "none"
-  );
+  const [checkedNightEntertainment, setCheckedNightEntertainment] = useState("none");
   const [checkedPool, setCheckedPool] = useState("none");
   const [checkedRestaurant, setCheckedRestaurant] = useState("none");
   const [amountOfChildren, setAmountOfChildren] = useState(0);
@@ -83,21 +81,21 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
     e.preventDefault();
 
     let queryParams = {
-      city: city ? city : 'none',
+      city: city ? city : "none",
       checkedKidsClub,
       checkedNightEntertainment,
       checkedRestaurant,
       checkedPool,
-      distanceBeach: distanceBeach ? distanceBeach : 'none',
-      distanceCity: distanceCity ? distanceCity : 'none',
+      distanceBeach: distanceBeach ? distanceBeach : "none",
+      distanceCity: distanceCity ? distanceCity : "none",
       amountOfAdults,
       amountOfChildren,
       ageOfChildren,
-      date
+      date,
     };
 
     setQueryParams(queryParams);
-    
+
     let c = [...residentData];
 
     c = filterAmountOfTravelers(c, amountOfAdults, ageOfChildren);
@@ -108,7 +106,7 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
     c = filterRestaurant(c, checkedRestaurant);
     c = filterDistanceBeach(c, distanceBeach);
     c = filterDistanceCity(c, distanceCity);
-    // c = filterDate(c, date)
+    c = filterDate(c, date);
 
     setFilteredDataCB(c);
     setSearching(true);
@@ -117,25 +115,12 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
   return (
     <Container>
       <Form onSubmit={onSubmit}>
-        <GridContainer
-          className="search-top"
-          container
-          spacing={1}
-          justify="space-around"
-        >
+        <GridContainer className="search-top" container spacing={1} justify="space-around">
           <Grid item xs={2}>
-            <SelectCity
-              residentData={residentData}
-              city={city}
-              setCity={setCity}
-            />
+            <SelectCity residentData={residentData} city={city} setCity={setCity} />
           </Grid>
           <Grid item xs={4}>
-            <DatePicker
-              residentData={residentData}
-              date={date}
-              setDate={setDate}
-            />
+            <DatePicker residentData={residentData} date={date} setDate={setDate} />
           </Grid>
           <Grid item xs={2}>
             <SelectAmountOfAdults
@@ -150,36 +135,21 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
             />
           </Grid>
           <Grid item xs={2}>
-            <ChildrenAgeSelects 
-              amountOfChildren={amountOfChildren} 
+            <ChildrenAgeSelects
+              amountOfChildren={amountOfChildren}
               setAgeOfChildren={setAgeOfChildren}
             />
           </Grid>
         </GridContainer>
 
-        <ButtonContainer
-          className="search-top"
-          container
-          spacing={1}
-          justify="flex-end"
-        >
+        <ButtonContainer className="search-top" container spacing={1} justify="flex-end">
           <Grid item xs={2}>
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              placeholder="Submit"
-            >
+            <Button type="submit" variant="contained" color="primary" placeholder="Submit">
               Submit
             </Button>
           </Grid>
         </ButtonContainer>
-        <GridContainer
-          className="search-bottom"
-          container
-          spacing={1}
-          justify="space-around"
-        >
+        <GridContainer className="search-bottom" container spacing={1} justify="space-around">
           <Grid item xs={2}>
             <CheckboxRestaurant
               checkedRestaurant={checkedRestaurant}
@@ -199,16 +169,10 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
             />
           </Grid>
           <Grid item xs={2}>
-            <CheckboxPool
-              checkedPool={checkedPool}
-              setCheckedPool={setCheckedPool}
-            />
+            <CheckboxPool checkedPool={checkedPool} setCheckedPool={setCheckedPool} />
           </Grid>
           <Grid item xs={2}>
-            <SelectDistanceCity
-              distanceCity={distanceCity}
-              setDistanceCity={setDistanceCity}
-            />
+            <SelectDistanceCity distanceCity={distanceCity} setDistanceCity={setDistanceCity} />
           </Grid>
           <Grid item xs={2}>
             <SelectDistanceBeach

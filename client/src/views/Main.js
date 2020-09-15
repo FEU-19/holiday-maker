@@ -10,13 +10,12 @@ const Container = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 2px solid black;
 `;
 
 const Main = () => {
   const [filteredData, setFilteredData] = useState([]);
   const [searching, setSearching] = useState(false);
-  const [sortOn, setSortOn] = useState('');
+  const [sortOn, setSortOn] = useState("");
   const [queryParams, setQueryParams] = useState({});
 
   function setFilteredDataCB(data) {
@@ -27,9 +26,18 @@ const Main = () => {
     <>
       <HeaderComp />
       <Container>
-        <SearchContainer setFilteredDataCB={setFilteredDataCB} setSearching={setSearching} setQueryParams={setQueryParams} />
-        <SortContainer filteredData={filteredData} setSortOn={setSortOn} sortOn={sortOn}  />
-        <ContentContainer filteredData={filteredData} sortOn={sortOn} searching={searching} queryParams={queryParams} />
+        <SearchContainer
+          setFilteredDataCB={setFilteredDataCB}
+          setSearching={setSearching}
+          setQueryParams={setQueryParams}
+        />
+        <SortContainer filteredData={filteredData} setSortOn={setSortOn} sortOn={sortOn} />
+        <ContentContainer
+          filteredData={filteredData}
+          sortOn={sortOn}
+          searching={searching}
+          queryParams={queryParams}
+        />
       </Container>
     </>
   );
