@@ -47,6 +47,7 @@ exports.create = async (req, res) => {
   return res.status(201).json(orderData);
 };
 
-exports.read = (_req, res) => {
-  res.send("OK");
+exports.read = async (req, res) => {
+  const orders = await Order.find({ $where: `userId=${req.body.user._id}` });
+  res.send({ data: orders });
 };

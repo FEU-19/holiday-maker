@@ -18,7 +18,7 @@ import SelectDistanceCity from "./SelectDistanceCity.js";
 import SelectDistanceBeach from "./SelectDistanceBeach";
 
 // Filter functions
-// import adultChildToBedFilter from "../../../utils/adultChildToBedFilter.js";
+import filterAmountOfTravelers from "../../../utils/filterAmountOfTravelers";
 import filterCity from "../../../utils/filterCity";
 import filterKidsClub from "../../../utils/filterKidsClub";
 import filterNightEntertainment from "../../../utils/filterNightEntertainment";
@@ -26,6 +26,7 @@ import filterPool from "../../../utils/filterPool";
 import filterRestaurant from "../../../utils/filterRestaurant";
 import filterDistanceBeach from "../../../utils/filterDistanceBeach";
 import filterDistanceCity from "../../../utils/filterDistanceCity";
+import filterDate from "../../../utils/filterDate";
 
 const Container = styled.div`
   width: 90vw;
@@ -48,23 +49,21 @@ const ButtonContainer = styled(Grid)`
   padding: 10px;
 `;
 
-const SearchContainer = ({ setFilteredDataCB }) => {
-  const [residentData, setResidentData] = useState([{}]);
+const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) => {
+  const [residentData, setResidentData] = useState([]);
   const [city, setCity] = useState("");
   const [checkedKidsClub, setCheckedKidsclub] = useState("none");
-  const [checkedNightEntertainment, setCheckedNightEntertainment] = useState(
-    "none"
-  );
+  const [checkedNightEntertainment, setCheckedNightEntertainment] = useState("none");
   const [checkedPool, setCheckedPool] = useState("none");
   const [checkedRestaurant, setCheckedRestaurant] = useState("none");
   const [amountOfChildren, setAmountOfChildren] = useState(0);
-
+  const [ageOfChildren, setAgeOfChildren] = useState([]);
   const [distanceCity, setDistanceCity] = useState(0);
   const [distanceBeach, setDistanceBeach] = useState(0);
   const [amountOfAdults, setAmountOfAdults] = useState(1);
   const [date, setDate] = useState({
-    start: "2020-06-02T10:30:00.000Z",
-    end: "2020-06-08T10:00:00.000Z",
+    start: "2020-06-02T00:00:00.000Z",
+    end: "2020-06-08T00:00:00.000Z",
   });
 
   useEffect(() => {
@@ -72,7 +71,6 @@ const SearchContainer = ({ setFilteredDataCB }) => {
       .get("http://localhost:8080/api/residences/")
       .then((res) => {
         setResidentData(res.data.data);
-        setFilteredDataCB(res.data.data);
       })
       .catch((err) => {
         console.error(err);
@@ -82,8 +80,25 @@ const SearchContainer = ({ setFilteredDataCB }) => {
   function onSubmit(e) {
     e.preventDefault();
 
+    let queryParams = {
+      city: city ? city : "none",
+      checkedKidsClub,
+      checkedNightEntertainment,
+      checkedRestaurant,
+      checkedPool,
+      distanceBeach: distanceBeach ? distanceBeach : "none",
+      distanceCity: distanceCity ? distanceCity : "none",
+      amountOfAdults,
+      amountOfChildren,
+      ageOfChildren,
+      date,
+    };
+
+    setQueryParams(queryParams);
+
     let c = [...residentData];
 
+    c = filterAmountOfTravelers(c, amountOfAdults, ageOfChildren);
     c = filterCity(c, city);
     c = filterPool(c, checkedPool);
     c = filterNightEntertainment(c, checkedNightEntertainment);
@@ -91,32 +106,21 @@ const SearchContainer = ({ setFilteredDataCB }) => {
     c = filterRestaurant(c, checkedRestaurant);
     c = filterDistanceBeach(c, distanceBeach);
     c = filterDistanceCity(c, distanceCity);
+    c = filterDate(c, date);
 
     setFilteredDataCB(c);
+    setSearching(true);
   }
 
   return (
     <Container>
       <Form onSubmit={onSubmit}>
-        <GridContainer
-          className="search-top"
-          container
-          spacing={1}
-          justify="space-around"
-        >
+        <GridContainer className="search-top" container spacing={1} justify="space-around">
           <Grid item xs={2}>
-            <SelectCity
-              residentData={residentData}
-              city={city}
-              setCity={setCity}
-            />
+            <SelectCity residentData={residentData} city={city} setCity={setCity} />
           </Grid>
           <Grid item xs={4}>
-            <DatePicker
-              residentData={residentData}
-              date={date}
-              setDate={setDate}
-            />
+            <DatePicker residentData={residentData} date={date} setDate={setDate} />
           </Grid>
           <Grid item xs={2}>
             <SelectAmountOfAdults
@@ -131,33 +135,21 @@ const SearchContainer = ({ setFilteredDataCB }) => {
             />
           </Grid>
           <Grid item xs={2}>
-            <ChildrenAgeSelects amountOfChildren={amountOfChildren} />
+            <ChildrenAgeSelects
+              amountOfChildren={amountOfChildren}
+              setAgeOfChildren={setAgeOfChildren}
+            />
           </Grid>
         </GridContainer>
 
-        <ButtonContainer
-          className="search-top"
-          container
-          spacing={1}
-          justify="flex-end"
-        >
+        <ButtonContainer className="search-top" container spacing={1} justify="flex-end">
           <Grid item xs={2}>
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              placeholder="Submit"
-            >
+            <Button type="submit" variant="contained" color="primary" placeholder="Submit">
               Submit
             </Button>
           </Grid>
         </ButtonContainer>
-        <GridContainer
-          className="search-bottom"
-          container
-          spacing={1}
-          justify="space-around"
-        >
+        <GridContainer className="search-bottom" container spacing={1} justify="space-around">
           <Grid item xs={2}>
             <CheckboxRestaurant
               checkedRestaurant={checkedRestaurant}
@@ -177,16 +169,10 @@ const SearchContainer = ({ setFilteredDataCB }) => {
             />
           </Grid>
           <Grid item xs={2}>
-            <CheckboxPool
-              checkedPool={checkedPool}
-              setCheckedPool={setCheckedPool}
-            />
+            <CheckboxPool checkedPool={checkedPool} setCheckedPool={setCheckedPool} />
           </Grid>
           <Grid item xs={2}>
-            <SelectDistanceCity
-              distanceCity={distanceCity}
-              setDistanceCity={setDistanceCity}
-            />
+            <SelectDistanceCity distanceCity={distanceCity} setDistanceCity={setDistanceCity} />
           </Grid>
           <Grid item xs={2}>
             <SelectDistanceBeach

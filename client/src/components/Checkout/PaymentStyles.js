@@ -14,20 +14,14 @@ export const PageStyle = makeStyles(() => ({
     marginBottom: 30,
   },
   pageTitle: {
-    /*color: "#162c72", // darkBlue */
-    color: "#E57D7C", // warm-pink
+    color: "#162c72", // darkBlue
     textAlign: "center",
-  },
-  header: {
-    /*color: "#4ab0bd", // lightGreen */
-    color: "#9B7F7E", //warm sandy
   },
   btnCtn: {
     textAlign: "center",
   },
   btn: {
-    /*backgroundColor: "#162c72", // darkBlue */
-    backgroundColor: "#6B8D97", // warm greenBlue
+    backgroundColor: "#162c72", // darkBlue
     color: "white",
   },
 }));
@@ -178,167 +172,81 @@ export const iconStyle = makeStyles(() => ({
   },
 }));
 
-// the following code need to convert to material ui component
-/* booking info  beach style
+// BookingInfo
+export const BookingInfoStyle = makeStyles(() => ({
+  box: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
 
+  container: {
+    display: "flex",
+    width: "80%",
+    justifyContent: "center",
+    flexDirection: "column",
+  },
 
-const Title = styled.h2`
-  color: #4ab1bb;
-`;
+  title: {
+    color: "#162C72",
+    display: "flex",
+    alignItems: "center",
+    width: "100px",
+    margin: "1% 0 0 0",
+    fontWeight: "700",
+  },
 
-const SmlHR = styled.hr`
-  border: none;
-  background-color: white;
-  height: 0.5px;
-  margin: 0px auto;
-  width: 90%;
-`;
+  boxDiv: {
+    display: "flex",
+    flex: "1",
+    alignItems: "center",
+    flexDirection: "column",
+    marginBottom: "5%",
+    borderRadius: "10px",
+    backgroundColor: "#F5F5F5",
+    padding: "10px 15px",
+    boxShadow: "0px 1px 1px grey",
+  },
 
+  ul: {
+    width: "100%",
+    display: "flex",
+    flexWrap: "wrap",
+    listStyle: "none",
+    margin: "10px auto",
+    marginTop: "0",
+  },
 
-const BookingInfoDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
+  li: {
+    width: "46%",
+    textAlign: "left",
+    marginTop: "5px",
+  },
 
-const BookingInfoContainer = styled.div`
-  display: flex;
-  width: 80%;
-  justify-content: center;
-  flex-direction: column;
-`;
+  hr: {
+    border: "none",
+    backgroundColor: "rgba(0, 0, 0, 0.2)",
+    height: "0.5px",
+    margin: "0px auto",
+    width: "90%",
+  },
 
+  p: {
+    fontWeight: "700",
+    alignSelf: "flex-end",
+    marginRight: "40px",
+    fontWeight: "700",
+    padding: " 10px 0",
+  },
 
-const BookingInfoBoxDiv = styled.div`
-  display: flex;
-  flex: 1;
-  align-items: center;
-  flex-direction: column;
-  margin: 10px;
-  border-radius: 10px;
-  background-color: #9db0c6;
-  padding: 0 15px;
-  box-shadow: 0px 1px 1px grey;
-`;
-
-const BookingInfoTextAlign = styled.div`
-  text-align: left;
-`;
-
-const BookingInfoTitle = styled.h3`
-  color: #162c72;
-  display: flex;
-  align-items: center;
-  width: 100px;
-`;
-
-const BookingInfoList = styled.ul`
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-  margin: 10px auto;
-`;
-
-const BookingInfoItems = styled.li`
-  width: 46%;
-  text-align: left;
-  margin-top: 5px;
-`;
-const BookingInfoText = styled.p`
-  font-weight: 700;
-  align-self: flex-end;
-  margin-right: 40px;
-  color: whitesmoke;
-  font-weight: 700;
-`;
-
-
-*/
-
-// warm beach style
-
-const Title = styled.h2`
-  color: #9b7f7e;
-`;
-
-const SmlHR = styled.hr`
-  border: none;
-  background-color: whitesmoke;
-  height: 0.5px;
-  margin: 0px auto;
-  width: 90%;
-`;
-
-const BookingInfoDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const BookingInfoContainer = styled.div`
-  display: flex;
-  width: 80%;
-  justify-content: center;
-  flex-direction: column;
-`;
-
-// #6B8D97 greenblue
-const BookingInfoBoxDiv = styled.div`
-  display: flex;
-  flex: 1;
-  align-items: center;
-  flex-direction: column;
-  margin: 10px;
-  border-radius: 10px;
-  background-color: #6b8d97;
-  padding: 0 15px;
-  box-shadow: 0px 1px 1px grey;
-`;
-
-const BookingInfoTextAlign = styled.div`
-  text-align: left;
-`;
-
-const BookingInfoTitle = styled.h3`
-  color: #e55b5b;
-  display: flex;
-  align-items: center;
-  width: 100px;
-`;
-
-const BookingInfoList = styled.ul`
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-  margin: 10px auto;
-`;
-
-const BookingInfoItems = styled.li`
-  width: 46%;
-  text-align: left;
-  margin-top: 5px;
-`;
-const BookingInfoText = styled.p`
-  font-weight: 700;
-  align-self: flex-end;
-  margin-right: 40px;
-  color: whitesmoke;
-  font-weight: 700;
-`;
-
-export {
-  Title,
-  SmlHR,
-  BookingInfoDiv,
-  BookingInfoContainer,
-  BookingInfoBoxDiv,
-  BookingInfoTextAlign,
-  BookingInfoTitle,
-  BookingInfoText,
-  BookingInfoList,
-  BookingInfoItems,
-};
+  InfoTitle: {
+    color: "#4AB0BD",
+    margin: "5% auto",
+  },
+  TotalAmount: {
+    fontWeight: "700",
+    alignSelf: "flex-end",
+    margin: "0 60px 10px 0px",
+  },
+}));
