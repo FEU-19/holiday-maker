@@ -35,6 +35,8 @@ function Payment() {
   });
   const [cardImg, setCardImg] = useState("");
   const [type, setType] = useState("");
+  const { state } = useLocation();
+
   let userId = "5f5aa3bc7bd3af45e0c97964";
 
   useEffect(() => {
@@ -139,7 +141,7 @@ function Payment() {
         Payment
       </Typography>
 
-      <BookingInfo />
+      <BookingInfo info={state} />
       <Divider />
       <Box className={pageStyle.wrapper}>
         <Typography variant="h5" className={style.InfoTitle}>
