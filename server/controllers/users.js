@@ -1,11 +1,18 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
-// const getCookie = require("../middleware/CookieFinder");
+const jwt = require("jsonwebtoken");
 
-exports.createLogout = async (req, res) => {
-  //   const { userId } = req.body;
-  //   res.clearCookie("holidayMakerCookie", `Bearer${userId}`).end();
+exports.read = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("-password");
+    res.json(user);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
 };
+
+exports.createLogout = async (req, res) => {};
 
 exports.createLogin = async (req, res) => {
   const { email, password } = req.body.user;
@@ -34,11 +41,14 @@ exports.createLogin = async (req, res) => {
       });
     }
 
-    res.status(200);
-    res.cookie("holidayMakerCookie", `Bearer${user.id}`, {
-      expires: new Date(Date.now() + 8 * 3600000),
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+
+    res.json({
+      token,
+      user: {
+        id: user._id,
+      },
     });
-    return res.send();
   } catch (err) {
     console.error(err.message);
     return res.status(500).send("Server error");
@@ -101,6 +111,7 @@ exports.create = async (req, res) => {
     user.password = await bcrypt.hash(password, salt);
 
     await user.save();
+
     return res.status(201).json({
       msg: "Account was created",
     });
@@ -117,4 +128,21 @@ exports.readOne = async (req, res) => {
   const user = await User.findById(userId);
   if (!user) return res.status(404).send({ error: "Couldn't find user." });
   return res.status(200).send({ data: user });
+};
+
+exports.createToken = async (req, res) => {
+  try {
+    const token = req.header("x-auth-token");
+    if (!token) return res.json(false);
+
+    const verified = jwt.verify(token, process.env.JWT_SECRET);
+    if (!verified) return res.json(false);
+
+    const user = await User.findById(verified.id);
+    if (!user) return res.json(false);
+
+    return res.json(true);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 };

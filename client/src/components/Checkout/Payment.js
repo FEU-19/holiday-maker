@@ -13,21 +13,12 @@ import InfoForm from "./InfoForm";
 import BookingInfo from "./BookingInfo";
 
 function Payment() {
+  // styles
   const IconStyle = iconStyle();
   const pageStyle = PageStyle();
   const style = BookingInfoStyle();
 
-  const [user, setUser] = useState({
-    firstName: "",
-    surname: "",
-    email: "",
-    zipCode: "",
-    phoneNumber: "",
-    city: "",
-    adress: "",
-    country: "",
-  });
-
+  // card payment states
   const [credit, setCredit] = useState({
     creditCard: "",
     expire: "",
@@ -35,31 +26,11 @@ function Payment() {
   });
   const [cardImg, setCardImg] = useState("");
   const [type, setType] = useState("");
+
+  // flight and rooms state
   const { state } = useLocation();
 
-  let userId = "5f5f64fb86170a41247bdf06";
-
-  useEffect(() => {
-    axios.get(`http://localhost:8080/api/users/${userId}`).then((response) => {
-      const user = response.data.data;
-
-      setUser({
-        ...user,
-        adress: "copacana fixa adressfält!!!",
-        country: "Sweden",
-      });
-    });
-  }, []);
-
   // User data.
-  function handleChange(e) {
-    let userData = {
-      ...user,
-      [e.target.name]: e.target.value,
-    };
-
-    setUser(userData);
-  }
 
   // Cleave credit
   function handleCredit(e) {
@@ -121,7 +92,7 @@ function Payment() {
 
   if (redirect) {
     // url needs to change to booking details page
-    return <Redirect to="/" />;
+    return <Redirect to="/mybookings/" />;
   }
 
   return (
