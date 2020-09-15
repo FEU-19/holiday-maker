@@ -76,6 +76,9 @@ function BookingInfo() {
             Amount: 22000kr
           </Typography>
         </Typography>
+        <Typography variant="h5" component="h5" className={style.TotalAmount}>
+          Total: 42000kr
+        </Typography>
       </Container>
     </Box>
   );
