@@ -142,5 +142,5 @@ const MyBookings = (props) => {
         </div>
   )
 }
-{/* <DialogTitle id="form-dialog-title">Hotel name</DialogTitle> */}
+
 export default MyBookings;
