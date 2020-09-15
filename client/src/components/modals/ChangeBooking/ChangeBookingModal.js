@@ -21,7 +21,7 @@ export default function ChangeBookingModal() {
   const [open, setOpen] = useState(true);
   const [hotelId, setHotelId] = useState('5f5b7e5b36ac0355705b8087');
   const [hotel, setHotel] = useState(null);
-  const [bookings, setBookings] = useState(
+  const [bookings, setBookings] = useState([
     {
     "_id": { // boknings nummer
         "$oid": "5f5889d8daa2064fd4eb8a42"
@@ -53,7 +53,7 @@ export default function ChangeBookingModal() {
         "$oid": "5f5b7e5b36ac0355705b8087"
     },
     "__v": 0
-  }); // ska få från parent
+  }]); // ska få från parent
   
 
 
