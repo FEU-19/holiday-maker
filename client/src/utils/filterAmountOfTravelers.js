@@ -1,12 +1,12 @@
+import filterChildrenByAge from './filterChildrenByAge';
+
 export default function filterAmountOfTravelers(c, adults, children) {
   let data = JSON.parse(JSON.stringify(c));
   let childrenOverAgeOfThree = [];
   let amountOfTravelers = null;
 
   // removes whitespace & children under the age of 3
-  childrenOverAgeOfThree = children
-    .filter(child => typeof child === 'number')
-    .filter(child => child >= 3)
+  childrenOverAgeOfThree = filterChildrenByAge(children);
 
   // total amount of travelers
   amountOfTravelers = adults + childrenOverAgeOfThree.length;

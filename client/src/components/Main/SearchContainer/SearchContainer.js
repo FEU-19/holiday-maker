@@ -18,6 +18,7 @@ import SelectDistanceCity from "./SelectDistanceCity.js";
 import SelectDistanceBeach from "./SelectDistanceBeach";
 
 // Filter functions
+import filterPresentCrib from '../../../utils/filterPresentCrib';
 import filterAmountOfTravelers from "../../../utils/filterAmountOfTravelers";
 import filterCity from "../../../utils/filterCity";
 import filterKidsClub from "../../../utils/filterKidsClub";
@@ -50,7 +51,7 @@ const ButtonContainer = styled(Grid)`
 `;
 
 const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) => {
-  const [residentData, setResidentData] = useState([{}]);
+  const [residentData, setResidentData] = useState([]);
   const [city, setCity] = useState("");
   const [checkedKidsClub, setCheckedKidsclub] = useState("none");
   const [checkedNightEntertainment, setCheckedNightEntertainment] = useState(
@@ -93,9 +94,10 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
       amountOfAdults,
       amountOfChildren,
       ageOfChildren,
-      date
+      date,
+      presentCrib: filterPresentCrib(ageOfChildren) || false
     };
-
+    
     setQueryParams(queryParams);
     
     let c = [...residentData];

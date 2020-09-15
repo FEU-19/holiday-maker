@@ -72,7 +72,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ContentContainer = ({ filteredData, sortOn, searching, queryParams }) => {
-  
   const [sortedData, setSortedData] = useState([]);
   const classes = useStyles();
 
@@ -93,7 +92,6 @@ const ContentContainer = ({ filteredData, sortOn, searching, queryParams }) => {
     }
     // eslint-disable-next-line
   }, [sortOn, filteredData, setSortedData])
-
 
   return (
     <div className={classes.root}>
