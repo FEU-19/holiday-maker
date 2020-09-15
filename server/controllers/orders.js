@@ -9,7 +9,7 @@ exports.create = async (req, res) => {
 
   const Id = req.body.userId;
   const data = req.body;
-  const orderData = {};
+  const orderData = { ...data };
 
   const user = await User.findById(Id);
 
@@ -18,19 +18,20 @@ exports.create = async (req, res) => {
   orderData.rooms = data.rooms;
   orderData.bookingDates = data.bookingDates;
   orderData.hotel = data.hotel;
+  orderData.totalPrice = 0;
+
+  const roomNs = [];
+  data.rooms.forEach((room) => {
+    orderData.totalPrice += room.price;
+    roomNs.push(room.roomNumber);
+  });
 
   const order = new Order(orderData);
-
   try {
     await order.save();
   } catch (err) {
     return res.status(409).send({ error: err.message });
   }
-
-  const roomNs = [];
-  data.rooms.forEach((room) => {
-    roomNs.push(room.roomNumber);
-  });
 
   const hotel = await Hotel.findOne({ _id: data.hotel });
   hotel.rooms.forEach((room) => {
