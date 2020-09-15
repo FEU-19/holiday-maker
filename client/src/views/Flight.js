@@ -34,7 +34,8 @@ const Flight = (props) => {
   const [airport, setAirport] = useState(departureAirports[0]);
   const style = useStyle();
 
-  const { amountOfAdults, amountOfChildren, date } = state.params;
+  console.log(state);
+  const { amountOfAdults, amountOfChildren, date } = state.queryParams;
 
   useEffect(() => {
     axios

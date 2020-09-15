@@ -49,12 +49,10 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     margin: "0 auto",
-
     "& > p": {
       fontWeight: "bold",
       fontSize: "2em",
     },
-
     "& > hr": {
       width: "200px",
       border: "1px solid black",
@@ -62,7 +60,6 @@ const useStyles = makeStyles((theme) => ({
       marginRight: 0,
       margin: "2em",
     },
-
     "& > svg": {
       color: "#e23131",
       fontSize: "64px",
