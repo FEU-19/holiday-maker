@@ -84,11 +84,11 @@ const ContentContainer = ({ filteredData, sortOn, searching, queryParams }) => {
     if (!sortOn) return setSortedData([...filteredData]);
 
     if (sortOn === 'Price low to high') {
-      setSortedData(sortPrice(sortedData, true));
+      setSortedData(sortPrice([...filteredData], true));
     }
 
     if (sortOn === 'Rating high to low') {
-      setSortedData(sortRating(sortedData, true));
+      setSortedData(sortRating([...filteredData], true));
     }
     // eslint-disable-next-line
   }, [sortOn, filteredData, setSortedData])
