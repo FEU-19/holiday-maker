@@ -3,28 +3,26 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Card, CardHeader, Typography, Checkbox } from "@material-ui/core";
 
 const useStyle = makeStyles(() => ({
- card: {
-  maxWidth: 345,
-  margin: 10,
-  backgroundColor: "rgb(234, 234, 234)",
-  display: "flex",
-  flexDirection: "column",
-  //justifyContent: "space-between",
-  alignItems: "flex-end",
-  boxShadow: "3px 6px 7px #263d69",
- },
- header: {
-  textAlign: "right",
-  paddingBottom: 0,
- },
- text: {
-  //margin: 20,
-  padding: 16,
-  paddingTop: 0,
-  fontSize: 16,
-  fontWeight: "bolder",
-  textAlign: "right",
- },
+  card: {
+    maxWidth: 345,
+    margin: 10,
+    backgroundColor: "#F5F5F5",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-end",
+    boxShadow:  "3px 3px 4px #162C72",
+  },
+  header: {
+    textAlign: "right",
+    paddingBottom: 0,
+  },
+  text: {
+    padding: 16,
+    paddingTop:0,
+    fontSize: 16,
+    fontWeight: "bolder",
+    textAlign: "right",
+  },
 }));
 
 const RoomPrice = ({

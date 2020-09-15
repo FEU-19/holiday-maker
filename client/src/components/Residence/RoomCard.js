@@ -17,65 +17,69 @@ import RoomType from "./RoomType";
 import RoomPrice from "./RoomPrice";
 
 const CustomCheckbox = withStyles({
- root: {
-  color: "#4AB0BD",
-
-  "&$checked": {
+  root: {
    color: "#4AB0BD",
+ 
+   "&$checked": {
+    color: "#4AB0BD",
+   },
   },
- },
- checked: {},
-})((props) => <Checkbox color="default" {...props} />);
-
-const CustomRadio = withStyles({
- root: {
-  color: "#4AB0BD",
-  "&$selected": {
+  checked: {},
+ })((props) => <Checkbox color="default" {...props} />);
+ 
+ const CustomRadio = withStyles({
+  root: {
    color: "#4AB0BD",
+   "&$selected": {
+    color: "#4AB0BD",
+   },
   },
- },
- checked: {},
-})((props) => <Radio color="default" {...props} />);
+  checked: {},
+ })((props) => <Radio color="default" {...props} />);
 
 const useStyle = makeStyles(() => ({
- card: {
-  position: "relative",
-  display: "flex",
-  flexWrap: "nowrap",
-  justifyContent: "space-between",
-  marginBottom: 20,
-  margintop: 20,
-  marginLeft: "3vw",
-  marginRight: "3vw",
- },
- title: {
-  marginTop: 5,
-  marginBottom: 20,
-  fontSize: 16,
-  fontWeight: "bolder",
-  textAlign: "center",
- },
- content: {
-  minWidth: 500,
-  fontSize: 14,
-  padding: 25,
-  objectFit: "cover",
- },
- grid: {
-  display: "flex",
-  flexDirection: "column",
- },
- icons: {
-  margin: 10,
-  display: "flex",
-  alignItems: "center",
- },
- options: {
-  margin: 10,
-  borderTopWidth: 1,
-  borderColor: "#ccd9dd",
-  borderStyle: "solid",
- },
+  card: {
+    position: "relative",
+    display: "flex",
+    flexWrap: "nowrap",
+    justifyContent: "space-between",
+    marginBottom: 20,
+    margintop: 20,
+    marginLeft: "3vw",
+    marginRight: "3vw",
+    backgroundColor: " #F5F5F5",
+    boxShadow: "3px 3px 4px #162C72",
+  },
+  title: {
+    marginTop: 5,
+    marginBottom: 20,
+    fontSize: 16,
+    fontWeight: "bolder",
+    textAlign: "center",
+    color: "#000000",
+  },
+  content: {
+    minWidth: 500,
+    fontSize: 14,
+    padding: 25,
+    objectFit: "cover",
+  },
+  grid: {
+    display: "flex",
+    flexDirection: "column",
+  },
+  icons: {
+    margin: "0.5vw",
+    display: "flex",
+    alignItems: "center",
+    color: "#4AB0BD",
+  },
+  options: {
+    margin: 10,
+    borderTopWidth: 1,
+    borderColor: "#4AB0BD",
+    borderStyle: "solid",
+  },
 }));
 
 const RoomCard = ({ roomInfo, chooseRoom }) => {
