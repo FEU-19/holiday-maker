@@ -18,9 +18,6 @@ export default function filterDate(hotels, date) {
           const pEnd = Date.parse(end);
 
           if ((s <= pStart && pStart <= e) || (s <= pEnd && pEnd <= e)) {
-            console.log(hotel.name, room.roomNumber);
-            console.log(start, date.start);
-            console.log(end, date.end);
             return true;
           }
           return false;

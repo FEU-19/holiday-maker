@@ -4,8 +4,9 @@ import { BookingInfoStyle } from "./PaymentStyles";
 import Hotel from "@material-ui/icons/Hotel";
 import Flight from "@material-ui/icons/Flight";
 
-function BookingInfo() {
+function BookingInfo({ info }) {
   const style = BookingInfoStyle();
+  console.log(info);
 
   return (
     <Box className={style.box}>

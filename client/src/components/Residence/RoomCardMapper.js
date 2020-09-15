@@ -38,15 +38,23 @@ const RoomCardMapper = ({ allRooms }) => {
         <Redirect
           to={{
             pathname: "/flight",
-            state: { rooms: chosenRooms, queryParams: state.queryParams },
+            state: {
+              rooms: chosenRooms,
+              queryParams: state.queryParams,
+              hotel: state.hotel,
+            },
           }}
         />
       )}
       {allRooms.map((room) => {
         return <RoomCard roomInfo={room} chooseRoom={chooseRoom} />;
       })}
-      <Button color="primary" className={styles.sticky} onClick={() => setRedirect(true)}>
-        CHECKOUT
+      <Button
+        color="primary"
+        className={styles.sticky}
+        onClick={() => setRedirect(true)}
+      >
+        {"proceed".toUpperCase()}
       </Button>
     </div>
   );
