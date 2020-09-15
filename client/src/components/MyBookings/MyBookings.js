@@ -1,58 +1,66 @@
-import React, {useState} from 'react';
-import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import { Redirect } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import Button from "@material-ui/core/Button";
+import { makeStyles } from "@material-ui/core/styles";
+import Accordion from "@material-ui/core/Accordion";
+import AccordionSummary from "@material-ui/core/AccordionSummary";
+import AccordionDetails from "@material-ui/core/AccordionDetails";
+import Typography from "@material-ui/core/Typography";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import DialogTitle from '@material-ui/core/DialogTitle';
 import axios from "axios";
 
+import ContainerButtons from "./ContainerButtons";
 
-
-const objekt = [{
-    _id: 'Booking Id1',
-    userId: 'mongoose.Schema.Types.ObjectID',
-    adults: 2,
-    children: 3,
-    hotel: 'Hotel name placeholder1',
-    totalPrice: 'Number',
-    rooms: [{
-        _id: 'mongoose.Schema.Types.ObjectID',
-        roomNumber: 'String',
-        option: 'String',
-        extraBed: 'No',
-        price: '2000kr'
-    }],
+const objekt = [
+  {
+    _id: "1",
+    userId: "mongoose.Schema.Types.ObjectID",
+    adults: "2",
+    children: "Number",
+    hotel: "mongoose.Schema.Types.ObjectID",
+    totalPrice: "Number",
+    rooms: [
+      {
+        _id: "mongoose.Schema.Types.ObjectID",
+        roomNumber: "String",
+        option: "String",
+        extraBed: "yes",
+        price: "2000kr",
+      },
+    ],
     bookingDates: {
-        start: 'new Date.toISOString()',
-        end: 'new Date.toISOString()'
+      start: "new Date.toISOString()",
+      end: "new Date.toISOString()",
     },
-    flight: 'null' | {
-        departureDate: 'new Date.toISOString()',
-        returnDate: 'new Date.toISOString()',
-        price: 'Number'
-    }
-}, {
-    _id: 'Booking Id2',
-    userId: 'mongoose.Schema.Types.ObjectID',
-    adults: 2,
-    children: 1,
-    hotel: 'Hotel name placeholder2',
-    totalPrice: '100$',
-    rooms: [{
-        _id: 'mongoose.Schema.Types.ObjectID',
-        roomNumber: 'String',
-        option: 'String',
-        extraBed: 'Yes',
-        price: '1000kr'
-    }],
+    flight:
+      "null" |
+      {
+        departureDate: "new Date.toISOString()",
+        returnDate: "new Date.toISOString()",
+        price: "Number",
+      },
+  },
+  {
+    _id: "2",
+    userId: "mongoose.Schema.Types.ObjectID",
+    adults: "2",
+    children: "5",
+    hotel: "mongoose.Schema.Types.ObjectID",
+    totalPrice: "100$",
+    rooms: [
+      {
+        _id: "mongoose.Schema.Types.ObjectID",
+        roomNumber: "String",
+        option: "String",
+        extraBed: "yes",
+        price: "1000kr",
+      },
+    ],
     bookingDates: {
-        start: 'new Date.toISOString()',
-        end: 'new Date.toISOString()'
+      start: "new Date.toISOString()",
+      end: "new Date.toISOString()",
     },
     flight:  {
         departureDate: 'new Date.toISOString()',
@@ -99,7 +107,7 @@ const MyBookings = (props) => {
   const [clickedBookings, setClickedBookings] = useState(false);
     
   const classes = useStyles();
-
+  
   return (
     <div className={classes.root}>  
             {objekt.map(myBooking => 
@@ -110,19 +118,19 @@ const MyBookings = (props) => {
                       <Typography className={classes.heading}>{myBooking._id}</Typography>
                     </AccordionSummary>
                     <AccordionDetails >
-                      <Typography  className={classes.flex} >
-                        <Card  className={classes.rootTwo}>
+                      <Typography className={classes.flex} >
+                        <Card className={classes.rootTwo}>
                             <CardContent >
-                                <Typography>
-                                  <h2 >Information</h2>
+                                <Typography variant={"h5"} component={"h2"}>
+                                  Information
                                 </Typography>
-                                <Typography  className={classes.pos} color="textSecondary">
-                                  <p>User Name/Id: {myBooking.userId}</p>
-                                  <p>Total Rooms: {myBooking.rooms.length}</p>
-                                  <p>Total People: {myBooking.adults + myBooking.children}</p>
-                                  <p>Departure Date: {myBooking.flight.departureDate}</p>
-                                  <p>Return Date: {myBooking.flight.returnDate}</p>
-                                  <p>Extra Bed:  {myBooking.rooms[0].extraBed}</p> 
+                                <Typography  className={classes.pos} color="textSecondary" variant={"body2"} component={"p"}>
+                                  User Name/Id: {myBooking.userId}
+                                  Total Rooms: {myBooking.rooms.length}
+                                  Total People: {myBooking.adults + myBooking.children}
+                                  Departure Date: {myBooking.flight.departureDate}
+                                  Return Date: {myBooking.flight.returnDate}
+                                  Extra Bed:  {myBooking.rooms[0].extraBed}
                                 </Typography>
                             </CardContent>
                         </Card>
@@ -131,9 +139,8 @@ const MyBookings = (props) => {
                 </Accordion>
                 )
             }
-            )}
         </div>
   )
 }
-
-export default MyBookings
+{/* <DialogTitle id="form-dialog-title">Hotel name</DialogTitle> */}
+export default MyBookings;
