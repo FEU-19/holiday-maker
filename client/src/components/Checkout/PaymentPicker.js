@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { Box, Radio, RadioGroup, FormControlLabel } from "@material-ui/core";
-
 import { paymentPicker } from "./PaymentStyles";
 
 function PaymentPicker({ handleChange, option }) {

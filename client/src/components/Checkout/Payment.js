@@ -166,14 +166,16 @@ function Payment() {
         </Typography>
         <PaymentPicker handleChange={handleChange} />
 
-        <PaymentForm
-          handleCredit={handleCredit}
-          onCreditCardTypeChanged={onCreditCardTypeChanged}
-          cardNum={credit.creditCard}
-          cvc={credit.cvc}
-          expire={credit.expire}
-          cardImg={cardImg}
-        />
+        {user.paymentPicker === "credit card" ? (
+          <PaymentForm
+            handleCredit={handleCredit}
+            onCreditCardTypeChanged={onCreditCardTypeChanged}
+            cardNum={credit.creditCard}
+            cvc={credit.cvc}
+            expire={credit.expire}
+            cardImg={cardImg}
+          />
+        ) : null}
       </Box>
       <Box className={pageStyle.btnCtn}>
         <Button
