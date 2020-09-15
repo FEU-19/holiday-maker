@@ -250,3 +250,15 @@ export const BookingInfoStyle = makeStyles(() => ({
     margin: "0 60px 10px 0px",
   },
 }));
+
+// Payment picker
+export const paymentPicker = makeStyles(() => ({
+  box: {
+    marginBottom: "10px",
+  },
+
+  radio: {
+    border: "1px solid #162c72",
+    padding: "10px 50px",
+  },
+}));

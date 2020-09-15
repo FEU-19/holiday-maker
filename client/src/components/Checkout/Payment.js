@@ -11,6 +11,7 @@ import { Container, Button, Divider, Box, Typography } from "@material-ui/core";
 import PaymentForm from "./PaymentForm";
 import InfoForm from "./InfoForm";
 import BookingInfo from "./BookingInfo";
+import PaymentPicker from "./PaymentPicker";
 
 function Payment() {
   const IconStyle = iconStyle();
@@ -26,6 +27,7 @@ function Payment() {
     city: "",
     adress: "",
     country: "",
+    paymentPicker: "",
   });
 
   const [credit, setCredit] = useState({
@@ -162,6 +164,8 @@ function Payment() {
         <Typography variant="h5" className={style.InfoTitle}>
           Payment Method
         </Typography>
+        <PaymentPicker handleChange={handleChange} />
+
         <PaymentForm
           handleCredit={handleCredit}
           onCreditCardTypeChanged={onCreditCardTypeChanged}
