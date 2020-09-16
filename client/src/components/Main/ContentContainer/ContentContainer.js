@@ -99,6 +99,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ContentContainer = ({ filteredData, sortOn, searching, queryParams }) => {
+  console.log(filteredData);
+  console.log(queryParams);
+  
   const [sortedData, setSortedData] = useState([]);
   const [paginationData, setPaginationData] = useState([]);
   const [isFetching, setIsFetching] = useState(false);

@@ -27,7 +27,7 @@ const Main = () => {
   return (
     <>
       <Container>
-        <SearchContainer setFilteredDataCB={setFilteredDataCB} setSearching={setSearching} setQueryParams={setQueryParams} />
+        <SearchContainer setFilteredDataCB={setFilteredDataCB} setSearching={setSearching} setQueryParams={setQueryParams} savedSearchQueryParams={queryParams} />
         <SortContainer filteredData={filteredData} setSortOn={setSortOn} sortOn={sortOn}  />
         <ContentContainer filteredData={filteredData} sortOn={sortOn} searching={searching} queryParams={queryParams} />
       </Container>
