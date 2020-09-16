@@ -73,29 +73,61 @@ const useStyles = makeStyles((theme) => ({
 
 const ContentContainer = ({ filteredData, sortOn, searching, queryParams }) => {
   const [sortedData, setSortedData] = useState([]);
+  const [paginationData, setPaginationData] = useState([]);
+  const [isFetching, setIsFetching] = useState(false);
   const classes = useStyles();
 
   useEffect(() => {
     setSortedData([...filteredData]);
-  }, [sortOn, filteredData])
-
+    setPaginationData([...filteredData].slice(0, 20));
+    // eslint-disable-next-line
+  }, [filteredData])
+  
   useEffect(() => {
     // If the option 'None' was selected
     if (!sortOn) return setSortedData([...filteredData]);
-
+    
     if (sortOn === 'Price low to high') {
       setSortedData(sortPrice([...filteredData], true));
     }
-
+    
     if (sortOn === 'Rating high to low') {
       setSortedData(sortRating([...filteredData], true));
     }
     // eslint-disable-next-line
   }, [sortOn, filteredData, setSortedData])
+  
+  useEffect(() => {
+    setPaginationData([...sortedData.slice(0, 20)]);
+  }, [sortedData])
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [handleScroll])
+
+  useEffect(() => {
+    if (!isFetching) return;
+    fetchMoreHotels();
+    // eslint-disable-next-line
+  }, [isFetching])
+
+  function fetchMoreHotels() {
+    setTimeout(() => {
+      setPaginationData(prevState => ([...prevState, ...sortedData.slice(prevState.length, prevState.length + 20)]));
+      setIsFetching(false);
+    }, 700);
+  }
+  
+  // eslint-disable-next-line
+  function handleScroll() {
+    if (window.innerHeight + document.documentElement.scrollTop <= document.documentElement.offsetHeight - 200) return;
+    if (!isFetching) setIsFetching(true);
+  }
 
   return (
     <div className={classes.root}>
-      {sortedData.map((hotel) => {
+      {paginationData.map((hotel) => {
         return (
           <div key={hotel._id}>
             <Paper className={classes.paper}>
@@ -194,6 +226,7 @@ const ContentContainer = ({ filteredData, sortOn, searching, queryParams }) => {
       </div>
     );
   })}
+  {isFetching && sortedData.length !== paginationData.length && <Typography> Fetching more hotels... </Typography>}
   {!sortedData.length && searching ?
     <div className={classes.noResult}>
       <Typography> No available hotels </Typography>
