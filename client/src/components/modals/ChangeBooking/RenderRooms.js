@@ -6,8 +6,9 @@ import DatePicker from "../../Main/SearchContainer/DatePicker";
 
 
 export default function RenderRooms({ bookings, hotel }) {
+  console.log('MyBooking -----> ', bookings);
   // console.log("this is the booking ", bookings[0].rooms);
-  const bookedRooms = bookings[0].rooms;
+  const bookedRooms = bookings.rooms;
   // console.log('This is the hotel', hotel);
   // mappa bokning
   // const bookedRooms = bookings.rooms

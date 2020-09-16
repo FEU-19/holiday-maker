@@ -16,63 +16,16 @@ import ChildrenAgeSelects from "../../Main/SearchContainer/ChildrenAgeSelects";
 
 import RenderRooms from "./RenderRooms";
 
-export default function ChangeBookingModal() {
-  const [open, setOpen] = useState(true);
-  const [hotelId, setHotelId] = useState("5f5b7e5b36ac0355705b8087");
+export default function ChangeBookingModal({handleClose, open, bookings, hotelId}) {
   const [hotel, setHotel] = useState(null);
-  const [bookings, setBookings] = useState([
-    {
-      _id: {
-        // boknings nummer
-        $oid: "5f5889d8daa2064fd4eb8a42",
-      },
-      userId: {
-        // användare
-        $oid: "5f5f64fb86170a41247bdf06",
-      },
-      bookingNumber: "k7cSt78z9k9v9n261lrv5364e",
-      rooms: [
-        //   {
-        //     "_id": {
-        //         "$oid": "5f5b7e5b36ac0355705b8088"
-        //     },
-        //     "price": 0,
-        //     "option": "selfCatering",
-        //     "roomNumber": "100"
-        // },
-        {
-          _id: {
-            $oid: "5f5b7e5b36ac0355705b808c",
-          },
-          price: 531,
-          option: "halfBoard",
-          roomNumber: "103",
-        },
-        {
-          _id: {
-            $oid: "5f5b7e5b36ac0355705b8096",
-          },
-          price: 748,
-          option: "allInclusive",
-          roomNumber: "110",
-        },
-      ],
-      bookingDates: {
-        start: "2020-06-01T11:46:29.258Z",
-        end: "2020-06-15T11:47:09.886Z",
-      },
-      hotel: {
-        $oid: "5f5b7e5b36ac0355705b8087",
-      },
-      __v: 0,
-    },
-  ]); // ska få från parent
-
+  console.log('I GOT the Order ', bookings);
+  console.log('I GOT the FLIGHT ID  ', hotelId);
+  
   useEffect(() => {
     axios
       .get(`http://localhost:8080/api/residences/${hotelId}`)
       .then((res) => {
-        console.log(res);
+        console.log('Hotel Res ', res);
 
         setHotel(res.data.data);
       })
@@ -92,13 +45,11 @@ export default function ChangeBookingModal() {
   // Sedan Redirect to={{ pathname: "/checkout", state: { rooms: chosenRooms } }}
   // const [chosenRooms, setChosenRooms] = useState([]);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+  // const handleClickOpen = () => {
+  //   setOpen(true);
+  // };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+ 
   return (
     <Dialog
       open={open}

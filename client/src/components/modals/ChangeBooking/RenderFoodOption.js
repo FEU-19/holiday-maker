@@ -21,10 +21,7 @@ export default function RenderFoodOptions({ roomInfo, roomOption }) {
     console.log("Clicking on ", e.target.value);
     setValue({ selected: e.target.value });
   };
-  //  console.log('startvärdet ',  roomOption);
-  console.log(
-    `value.selected = ${value.selected}    roomInfo.allInclusive = ${roomInfo.allInclusive}. selected = ${selected} value = ${value} roomInfo = ${roomInfo} roomOption = ${roomOption}`
-  );
+ 
 
   return (
     <>
