@@ -30,18 +30,20 @@ function AppRouter() {
         localStorage.setItem("auth-token", "");
         token = "";
       }
+      try {
+        const response = await axios.get("http://localhost:8080/api/users/", {
+          headers: { "x-auth-token": token },
+        });
+        console.log(response);
 
-      const response = await axios.get("http://localhost:8080/api/users/", {
-        headers: { "x-auth-token": token },
-      });
-
-      setContext({ token, user: response.data.user });
+        setContext({ token, user: response.data.user });
+      } catch (error) {
+        return console.log("user not logged in");
+      }
     };
 
     checkLoggedIn();
   }, []);
-
-  console.log(context);
 
   return (
     <UserContext.Provider value={[context, setContext]}>
