@@ -68,7 +68,8 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: 7,
   },
   rating: {
-    color: 'yellow',
+    color: '#ffcc00',
+    fontSize: 30,
   },
 
   noResult: {
@@ -109,21 +110,21 @@ const ContentContainer = ({ filteredData, sortOn, searching, queryParams }) => {
     setPaginationData([...filteredData].slice(0, 20));
     // eslint-disable-next-line
   }, [filteredData])
-  
+
   useEffect(() => {
     // If the option 'None' was selected
     if (!sortOn) return setSortedData([...filteredData]);
-    
+
     if (sortOn === 'Price low to high') {
       setSortedData(sortPrice([...filteredData], true));
     }
-    
+
     if (sortOn === 'Rating high to low') {
       setSortedData(sortRating([...filteredData], true));
     }
     // eslint-disable-next-line
   }, [sortOn, filteredData, setSortedData])
-  
+
   useEffect(() => {
     setPaginationData([...sortedData.slice(0, 20)]);
   }, [sortedData])
@@ -145,7 +146,7 @@ const ContentContainer = ({ filteredData, sortOn, searching, queryParams }) => {
       setIsFetching(false);
     }, 700);
   }
-  
+
   // eslint-disable-next-line
   function handleScroll() {
     if (window.innerHeight + document.documentElement.scrollTop <= document.documentElement.offsetHeight - 200) return;
