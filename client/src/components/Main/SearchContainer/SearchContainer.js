@@ -50,6 +50,11 @@ const ButtonContainer = styled(Grid)`
   border-bottom: 1px solid grey;
   padding: 10px;
 `;
+const saveSearch = {
+  display: "flex",
+  flexDirection: "row-reverse",
+  justifyContent: "space-between",
+};
 
 const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams, savedSearchQueryParams }) => {
   const [residentData, setResidentData] = useState([]);
@@ -166,7 +171,7 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams, save
           spacing={1}
           justify="flex-end"
         >
-          <Grid item xs={2}>
+          <Grid item xs={4} style = {saveSearch}>
             <Button
               type="submit"
               variant="contained"
