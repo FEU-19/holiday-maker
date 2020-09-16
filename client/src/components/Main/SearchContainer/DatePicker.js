@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Grid from "@material-ui/core/Grid";
 import DateFnsUtils from '@date-io/date-fns';
 import {
   MuiPickersUtilsProvider,
@@ -39,11 +38,11 @@ export default function DatePicker({ residentData, date, setDate }) {
   useEffect(() => {
     let startToISO = startDate.toISOString();
     let endToISO = endDate.toISOString();
-    setDate((prevState => ({...prevState, start: startToISO, end: endToISO})))
-  },[setDate, startDate, endDate])
+    setDate((prevState => ({ ...prevState, start: startToISO, end: endToISO })))
+  }, [setDate, startDate, endDate])
 
   return (
-      <Box className={classes.border} border={3} >
+    <Box className={classes.border} border={3} >
       <MuiPickersUtilsProvider className={classes.container} utils={DateFnsUtils}>
         <KeyboardDatePicker
           autoOk={true}
@@ -77,6 +76,6 @@ export default function DatePicker({ residentData, date, setDate }) {
           }}
         />
       </MuiPickersUtilsProvider>
-      </Box>
+    </Box>
   );
 }

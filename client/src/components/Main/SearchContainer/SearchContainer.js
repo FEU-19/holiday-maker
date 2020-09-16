@@ -3,7 +3,6 @@ import styled from "styled-components";
 import axios from "axios";
 import Grid from "@material-ui/core/Grid";
 import { Button } from "@material-ui/core";
-import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/core/styles';
@@ -37,11 +36,7 @@ import filterRestaurant from "../../../utils/filterRestaurant";
 import filterDistanceBeach from "../../../utils/filterDistanceBeach";
 import filterDistanceCity from "../../../utils/filterDistanceCity";
 import filterDate from "../../../utils/filterDate";
-/*
-const StyledContainer = styled(Container)`
-  padding-top: 60px;
-  background-color: #F5F5F5;
-`; */
+
 
 const useStyles = makeStyles((theme) => ({
   backgroundColor: {
@@ -59,7 +54,6 @@ const Form = styled.form`
   flex-direction: column;
   align-items: center;
 `;
-
 
 const ButtonContainer = styled(Grid)`
   padding: 30px;
