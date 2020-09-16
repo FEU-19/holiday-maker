@@ -47,7 +47,6 @@ import Paper from '@material-ui/core/Paper';
         flightTimeHome: 'from 11:00, to 15:00',
         seats: '1'
   },
-  
 },
 { 
     Response: {
@@ -108,7 +107,7 @@ const FlightBooking = () => {
           <Button onClick={handleOpen}>Open Modal</Button> 
           <Modal open={open} onClose={handleClose} aria-labelledby="simple-modal-title" aria-describedby="simple-modal-description">
             <TableContainer component={Paper}>
-            <Table className={classes.paper} aria-label="simple table">
+             <Table className={classes.paper} aria-label="simple table">
               <TableHead>
                 <TableRow>
                   <TableCell align="right">Date</TableCell>
@@ -138,10 +137,10 @@ const FlightBooking = () => {
                   </TableRow>
                 ))}
               </TableBody>
-            </Table>
-          </TableContainer>
-      </Modal>  
-      </div>
+             </Table>
+            </TableContainer>
+          </Modal>  
+        </div>
     );
 }
 export default FlightBooking;
