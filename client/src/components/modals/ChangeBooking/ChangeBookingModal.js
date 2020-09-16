@@ -16,6 +16,7 @@ import ChildrenAgeSelects from "../../Main/SearchContainer/ChildrenAgeSelects";
 
 import ChangeDates from "./ChangeDates";
 import RenderFoodOption from "./RenderFoodOption";
+import { DataFoodOptions } from "./DataFoodOptions";
 
 export default function ChangeBookingModal({
   handleClose,
@@ -23,29 +24,30 @@ export default function ChangeBookingModal({
   bookings,
   hotelId,
 }) {
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
-  const [date, setDate] = useState({start: '', end: ''});
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [date, setDate] = useState({ start: "", end: "" });
   const [hotel, setHotel] = useState(null);
-  const [newRoomOptions, setNewRoomOptions] = useState(bookings.rooms[0])
-  
+  const [newRoomOptions, setNewRoomOptions] = useState(bookings.rooms[0]);
 
   const bookedRooms = bookings.rooms;
-  // console.log('the room have this options ', newRoomOptions)
-
+  console.log("****** Remove NAME before PUT *************", newRoomOptions);
 
   useEffect(() => {
-    if(bookings){
-      
-      setDate((prevState => ({...prevState, start: startDate, end: endDate})));
+    if (bookings) {
+      setDate((prevState) => ({
+        ...prevState,
+        start: startDate,
+        end: endDate,
+      }));
     }
-}, [bookings]);
+  }, [bookings]);
 
   useEffect(() => {
     axios
       .get(`http://localhost:8080/api/residences/${hotelId}`)
       .then((res) => {
-        console.log("Hotel Res ", res);
+        // console.log("Hotel Res ", res);
         setHotel(res.data.data);
       })
       .catch((error) => {
@@ -80,24 +82,20 @@ export default function ChangeBookingModal({
           <DialogTitle id="form-dialog-title">{hotel.name}</DialogTitle>
           <DialogContent>
             <ChangeDates date={date} setDate={setDate} />
-{/*             
+            {/*             
         <SelectAmountOfAdults />
         <SelectAmountOfChildren />
-        <ChildrenAgeSelects /> */} 
+        <ChildrenAgeSelects /> */}
             {/* Extra bed */}
             {/* flight */}
             {/* Need price */}
             {bookedRooms.map((room, index) => {
-              // console.log("This is my option ", room);
-
               const hotelRoom = findTheHotelRoomInHotel(room._id);
-              
-
-              
+              console.log(hotelRoom);
+              const data = DataFoodOptions(hotelRoom);
 
               return (
                 <React.Fragment key={index}>
-                  
                   {/* <FormControlLabel
                 value={hotelRoom.extraBed}
                 control={<Checkbox color="default" />}
@@ -110,12 +108,12 @@ export default function ChangeBookingModal({
                 labelPlacement="start"
               />
               */}
-              <Typography> Food options</Typography>
+                  <Typography> Food options</Typography>
                   <RenderFoodOption
-                    roomInfo={hotelRoom}
-                    roomOption={room.price}
+                    initiallySelected={room.option}
                     setNewRoomOptions={setNewRoomOptions}
                     newRoomOptions={newRoomOptions}
+                    data={data}
                   />
                 </React.Fragment>
               );
