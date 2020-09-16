@@ -40,7 +40,15 @@ const orderSchema = mongoose.Schema(
       type: Number,
       required: true,
     },
-    flight: Boolean /*  || { Flight } */,
+    flight: {
+      departureDate: String,
+      finalAirport: String,
+      finalFlightNumber: String,
+      firstAirport: String,
+      firstFlightNumber: String,
+      price: Number,
+      returnDate: String,
+    },
   },
   {
     timestamps: true,

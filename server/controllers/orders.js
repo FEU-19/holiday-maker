@@ -7,18 +7,23 @@ const bookingNrGenerator = require("../utils/bookingNrGenerator");
 exports.create = async (req, res) => {
   // Id will be a cookie.
 
-  const Id = req.body.userId;
+  const Id = req.body.user._id;
   const data = req.body;
-  const orderData = { ...data };
+  const orderData = {};
 
-  const user = await User.findById(Id);
+  try {
+    const user = await User.findById(Id);
+  } catch (err) {
+    return res.status(404).send({ error: err.message });
+  }
 
-  orderData.userId = data.userId;
+  orderData.userId = data.user._id;
   orderData.bookingNumber = bookingNrGenerator(user.firstName, user.surname, 6);
   orderData.rooms = data.rooms;
   orderData.bookingDates = data.bookingDates;
   orderData.hotel = data.hotel;
-  orderData.totalPrice = 0;
+  orderData.flight = data.flight;
+  orderData.totalPrice = data.flight.price || 0;
 
   const roomNs = [];
   data.rooms.forEach((room) => {
