@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-
 import SearchContainer from "../components/Main/SearchContainer/SearchContainer";
 import ContentContainer from "../components/Main/ContentContainer/ContentContainer";
 import ChangeBookingModal from '../components/modals/ChangeBooking/ChangeBookingModal';
