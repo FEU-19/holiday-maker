@@ -1,18 +1,35 @@
 import React, { useState, useEffect } from 'react';
-import styled from "styled-components";
+import { makeStyles } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import { sortValues } from '../../../config/constants';
+import styled from "styled-components";
 
 const Container = styled.div`
   margin-inline-start: auto;
-  padding-right: 130px;
+  padding-right: 125px;
   padding-top: 25px;
 `;
 
+const useStyles = makeStyles((theme) => ({
+  border: {
+    width: 180,
+    height: 40,
+    borderRadius: 7,
+    background: 'white',
+    borderColor: '#162C72',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+    paddingRight: '25',
+  },
+}));
+
 export default function SortContainer({ filteredData, sortOn, setSortOn }) {
   const [searchDone, setSearchDone] = useState(false);
+  const classes = useStyles();
 
   useEffect(() => {
     if (filteredData.length) {
@@ -21,17 +38,16 @@ export default function SortContainer({ filteredData, sortOn, setSortOn }) {
   }, [filteredData])
 
   function onChange(e) {
-    if (e.target.value === 'None') return setSortOn('');
+    if (e.target.value === 'Sort by') return setSortOn('');
     setSortOn(e.target.value);
   }
 
   return (
     <Container>
       {searchDone &&
-        <>
-          <InputLabel id="sort">Sort by</InputLabel>
-          <Select
-            value={sortOn || 'None'}
+        <Box className={classes.border} border={3}>
+          <Select className={classes.select}
+            value={sortOn || 'Sort by'}
             onChange={onChange}
             id="sort"
             >
@@ -41,7 +57,7 @@ export default function SortContainer({ filteredData, sortOn, setSortOn }) {
                 )
               })}
           </Select>
-        </>
+        </Box>
       }
     </Container>
   )
