@@ -48,7 +48,7 @@ const useStyle = makeStyles(() => ({
     marginLeft: "3vw",
     marginRight: "3vw",
     backgroundColor: " #F5F5F5",
-    boxShadow: "3px 3px 4px #162C72",
+    boxShadow: " 0 4px 2px -2px #162C72",
   },
   title: {
     marginTop: 5,
@@ -84,17 +84,20 @@ const useStyle = makeStyles(() => ({
 
 const RoomCard = ({ roomInfo, chooseRoom }) => {
  const classes = useStyle();
- const [value, setValue] = useState({ selected: "uniqueValue" });
- const [extraBedValue, setExtraBedValue] = useState({ extraBedValue: "" });
+ const [value, setValue] = useState({ selected: "selfCatering" });
+ const [extraBedValue, setExtraBedValue] = useState(0);
+ 
+
  const handleChange = (e) => {
   setValue({ selected: e.target.value });
  };
 
  const handleCheck = (e) => {
   if (e.target.checked) {
-   setExtraBedValue({ extraBedPrice: e.target.value });
+   const toInt = parseInt(e.target.value);
+   setExtraBedValue(toInt);
   } else {
-   setExtraBedValue({ extraBedPrice: 0 });
+   setExtraBedValue(0);
   }
  };
 
@@ -135,11 +138,32 @@ const RoomCard = ({ roomInfo, chooseRoom }) => {
       <FormControl component="fieldset">
        <Typography className={classes.title}>Options</Typography>
        <FormControlLabel
+        style = {{justifyContent: "space-between"}}
+        value={roomInfo.presentCrib}
+        control={<CustomCheckbox />}
+        onChange={handleCheck}
+        disabled={roomInfo.presentCrib ? false : true}
+        label={
+          roomInfo.presentCrib ? (
+         <p style={{ paddingRight: "10vw" }} >Crib: 100:- {roomInfo.presentCrib}</p>
+        ) : (
+          <p style={{ paddingRight: "10vw" }}>Crib: {"N/A"}</p>
+          )
+        } 
+        labelPlacement="start"
+       />
+       <FormControlLabel
+        style = {{justifyContent: "space-between"}}
         value={roomInfo.extraBed}
         control={<CustomCheckbox />}
         onChange={handleCheck}
+        disabled={roomInfo.extraBed ? false : true}
         label={
-         <p style={{ paddingRight: "10vw" }}>Extra Bed: {roomInfo.extraBed}</p>
+          roomInfo.extraBed ? (
+         <p style={{ paddingRight: "10vw" }} >Extra Bed: {roomInfo.extraBed + ":-"}</p>
+         ) : (
+          <p style={{ paddingRight: "10vw" }}>Extra Bed: {"N/A"}</p>
+         )
         }
         labelPlacement="start"
        />
@@ -150,8 +174,8 @@ const RoomCard = ({ roomInfo, chooseRoom }) => {
         onChange={handleChange}
        >
         <FormControlLabel
-         style={{ borderTop: "1px solid #ccd9dd" }}
-         value={roomInfo.allInclusive.toString()}
+         style={{ borderTop: "1px solid #ccd9dd" , justifyContent: "space-between" }}
+         value= "allInclusive"
          control={<CustomRadio />}
          disabled={roomInfo.allInclusive ? false : true}
          label={
@@ -166,8 +190,8 @@ const RoomCard = ({ roomInfo, chooseRoom }) => {
          labelPlacement="start"
         />
         <FormControlLabel
-         style={{ borderTop: "1px solid #ccd9dd" }}
-         value={roomInfo.fullBoard.toString()}
+         style={{ borderTop: "1px solid #ccd9dd", justifyContent: "space-between" }}
+         value="fullBoard"
          control={<CustomRadio />}
          disabled={roomInfo.fullBoard ? false : true}
          label={
@@ -182,7 +206,7 @@ const RoomCard = ({ roomInfo, chooseRoom }) => {
          labelPlacement="start"
         />
         <FormControlLabel
-         style={{ borderTop: "1px solid #ccd9dd" }}
+         style={{ borderTop: "1px solid #ccd9dd", justifyContent: "space-between" }}
          value="halfBoard"
          control={<CustomRadio />}
          disabled={roomInfo.halfBoard ? false : true}
@@ -198,8 +222,8 @@ const RoomCard = ({ roomInfo, chooseRoom }) => {
          labelPlacement="start"
         />
         <FormControlLabel
-         style={{ borderTop: "1px solid #ccd9dd" }}
-         value="uniqueValue"
+         style={{ borderTop: "1px solid #ccd9dd", justifyContent: "space-between" }}
+         value="selfCatering"
          control={<CustomRadio />}
          label={
           roomInfo.selfCatering || (

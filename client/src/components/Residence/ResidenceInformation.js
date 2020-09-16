@@ -10,7 +10,6 @@ const boxContainer = {
   justifyContent: "space-between",
   alignItems: "center",
   marginBottom: "20px",
-
 };
 
 const infoContainer = {
@@ -25,7 +24,7 @@ const infoContainer = {
   color: "#F23622",
   borderRadius: "10px",
   boxSizing: "border-box",
-  boxShadow: "3px 3px 4px #162C72", 
+  boxShadow: "0px 4px 5px 0px rgba(0,0,0,0.14)", 
 };
 
 const infoContent = {
@@ -40,7 +39,6 @@ const textReset = {
   margin: "0",
   padding: "0",
   fontWeight: "bold",
-  fontSize: "15px",
 };
 
 const defaultText = {
@@ -54,9 +52,16 @@ const check = {
   transform: "translateY(3px)",
 };
 
+const text = {
+  margin: "0",
+  padding: "0",
+  fontWeight: "bold",
+  fontSize: "15px"
+};
+
 const ResidenceInformation = ({ info }) => {
   return (
-    <div
+    <div 
       className="residence__residenceInformation__boxContainer"
       style={boxContainer}
     >
@@ -118,20 +123,20 @@ const ResidenceInformation = ({ info }) => {
         style={infoContainer}
       >
         <Typography variant = "subtitle1" style={textReset}>Nearby</Typography>
-        <Typography
+        <Typography  component = "p"
           className="residence__residenceInformation__boxContainer__nearbyContent"
           style={infoContent}
         >
           {info.distanceToBeach && (
-            <p style={textReset}>Distance to Beach: {info.distanceToBeach} m</p>
+            <span style={text}>Distance to Beach: {info.distanceToBeach} m</span>
           )}
           {info.distanceToCity && (
-            <p style={textReset}>Distance to City: {info.distanceToCity} m</p>
+            <span style={text}>Distance to City: {info.distanceToCity} m</span>
           )}
           {!info.distanceToBeach && !info.distanceToCity && (
-            <p style={defaultText}>
+            <span style={defaultText}>
               Please contact the residence for more information.
-            </p>
+            </span>
           )}
         </Typography>
       </div>
