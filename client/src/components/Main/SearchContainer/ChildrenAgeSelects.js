@@ -71,24 +71,24 @@ class ChildrenAgeSelects extends React.Component {
 
       x.push(
         <Box
-        style={{
-          width: 100,
-          height: 35,
-          border: "3px solid #162C72",
-          borderRadius: 7,
-          backgroundColor: "white",
-          borderColor: "#162C72",
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-around",
-          alignItems: "center",
-          marginTop: 5,
-          marginRight: 5,
-        }}
+          key={ "ageSelect-" + i + Date.now() }
+          style={{
+            width: 100,
+            height: 35,
+            border: "3px solid #162C72",
+            borderRadius: 7,
+            backgroundColor: "white",
+            borderColor: "#162C72",
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-around",
+            alignItems: "center",
+            marginTop: 5,
+            marginRight: 5,
+          }}
         >
           <p>Age</p>
           <Select
-            key={ "ageSelect-" + i + Date.now() }
             displayEmpty
             value={ this.state.childrenAgeArr[i] }
             onChange= { (e) => this.onChange(e, i) }
