@@ -34,8 +34,6 @@ function Payment() {
   // User context
   const [{ user }] = useContext(UserContext);
 
-  console.log(user);
-
   // Cleave credit
   function handleCredit(e) {
     let creditData = {
