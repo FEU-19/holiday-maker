@@ -7,8 +7,13 @@ import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import axios from "axios";
 import { Button } from "@material-ui/core";
 import ChangeBookingModal from "../modals/ChangeBooking/ChangeBookingModal";
+
+import ContainerButtons from "./ContainerButtons";
+import getToken from "../../utils/getToken";
 
 const objekt = [
   {
@@ -77,32 +82,32 @@ const objekt = [
         price: "Number",
       },
   },
-  // {
-  //   _id: "2",
-  //   userId: "mongoose.Schema.Types.ObjectID",
-  //   adults: "2",
-  //   children: "5",
-  //   hotel: "mongoose.Schema.Types.ObjectID",
-  //   totalPrice: "100$",
-  //   rooms: [
-  //     {
-  //       _id: "mongoose.Schema.Types.ObjectID",
-  //       roomNumber: "String",
-  //       option: "String",
-  //       extraBed: "yes",
-  //       price: "1000kr",
-  //     },
-  //   ],
-  //   bookingDates: {
-  //     start: "new Date.toISOString()",
-  //     end: "new Date.toISOString()",
-  //   },
-  //   flight:  {
-  //       departureDate: 'new Date.toISOString()',
-  //       returnDate: 'new Date.toISOString()',
-  //       price: 'Number'
-  //   }
-  // }
+  {
+    _id: "2",
+    userId: "mongoose.Schema.Types.ObjectID",
+    adults: "2",
+    children: "5",
+    hotel: "mongoose.Schema.Types.ObjectID",
+    totalPrice: "100$",
+    rooms: [
+      {
+        _id: "mongoose.Schema.Types.ObjectID",
+        roomNumber: "String",
+        option: "String",
+        extraBed: "yes",
+        price: "1000kr",
+      },
+    ],
+    bookingDates: {
+      start: "new Date.toISOString()",
+      end: "new Date.toISOString()",
+    },
+    flight: {
+      departureDate: "new Date.toISOString()",
+      returnDate: "new Date.toISOString()",
+      price: "Number",
+    },
+  },
 ];
 
 const useStyles = makeStyles((theme) => ({
@@ -143,13 +148,30 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const MyBookings = (props) => {
-  const [myBookings, setMyBookings] = useState({});
+  const [myBookings, setMyBookings] = useState([]);
   const [clickedBookings, setClickedBookings] = useState(false);
+  const [update, setUpdate] = useState(0);
   const [open, setOpen] = useState(false);
   const [order, setOrder] = useState(null);
   const [hotelId, setHotelId] = useState(null);
 
   const classes = useStyles();
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/api/orders/", { withCredentials: true })
+      .then((res) => {
+        console.log(res);
+        setMyBookings(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [update]);
+
+  if (!myBookings) {
+    return <p>loading..</p>;
+  }
 
   function saveOrder(myBooking) {
     setOrder(myBooking);
@@ -214,6 +236,7 @@ const MyBookings = (props) => {
                 >
                   Change Booking
                 </Button>
+                <ContainerButtons />
               </CardContent>
             </Card>
           </AccordionDetails>
