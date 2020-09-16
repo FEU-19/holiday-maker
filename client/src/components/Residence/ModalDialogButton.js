@@ -5,10 +5,10 @@ import { makeStyles } from "@material-ui/core";
 
 const useStyle = makeStyles(() => ({
   button: {
-    backgroundColor: "#F23622",
+    backgroundColor: "#162C72",
     color: "#FFFFFF",
     "&:hover": {
-      backgroundColor: "#F23622",
+      backgroundColor: "#162C72",
       color: "#FFFFFF",
       opacity: "0.8",
     },
