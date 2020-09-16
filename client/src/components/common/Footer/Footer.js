@@ -13,8 +13,10 @@ const FooterCont = styled.footer`
   background-color: #162c72;
   color: white;
   padding: 20px;
-  position: relative;
+  position: absolute;
   border-radius: 1px;
+  bottom: 0;
+  
   .MuiGrid-spacing-xs-2 > .MuiGrid-item{
       padding: 1px 10px 0px 0px;
   }
