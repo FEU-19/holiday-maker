@@ -15,13 +15,22 @@ import RegistrationComp from "./Registration/RegistrationComp";
 import LoginComp from "./Login/Login";
 import UserContext from "../../context/userContext";
 
-import { cookieFinder } from "../../utils/findCookie";
+import { Link } from "react-router-dom";
+
+import styled from "styled-components";
+
+const Wrapper = styled.div`
+  
+  display:flex;
+  
+`
 
 const LoginModal = () => {
   const { userData, setUserData } = useContext(UserContext);
   const [open, setOpen] = useState(false);
   const [cookie, setCookie] = useState(false);
   const [value, setValue] = useState(0);
+  const [redirect, setRedirect] = useState(false);
 
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -83,25 +92,49 @@ const LoginModal = () => {
     localStorage.setItem("auth-token", "");
   };
 
+  const RedirectTo = (e) => {
+    setRedirect(true);
+  }
+
   return (
     <div>
       {!userData.user ? (
-        <div>
-          <Button variant="outlined" color="primary" onClick={handleModalOpen}>
+        
+        <Wrapper>
+          <Button variant="outlined" color="primary">
+            <Link to={{ pathname: "/" }}>Main</Link>
+          </Button>
+
+          <Button className="login" variant="outlined" color="primary" onClick={handleModalOpen}>
             Login
           </Button>
+
           <Button
+            className="login"
             variant="outlined"
             color="primary"
             onClick={handleModalRegistration}
           >
             Registration
           </Button>
-        </div>
+        </Wrapper>
       ) : (
-        <Button variant="outlined" color="primary" onClick={(e) => onLogout(e)}>
-          Logout
-        </Button>
+        <Wrapper>
+          <Button variant="outlined" color="primary">
+            <Link to={{ pathname: "/" }}>Main</Link>
+          </Button>
+
+          <Button variant="outlined" color="primary">
+            <Link to={{ pathname: "/mybookings" }}>My Bookings</Link>
+          </Button>
+
+          
+            <Button className="login" variant="outlined" color="primary" onClick={(e) => onLogout(e)}>
+              <Link to={{ pathname: "/" }}>
+              Logout
+              </Link>
+            </Button>
+        </Wrapper>
       )}
       <Dialog
         open={open}
