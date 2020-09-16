@@ -15,15 +15,15 @@ function PaymentPicker({ handleChange, option }) {
         onChange={handleChange}
       >
         <FormControlLabel
-          value="credit card"
-          control={<Radio />}
-          label="Credit Card"
-          className={style.radio}
-        />
-        <FormControlLabel
           value="Invoice"
           control={<Radio />}
           label="Invoice"
+          className={style.radio}
+        />
+        <FormControlLabel
+          value="credit card"
+          control={<Radio />}
+          label="Credit Card"
           className={style.radio}
         />
       </RadioGroup>

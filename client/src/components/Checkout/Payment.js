@@ -8,10 +8,10 @@ import { iconStyle, PageStyle, BookingInfoStyle } from "./PaymentStyles";
 import Modal from "../common/Modal/Modal";
 import { Container, Button, Divider, Box, Typography } from "@material-ui/core";
 
-import PaymentForm from "./PaymentForm";
 import InfoForm from "./InfoForm";
 import BookingInfo from "./BookingInfo";
 import PaymentPicker from "./PaymentPicker";
+import PaymentOptionWrapper from "./PaymentOptionWrapper";
 
 function Payment() {
   const IconStyle = iconStyle();
@@ -166,16 +166,15 @@ function Payment() {
         </Typography>
         <PaymentPicker handleChange={handleChange} />
 
-        {user.paymentPicker === "credit card" ? (
-          <PaymentForm
-            handleCredit={handleCredit}
-            onCreditCardTypeChanged={onCreditCardTypeChanged}
-            cardNum={credit.creditCard}
-            cvc={credit.cvc}
-            expire={credit.expire}
-            cardImg={cardImg}
-          />
-        ) : null}
+        <PaymentOptionWrapper
+          option={user.paymentPicker}
+          handleCredit={handleCredit}
+          onCreditCardTypeChanged={onCreditCardTypeChanged}
+          cardNum={credit.creditCard}
+          cvc={credit.cvc}
+          expire={credit.expire}
+          cardImg={cardImg}
+        />
       </Box>
       <Box className={pageStyle.btnCtn}>
         <Button
@@ -186,7 +185,11 @@ function Payment() {
           Finish & Pay
         </Button>
       </Box>
-      <Modal onClose={() => controlCloseModal(paymentSuccess)} open={showModal}>
+      <Modal
+        onClose={() => controlCloseModal(paymentSuccess)}
+        paymentO
+        open={showModal}
+      >
         {paymentSuccess ? (
           <div className="modal__container">
             <CheckIcon className={IconStyle.checkIcon} />
