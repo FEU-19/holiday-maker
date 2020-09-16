@@ -14,7 +14,9 @@ const Container = styled.div`
   align-items: center;
   justify-content: space-between;
   box-shadow: 0px 3px 5px -3px rgba(0, 0, 0, 0.5);
-  position: relative;
+  position: sticky;
+  top: 0;
+  z-index: 99;
 `;
 
 const ContainerBtns = styled.div`
