@@ -34,16 +34,12 @@ const RoomPrice = ({
  roomInfo,
 }) => {
  const classes = useStyle();
- const selectedToInt = parseInt(selected) || 0;
- const extraBedToInt = parseInt(extraBed.extraBedPrice) || 0;
- const totalPrice = price + selectedToInt + extraBedToInt;
- //const finalPrice = roomType.price + price.extras;
+ const totalPrice = price + roomInfo[selected] + extraBed;
  return (
   <Card elevation={0} className={classes.card}>
    <CardHeader
     className={classes.header}
     title={totalPrice + ":- SEK"}
-    //title = {selected}
     subheader={"for 1 room for 1 night"}
    />
    <Typography className={classes.text} component="p">
