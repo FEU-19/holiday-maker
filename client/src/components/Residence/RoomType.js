@@ -11,26 +11,27 @@ import {
 import ModalDialogButton from "./ModalDialogButton";
 
 const useStyle = makeStyles(() => ({
- card: {
-  maxWidth: 345,
-  minWidth: 316,
-  margin: 10,
-  backgroundColor: "#e8e8e8",
- },
- media: {
-  height: 0,
-  paddingTop: "56.25%",
-  margin: 20,
- },
- container: {
-  margin: "0 auto",
-  padding: "20px",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  overflow: "auto",
-  paddingBottom: 15,
- },
+  card: {
+    maxWidth: 345,
+    minWidth: 316,
+    margin: 10,
+    backgroundColor: "#e8e8e8",
+    //boxShadow: "3px 3px 4px #162C72",
+  },
+  media: {
+    height: 0,
+    paddingTop: "56.25%",
+    margin: 15,
+    marginTop: 0,
+    borderRadius: "4px",
+  },
+  container: {
+    margin: "0 auto",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    overflow: "auto",
+ }
 }));
 
 const RoomType = ({ roomType }) => {

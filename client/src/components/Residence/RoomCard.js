@@ -38,46 +38,48 @@ const CustomCheckbox = withStyles({
  })((props) => <Radio color="default" {...props} />);
 
 const useStyle = makeStyles(() => ({
- card: {
-  position: "relative",
-  display: "flex",
-  flexWrap: "nowrap",
-  justifyContent: "space-between",
-  marginBottom: 20,
-  margintop: 20,
-  marginLeft: "3vw",
-  marginRight: "3vw",
-  backgroundColor: "#f5f5f5",
-  boxShadow: " 0 4px 2px -2px #263d69",
- },
- title: {
-  marginTop: 5,
-  marginBottom: 20,
-  fontSize: 16,
-  fontWeight: "bolder",
-  textAlign: "center",
- },
- content: {
-  minWidth: 500,
-  fontSize: 14,
-  padding: 25,
-  objectFit: "cover",
- },
- grid: {
-  display: "flex",
-  flexDirection: "column",
- },
- icons: {
-  margin: 10,
-  display: "flex",
-  alignItems: "center",
- },
- options: {
-  margin: 10,
-  borderTopWidth: 1,
-  borderColor: "#ccd9dd",
-  borderStyle: "solid",
- },
+  card: {
+    position: "relative",
+    display: "flex",
+    flexWrap: "nowrap",
+    justifyContent: "space-between",
+    marginBottom: 20,
+    margintop: 20,
+    marginLeft: "3vw",
+    marginRight: "3vw",
+    backgroundColor: " #F5F5F5",
+    boxShadow: " 0 4px 2px -2px #162C72",
+  },
+  title: {
+    marginTop: 5,
+    marginBottom: 20,
+    fontSize: 16,
+    fontWeight: "bolder",
+    textAlign: "center",
+    color: "#000000",
+  },
+  content: {
+    minWidth: 500,
+    fontSize: 14,
+    padding: 25,
+    objectFit: "cover",
+  },
+  grid: {
+    display: "flex",
+    flexDirection: "column",
+  },
+  icons: {
+    margin: "0.5vw",
+    display: "flex",
+    alignItems: "center",
+    color: "#4AB0BD",
+  },
+  options: {
+    margin: 10,
+    borderTopWidth: 1,
+    borderColor: "#4AB0BD",
+    borderStyle: "solid",
+  },
 }));
 
 const RoomCard = ({ roomInfo, chooseRoom }) => {
@@ -134,6 +136,7 @@ const RoomCard = ({ roomInfo, chooseRoom }) => {
       <FormControl component="fieldset">
        <Typography className={classes.title}>Options</Typography>
        <FormControlLabel
+        style = {{justifyContent: "space-between"}}
         value={roomInfo.extraBed}
         control={<CustomCheckbox />}
         onChange={handleCheck}
@@ -149,8 +152,8 @@ const RoomCard = ({ roomInfo, chooseRoom }) => {
         onChange={handleChange}
        >
         <FormControlLabel
-         style={{ borderTop: "1px solid #ccd9dd" }}
-         value="allInclusive"
+         style={{ borderTop: "1px solid #ccd9dd" , justifyContent: "space-between" }}
+         value= "allInclusive"
          control={<CustomRadio />}
          disabled={roomInfo.allInclusive ? false : true}
          label={
@@ -165,7 +168,7 @@ const RoomCard = ({ roomInfo, chooseRoom }) => {
          labelPlacement="start"
         />
         <FormControlLabel
-         style={{ borderTop: "1px solid #ccd9dd" }}
+         style={{ borderTop: "1px solid #ccd9dd", justifyContent: "space-between" }}
          value="fullBoard"
          control={<CustomRadio />}
          disabled={roomInfo.fullBoard ? false : true}
@@ -181,7 +184,7 @@ const RoomCard = ({ roomInfo, chooseRoom }) => {
          labelPlacement="start"
         />
         <FormControlLabel
-         style={{ borderTop: "1px solid #ccd9dd" }}
+         style={{ borderTop: "1px solid #ccd9dd", justifyContent: "space-between" }}
          value="halfBoard"
          control={<CustomRadio />}
          disabled={roomInfo.halfBoard ? false : true}
@@ -197,7 +200,7 @@ const RoomCard = ({ roomInfo, chooseRoom }) => {
          labelPlacement="start"
         />
         <FormControlLabel
-         style={{ borderTop: "1px solid #ccd9dd" }}
+         style={{ borderTop: "1px solid #ccd9dd", justifyContent: "space-between" }}
          value="selfCatering"
          control={<CustomRadio />}
          label={
