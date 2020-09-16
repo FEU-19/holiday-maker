@@ -32,7 +32,7 @@ export default function PaymentForms({
           />
         </InputLabel>
         <Box className={classes.imgWrapper}>
-          <img className={classes.image} src={cardImg} alt="paycard-thumbnail" />
+          <img className={classes.image} src={cardImg || ""} alt="" />
         </Box>
       </Box>
       <Box className={classes.wrapper}>
