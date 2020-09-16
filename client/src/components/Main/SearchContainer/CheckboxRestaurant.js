@@ -5,9 +5,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { checkboxTheme, checkboxStyle } from "./CheckboxTheme";
 import { ThemeProvider } from '@material-ui/core/styles';
 
-
 const CheckboxRestaurant = ({checkedRestaurant, setCheckedRestaurant}) => {
-
   const theme = checkboxStyle();
 
   const handleChange = (e) => {

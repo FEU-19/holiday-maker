@@ -9,7 +9,6 @@ import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import PropTypes from "prop-types";
-import styled from "styled-components";
 import { makeStyles } from "@material-ui/core/styles";
 
 import RegistrationComp from "./Registration/RegistrationComp";
