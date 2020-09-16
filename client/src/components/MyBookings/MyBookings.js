@@ -28,14 +28,6 @@ const objekt = [
         option: "halfBoard",
         roomNumber: "103",
       },
-      {
-        _id: {
-          $oid: "5f5b7e5b36ac0355705b8096",
-        },
-        price: "748",
-        option: "allInclusive",
-        roomNumber: "110",
-      },
     ],
     bookingDates: {
       start: "2020-06-01T11:46:29.258Z",
@@ -61,14 +53,6 @@ const objekt = [
     },
     bookingNumber: "k7cSt78z9k9v9n261lrv5364e",
     rooms: [
-      {
-        _id: {
-          $oid: "5f5b7e5b36ac0355705b808c",
-        },
-        price: "531",
-        option: "halfBoard",
-        roomNumber: "103",
-      },
       {
         _id: {
           $oid: "5f5b7e5b36ac0355705b8096",

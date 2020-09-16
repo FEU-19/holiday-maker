@@ -31,11 +31,11 @@ export default function ChangeBookingModal({
   console.log("I GOT the Order ", bookings);
   console.log("I GOT the FLIGHT ID  ", hotelId);
   
-  (bookings.map(booking => {
-    console.log(booking.bookingDates)
-    // setStartDate(booking.bookingDates.start)
-    // setEndDate(booking.bookingDates.end)
-  }))
+  // (bookings.map(booking => {
+  //   console.log(booking.bookingDates)
+  //   // setStartDate(booking.bookingDates.start)
+  //   // setEndDate(booking.bookingDates.end)
+  // }))
 
   useEffect(() => {
     if(bookings){
