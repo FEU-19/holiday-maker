@@ -47,7 +47,6 @@ export default function DatePicker({ residentData, date, setDate }) {
       <Box className={classes.border} border={3} >
       <MuiPickersUtilsProvider className={classes.container} utils={DateFnsUtils}>
         <KeyboardDatePicker
-          classes={{icon: classes.icon}}
           autoOk={true}
           disableToolbar
           variant="inline"
