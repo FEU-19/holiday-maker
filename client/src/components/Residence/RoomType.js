@@ -15,8 +15,8 @@ const useStyle = makeStyles(() => ({
     maxWidth: 345,
     minWidth: 316,
     margin: 10,
-    backgroundColor: "#F5F5F5",
-    boxShadow: "3px 3px 4px #162C72",
+    backgroundColor: "#e8e8e8",
+    //boxShadow: "3px 3px 4px #162C72",
   },
   media: {
     height: 0,
@@ -27,12 +27,10 @@ const useStyle = makeStyles(() => ({
   },
   container: {
     margin: "0 auto",
-    //padding: "20px",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     overflow: "auto",
-    //paddingBottom: 15,
  }
 }));
 
@@ -40,7 +38,7 @@ const RoomType = ({ roomType }) => {
  const classes = useStyle();
 
  return (
-  <Card elevation={10} className={classes.card}>
+  <Card className={classes.card}>
    <CardHeader className={classes.header} title={roomType.type} />
    <CardMedia
     className={classes.media}

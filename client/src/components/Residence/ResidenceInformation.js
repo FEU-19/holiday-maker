@@ -25,7 +25,7 @@ const infoContainer = {
   color: "#F23622",
   borderRadius: "10px",
   boxSizing: "border-box",
-  boxShadow: "3px 3px 4px #162C72", 
+  boxShadow: "0px 4px 5px 0px rgba(0,0,0,0.14)", 
 };
 
 const infoContent = {

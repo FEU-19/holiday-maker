@@ -2,11 +2,10 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Typography } from "@material-ui/core";
 import { v4 as uuidv4 } from "uuid";
 
-
 // Style variables
 const boxContainer = {
   padding: "30px 30px 50px 30px",
-  width:"1305.280",
+  width:"1305.280", 
 };
 
 const title = {
@@ -15,9 +14,14 @@ const title = {
   alignItems: "center",
   width: '319px',
   height: "35px",
-  backgroundColor: "#F5F5F5",
+  backgroundColor: "#F23622",
+  color: "white",
   borderBottom: "1px solid #9a9a9a",
   borderRadius: "4px 4px 0 0",
+};
+
+const box = {
+  boxShadow: " 0 4px 2px -2px #263d69",
 };
 
 const contentContainer = {
@@ -27,12 +31,14 @@ const contentContainer = {
   justifyContent: "space-between",
   backgroundColor: "#F5F5F5",
   borderRadius: "0 0 4px 4px",
+  
 };
 
 const content = {
   width: "300px",
   padding: "0 20px 20px 40px",
   boxSizing: "border-box",
+  
 };
 
 const headInfo = {
@@ -115,9 +121,11 @@ const GeneralInformation = ({ generalInfo }) => {
      className="residence__generalInformationContainer__title"
      style={title}
     >
-      <Typography variant = "h6">Residence Overview</Typography>
+      <Typography variant = "h6" >Residence Overview</Typography>
     </div>
-    <div
+    <div className = "residence__generialInformationContainer__box"
+      style = {box}>
+    <Typography
      className="residence__generalInformationContainer__headInfo"
      style={headInfo}
     >
@@ -125,12 +133,12 @@ const GeneralInformation = ({ generalInfo }) => {
       This residence has {info.numberOfRooms} rooms, {info.totalBeds} Beds and{" "}
       {info.totalExtraBeds} Extra beds.
      </p>
-    </div>
+    </Typography>
     <div
      className="residence__generalInformationContainer__contentContainer"
      style={contentContainer}
     >
-     <div
+     <Typography
       className="residence__generalInformationContainer__contentContainer__content"
       style={content}
      >
@@ -143,16 +151,16 @@ const GeneralInformation = ({ generalInfo }) => {
         </p>
        );
       })}
-     </div>
-     <div
+     </Typography>
+     <Typography variant="body2" color="textSecondary" component="p"
       className="residence__generalInformationContainer__contentContainer__content"
       style={content}
      >
       <p style={subTitle}>Beds</p>
       <p style={textReset}>{info.totalBeds} Beds</p>
       <p style={textReset}>{info.totalExtraBeds} Extra beds</p>
-     </div>
-     <div
+     </Typography>
+     <Typography
       className="residence__generalInformationContainer__contentContainer__content"
       style={content}
      >
@@ -165,7 +173,8 @@ const GeneralInformation = ({ generalInfo }) => {
         </p>
        );
       })}
-     </div>
+     </Typography>
+    </div>
     </div>
    </div>
   </div>

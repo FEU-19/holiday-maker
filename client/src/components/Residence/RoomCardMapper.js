@@ -40,13 +40,13 @@ const RoomCardMapper = ({ allRooms }) => {
    {allRooms.map((room) => {
     return <RoomCard key={uuidv4()} roomInfo={room} chooseRoom={chooseRoom} />;
    })}
-   <Button
+   {/*<Button
     color="primary"
     className={styles.sticky}
     onClick={() => setRedirect(true)}
    >
     CHECKOUT
-   </Button>
+   </Button>*/}
   </div>
  );
 };

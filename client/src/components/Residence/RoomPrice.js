@@ -6,11 +6,11 @@ const useStyle = makeStyles(() => ({
   card: {
     maxWidth: 345,
     margin: 10,
-    backgroundColor: "#F5F5F5",
+    backgroundColor: "#e8e8e8",
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-end",
-    boxShadow:  "3px 3px 4px #162C72",
+    //boxShadow:  "3px 3px 4px #162C72",
   },
   header: {
     textAlign: "right",
@@ -39,7 +39,7 @@ const RoomPrice = ({
  const totalPrice = price + selectedToInt + extraBedToInt;
  //const finalPrice = roomType.price + price.extras;
  return (
-  <Card className={classes.card}>
+  <Card elevation={0} className={classes.card}>
    <CardHeader
     className={classes.header}
     title={totalPrice + ":- SEK"}

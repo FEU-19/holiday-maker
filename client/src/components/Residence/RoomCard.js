@@ -48,7 +48,12 @@ const useStyle = makeStyles(() => ({
     marginLeft: "3vw",
     marginRight: "3vw",
     backgroundColor: " #F5F5F5",
-    boxShadow: "3px 3px 4px #162C72",
+   /* "& .MuiPaper-root": {
+      borderBottom: "3px",
+      borderColor: "#162C72",
+    },*/
+    boxShadow: " 0 4px 2px -2px #162C72",
+    //boxShadow: "3px 3px 4px #162C72",
   },
   title: {
     marginTop: 5,
