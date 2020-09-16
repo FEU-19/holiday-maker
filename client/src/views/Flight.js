@@ -11,6 +11,7 @@ import {
   Paper,
   Select,
   Typography,
+  Link,
 } from "@material-ui/core";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
@@ -28,7 +29,13 @@ const useStyle = makeStyles({
     bottom: 0,
     left: 0,
     width: "100vw",
-    backgroundColor: "#4db51d",
+  },
+  noFlightLink: {
+    // position: "absolute",
+    // bottom: 50,
+    // left: "50%",
+    // transform: "translateX(-50%)",
+    color: "#162C72",
   },
   flex: {
     display: "flex",
@@ -46,7 +53,8 @@ const Flight = (props) => {
   } = useLocation();
   const [airport, setAirport] = useState(departureAirports[0]);
   const [flightInfo, setFlightInfo] = useState(null);
-  const [redirect, setRedirect] = useState(false);
+  const [redirectWithFlight, setRedirectWithFlight] = useState(false);
+  const [redirectWithoutFlight, setRedirectWithoutFlight] = useState(false);
   const style = useStyle();
 
   const { amountOfAdults, amountOfChildren, date } = queryParams;
@@ -56,7 +64,9 @@ const Flight = (props) => {
       .get(
         `http://localhost:8080/api/flights/?checkIn=${date.start}&checkOut=${date.end}&adults=${amountOfAdults}&children=${amountOfChildren}`,
         {
-          headers: { "x-auth-token": window.localStorage.getItem("auth-token") },
+          headers: {
+            "x-auth-token": window.localStorage.getItem("auth-token"),
+          },
         }
       )
       .then((response) => {
@@ -71,8 +81,19 @@ const Flight = (props) => {
   return !flightInfo ? (
     <h1>no flights yet, please wait</h1>
   ) : (
-    <Container>
-      {redirect && (
+    <Container
+      style={{
+        boxSizing: "border-box",
+        width: "100vw",
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        padding: "50px 0",
+        alignItems: "center",
+      }}
+    >
+      {redirectWithFlight && (
         <Redirect
           to={{
             pathname: "/checkout",
@@ -89,6 +110,11 @@ const Flight = (props) => {
               rooms,
             },
           }}
+        />
+      )}
+      {redirectWithoutFlight && (
+        <Redirect
+          to={{ pathname: "/checkout", state: { queryParams, hotel, rooms } }}
         />
       )}
       <Grid container spacing={3}>
@@ -111,14 +137,16 @@ const Flight = (props) => {
                   </Select>
                 </FormControl>
               </Grid>
-              <Grid item xs={5}>
-                <Typography>{flightInfo.departureDate} </Typography>
+              <Grid item xs={4}>
+                <Typography>
+                  {new Date(flightInfo.departureDate).toLocaleString()}
+                </Typography>
               </Grid>
               <Grid item xs={2}>
                 <Typography>Adults: {amountOfAdults} </Typography>
               </Grid>
-              <Grid item xs={1}>
-                <Typography>Niños: {amountOfChildren} </Typography>
+              <Grid item xs={2}>
+                <Typography>Children: {amountOfChildren} </Typography>
               </Grid>
             </Grid>
 
@@ -131,14 +159,16 @@ const Flight = (props) => {
                     </Grid>
                   </Grid>
                 </Grid>
-                <Grid item xs={5}>
-                  <Typography>{flightInfo.returnDate} </Typography>
+                <Grid item xs={4}>
+                  <Typography>
+                    {new Date(flightInfo.returnDate).toLocaleString()}
+                  </Typography>
                 </Grid>
                 <Grid item xs={2}>
                   <Typography>Adults: {amountOfAdults} </Typography>
                 </Grid>
-                <Grid item xs={1}>
-                  <Typography>Niños: {amountOfChildren} </Typography>
+                <Grid item xs={2}>
+                  <Typography>Children: {amountOfChildren} </Typography>
                 </Grid>
               </Grid>
             </Box>
@@ -150,7 +180,18 @@ const Flight = (props) => {
           </Paper>
         </Grid>
       </Grid>
-      <Button color="primary" className={style.checkoutButton} onClick={() => setRedirect(true)}>
+      <Link
+        className={style.noFlightLink}
+        onClick={() => setRedirectWithoutFlight(true)}
+      >
+        Continue without flight
+      </Link>
+      <Button
+        variant="contained"
+        color="primary"
+        className={style.checkoutButton}
+        onClick={() => setRedirectWithFlight(true)}
+      >
         Checkout
       </Button>
     </Container>

@@ -11,7 +11,6 @@ const useStyle = makeStyles({
     padding: "10px 0",
     width: "100%",
     margin: "0 auto",
-    background: "#4db51d",
   },
 });
 
@@ -50,6 +49,7 @@ const RoomCardMapper = ({ allRooms }) => {
         return <RoomCard roomInfo={room} chooseRoom={chooseRoom} />;
       })}
       <Button
+        variant="contained"
         color="primary"
         className={styles.sticky}
         onClick={() => setRedirect(true)}
