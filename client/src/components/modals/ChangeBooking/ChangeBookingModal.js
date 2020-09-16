@@ -10,11 +10,11 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 
 import SelectAmountOfAdults from "../../Main/SearchContainer/SelectAmountOfAdults";
 import SelectAmountOfChildren from "../../Main/SearchContainer/SelectAmountOfChildren";
-import DatePicker from "../../Main/SearchContainer/DatePicker";
 
 import ChildrenAgeSelects from "../../Main/SearchContainer/ChildrenAgeSelects";
 
 import RenderRooms from "./RenderRooms";
+import ChangeDates from "./ChangeDates";
 
 export default function ChangeBookingModal() {
   const [open, setOpen] = useState(true);
@@ -67,6 +67,22 @@ export default function ChangeBookingModal() {
       __v: 0,
     },
   ]); // ska få från parent
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [date, setDate] = useState({start: '', end: ''});
+  
+  (bookings.map(booking => {
+    console.log(booking.bookingDates)
+    // setStartDate(booking.bookingDates.start)
+    // setEndDate(booking.bookingDates.end)
+  }))
+
+  useEffect(() => {
+    if(bookings){
+      
+      setDate((prevState => ({...prevState, start: startDate, end: endDate})));
+    }
+}, [bookings]);
 
   useEffect(() => {
     axios
@@ -99,6 +115,8 @@ export default function ChangeBookingModal() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  console.log(date)
   return (
     <Dialog
       open={open}
@@ -111,12 +129,12 @@ export default function ChangeBookingModal() {
         <div>
           <DialogTitle id="form-dialog-title">{hotel.name}</DialogTitle>
           <DialogContent>
+            <ChangeDates date={date} setDate={setDate} />
             <RenderRooms bookings={bookings} hotel={hotel} />
             {/* <DatePicker />
         <SelectAmountOfAdults />
         <SelectAmountOfChildren />
         <ChildrenAgeSelects /> */}
-            {/* Antal rum */}
             {/* Extra bed */}
             {/* flight */}
             {/* Need price */}
