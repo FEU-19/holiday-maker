@@ -21,50 +21,46 @@ const InfoForm = ({
     <form className={InfoStyle.form} noValidate autoComplete="off">
       <Box>
         <TextInput
-          className={InfoStyle.input}
           label="First name"
           onchange={handleUser}
           name="firstName"
-          value={firstName}
+          value={firstName || ""}
         />
         <TextInput
-          className={InfoStyle.input}
           label="Last name"
           onchange={handleUser}
           name="surname"
-          value={surname}
+          value={surname || ""}
         />
         <TextInput
-          className={InfoStyle.input}
           label="E-mail"
           onchange={handleUser}
           name="email"
-          value={email}
+          value={email || ""}
         />
         <TextInput
-          className={InfoStyle.input}
           label="Mobile"
           onchange={handleUser}
           name="phoneNumber"
-          value={phoneNumber}
+          value={phoneNumber || ""}
         />
         <TextInput
           label="Street"
           onchange={handleUser}
           name="street"
-          value={street}
+          value={street || ""}
         />
         <TextInput
           label="City"
           name="city"
           onchange={handleUser}
-          value={city}
+          value={city || ""}
         />
         <TextInput
           label="Zip code"
           name="zipCode"
           onchange={handleUser}
-          value={zipCode}
+          value={zipCode || ""}
         />
 
         <CountryDropdownList handleUser={handleUser} country={country} />

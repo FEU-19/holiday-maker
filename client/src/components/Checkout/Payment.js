@@ -41,7 +41,7 @@ function Payment() {
   const [{ user }] = useContext(UserContext);
 
   // User state
-  const [userInfo, setUserInfo] = useState(user);
+  const [userInfo, setUserInfo] = useState();
 
   useEffect(() => {
     setUserInfo(user);
@@ -53,7 +53,7 @@ function Payment() {
       [e.target.name]: e.target.value,
     };
 
-    console.log(userData);
+    console.log(e.target.name, userData.country);
     setUserInfo(userData);
   }
 

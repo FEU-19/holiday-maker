@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Country_DropdownList({ country, handleChange }) {
+function Country_DropdownList({ country, handleUser }) {
   const classes = useStyles();
 
   return (
@@ -43,7 +43,7 @@ function Country_DropdownList({ country, handleChange }) {
       <ThemeProvider theme={theme}>
         <InputLabel htmlFor="country">Country</InputLabel>
       </ThemeProvider>
-      <Select name="country" native value={country} onChange={handleChange}>
+      <Select name="country" native value={country} onChange={handleUser}>
         <option aria-label="None" value="" />
         <option value="Afganistan">Afghanistan</option>
         <option value="Albania">Albania</option>
