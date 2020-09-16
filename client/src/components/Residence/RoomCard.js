@@ -38,63 +38,62 @@ const CustomCheckbox = withStyles({
  })((props) => <Radio color="default" {...props} />);
 
 const useStyle = makeStyles(() => ({
-  card: {
-    position: "relative",
-    display: "flex",
-    flexWrap: "nowrap",
-    justifyContent: "space-between",
-    marginBottom: 20,
-    margintop: 20,
-    marginLeft: "3vw",
-    marginRight: "3vw",
-    backgroundColor: " #F5F5F5",
-    boxShadow: "3px 3px 4px #162C72",
-  },
-  title: {
-    marginTop: 5,
-    marginBottom: 20,
-    fontSize: 16,
-    fontWeight: "bolder",
-    textAlign: "center",
-    color: "#000000",
-  },
-  content: {
-    minWidth: 500,
-    fontSize: 14,
-    padding: 25,
-    objectFit: "cover",
-  },
-  grid: {
-    display: "flex",
-    flexDirection: "column",
-  },
-  icons: {
-    margin: "0.5vw",
-    display: "flex",
-    alignItems: "center",
-    color: "#4AB0BD",
-  },
-  options: {
-    margin: 10,
-    borderTopWidth: 1,
-    borderColor: "#4AB0BD",
-    borderStyle: "solid",
-  },
+ card: {
+  position: "relative",
+  display: "flex",
+  flexWrap: "nowrap",
+  justifyContent: "space-between",
+  marginBottom: 20,
+  margintop: 20,
+  marginLeft: "3vw",
+  marginRight: "3vw",
+  backgroundColor: "#f5f5f5",
+  boxShadow: " 0 4px 2px -2px #263d69",
+ },
+ title: {
+  marginTop: 5,
+  marginBottom: 20,
+  fontSize: 16,
+  fontWeight: "bolder",
+  textAlign: "center",
+ },
+ content: {
+  minWidth: 500,
+  fontSize: 14,
+  padding: 25,
+  objectFit: "cover",
+ },
+ grid: {
+  display: "flex",
+  flexDirection: "column",
+ },
+ icons: {
+  margin: 10,
+  display: "flex",
+  alignItems: "center",
+ },
+ options: {
+  margin: 10,
+  borderTopWidth: 1,
+  borderColor: "#ccd9dd",
+  borderStyle: "solid",
+ },
 }));
 
 const RoomCard = ({ roomInfo, chooseRoom }) => {
  const classes = useStyle();
- const [value, setValue] = useState({ selected: "uniqueValue" });
- const [extraBedValue, setExtraBedValue] = useState({ extraBedValue: "" });
+ const [value, setValue] = useState({ selected: "selfCatering" });
+ const [extraBedValue, setExtraBedValue] = useState(0);
  const handleChange = (e) => {
   setValue({ selected: e.target.value });
  };
 
  const handleCheck = (e) => {
   if (e.target.checked) {
-   setExtraBedValue({ extraBedPrice: e.target.value });
+   const toInt = parseInt(e.target.value);
+   setExtraBedValue(toInt);
   } else {
-   setExtraBedValue({ extraBedPrice: 0 });
+   setExtraBedValue(0);
   }
  };
 
@@ -151,7 +150,7 @@ const RoomCard = ({ roomInfo, chooseRoom }) => {
        >
         <FormControlLabel
          style={{ borderTop: "1px solid #ccd9dd" }}
-         value={roomInfo.allInclusive.toString()}
+         value="allInclusive"
          control={<CustomRadio />}
          disabled={roomInfo.allInclusive ? false : true}
          label={
@@ -167,7 +166,7 @@ const RoomCard = ({ roomInfo, chooseRoom }) => {
         />
         <FormControlLabel
          style={{ borderTop: "1px solid #ccd9dd" }}
-         value={roomInfo.fullBoard.toString()}
+         value="fullBoard"
          control={<CustomRadio />}
          disabled={roomInfo.fullBoard ? false : true}
          label={
@@ -199,7 +198,7 @@ const RoomCard = ({ roomInfo, chooseRoom }) => {
         />
         <FormControlLabel
          style={{ borderTop: "1px solid #ccd9dd" }}
-         value="uniqueValue"
+         value="selfCatering"
          control={<CustomRadio />}
          label={
           roomInfo.selfCatering || (
