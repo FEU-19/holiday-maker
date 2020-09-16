@@ -3,9 +3,10 @@ const jwt = require("jsonwebtoken");
 
 const auth = async function (req, res, next) {
   const accessToken = req.headers["x-auth-token"];
+
   if (!accessToken) {
     console.log("no access token in header");
-    return res.send({ error: "no access token in header" });
+    return res.status(403).send({ error: "no access token in header" });
   }
 
   const decodedJWT = jwt.verify(accessToken, process.env.JWT_SECRET);

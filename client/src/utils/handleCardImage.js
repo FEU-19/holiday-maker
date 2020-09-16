@@ -1,6 +1,4 @@
-export function onCreditCardTypeChanged(type, setType, setCardImg) {
-  setType(type);
-
+export function onCreditCardTypeChanged(type, setCardImg) {
   const visaCard = "https://i.ibb.co/vVYd6Xq/visa-3-226460.png";
 
   const masterCard = "https://i.ibb.co/HFg4VgG/Master-Card.png";
