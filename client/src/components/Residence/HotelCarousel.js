@@ -17,7 +17,7 @@ const HotelCarousel = ({ dataImage }) => {
  useEffect(() => {
   let picArray = dataImage.rooms.map((item) => item.images);
   updateImages(picArray);
-}, [dataImage.rooms]);
+ }, [dataImage.rooms]);
 
  const classes = useStyles();
 

@@ -1,62 +1,85 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
+import React, { useState, useEffect } from "react";
+import Grid from "@material-ui/core/Grid";
+import DateFnsUtils from '@date-io/date-fns';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
+import { makeStyles } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
+
+
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    display: "flex",
-    flexWrap: "wrap",
-  },
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
     width: 200,
+  },
+  icon: {
+    fill: '#162C72',
+  },
+  border: {
+    height: 40,
+    borderRadius: 7,
+    background: 'white',
+    borderColor: '#162C72',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'flex-end',
   },
 }));
 
+
+
+
 export default function DatePicker({ residentData, date, setDate }) {
+  const [startDate, handleStartChange] = useState(new Date(date.start));
+  const [endDate, handleEndChange] = useState(new Date(date.end));
   const classes = useStyles();
 
-  function StartDateChange(e) {
-    e.persist();
-    setDate((prevState) => ({
-      ...prevState,
-      start: e.target.value + ":00.000Z",
-    }));
-  }
-
-  function EndDateChange(e) {
-    e.persist();
-    setDate((prevState) => ({
-      ...prevState,
-      end: e.target.value + ":00.000Z",
-    }));
-  }
+  useEffect(() => {
+    let startToISO = startDate.toISOString();
+    let endToISO = endDate.toISOString();
+    setDate((prevState => ({...prevState, start: startToISO, end: endToISO})))
+  },[setDate, startDate, endDate])
 
   return (
-    <div className={classes.container}>
-      <TextField
-        id="datetime-local-start"
-        label="Start"
-        type="datetime-local"
-        onChange={StartDateChange}
-        defaultValue="2020-06-02T00:00"
-        className={classes.textField}
-        InputLabelProps={{
-          shrink: true,
-        }}
-      />
-      <TextField
-        id="datetime-local-end"
-        label="End"
-        type="datetime-local"
-        onChange={EndDateChange}
-        defaultValue="2020-06-08T00:00"
-        className={classes.textField}
-        InputLabelProps={{
-          shrink: true,
-        }}
-      />
+    <div>
+      <Box className={classes.border} border={3} >
+      <MuiPickersUtilsProvider className={classes.container} utils={DateFnsUtils}>
+        <KeyboardDatePicker
+          classes={{icon: classes.icon}}
+          autoOk={true}
+          disableToolbar
+          variant="inline"
+          format="MM/dd/yyyy"
+          id="date-picker-inline-start"
+          label=""
+          mr='10px'
+          value={startDate}
+          minDate={new Date('2020-06-01')}
+          maxDate={endDate}
+          onChange={date => handleStartChange(date)}
+          KeyboardButtonProps={{
+            'aria-label': 'change date',
+          }}
+        />
+        <KeyboardDatePicker
+          autoOk={true}
+          disableToolbar
+          variant="inline"
+          format="MM/dd/yyyy"
+          id="date-picker-inline-end"
+          label=""
+          value={endDate}
+          minDate={startDate}
+          maxDate={new Date('2020-07-31')}
+          onChange={date => handleEndChange(date)}
+          KeyboardButtonProps={{
+            'aria-label': 'change date',
+          }}
+        />
+      </MuiPickersUtilsProvider>
+      </Box>
     </div>
   );
 }
