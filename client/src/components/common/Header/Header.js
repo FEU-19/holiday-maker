@@ -28,8 +28,8 @@ const ContainerBtns = styled.div`
 
 const Logo = styled.img`
   object-fit: contain;
-  max-width: 92%;
-  max-height: 92%;
+  max-width: 100%;
+  max-height: 100%;
   width: auto;
   height: auto;
 `;
@@ -40,8 +40,8 @@ const Header = () => {
       <Link
         to="/"
         style={{
-          maxWidth: "21%",
-          maxHeight: "92%",
+          maxWidth: "280px",
+          maxHeight: "85px",
           width: "auto",
           height: "auto",
           paddingLeft: 10,
