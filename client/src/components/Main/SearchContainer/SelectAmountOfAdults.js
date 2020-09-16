@@ -61,7 +61,7 @@ const SelectAmountOfAdults = ({ amountOfAdults, setAmountOfAdults }) => {
           <p className={classes.p}>Adults</p>
 {/*           <InputLabel id="selectAmountOfAdults">Adults</InputLabel>
  */}          <Select
-            classes={{ select: classes.select}}
+            classes={{ select: classes.select, icon: classes.icon }}
             aria-label={"Adults"}
             displayEmpty
             id="selectAmountOfAdults"

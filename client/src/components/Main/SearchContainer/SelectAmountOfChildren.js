@@ -5,7 +5,6 @@ import Box from '@material-ui/core/Box';
 
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
-import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from '@material-ui/core/FormControl';
 
 
@@ -62,6 +61,7 @@ const SelectAmountOfChildren = ({setAmountOfChildren, amountOfChildren}) => {
 
        <p className={classes.p}>Children</p>
         <Select
+        classes={{ select: classes.select, icon: classes.icon }}
         value={amountOfChildren}
         onChange={handleChange}
         displayEmpty
