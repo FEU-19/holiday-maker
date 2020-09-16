@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import { Modal, Box } from "@material-ui/core";
 import { modalStyle } from "./ModalStyle";
 import CloseIcon from "@material-ui/icons/Close";

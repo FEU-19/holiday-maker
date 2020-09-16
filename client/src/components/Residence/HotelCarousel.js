@@ -24,7 +24,7 @@ const HotelCarousel = ({ hotelId }) => {
       .catch((error) => {
         console.error("An error occured while retrieving data from the server", error);
       });
-  }, []);
+  }, [hotelId]);
 
   const classes = useStyles();
 

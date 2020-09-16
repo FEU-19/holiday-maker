@@ -1,6 +1,6 @@
 import React from "react";
 
-import { InputContainer, InputStyle } from "./PaymentStyles";
+import { InputStyle } from "./PaymentStyles";
 import TextField from "@material-ui/core/TextField";
 
 function TextInput({ label, onchange, value, name }) {

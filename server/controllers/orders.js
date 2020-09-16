@@ -48,6 +48,6 @@ exports.create = async (req, res) => {
 };
 
 exports.read = async (req, res) => {
-  const orders = await Order.find({ $where: `userId=${req.body.user._id}` });
+  const orders = await Order.find({ userId: req.user });
   res.send({ data: orders });
 };

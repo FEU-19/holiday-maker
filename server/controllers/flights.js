@@ -7,6 +7,6 @@ module.exports = {
     const { departureDate, returnDate } = generateFlightDates(checkIn, checkOut);
     const price = generateFlightPrice(children, adults);
 
-    res.status(200).send({ data: { departureDate, returnDate, price } });
+    res.status(200).send({ data: { departureDate, returnDate, price }, user: req.user });
   },
 };
