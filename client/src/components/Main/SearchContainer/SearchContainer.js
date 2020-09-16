@@ -23,6 +23,7 @@ import SelectDistanceCity from "./SelectDistanceCity.js";
 import SelectDistanceBeach from "./SelectDistanceBeach";
 
 // Filter functions
+import filterPresentCrib from '../../../utils/filterPresentCrib';
 import filterAmountOfTravelers from "../../../utils/filterAmountOfTravelers";
 import filterCity from "../../../utils/filterCity";
 import filterKidsClub from "../../../utils/filterKidsClub";
@@ -62,7 +63,7 @@ const theme = createMuiTheme({
 });
 
 const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) => {
-  const [residentData, setResidentData] = useState([{}]);
+  const [residentData, setResidentData] = useState([]);
   const [city, setCity] = useState("");
   const [checkedKidsClub, setCheckedKidsclub] = useState("none");
   const [checkedNightEntertainment, setCheckedNightEntertainment] = useState(
@@ -105,11 +106,12 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
       amountOfAdults,
       amountOfChildren,
       ageOfChildren,
-      date
+      date,
+      presentCrib: filterPresentCrib(ageOfChildren) || false
     };
 
     setQueryParams(queryParams);
-    
+
     let c = [...residentData];
 
     c = filterAmountOfTravelers(c, amountOfAdults, ageOfChildren);
@@ -120,10 +122,11 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
     c = filterRestaurant(c, checkedRestaurant);
     c = filterDistanceBeach(c, distanceBeach);
     c = filterDistanceCity(c, distanceCity);
-    // c = filterDate(c, date)
+    c = filterDate(c, date)
 
     setFilteredDataCB(c);
     setSearching(true);
+
   }
 
   return (
@@ -165,8 +168,8 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
             />
           </Grid>
           <Grid item xs={2}>
-            <ChildrenAgeSelects 
-              amountOfChildren={amountOfChildren} 
+            <ChildrenAgeSelects
+              amountOfChildren={amountOfChildren}
               setAgeOfChildren={setAgeOfChildren}
             />
           </Grid>
