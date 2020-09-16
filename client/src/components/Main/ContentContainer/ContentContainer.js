@@ -259,7 +259,13 @@ const ContentContainer = ({ filteredData, sortOn, searching, queryParams }) => {
         </div>
       );
   })}
-  {isFetching && sortedData.length !== paginationData.length && <Typography> Fetching more hotels... </Typography>}
+  {isFetching && sortedData.length !== paginationData.length && <Typography style={{
+    fontSize: 25,
+    alignSelf: "center",
+    textAlign: "center",
+    marginBottom: 20,
+    color: "#808080",
+  }}> Fetching more hotels... </Typography>}
   {!sortedData.length && searching ?
     <div className={classes.noResult}>
       <Typography> No available hotels </Typography>
