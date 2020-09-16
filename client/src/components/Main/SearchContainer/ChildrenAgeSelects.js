@@ -1,7 +1,6 @@
 import React from 'react';
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
-import InputLabel from "@material-ui/core/InputLabel";
 import Box from '@material-ui/core/Box';
 
 class ChildrenAgeSelects extends React.Component {

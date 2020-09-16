@@ -57,6 +57,7 @@ const SelectAmountOfChildren = ({setAmountOfChildren, amountOfChildren}) => {
 
        <p className={classes.p}>Children</p>
         <Select
+        classes={{ select: classes.select, icon: classes.icon }}
         value={amountOfChildren}
         onChange={handleChange}
         displayEmpty
