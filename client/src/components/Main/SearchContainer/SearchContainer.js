@@ -37,7 +37,7 @@ import filterRestaurant from "../../../utils/filterRestaurant";
 import filterDistanceBeach from "../../../utils/filterDistanceBeach";
 import filterDistanceCity from "../../../utils/filterDistanceCity";
 import filterDate from "../../../utils/filterDate";
-/* 
+/*
 const StyledContainer = styled(Container)`
   padding-top: 60px;
   background-color: #F5F5F5;
@@ -46,10 +46,10 @@ const StyledContainer = styled(Container)`
 const useStyles = makeStyles((theme) => ({
   backgroundColor: {
     backgroundColor: '#F5F5F5',
-    paddingTop: 70, 
+    paddingTop: 70,
     minHeight: 350,
   },
-  
+
 }));
 
 
@@ -178,7 +178,17 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
                 amountOfChildren={amountOfChildren}
               />
             </Grid>
-            <Grid item xs={2}>
+            <Grid
+              style={{
+                minHeight: 110,
+                minWidth: 210,
+                marginTop: 10,
+                marginBottom: -70
+              }}
+              container
+              spacing={1}
+              item xs={4}
+            >
               <ChildrenAgeSelects
                 amountOfChildren={amountOfChildren}
                 setAgeOfChildren={setAgeOfChildren}
