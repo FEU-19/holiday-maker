@@ -9,6 +9,7 @@ import StarRateIcon from '@material-ui/icons/StarRate';
 import { useLocation } from "react-router-dom";
 import Star from "../components/Residence/Star";
 import axios from "axios";
+import ResidenceSpinner from "../components/Residence/ResidenceSpinner";
 
 const useStyle = makeStyles(() => ({
   article: {
@@ -82,7 +83,7 @@ const Residence = () => {
     },[data._id]);
 
     if (!data || !unfilteredData){
-      return <div />
+      return <div className={classes.spinner}><ResidenceSpinner /></div>
     }
 
   function starRating(rating){
@@ -97,7 +98,7 @@ const Residence = () => {
     <div className={classes.article}>
       <div className={classes.favouriteDiv}>
         <Typography variant = "p" className={classes.favourites}>Add to favourites</Typography>
-        <Star/>
+        <Star hotelID={data._id}/>
         </div>
       <div className={classes.titlecontainer}>
         <div className={classes.titlefavouritecontainer}>

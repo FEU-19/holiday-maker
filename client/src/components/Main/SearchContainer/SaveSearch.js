@@ -6,7 +6,7 @@ import { Button } from "@material-ui/core";
 const SaveSearch = ({savedSearchParams}) => {
 
   function saveSearch(){
-    // Make post to server with savedSearchParams
+    // Make post to server and save hotel ID in user bookmarkedHotels[]
     console.log(savedSearchParams);
   }
 
