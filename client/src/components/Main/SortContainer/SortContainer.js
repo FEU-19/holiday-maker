@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react';
-
+import styled from "styled-components";
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import { sortValues } from '../../../config/constants';
+
+const Container = styled.div`
+  margin-inline-start: auto;
+  padding-right: 130px;
+  padding-top: 25px;
+`;
 
 export default function SortContainer({ filteredData, sortOn, setSortOn }) {
   const [searchDone, setSearchDone] = useState(false);
@@ -20,8 +26,8 @@ export default function SortContainer({ filteredData, sortOn, setSortOn }) {
   }
 
   return (
-    <>
-      {searchDone && 
+    <Container>
+      {searchDone &&
         <>
           <InputLabel id="sort">Sort by</InputLabel>
           <Select
@@ -37,6 +43,6 @@ export default function SortContainer({ filteredData, sortOn, setSortOn }) {
           </Select>
         </>
       }
-    </>
+    </Container>
   )
 }
