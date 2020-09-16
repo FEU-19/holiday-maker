@@ -78,6 +78,8 @@ const Flight = (props) => {
     setAirport(event.target.value);
   }
 
+  console.log(queryParams);
+
   return !flightInfo ? (
     <h1>no flights yet, please wait</h1>
   ) : (

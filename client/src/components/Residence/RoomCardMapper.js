@@ -52,7 +52,7 @@ const RoomCardMapper = ({ allRooms }) => {
         variant="contained"
         color="primary"
         className={styles.sticky}
-        onClick={() => setRedirect(true)}
+        onClick={() => setRedirect(!!chosenRooms.length)}
       >
         {"proceed".toUpperCase()}
       </Button>
