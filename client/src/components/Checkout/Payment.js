@@ -54,8 +54,6 @@ function Payment() {
       ...userInfo,
       [e.target.name]: e.target.value,
     };
-
-    console.log(e.target.name, userData.country);
     setUserInfo(userData);
   }
 
@@ -65,7 +63,6 @@ function Payment() {
       ...credit,
       [e.target.name]: e.target.value,
     };
-    console.log(creditData);
     if (!creditData.creditCard) setCardImg("");
     setCredit(creditData);
   }
@@ -113,11 +110,20 @@ function Payment() {
       };
     });
 
-    console.log(ordData, PORT);
+    const token = localStorage.getItem("auth-token");
+    const options = {
+      headers: {
+        "X-Auth-Token": token,
+      },
+    };
+
     axios
-      .post(`http://localhost:${PORT}/api/orders`, ordData)
+      .post(`http://localhost:${PORT}/api/orders`, ordData, options)
       .then((response) => {
         console.log(response);
+      })
+      .catch((err) => {
+        console.error({ error: err.message });
       });
   }
 
