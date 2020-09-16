@@ -32,15 +32,32 @@ const RoomPrice = ({
  extraBed,
  chooseRoom,
  roomInfo,
+ dates
 }) => {
+
+  function calculateNights(){
+    let index = dates.start.indexOf("T");
+
+    let dateStartExTime = dates.start.substring(0, index);
+    let dateEndExTime = dates.end.substring(0, index);
+
+    let dateStart = new Date(dateStartExTime);
+    let dateEnd = new Date(dateEndExTime);
+
+    let differenceInTime = dateEnd.getTime() - dateStart.getTime();
+    let differenceInDays = differenceInTime / (1000 * 3600 * 24);
+
+    return differenceInDays;
+  }
+
  const classes = useStyle();
  const totalPrice = price + roomInfo[selected] + extraBed;
  return (
   <Card elevation={0} className={classes.card}>
    <CardHeader
     className={classes.header}
-    title={totalPrice + ":- SEK"}
-    subheader={"for 1 room for 1 night"}
+    title={totalPrice * calculateNights() + ":- SEK"}
+    subheader={"for 1 room for " + calculateNights() + " night(s)"}
    />
    <Typography className={classes.text} component="p">
     Today's Price including taxes and fees
