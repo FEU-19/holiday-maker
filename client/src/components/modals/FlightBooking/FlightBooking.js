@@ -87,6 +87,9 @@ import Paper from '@material-ui/core/Paper';
     table: {
       minWidth: 650,
     },
+    button: {
+      width: '100px'
+    }
   }));
 
 const FlightBooking = () => {
@@ -118,6 +121,7 @@ const FlightBooking = () => {
                   <TableCell align="right">Flight Time</TableCell>
                   <TableCell align="right">Flight Time Home</TableCell>
                   <TableCell align="right">Seats</TableCell>
+                  <Button onClick={handleClose} className={classes.button}>X</Button>
                 </TableRow>
               </TableHead>
               <TableBody>
