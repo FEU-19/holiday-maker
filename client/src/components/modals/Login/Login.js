@@ -5,7 +5,7 @@ import styled from "styled-components";
 import axios from "axios";
 import SimpleDialog from "@material-ui/core/Dialog";
 
-import UserContext from "../../../context/userContext";
+import UserContext from "../../../context/UserContext";
 
 const Container = styled.div`
   display: flex;
@@ -25,9 +25,9 @@ const Container = styled.div`
 const Login = (props) => {
   const [user, setUser] = useState({ email: "", password: "" });
   const [open, setOpen] = useState(false);
-  const [errorMsg, setErrorMsg] = useState(0);
+  const [errorMsg] = useState(0);
 
-  const { setUserData } = useContext(UserContext);
+  const [, setContext] = useContext(UserContext);
 
   const onChangeUser = (e) => {
     const { value } = e.target;
@@ -42,8 +42,8 @@ const Login = (props) => {
         const loginRes = await axios.post("http://localhost:8080/api/login", {
           user,
         });
-
-        setUserData({
+        console.log("hej");
+        setContext({
           token: loginRes.data.token,
           user: loginRes.data.user,
         });
@@ -51,7 +51,8 @@ const Login = (props) => {
         props.handleModalClose();
       } catch (err) {
         setOpen(true);
-        setErrorMsg(err.response.data.error[0].msg);
+        console.log(err);
+        // setErrorMsg(err.response.data.error[0].msg);
       }
     }
   };

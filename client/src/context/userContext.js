@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
-export default createContext({
+export const initialUserContext = {
   token: "",
   user: {
     email: "",
@@ -13,4 +13,8 @@ export default createContext({
     bookmarkedQueries: [],
     bookmarkedHotels: [],
   },
-});
+};
+
+const UserContext = createContext();
+
+export default UserContext;

@@ -6,7 +6,7 @@ import Checkout from "./views/Checkout";
 import DropDown from "./components/common/DropDown/DropDown";
 import Residence from "./views/Residence";
 import Flight from "./views/Flight";
-import UserContext from "./context/userContext";
+import UserContext, { initialUserContext } from "./context/UserContext";
 import MyBookings from "./views/MyBookings";
 
 // To add more routes use format as below and add to the routes array
@@ -20,37 +20,31 @@ const routes = [
 ];
 
 function AppRouter() {
-  const [userData, setUserData] = useState({
-    token: undefined,
-    user: undefined,
-  });
+  const [context, setContext] = useState(initialUserContext);
 
   useEffect(() => {
     const checkLoggedIn = async () => {
       let token = localStorage.getItem("auth-token");
+
       if (token === null) {
         localStorage.setItem("auth-token", "");
         token = "";
       }
-      const tokenRes = await axios.post("http://localhost:8080/api/tokenIsValid/", null, {
+
+      const response = await axios.get("http://localhost:8080/api/users/", {
         headers: { "x-auth-token": token },
       });
-      if (tokenRes.data) {
-        const userRes = await axios.get("http://localhost:8080/api/users/", {
-          headers: { "x-auth-token": token },
-        });
-        setUserData({
-          token,
-          user: userRes.data,
-        });
-      }
+
+      setContext({ token, user: response.data.user });
     };
 
     checkLoggedIn();
   }, []);
 
+  console.log(context);
+
   return (
-    <UserContext.Provider value={{ userData, setUserData }}>
+    <UserContext.Provider value={[context, setContext]}>
       <Switch>
         {routes.map(({ path, component }) => (
           <Route exact path={path} key={path + component} component={component} />

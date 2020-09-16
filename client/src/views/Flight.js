@@ -54,7 +54,10 @@ const Flight = (props) => {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:8080/api/flights/?checkIn=${date.start}&checkOut=${date.end}&adults=${amountOfAdults}&children=${amountOfChildren}`
+        `http://localhost:8080/api/flights/?checkIn=${date.start}&checkOut=${date.end}&adults=${amountOfAdults}&children=${amountOfChildren}`,
+        {
+          headers: { "x-auth-token": window.localStorage.getItem("auth-token") },
+        }
       )
       .then((response) => {
         setFlightInfo(response.data.data);
@@ -147,11 +150,7 @@ const Flight = (props) => {
           </Paper>
         </Grid>
       </Grid>
-      <Button
-        color="primary"
-        className={style.checkoutButton}
-        onClick={() => setRedirect(true)}
-      >
+      <Button color="primary" className={style.checkoutButton} onClick={() => setRedirect(true)}>
         Checkout
       </Button>
     </Container>

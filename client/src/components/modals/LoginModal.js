@@ -10,7 +10,7 @@ import Box from "@material-ui/core/Box";
 
 import RegistrationComp from "./Registration/RegistrationComp";
 import LoginComp from "./Login/Login";
-import UserContext from "../../context/userContext";
+import UserContext, { initialUserContext } from "../../context/UserContext";
 
 import { Link } from "react-router-dom";
 
@@ -21,7 +21,7 @@ const Wrapper = styled.div`
 `;
 
 const LoginModal = () => {
-  const { userData, setUserData } = useContext(UserContext);
+  const { user, setContext } = useContext(UserContext);
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(0);
   //   const [redirect, setRedirect] = useState(false);
@@ -73,16 +73,13 @@ const LoginModal = () => {
 
   const onLogout = (e) => {
     e.preventDefault();
-    setUserData({
-      token: undefined,
-      user: undefined,
-    });
-    localStorage.setItem("auth-token", "");
+    setContext(initialUserContext);
+    window.localStorage.setItem("auth-token", "");
   };
 
   return (
     <div>
-      {!userData.user ? (
+      {!user?.bookmarkedHotels ? (
         <Wrapper>
           <Button variant="outlined" color="primary">
             <Link to={{ pathname: "/" }}>Main</Link>

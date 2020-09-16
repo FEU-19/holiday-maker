@@ -10,7 +10,7 @@ import { Container, Button, Divider, Box, Typography } from "@material-ui/core";
 import PaymentForm from "./PaymentForm";
 import InfoForm from "./InfoForm";
 import BookingInfo from "./BookingInfo";
-import UserContext from "../../context/userContext";
+import UserContext from "../../context/UserContext";
 import { onCreditCardTypeChanged } from "../../utils/handleCardImage";
 
 function Payment() {
@@ -32,7 +32,9 @@ function Payment() {
   const { state } = useLocation();
 
   // User context
-  const { user } = useContext(UserContext);
+  const [{ user }] = useContext(UserContext);
+
+  console.log(user);
 
   // Cleave credit
   function handleCredit(e) {
@@ -75,7 +77,7 @@ function Payment() {
         <Typography variant="h5" className={style.InfoTitle}>
           Account Information
         </Typography>
-        <InfoForm user={user} />
+        <InfoForm {...user} />
       </Box>
       <Divider />
       <Box className={pageStyle.wrapper}>

@@ -1,8 +1,8 @@
 const { read } = require("../controllers/flights");
-const authorizeUser = require("../middleware/auth");
+const auth = require("../middleware/auth");
 
 const Router = require("express").Router();
 
-Router.get("/flights/", authorizeUser, read);
+Router.get("/flights/", auth, read);
 
 module.exports = Router;

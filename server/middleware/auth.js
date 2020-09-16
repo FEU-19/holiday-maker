@@ -1,23 +1,17 @@
 const User = require("../models/User");
+const jwt = require("jsonwebtoken");
 
-const authorizeUser = async function (req, res, next) {
-  const { cookie } = req.body;
+const auth = async function (req, _res, next) {
+  const accessToken = req.headers["x-auth-token"];
 
-  if (!cookie) {
-    res.send("user not logged in");
-  }
+  const decodedJWT = jwt.verify(accessToken, process.env.JWT_SECRET);
+  if (!decodedJWT) next(new Error("unauthenticated"));
 
-  const userId = cookie.split("=Bearer")[1];
-
-  const user = await User.findById(userId);
-
-  if (!user) {
-    res.send("User does not exist");
-  }
+  const { id } = decodedJWT;
+  const user = await User.findById(id, "-password -__v");
 
   req.user = user;
-
   next();
 };
 
-module.exports = authorizeUser;
+module.exports = auth;
