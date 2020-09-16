@@ -20,10 +20,8 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-  
-  display:flex;
-  
-`
+  display: flex;
+`;
 
 const LoginModal = () => {
   const { userData, setUserData } = useContext(UserContext);
@@ -85,27 +83,42 @@ const LoginModal = () => {
 
   const onLogout = (e) => {
     e.preventDefault();
-    setUserData({
-      token: undefined,
-      user: undefined,
-    });
-    localStorage.setItem("auth-token", "");
+    let data = userData.user;
+    axios
+      .post(
+        "http://localhost:8080/api/logout/",
+        {
+          data,
+        },
+        { withCredentials: true }
+      )
+      .then((res) => {
+        setUserData({ user: {} });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
-  const RedirectTo = (e) => {
-    setRedirect(true);
+  let loggedIn = 10;
+  if (userData.user) {
+    loggedIn = Object.entries(userData.user).length;
   }
 
   return (
     <div>
-      {!userData.user ? (
-        
+      {loggedIn === 0 ? (
         <Wrapper>
           <Button variant="outlined" color="primary">
             <Link to={{ pathname: "/" }}>Main</Link>
           </Button>
 
-          <Button className="login" variant="outlined" color="primary" onClick={handleModalOpen}>
+          <Button
+            className="login"
+            variant="outlined"
+            color="primary"
+            onClick={handleModalOpen}
+          >
             Login
           </Button>
 
@@ -128,12 +141,14 @@ const LoginModal = () => {
             <Link to={{ pathname: "/mybookings" }}>My Bookings</Link>
           </Button>
 
-          
-            <Button className="login" variant="outlined" color="primary" onClick={(e) => onLogout(e)}>
-              <Link to={{ pathname: "/" }}>
-              Logout
-              </Link>
-            </Button>
+          <Button
+            className="login"
+            variant="outlined"
+            color="primary"
+            onClick={(e) => onLogout(e)}
+          >
+            <Link to={{ pathname: "/" }}>Logout</Link>
+          </Button>
         </Wrapper>
       )}
       <Dialog
