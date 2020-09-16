@@ -7,6 +7,9 @@ import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
+
+
 
 
 // Componets
@@ -34,34 +37,42 @@ import filterRestaurant from "../../../utils/filterRestaurant";
 import filterDistanceBeach from "../../../utils/filterDistanceBeach";
 import filterDistanceCity from "../../../utils/filterDistanceCity";
 import filterDate from "../../../utils/filterDate";
-
+/* 
 const StyledContainer = styled(Container)`
   padding-top: 60px;
-  display: flex;
-  justify-content: center;
   background-color: #F5F5F5;
-`;
+`; */
+
+const useStyles = makeStyles((theme) => ({
+  backgroundColor: {
+    backgroundColor: '#F5F5F5',
+    paddingTop: 70, 
+    minHeight: 350,
+  },
+  
+}));
+
 
 const Form = styled.form`
-  width: 100vw;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
 
-const GridContainer = styled(Grid)`
-`;
 
 const ButtonContainer = styled(Grid)`
   border-bottom: 1px solid grey;
-  padding: 10px;
+  padding: 30px;
 `;
 
 const theme = createMuiTheme({
   palette: {
-    primary: {500: '#F23622'},
+    primary: { main: '#F23622' },
+    secondary: { main: '#F23622' },
   },
 });
+
 
 const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) => {
   const [residentData, setResidentData] = useState([]);
@@ -81,6 +92,7 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
     start: "2020-06-02T00:00:00.000Z",
     end: "2020-06-08T00:00:00.000Z",
   });
+  const classes = useStyles();
 
   useEffect(() => {
     axios
@@ -131,115 +143,111 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
   }
 
   return (
-    <StyledContainer maxWidth="false">
-      <Form onSubmit={onSubmit}>
-        <GridContainer
-          className="search-top"
-          container
-          spacing={1}
-          justify="space-around"
-        >
-          <Grid item xs={2}>
-            <SelectCity
-              residentData={residentData}
-              city={city}
-              setCity={setCity}
-            />
+    <ThemeProvider theme={theme}>
+      <Container maxWidth={false} className={classes.backgroundColor} >
+        <Form onSubmit={onSubmit}>
+          <Grid
+            className="search-top"
+            container
+            spacing={1}
+            justify="space-around"
+          >
+            <Grid item xs={2}>
+              <SelectCity
+                residentData={residentData}
+                city={city}
+                setCity={setCity}
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <DatePicker
+                residentData={residentData}
+                date={date}
+                setDate={setDate}
+              />
+            </Grid>
+            <Grid item xs={2}>
+              <SelectAmountOfAdults
+                setAmountOfAdults={setAmountOfAdults}
+                amountOfAdults={amountOfAdults}
+              />
+            </Grid>
+            <Grid item xs={2}>
+              <SelectAmountOfChildren
+                setAmountOfChildren={setAmountOfChildren}
+                amountOfChildren={amountOfChildren}
+              />
+            </Grid>
+            <Grid item xs={2}>
+              <ChildrenAgeSelects
+                amountOfChildren={amountOfChildren}
+                setAgeOfChildren={setAgeOfChildren}
+              />
+            </Grid>
           </Grid>
-          <Grid item xs={4}>
-
-            <DatePicker
-              residentData={residentData}
-              date={date}
-              setDate={setDate}
-            />
-
-          </Grid>
-
-          <Grid item xs={2}>
-            <SelectAmountOfAdults
-              setAmountOfAdults={setAmountOfAdults}
-              amountOfAdults={amountOfAdults}
-            />
-          </Grid>
-          <Grid item xs={2}>
-            <SelectAmountOfChildren
-              setAmountOfChildren={setAmountOfChildren}
-              amountOfChildren={amountOfChildren}
-            />
-          </Grid>
-          <Grid item xs={2}>
-            <ChildrenAgeSelects
-              amountOfChildren={amountOfChildren}
-              setAgeOfChildren={setAgeOfChildren}
-            />
-          </Grid>
-        </GridContainer>
-
-        <ButtonContainer
-          className="search-top"
-          container
-          spacing={1}
-          justify="flex-end"
-        >
-          <Grid item xs={2}>
-            <ThemeProvider theme={theme}>
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              placeholder="Submit"
-            >
-              Submit
+          <ButtonContainer
+            className="search-top"
+            container
+            spacing={1}
+            justify="flex-end"
+          >
+            <Grid item xs={2}>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                placeholder="Submit"
+              >
+                Search
             </Button>
-            </ThemeProvider>
+            </Grid>
+          </ButtonContainer>
+          <Grid
+            className="search-bottom"
+            container
+            spacing={1}
+            justify="space-around"
+          >
+            <Grid item xs={2}>
+              <CheckboxRestaurant
+                checkedRestaurant={checkedRestaurant}
+                setCheckedRestaurant={setCheckedRestaurant}
+              />
+            </Grid>
+            <Grid item xs={2}>
+              <CheckboxKidsClub
+                checkedKidsClub={checkedKidsClub}
+                setCheckedKidsclub={setCheckedKidsclub}
+              />
+            </Grid>
+            <Grid item xs={2}>
+              <CheckboxNightEntertainment
+                checkedNightEntertainment={checkedNightEntertainment}
+                setCheckedNightEntertainment={setCheckedNightEntertainment}
+              />
+            </Grid>
+            <Grid item xs={2}>
+              <CheckboxPool
+                checkedPool={checkedPool}
+                setCheckedPool={setCheckedPool}
+              />
+            </Grid>
+            <Grid item xs={2}>
+              <SelectDistanceCity
+                distanceCity={distanceCity}
+                setDistanceCity={setDistanceCity}
+              />
+            </Grid>
+            <Grid item xs={2}>
+              <SelectDistanceBeach
+                distanceBeach={distanceBeach}
+                setDistanceBeach={setDistanceBeach}
+              />
+            </Grid>
           </Grid>
-        </ButtonContainer>
-        <GridContainer
-          className="search-bottom"
-          container
-          spacing={1}
-          justify="space-around"
-        >
-          <Grid item xs={2}>
-            <CheckboxRestaurant
-              checkedRestaurant={checkedRestaurant}
-              setCheckedRestaurant={setCheckedRestaurant}
-            />
-          </Grid>
-          <Grid item xs={2}>
-            <CheckboxKidsClub
-              checkedKidsClub={checkedKidsClub}
-              setCheckedKidsclub={setCheckedKidsclub}
-            />
-          </Grid>
-          <Grid item xs={2}>
-            <CheckboxNightEntertainment
-              checkedNightEntertainment={checkedNightEntertainment}
-              setCheckedNightEntertainment={setCheckedNightEntertainment}
-            />
-          </Grid>
-          <Grid item xs={2}>
-            <CheckboxPool
-              checkedPool={checkedPool}
-              setCheckedPool={setCheckedPool}
-            />
-          </Grid>
-          <Grid item xs={2}>
-            <SelectDistanceCity
-              distanceCity={distanceCity}
-              setDistanceCity={setDistanceCity}
-            />
-          </Grid>
-          <Grid item xs={2}>
-            <SelectDistanceBeach
-              distanceBeach={distanceBeach}
-              setDistanceBeach={setDistanceBeach}
-            />
-          </Grid>
-        </GridContainer>
-      </Form>
-    </StyledContainer>
+        </Form>
+      </Container>
+    </ThemeProvider>
   );
 };
 
