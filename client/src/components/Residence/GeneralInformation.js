@@ -1,53 +1,45 @@
 import React, { useState, useEffect, useCallback } from "react";
+import { Typography } from "@material-ui/core";
 import { v4 as uuidv4 } from "uuid";
+
 
 // Style variables
 const boxContainer = {
- //width: "600px",
- padding: "30px 30px 50px 30px",
- width: "1305.280",
+  padding: "30px 30px 50px 30px",
+  width:"1305.280",
 };
 
 const title = {
- display: "flex",
- justifyContent: "center",
- alignItems: "center",
- //width: "200px",
- width: "319px",
- height: "35px",
- backgroundColor: "lightgrey",
- color: "#464646",
- borderBottom: "1px solid #9a9a9a",
- borderRadius: "4px 4px 0 0",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  width: '319px',
+  height: "35px",
+  backgroundColor: "#F5F5F5",
+  borderBottom: "1px solid #9a9a9a",
+  borderRadius: "4px 4px 0 0",
 };
 
 const contentContainer = {
- display: "flex",
- flexDirection: "row",
- flexWrap: "nowrap",
- justifyContent: "space-between",
- //alignSelf: "flex-start",
- //justifyContent: "center",
- //width: "600px",
- backgroundColor: "#EAEAEA",
- color: "#464646",
- borderRadius: "0 0 4px 4px",
+  display: "flex",
+  flexDirection: "row",
+  flexWrap: "nowrap",
+  justifyContent: "space-between",
+  backgroundColor: "#F5F5F5",
+  borderRadius: "0 0 4px 4px",
 };
 
 const content = {
- width: "300px",
- padding: "0 20px 20px 40px",
- color: "#464646",
- boxSizing: "border-box",
+  width: "300px",
+  padding: "0 20px 20px 40px",
+  boxSizing: "border-box",
 };
 
 const headInfo = {
- //width: "600px",
- padding: "30px 40px 20px 40px",
- borderRadius: "0 4px 0 0",
- color: "#464646",
- backgroundColor: "#EAEAEA",
- boxSizing: "border-box",
+  padding: "30px 40px 20px 40px",
+  borderRadius: "0 4px 0 0",
+  backgroundColor: "#F5F5F5",
+  boxSizing: "border-box",
 };
 
 const textReset = {
@@ -60,12 +52,6 @@ const subTitle = {
  padding: "0 0 10px 0",
  fontWeight: "bold",
 };
-
-/*const subTitleBeds = {
-  margin: "0",
-  padding: "20px 0 10px 0",
-  fontWeight: "bold",
-};*/
 
 function getRoomInfo(key, generalInfo) {
  const tempObject = generalInfo.rooms.reduce((acc, cur) => {
@@ -129,7 +115,7 @@ const GeneralInformation = ({ generalInfo }) => {
      className="residence__generalInformationContainer__title"
      style={title}
     >
-     <h4>Residence Overview</h4>
+      <Typography variant = "h6">Residence Overview</Typography>
     </div>
     <div
      className="residence__generalInformationContainer__headInfo"

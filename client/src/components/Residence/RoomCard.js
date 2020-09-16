@@ -17,25 +17,25 @@ import RoomType from "./RoomType";
 import RoomPrice from "./RoomPrice";
 
 const CustomCheckbox = withStyles({
- root: {
-  color: "#4AB0BD",
-
-  "&$checked": {
+  root: {
    color: "#4AB0BD",
+ 
+   "&$checked": {
+    color: "#4AB0BD",
+   },
   },
- },
- checked: {},
-})((props) => <Checkbox color="default" {...props} />);
-
-const CustomRadio = withStyles({
- root: {
-  color: "#4AB0BD",
-  "&$selected": {
+  checked: {},
+ })((props) => <Checkbox color="default" {...props} />);
+ 
+ const CustomRadio = withStyles({
+  root: {
    color: "#4AB0BD",
+   "&$selected": {
+    color: "#4AB0BD",
+   },
   },
- },
- checked: {},
-})((props) => <Radio color="default" {...props} />);
+  checked: {},
+ })((props) => <Radio color="default" {...props} />);
 
 const useStyle = makeStyles(() => ({
  card: {

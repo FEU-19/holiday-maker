@@ -1,4 +1,5 @@
-import React from "react";
+import React from "react"; 
+import { Typography } from "@material-ui/core";
 import CheckIcon from "@material-ui/icons/Check";
 
 // Style variables
@@ -9,37 +10,37 @@ const boxContainer = {
   justifyContent: "space-between",
   alignItems: "center",
   marginBottom: "20px",
-  //width: "700px",
-  //height: "200px",
+
 };
 
 const infoContainer = {
   display: "flex",
   flexDirection: "column",
   alignSelf: "flex-start",
-  width: "220px",
+  width: "240px",
   paddingLeft: "25px",
   paddingTop: "20px",
   paddingBottom: "20px",
-  //marginLeft: "5px",
-  //marginRight: "5px",
-  backgroundColor: "#EAEAEA",
-  color: "black",
+  backgroundColor: "#F5F5F5",
+  color: "#F23622",
   borderRadius: "10px",
   boxSizing: "border-box",
+  boxShadow: "3px 3px 4px #162C72", 
 };
 
 const infoContent = {
   display: "flex",
   flexDirection: "column",
   paddingTop: "20px",
-  color: "black",
+  color: "#000000",
   boxSizing: "border-box",
 };
 
 const textReset = {
   margin: "0",
   padding: "0",
+  fontWeight: "bold",
+  fontSize: "15px",
 };
 
 const defaultText = {
@@ -63,7 +64,7 @@ const ResidenceInformation = ({ info }) => {
         className="residence__residenceInformation__boxContainer__aboutContainer"
         style={infoContainer}
       >
-        <h3 style={textReset}>About</h3>
+        <Typography variant= "subtitle1" style={textReset}>About</Typography>
         <div
           className="residence__residenceInformation__boxContainer__aboutContent"
           style={infoContent}
@@ -95,7 +96,7 @@ const ResidenceInformation = ({ info }) => {
         className="residence__residenceInformation__boxContainer__familyContainer"
         style={infoContainer}
       >
-        <h3 style={textReset}>For Family</h3>
+        <Typography variant = "subtitle1" style={textReset}>For Family</Typography>
         <div
           className="residence__residenceInformation__boxContainer__familyContent"
           style={infoContent}
@@ -116,8 +117,8 @@ const ResidenceInformation = ({ info }) => {
         className="residence__residenceInformation__boxContainer__nearbyContainer"
         style={infoContainer}
       >
-        <h3 style={textReset}>Nearby</h3>
-        <div
+        <Typography variant = "subtitle1" style={textReset}>Nearby</Typography>
+        <Typography
           className="residence__residenceInformation__boxContainer__nearbyContent"
           style={infoContent}
         >
@@ -132,7 +133,7 @@ const ResidenceInformation = ({ info }) => {
               Please contact the residence for more information.
             </p>
           )}
-        </div>
+        </Typography>
       </div>
     </div>
   );
