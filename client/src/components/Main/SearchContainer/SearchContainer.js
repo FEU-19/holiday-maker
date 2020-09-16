@@ -22,6 +22,7 @@ import CheckboxRestaurant from "./CheckboxRestaurant";
 import SelectDistanceCity from "./SelectDistanceCity.js";
 import SelectDistanceBeach from "./SelectDistanceBeach";
 
+
 // Filter functions
 import filterPresentCrib from '../../../utils/filterPresentCrib';
 import filterAmountOfTravelers from "../../../utils/filterAmountOfTravelers";
@@ -58,7 +59,7 @@ const ButtonContainer = styled(Grid)`
 
 const theme = createMuiTheme({
   palette: {
-    primary: {500: '#F23622'}, 
+    primary: {500: '#F23622'},
   },
 });
 
@@ -154,7 +155,7 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
             />
 
           </Grid>
-          
+
           <Grid item xs={2}>
             <SelectAmountOfAdults
               setAmountOfAdults={setAmountOfAdults}
