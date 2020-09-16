@@ -7,6 +7,7 @@ import HotelCarousel from "../components/Residence/HotelCarousel";
 import RoomCardMapper from "../components/Residence/RoomCardMapper";
 import StarRateIcon from '@material-ui/icons/StarRate';
 import { useParams, useLocation } from "react-router-dom";
+import Star from "../components/Residence/Star";
 import axios from "axios";
 
 const useStyle = makeStyles(() => ({
@@ -16,6 +17,7 @@ const useStyle = makeStyles(() => ({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
+    position: 'relative'
   },
   title: {
     textAlign: "center",
@@ -32,7 +34,26 @@ const useStyle = makeStyles(() => ({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-  }
+  },
+  titlefavouritecontainer: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent:'center',
+  },
+  favourites: {
+    margin: 'auto',
+    width: 60,
+    marginRight: '6px',
+    display: 'flex',
+    justifyContent: 'center'
+  },
+  favouriteDiv: {
+    position: 'absolute',
+    display: 'flex',
+    justifyContent: 'center',
+    top: 36,
+    right: 20,
+  },
 }));
 
 
@@ -80,8 +101,14 @@ const Residence = () => {
 
   return (
     <div className={classes.article}>
+      <div className={classes.favouriteDiv}>
+        <Typography variant = "p" className={classes.favourites}>Add to favourites</Typography>
+        <Star/>
+        </div>
       <div className={classes.titlecontainer}>
+        <div className={classes.titlefavouritecontainer}>
         <Typography variant = "h3" className={classes.title}>{data.name} {starRating(data.rating)}</Typography>
+        </div>
         <HotelCarousel dataImage={data} />
         <div className={classes.info}>
           <ResidenceInformation info={data} />
