@@ -14,18 +14,24 @@ import DatePicker from "../../Main/SearchContainer/DatePicker";
 
 import ChildrenAgeSelects from "../../Main/SearchContainer/ChildrenAgeSelects";
 
-import RenderRooms from "./RenderRooms";
+import RenderFoodOption from "./RenderFoodOption";
 
-export default function ChangeBookingModal({handleClose, open, bookings, hotelId}) {
+export default function ChangeBookingModal({
+  handleClose,
+  open,
+  bookings,
+  hotelId,
+}) {
   const [hotel, setHotel] = useState(null);
-  console.log('I GOT the Order ', bookings);
-  console.log('I GOT the FLIGHT ID  ', hotelId);
-  
+  const bookedRooms = bookings.rooms;
+  console.log("I GOT the Order ", bookings);
+  console.log("I GOT the FLIGHT ID  ", hotelId);
+
   useEffect(() => {
     axios
       .get(`http://localhost:8080/api/residences/${hotelId}`)
       .then((res) => {
-        console.log('Hotel Res ', res);
+        console.log("Hotel Res ", res);
 
         setHotel(res.data.data);
       })
@@ -36,20 +42,22 @@ export default function ChangeBookingModal({handleClose, open, bookings, hotelId
         );
       });
   }, [hotelId]);
-  // VÄLJA MAT OPTION
-  // hitta room på room[]._id
-  // rendera ut vad rummet erbjuder
-  // skicka in datan till RenderFoodOption
 
-  // Få PUT att funka innan vi redirectar¨
-  // Sedan Redirect to={{ pathname: "/checkout", state: { rooms: chosenRooms } }}
-  // const [chosenRooms, setChosenRooms] = useState([]);
+  function findTheHotelRoomInHotel(id) {
+    // console.log( id);
+    let x;
+    const roomsInHotel = hotel.rooms;
+    roomsInHotel.map((HotelRoom) => {
+      // console.log('This is rooms in HOTEL -> ',  HotelRoom._id);
+      if (HotelRoom._id === id) {
+        // console.log("*************************************", HotelRoom._id, id);
+        // console.log(HotelRoom);
+        return (x = HotelRoom);
+      }
+    });
+    return x;
+  }
 
-  // const handleClickOpen = () => {
-  //   setOpen(true);
-  // };
-
- 
   return (
     <Dialog
       open={open}
@@ -62,7 +70,6 @@ export default function ChangeBookingModal({handleClose, open, bookings, hotelId
         <div>
           <DialogTitle id="form-dialog-title">{hotel.name}</DialogTitle>
           <DialogContent>
-            <RenderRooms bookings={bookings} hotel={hotel} />
             {/* <DatePicker />
         <SelectAmountOfAdults />
         <SelectAmountOfChildren />
@@ -71,7 +78,40 @@ export default function ChangeBookingModal({handleClose, open, bookings, hotelId
             {/* Extra bed */}
             {/* flight */}
             {/* Need price */}
+            {bookedRooms.map((room, index) => {
+              console.log("This is my option ", room);
 
+              const hotelRoom = findTheHotelRoomInHotel(room._id.$oid);
+              // console.log("only the matching hotelRoom ", hotelRoom);
+
+              return (
+                <React.Fragment key={index}>
+                  {/* <p>size: {hotelRoom.size}</p> */}
+                  {/* <FormControlLabel
+                value={hotelRoom.extraBed}
+                control={<Checkbox color="default" />}
+                onChange={handleCheck}
+                label={
+                  <p style={{ paddingRight: "10vw" }}>
+                    Extra Bed: {hotelRoom.extraBed}
+                  </p>
+                }
+                labelPlacement="start"
+              />
+              <RadioGroup
+                aria-label="price"
+                name="price"
+                value={selected}
+                // onChange={handleChange}
+              /> */}
+
+                  <RenderFoodOption
+                    roomInfo={hotelRoom}
+                    roomOption={room.price}
+                  />
+                </React.Fragment>
+              );
+            })}
             <RadioGroup
               aria-label="price"
               name="price"
