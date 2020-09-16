@@ -6,9 +6,9 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import { Button } from "@material-ui/core";
-import CheckIcon from "@material-ui/icons/Check";
-import StarRateIcon from '@material-ui/icons/StarRate';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import CancelIcon from '@material-ui/icons/Cancel';
+import StarRateIcon from '@material-ui/icons/StarRate';
 
 // Functions
 import sortRating from "../../../utils/sortRating.js";
@@ -17,31 +17,58 @@ import getAveragePrice from "../../../utils/getAveragePrice.js";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '65vw',
-    padding: 50,
+    width: '85vw',
   },
   paper: {
-    padding: theme.spacing(2),
-    margin: 10,
+    padding: theme.spacing(4),
+    margin: 20,
     height: 200,
+    backgroundColor: '#F5F5F5',
+    border: '#162C72',
+    display: 'flex',
+    flexDirection: 'column',
   },
   image: {
     width: 200,
-    height: 170,
-    marginLeft: 30,
+    height: 160,
+    marginLeft: 50,
     marginRight: 30,
   },
   img: {
     maxWidth: '100%',
     maxHeight: '100%',
     borderRadius: 2,
+    marginTop: 10,
   },
   button: {
-    marginTop: 30,
+    backgroundColor: '#F23622',
+    width: 120,
+    '&:hover': {
+      backgroundColor: '#990000',
+    }
   },
   link: {
     textDecoration: 'none',
-    color: 'black',
+    color: '#F5F5F5',
+  },
+  name: {
+    color: '#F23622',
+    fontSize: 20,
+    margin: 0,
+  },
+  checkIcon: {
+    fontSize: 20,
+    color: ' #4AB0BD',
+  },
+  bottom: {
+    paddingTop: 30,
+    paddingLeft: 10,
+  },
+  checkLabel:{
+    paddingRight: 7,
+  },
+  rating: {
+    color: 'yellow',
   },
 
   noResult: {
@@ -72,7 +99,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ContentContainer = ({ filteredData, sortOn, searching, queryParams }) => {
-  
+
   const [sortedData, setSortedData] = useState([]);
   const classes = useStyles();
 
@@ -94,107 +121,111 @@ const ContentContainer = ({ filteredData, sortOn, searching, queryParams }) => {
     // eslint-disable-next-line
   }, [sortOn, filteredData, setSortedData])
 
-
   return (
     <div className={classes.root}>
       {sortedData.map((hotel) => {
         return (
           <div key={hotel._id}>
             <Paper className={classes.paper}>
-              <Grid container spacing={2}>
-                <Grid item xs={12} sm={4}>
-                  <ButtonBase className={classes.image}>
-                    <img className={classes.img} alt="hotels" src={hotel.rooms[0].images[0]} />
-                  </ButtonBase>
+              <Grid container spacing={5}>
+                <Grid item xs className={classes.image}>
+                  <img className={classes.img} alt="hotels" src={hotel.rooms[0].images[0]} />
                 </Grid>
-                <Grid item xs={12} sm={4} >
-                  <Typography gutterBottom variant="subtitle1">
+                <Grid item xs={9} >
+                  <Typography  className={classes.name} gutterBottom variant="subtitle1">
                     {hotel.name}
                   </Typography>
                   <Typography variant="body2" gutterBottom>
                     {hotel.rating === 1 && (
-                      <StarRateIcon />
+                      <StarRateIcon className={classes.rating}/>
                     )}
                     {hotel.rating === 2 && (
                       <>
-                        <StarRateIcon />
-                        <StarRateIcon />
-                     </>
+                        <StarRateIcon className={classes.rating}/>
+                        <StarRateIcon className={classes.rating}/>
+                      </>
+                    )}
+                    {hotel.rating === 3 && (
+                      <>
+                        <StarRateIcon className={classes.rating}/>
+                        <StarRateIcon className={classes.rating}/>
+                        <StarRateIcon className={classes.rating}/>
+                      </>
+                    )}
+                    {hotel.rating === 4 && (
+                      <>
+                        <StarRateIcon className={classes.rating}/>
+                        <StarRateIcon className={classes.rating}/>
+                        <StarRateIcon className={classes.rating}/>
+                        <StarRateIcon className={classes.rating}/>
+                      </>
+                    )}
+                    {hotel.rating === 5 && (
+                      <>
+                        <StarRateIcon className={classes.rating}/>
+                        <StarRateIcon className={classes.rating}/>
+                        <StarRateIcon className={classes.rating}/>
+                        <StarRateIcon className={classes.rating}/>
+                        <StarRateIcon className={classes.rating}/>
+                      </>
+                    )}
+                  </Typography>
+                  <Typography variant="body2">
+                    City: {hotel.city}
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary">
+                    Distance to the beach {hotel.distanceToBeach} m.
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary">
+                    Distance to the center {hotel.distanceToCity} m.
+                  </Typography>
+                </Grid>
+              </Grid>
+              <Grid container className={classes.bottom}>
+                <Grid item xs={3}>
+                </Grid>
+                <Grid item xs={5}>
+                  {hotel.restaurant && (
+                    <Typography variant="caption" className={classes.checkLabel}>
+                      <CheckCircleIcon className={classes.checkIcon}/> Restaurant
+                    </Typography>
                   )}
-                  {hotel.rating === 3 && (
-                    <>
-                    <StarRateIcon />
-                    <StarRateIcon />
-                    <StarRateIcon />
-                  </>
-                )}
-                {hotel.rating === 4 && (
-                  <>
-                  <StarRateIcon />
-                  <StarRateIcon />
-                  <StarRateIcon />
-                  <StarRateIcon />
-                </>
-              )}
-              {hotel.rating === 5 && (
-                <>
-                <StarRateIcon />
-                <StarRateIcon />
-                <StarRateIcon />
-                <StarRateIcon />
-                <StarRateIcon />
-              </>
-            )}
-          </Typography>
-          <Typography variant="body2">
-            City: {hotel.city}
-          </Typography>
-          <Typography variant="body2" color="textSecondary">
-            Distance to the beach {hotel.distanceToBeach} m.
-          </Typography>
-          <Typography variant="body2" color="textSecondary">
-            Distance to the center {hotel.distanceToCity} m.
-          </Typography>
-          <Typography variant="body2" color="textSecondary">
-            Average price for a room {getAveragePrice(hotel)} sek.
-          </Typography>
-        </Grid>
-        <Grid item xs={12} sm={4}>
-          {hotel.restaurant && (
-            <Typography variant="body2">
-              <CheckIcon /> Restaurant
-            </Typography>
-          )}
-          {hotel.pool && (
-            <Typography variant="body2">
-              <CheckIcon/> Pool
-            </Typography>
-          )}
-          {hotel.kidsClub && (
-            <Typography variant="body2">
-              <CheckIcon /> Kids club
-            </Typography>
-          )}
-          {hotel.nightEntertainment && (
-            <Typography variant="body2">
-              <CheckIcon/> Evening entertainment
-            </Typography>
-          )}
-          <Button className={classes.button}
-            variant="contained"
-            color="default"
-            >
-              <Link
-                to={{ pathname: `/residence/${hotel._id}`, state: { hotel, queryParams } }}
-                >
-                  More Info
-                </Link>
-              </Button>
-            </Grid>
-          </Grid>
-        </Paper>
-      </div>
-    );
+                  {hotel.pool && (
+                    <Typography variant="caption" className={classes.checkLabel}>
+                      <CheckCircleIcon className={classes.checkIcon}/> Pool
+                    </Typography>
+                  )}
+                  {hotel.kidsClub && (
+                    <Typography variant="caption" className={classes.checkLabel}>
+                      <CheckCircleIcon  className={classes.checkIcon}/> Kids club
+                    </Typography>
+                  )}
+                  {hotel.nightEntertainment && (
+                    <Typography variant="caption" className={classes.checkLabel}>
+                      <CheckCircleIcon className={classes.checkIcon}/> Evening entertainment
+                    </Typography>
+                  )}
+                </Grid>
+                <Grid item xs={2}>
+                  <Typography variant="subtitle1">
+                    <b>SEK {getAveragePrice(hotel)}</b> avg/night
+                  </Typography>
+                </Grid>
+                <Grid item xs={2}>
+                  <Button className={classes.button}
+                    variant="contained"
+                  >
+                    <Link className={classes.link}
+                      to={{ pathname: `/residence/${hotel._id}`, state: { hotel, queryParams } }}
+                    >
+                      Select
+                    </Link>
+                  </Button>
+                </Grid>
+              </Grid>
+          </Paper>
+        </div>
+      );
   })}
   {!sortedData.length && searching ?
     <div className={classes.noResult}>
