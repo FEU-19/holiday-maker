@@ -22,6 +22,8 @@ const DivRoot = styled.div`
   flex-direction: column;
 `;
 
+document.body.style.margin = 0;
+
 const MainContent = styled.div`
   position: relative;
   flex-grow: 1;
