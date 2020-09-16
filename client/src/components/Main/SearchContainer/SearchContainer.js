@@ -25,6 +25,7 @@ import CheckboxRestaurant from "./CheckboxRestaurant";
 import SelectDistanceCity from "./SelectDistanceCity.js";
 import SelectDistanceBeach from "./SelectDistanceBeach";
 
+
 // Filter functions
 import filterPresentCrib from '../../../utils/filterPresentCrib';
 import filterAmountOfTravelers from "../../../utils/filterAmountOfTravelers";
@@ -159,15 +160,12 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
               />
             </Grid>
             <Grid item xs={4}>
-
               <DatePicker
                 residentData={residentData}
                 date={date}
                 setDate={setDate}
               />
-
             </Grid>
-
             <Grid item xs={2}>
               <SelectAmountOfAdults
                 setAmountOfAdults={setAmountOfAdults}
@@ -187,7 +185,6 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
               />
             </Grid>
           </Grid>
-
           <ButtonContainer
             className="search-top"
             container
