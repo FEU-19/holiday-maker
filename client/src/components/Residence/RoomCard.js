@@ -140,6 +140,7 @@ const RoomCard = ({ roomInfo, chooseRoom }) => {
       <FormControl component="fieldset">
        <Typography className={classes.title}>Options</Typography>
        <FormControlLabel
+        style = {{justifyContent: "space-between"}}
         value={roomInfo.extraBed}
         control={<CustomCheckbox />}
         onChange={handleCheck}
@@ -155,7 +156,7 @@ const RoomCard = ({ roomInfo, chooseRoom }) => {
         onChange={handleChange}
        >
         <FormControlLabel
-         style={{ borderTop: "1px solid #ccd9dd" }}
+         style={{ borderTop: "1px solid #ccd9dd" , justifyContent: "space-between" }}
          value={roomInfo.allInclusive.toString()}
          control={<CustomRadio />}
          disabled={roomInfo.allInclusive ? false : true}
@@ -171,7 +172,7 @@ const RoomCard = ({ roomInfo, chooseRoom }) => {
          labelPlacement="start"
         />
         <FormControlLabel
-         style={{ borderTop: "1px solid #ccd9dd" }}
+         style={{ borderTop: "1px solid #ccd9dd", justifyContent: "space-between" }}
          value={roomInfo.fullBoard.toString()}
          control={<CustomRadio />}
          disabled={roomInfo.fullBoard ? false : true}
@@ -187,7 +188,7 @@ const RoomCard = ({ roomInfo, chooseRoom }) => {
          labelPlacement="start"
         />
         <FormControlLabel
-         style={{ borderTop: "1px solid #ccd9dd" }}
+         style={{ borderTop: "1px solid #ccd9dd", justifyContent: "space-between" }}
          value="halfBoard"
          control={<CustomRadio />}
          disabled={roomInfo.halfBoard ? false : true}
@@ -203,7 +204,7 @@ const RoomCard = ({ roomInfo, chooseRoom }) => {
          labelPlacement="start"
         />
         <FormControlLabel
-         style={{ borderTop: "1px solid #ccd9dd" }}
+         style={{ borderTop: "1px solid #ccd9dd", justifyContent: "space-between" }}
          value="uniqueValue"
          control={<CustomRadio />}
          label={

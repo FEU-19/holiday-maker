@@ -12,11 +12,11 @@ const title = {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  width: '319px',
+  //width: '319px',
   height: "35px",
-  backgroundColor: "#F23622",
-  color: "white",
-  borderBottom: "1px solid #9a9a9a",
+  backgroundColor: "#F5F5F5",
+  color: "#F23622",
+  borderBottom: "1px solid #4AB0BD",
   borderRadius: "4px 4px 0 0",
 };
 
@@ -31,7 +31,6 @@ const contentContainer = {
   justifyContent: "space-between",
   backgroundColor: "#F5F5F5",
   borderRadius: "0 0 4px 4px",
-  
 };
 
 const content = {
@@ -49,8 +48,10 @@ const headInfo = {
 };
 
 const textReset = {
- margin: "0",
- padding: "0",
+  display: "flex",
+  flex: "column",
+  margin: "0",
+  padding: "0",
 };
 
 const subTitle = {
@@ -125,52 +126,52 @@ const GeneralInformation = ({ generalInfo }) => {
     </div>
     <div className = "residence__generialInformationContainer__box"
       style = {box}>
-    <Typography
+    <Typography component = "p"
      className="residence__generalInformationContainer__headInfo"
      style={headInfo}
     >
-     <p style={textReset}>
+     <span style={textReset}>
       This residence has {info.numberOfRooms} rooms, {info.totalBeds} Beds and{" "}
       {info.totalExtraBeds} Extra beds.
-     </p>
+     </span>
     </Typography>
     <div
      className="residence__generalInformationContainer__contentContainer"
      style={contentContainer}
     >
-     <Typography
+     <Typography component = "p"
       className="residence__generalInformationContainer__contentContainer__content"
       style={content}
      >
-      <p style={subTitle}>Type of rooms</p>
+      <span style={subTitle}>Type of rooms</span>
       {info.roomTypes.map((room) => {
        let value = info.roomsOfTypes[room];
        return (
-        <p key={uuidv4()} style={textReset}>
+        <span key={uuidv4()} style={textReset}>
          {value} {room}s
-        </p>
+        </span>
        );
       })}
      </Typography>
-     <Typography variant="body2" color="textSecondary" component="p"
+     <Typography variant="body1" component="p"
       className="residence__generalInformationContainer__contentContainer__content"
       style={content}
      >
-      <p style={subTitle}>Beds</p>
-      <p style={textReset}>{info.totalBeds} Beds</p>
-      <p style={textReset}>{info.totalExtraBeds} Extra beds</p>
+      <span style={subTitle}>Beds</span>
+      <span style={textReset}>{info.totalBeds} Beds</span>
+      <span style={textReset}>{info.totalExtraBeds} Extra beds</span>
      </Typography>
-     <Typography
+     <Typography component = "p"
       className="residence__generalInformationContainer__contentContainer__content"
       style={content}
      >
-      <p style={subTitle}>Room sizes</p>
+      <span style={subTitle}>Room sizes</span>
       {info.roomSizes.map((room) => {
        let value = info.roomsOfSizes[room];
        return (
-        <p key={uuidv4()} style={textReset}>
+        <span key={uuidv4()} style={textReset}>
          {value} {room} rooms
-        </p>
+        </span>
        );
       })}
      </Typography>

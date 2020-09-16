@@ -38,7 +38,7 @@ const RoomType = ({ roomType }) => {
  const classes = useStyle();
 
  return (
-  <Card className={classes.card}>
+  <Card elevation={0} className={classes.card}>
    <CardHeader className={classes.header} title={roomType.type} />
    <CardMedia
     className={classes.media}
