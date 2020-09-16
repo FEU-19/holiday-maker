@@ -9,7 +9,7 @@ const ContainerButtons = (props) => {
         headers: { "x-auth-token": getToken() },
       })
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
