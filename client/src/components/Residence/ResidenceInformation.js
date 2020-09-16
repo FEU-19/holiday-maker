@@ -124,20 +124,20 @@ const ResidenceInformation = ({ info }) => {
         style={infoContainer}
       >
         <Typography variant = "subtitle1" style={textReset}>Nearby</Typography>
-        <Typography
+        <Typography  component = "p"
           className="residence__residenceInformation__boxContainer__nearbyContent"
           style={infoContent}
         >
           {info.distanceToBeach && (
-            <p style={text}>Distance to Beach: {info.distanceToBeach} m</p>
+            <span style={text}>Distance to Beach: {info.distanceToBeach} m</span>
           )}
           {info.distanceToCity && (
-            <p style={text}>Distance to City: {info.distanceToCity} m</p>
+            <span style={text}>Distance to City: {info.distanceToCity} m</span>
           )}
           {!info.distanceToBeach && !info.distanceToCity && (
-            <p style={defaultText}>
+            <span style={defaultText}>
               Please contact the residence for more information.
-            </p>
+            </span>
           )}
         </Typography>
       </div>
