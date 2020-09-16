@@ -26,9 +26,6 @@ const useStyles = makeStyles((theme) => ({
   icon: {
     fill: '#162C72',
   },
-  menuItem: {
-    fontSize: 20, // font size i drop down kommer jag ej åt
-  },
   border: {
     width: 160,
     height: 40,
