@@ -6,13 +6,13 @@ import { InfoFormStyle } from "./PaymentStyles";
 
 const InfoForm = ({
   firstName,
-  address,
-  lastName,
+  street,
+  surname,
   email,
-  phoneNum,
+  phoneNumber,
   city,
-  zipcode,
-  handleChange,
+  zipCode,
+  handleUser,
   country,
 }) => {
   const InfoStyle = InfoFormStyle();
@@ -21,54 +21,49 @@ const InfoForm = ({
     <form className={InfoStyle.form} noValidate autoComplete="off">
       <Box>
         <TextInput
-          className={InfoStyle.input}
           label="First name"
-          onchange={handleChange}
+          onchange={handleUser}
           name="firstName"
-          value={firstName}
+          value={firstName || ""}
         />
         <TextInput
-          className={InfoStyle.input}
           label="Last name"
-          onchange={handleChange}
+          onchange={handleUser}
           name="surname"
-          value={lastName}
+          value={surname || ""}
         />
         <TextInput
-          className={InfoStyle.input}
           label="E-mail"
-          onchange={handleChange}
+          onchange={handleUser}
           name="email"
-          value={email}
+          value={email || ""}
         />
         <TextInput
-          className={InfoStyle.input}
           label="Mobile"
-          onchange={handleChange}
+          onchange={handleUser}
           name="phoneNumber"
-          value={phoneNum}
+          value={phoneNumber || ""}
         />
-
         <TextInput
-          label="Adress"
-          onchange={handleChange}
-          name="adress"
-          value={address}
+          label="Street"
+          onchange={handleUser}
+          name="street"
+          value={street || ""}
         />
         <TextInput
           label="City"
           name="city"
-          onchange={handleChange}
-          value={city}
+          onchange={handleUser}
+          value={city || ""}
         />
         <TextInput
           label="Zip code"
           name="zipCode"
-          onchange={handleChange}
-          value={zipcode}
+          onchange={handleUser}
+          value={zipCode || ""}
         />
 
-        <CountryDropdownList handleChange={handleChange} myCountry={country} />
+        <CountryDropdownList handleUser={handleUser} country={country} />
       </Box>
     </form>
   );

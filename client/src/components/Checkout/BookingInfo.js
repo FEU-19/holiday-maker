@@ -4,7 +4,7 @@ import { BookingInfoStyle } from "./PaymentStyles";
 import Hotel from "@material-ui/icons/Hotel";
 import Flight from "@material-ui/icons/Flight";
 
-function BookingInfo() {
+function BookingInfo({ info }) {
   const style = BookingInfoStyle();
 
   return (
@@ -14,36 +14,30 @@ function BookingInfo() {
       </Typography>
       <Container className={style.container}>
         <Typography component="h3" className={style.title}>
-          <Hotel style={{ marginRight: "5px" }} /> Resident
+          <Hotel style={{ marginRight: "5px" }} /> Hotel
         </Typography>
 
         <Typography component="div" className={style.boxDiv}>
           <Typography component="ul" className={style.ul}>
             <Typography component="li" className={style.li}>
-              Check-In: 2020/09/09
+              {new Date(info.queryParams.date.start).toLocaleDateString("sv-SE")}
             </Typography>
             <Typography component="li" className={style.li}>
-              Check-Out: 2020/09/20
+              {new Date(info.queryParams.date.end).toLocaleDateString("sv-SE")}
             </Typography>
             <Typography component="li" className={style.li}>
-              Room Type: Full-Board
+              Rooms: {info.rooms.length}
             </Typography>
             <Typography component="li" className={style.li}>
-              Rooms: 4
+              Adults: {info.queryParams.amountOfAdults}
             </Typography>
             <Typography component="li" className={style.li}>
-              Adults: 2
-            </Typography>
-            <Typography component="li" className={style.li}>
-              Children: 2
-            </Typography>
-            <Typography component="li" className={style.li}>
-              Extra Bed: 0
+              Children: {info.queryParams.amountOfChildren}
             </Typography>
           </Typography>
           <Typography component="hr" className={style.hr} />
           <Typography component="p" className={style.p}>
-            Amount: 20000kr
+            Amount: {info.rooms.reduce((sum, room) => sum + room.price, 0)}
           </Typography>
         </Typography>
 
@@ -53,31 +47,25 @@ function BookingInfo() {
         <Typography component="div" className={style.boxDiv}>
           <Typography component="ul" className={style.ul}>
             <Typography component="li" className={style.li}>
-              Departure Time:2020/09/08 12:20
+              Departure Date: {new Date(info.flight.departureDate).toLocaleString("sv-SE")}
             </Typography>
             <Typography component="li" className={style.li}>
-              Arrival Time:2020/09/09 14:20
+              Return Date: {new Date(info.flight.returnDate).toLocaleString("sv-SE")}
             </Typography>
             <Typography component="li" className={style.li}>
-              Departure: Copenhagen
+              Departure: {info.flight.firstAirport}
             </Typography>
             <Typography component="li" className={style.li}>
-              Destination: Miami
-            </Typography>
-            <Typography component="li" className={style.li}>
-              Adults: 2
-            </Typography>
-            <Typography component="li" className={style.li}>
-              Children: 2
+              Destination: {info.flight.finalAirport}
             </Typography>
           </Typography>
           <Typography component="hr" className={style.hr} />
           <Typography component="p" className={style.p}>
-            Amount: 22000kr
+            Amount: {info.flight.price}
           </Typography>
         </Typography>
         <Typography variant="h5" component="h5" className={style.TotalAmount}>
-          Total: 42000kr
+          Total: {info.flight.price + info.rooms.reduce((sum, room) => sum + room.price, 0)}kr
         </Typography>
       </Container>
     </Box>

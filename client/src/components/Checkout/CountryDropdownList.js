@@ -19,37 +19,31 @@ const theme = createMuiTheme({
   },
 });
 
-function Country_DropdownList({ myCountry, handleChange }) {
-  /*  const [country, setCountry] = useState({ name: myCountry }); */
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    width: `${40}%`,
+    flex: 1,
+    marginTop: 9,
+    marginLeft: 10,
 
-  const useStyles = makeStyles((theme) => ({
-    formControl: {
-      width: `${40}%`,
-      flex: 1,
-      marginTop: 9,
-      marginLeft: 10,
+    padding: 0,
+    backgroundColor: "transparent",
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(1),
+    backgroundColor: "transparent",
+  },
+}));
 
-      padding: 0,
-      backgroundColor: "transparent",
-    },
-    selectEmpty: {
-      marginTop: theme.spacing(1),
-      backgroundColor: "transparent",
-    },
-  }));
-
+function Country_DropdownList({ country, handleUser }) {
   const classes = useStyles();
-
-  /*  const handleChange = ({ target: { name, value } }) => {
-    setCountry({ [name]: value });
-  }; */
 
   return (
     <FormControl className={classes.formControl}>
       <ThemeProvider theme={theme}>
         <InputLabel htmlFor="country">Country</InputLabel>
       </ThemeProvider>
-      <Select name="country" native value={myCountry} onChange={handleChange}>
+      <Select name="country" native value={country} onChange={handleUser}>
         <option aria-label="None" value="" />
         <option value="Afganistan">Afghanistan</option>
         <option value="Albania">Albania</option>
