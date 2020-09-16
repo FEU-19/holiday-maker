@@ -14,16 +14,27 @@ const Container = styled.div`
 `;
 
 const useStyles = makeStyles((theme) => ({
+
   border: {
-    width: 180,
+    width: 220,
     height: 40,
     borderRadius: 7,
-    background: 'white',
     borderColor: '#162C72',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'flex-end',
-    paddingRight: '25',
+  },
+
+  select: {
+    paddingRight: 45,
+    margin: 1,
+    color: 'black',
+    '& > svg' : {
+      color: 'black',
+    },
+    '& > .MuiSelect-select:focus' : {
+      backgroundColor: 'white',
+    },
   },
 }));
 
