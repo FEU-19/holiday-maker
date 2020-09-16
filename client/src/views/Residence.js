@@ -17,6 +17,7 @@ const useStyle = makeStyles(() => ({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
+    position: 'relative'
   },
   title: {
     textAlign: "center",
@@ -38,7 +39,6 @@ const useStyle = makeStyles(() => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent:'center',
-    position: 'relative',
   },
   favourites: {
     margin: 'auto',
@@ -49,9 +49,10 @@ const useStyle = makeStyles(() => ({
   },
   favouriteDiv: {
     position: 'absolute',
-    right: -60,
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    top: 36,
+    right: 20,
   },
 }));
 
@@ -100,13 +101,13 @@ const Residence = () => {
 
   return (
     <div className={classes.article}>
-      <div className={classes.titlecontainer}>
-        <div className={classes.titlefavouritecontainer}>
-        <Typography variant = "h3" className={classes.title}>{data.name} {starRating(data.rating)}</Typography>
-        <div className={classes.favouriteDiv}>
+      <div className={classes.favouriteDiv}>
         <Typography variant = "p" className={classes.favourites}>Add to favourites</Typography>
         <Star/>
         </div>
+      <div className={classes.titlecontainer}>
+        <div className={classes.titlefavouritecontainer}>
+        <Typography variant = "h3" className={classes.title}>{data.name} {starRating(data.rating)}</Typography>
         </div>
         <HotelCarousel dataImage={data} />
         <div className={classes.info}>
