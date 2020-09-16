@@ -1,5 +1,4 @@
 import React from 'react';
-
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -39,7 +38,6 @@ const SelectDistanceCity = ({distanceCity, setDistanceCity}) => {
             : <MenuItem value={ distance } key={index}>N/A</MenuItem>
           )
         }
-
       </Select>
     </>
   )

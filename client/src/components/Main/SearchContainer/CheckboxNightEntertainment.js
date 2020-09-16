@@ -5,10 +5,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { checkboxTheme, checkboxStyle } from "./CheckboxTheme";
 import { ThemeProvider } from '@material-ui/core/styles';
 
-
 const CheckboxNightEntertainment = ({checkedNightEntertainment, setCheckedNightEntertainment}) => {
-
-   const theme = checkboxStyle();
+  const theme = checkboxStyle();
 
   useEffect(() => {
     if (!checkedNightEntertainment) {

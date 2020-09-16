@@ -1,14 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Grid from "@material-ui/core/Grid";
 import DateFnsUtils from '@date-io/date-fns';
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker,
-} from '@material-ui/pickers';
+import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
-
-
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -27,9 +21,6 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'flex-end',
   },
 }));
-
-
-
 
 export default function DatePicker({ residentData, date, setDate }) {
   const [startDate, handleStartChange] = useState(new Date(date.start));

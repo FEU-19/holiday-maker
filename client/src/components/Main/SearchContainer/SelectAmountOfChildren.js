@@ -1,20 +1,15 @@
 import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
-
 import Box from '@material-ui/core/Box';
-
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
-import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from '@material-ui/core/FormControl';
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexDirection: 'row',
     alignItems: 'flex-end',
     justifyItems: 'space-around',
-
   },
   formControl: {
     margin: theme.spacing(1),

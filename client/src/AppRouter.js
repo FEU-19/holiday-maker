@@ -8,7 +8,6 @@ import Residence from "./views/Residence";
 import HeaderComp from "./components/common/Header/Header";
 import Footer from "./components/common/Footer/Footer";
 
-// To add more routes use format as below and add to the routes array
 const routes = [
   { path: "/", component: Main },
   { path: "/checkout/", component: Checkout },
