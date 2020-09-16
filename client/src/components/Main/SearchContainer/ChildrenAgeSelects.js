@@ -73,7 +73,7 @@ class ChildrenAgeSelects extends React.Component {
         <Box
         style={{
           width: 100,
-          height: 40,
+          height: 35,
           border: "3px solid #162C72",
           borderRadius: 7,
           backgroundColor: "white",
@@ -81,6 +81,9 @@ class ChildrenAgeSelects extends React.Component {
           display: "flex",
           flexDirection: "row",
           justifyContent: "space-around",
+          alignItems: "center",
+          marginTop: 5,
+          marginRight: 5,
         }}
         >
           <p>Age</p>
