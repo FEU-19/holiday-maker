@@ -1,7 +1,5 @@
 import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
-
-
 import Box from '@material-ui/core/Box';
 import FormControl from '@material-ui/core/FormControl';
 import Select from "@material-ui/core/Select";
@@ -12,7 +10,6 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'row',
     alignItems: 'flex-end',
     justifyItems: 'space-around',
-
   },
   formControl: {
     margin: theme.spacing(1),
@@ -45,8 +42,6 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-
-
 const SelectAmountOfAdults = ({ amountOfAdults, setAmountOfAdults }) => {
   const classes = useStyles();
 
@@ -59,8 +54,7 @@ const SelectAmountOfAdults = ({ amountOfAdults, setAmountOfAdults }) => {
       <Box className={classes.border} border={3}>
         <FormControl classes={{ root: classes.root }} >
           <p className={classes.p}>Adults</p>
-{/*           <InputLabel id="selectAmountOfAdults">Adults</InputLabel>
- */}          <Select
+          <Select
             classes={{ select: classes.select}}
             aria-label={"Adults"}
             displayEmpty

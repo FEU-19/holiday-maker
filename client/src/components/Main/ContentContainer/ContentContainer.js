@@ -4,7 +4,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import ButtonBase from '@material-ui/core/ButtonBase';
 import { Button } from "@material-ui/core";
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import CancelIcon from '@material-ui/icons/Cancel';
@@ -112,7 +111,6 @@ const ContentContainer = ({ filteredData, sortOn, searching, queryParams }) => {
   }, [filteredData])
 
   useEffect(() => {
-    // If the option 'None' was selected
     if (!sortOn) return setSortedData([...filteredData]);
 
     if (sortOn === 'Price low to high') {

@@ -1,25 +1,12 @@
 import React from "react";
-// import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 
-// const useStyles = makeStyles((theme) => ({
-//   formControl: {
-//     margin: theme.spacing(1),
-//     minWidth: 120,
-//   },
-//   selectEmpty: {
-//     marginTop: theme.spacing(2),
-//   },
-// }));
-
 const distanceInterval = [0, 500, 1000, 1500, 2000, 3000, 4000, 6000, 8000];
 
-export default function SelectDistanceBeach({
-  distanceBeach,
-  setDistanceBeach,
-}) {
+export default function SelectDistanceBeach({ distanceBeach, setDistanceBeach }) {
+  
   function handleBeachChange(e) {
     setDistanceBeach(e.target.value);
   }
