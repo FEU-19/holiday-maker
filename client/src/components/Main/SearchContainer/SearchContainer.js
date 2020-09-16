@@ -3,6 +3,11 @@ import styled from "styled-components";
 import axios from "axios";
 import Grid from "@material-ui/core/Grid";
 import { Button } from "@material-ui/core";
+import Box from '@material-ui/core/Box';
+import Container from '@material-ui/core/Container';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/core/styles';
+
 
 // Componets
 import DatePicker from "./DatePicker";
@@ -29,26 +34,33 @@ import filterDistanceBeach from "../../../utils/filterDistanceBeach";
 import filterDistanceCity from "../../../utils/filterDistanceCity";
 import filterDate from "../../../utils/filterDate";
 
-const Container = styled.div`
-  width: 90vw;
+const StyledContainer = styled(Container)`
+  padding-top: 60px;
   display: flex;
   justify-content: center;
+  background-color: #F5F5F5;
 `;
 
 const Form = styled.form`
+  width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
 
 const GridContainer = styled(Grid)`
-  padding: 20px;
 `;
 
 const ButtonContainer = styled(Grid)`
   border-bottom: 1px solid grey;
   padding: 10px;
 `;
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {500: '#F23622'}, 
+  },
+});
 
 const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) => {
   const [residentData, setResidentData] = useState([]);
@@ -118,7 +130,7 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
   }
 
   return (
-    <Container>
+    <StyledContainer maxWidth="false">
       <Form onSubmit={onSubmit}>
         <GridContainer
           className="search-top"
@@ -134,12 +146,15 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
             />
           </Grid>
           <Grid item xs={4}>
+
             <DatePicker
               residentData={residentData}
               date={date}
               setDate={setDate}
             />
+
           </Grid>
+          
           <Grid item xs={2}>
             <SelectAmountOfAdults
               setAmountOfAdults={setAmountOfAdults}
@@ -167,6 +182,7 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
           justify="flex-end"
         >
           <Grid item xs={2}>
+            <ThemeProvider theme={theme}>
             <Button
               type="submit"
               variant="contained"
@@ -175,6 +191,7 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
             >
               Submit
             </Button>
+            </ThemeProvider>
           </Grid>
         </ButtonContainer>
         <GridContainer
@@ -221,7 +238,7 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
           </Grid>
         </GridContainer>
       </Form>
-    </Container>
+    </StyledContainer>
   );
 };
 
