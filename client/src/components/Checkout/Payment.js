@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState, useContext } from "react";
 
 import { Redirect, useLocation } from "react-router-dom";
 import CheckIcon from "@material-ui/icons/CheckCircle";
@@ -12,24 +11,16 @@ import InfoForm from "./InfoForm";
 import BookingInfo from "./BookingInfo";
 import PaymentPicker from "./PaymentPicker";
 import PaymentOptionWrapper from "./PaymentOptionWrapper";
+import UserContext from "../../context/UserContext";
+import { onCreditCardTypeChanged } from "../../utils/handleCardImage";
 
 function Payment() {
+  // styles
   const IconStyle = iconStyle();
   const pageStyle = PageStyle();
   const style = BookingInfoStyle();
 
-  const [user, setUser] = useState({
-    firstName: "",
-    surname: "",
-    email: "",
-    zipCode: "",
-    phoneNumber: "",
-    city: "",
-    adress: "",
-    country: "",
-    paymentPicker: "",
-  });
-
+  // card payment states
   const [credit, setCredit] = useState({
     creditCard: "",
     expire: "",
@@ -37,40 +28,14 @@ function Payment() {
   });
   const [cardImg, setCardImg] = useState("");
   const [type, setType] = useState("");
-  let userId = "5f5aa3bc7bd3af45e0c97964";
 
-  useEffect(() => {
-    axios
-      .get(`http://localhost:8080/api/users/${userId}`)
-      .then((response) => {
-        let user = response.data.data;
-        const data = {
-          firstName: user.firstName,
-          surname: user.surname,
-          email: user.email,
-          zipCode: user.zipCode,
-          phoneNumber: user.phoneNumber,
-          city: user.city,
-          adress: "copacana fixa adressfält!!!",
-          country: "Sweden",
-        };
+  // flight and rooms state
+  const { state } = useLocation();
 
-        return data;
-      })
-      .then((data) => {
-        setUser(data);
-      });
-  }, []);
+  // User context
+  const [{ user }] = useContext(UserContext);
 
-  // User data.
-  function handleChange(e) {
-    let userData = {
-      ...user,
-      [e.target.name]: e.target.value,
-    };
-
-    setUser(userData);
-  }
+  console.log(user);
 
   // Cleave credit
   function handleCredit(e) {
@@ -80,40 +45,6 @@ function Payment() {
     };
     if (!creditData.creditCard) setCardImg("");
     setCredit(creditData);
-  }
-
-  function onCreditCardTypeChanged(type) {
-    setType(type);
-
-    const visaCard = "https://i.ibb.co/vVYd6Xq/visa-3-226460.png";
-
-    const masterCard = "https://i.ibb.co/HFg4VgG/Master-Card.png";
-
-    const maestroCard = "https://i.ibb.co/vQm4yLR/21-credit-512.png";
-
-    const AMEX = "https://i.ibb.co/FXP29n4/American-Express-copy.png";
-
-    const discover =
-      "https://i.ibb.co/bXPV1nH/atm-card-credit-card-debit-card-discover-icon-discover-card-png-512-512.png";
-
-    const JCB = "https://i.ibb.co/5nhStm0/cropped-favicon.png";
-
-    const dinnersCard = "https://i.ibb.co/WVqdBMS/Diners-Club1950.png";
-
-    const instaPay =
-      "https://i.ibb.co/1Jmrn7Q/Xs-Gvw5zw-KGRs4-S6o3ma4ika8-WXk-cdw-Jaj-EEZhx-Ul-PCJGnj-Bt-Mu-HAXQRjd-PQh-Md-Er-Po-B.png";
-
-    const UATP = "https://i.ibb.co/kJ2BGzZ/website-UATPLogo.png";
-
-    type === "visa" && setCardImg(visaCard);
-    type === "mastercard" && setCardImg(masterCard);
-    type === "amex" && setCardImg(AMEX);
-    type === "diners" && setCardImg(dinnersCard);
-    type === "jcb" && setCardImg(JCB);
-    type === "uatp" && setCardImg(UATP);
-    type === "discover" && setCardImg(discover);
-    type === "maestro" && setCardImg(maestroCard);
-    type === "instapayment" && setCardImg(instaPay);
   }
 
   // Check if payment confirmed
@@ -132,7 +63,7 @@ function Payment() {
 
   if (redirect) {
     // url needs to change to booking details page
-    return <Redirect to="/" />;
+    return <Redirect to="/mybookings/" />;
   }
 
   return (
@@ -141,23 +72,13 @@ function Payment() {
         Payment
       </Typography>
 
-      <BookingInfo />
+      <BookingInfo info={state} />
       <Divider />
       <Box className={pageStyle.wrapper}>
         <Typography variant="h5" className={style.InfoTitle}>
           Account Information
         </Typography>
-        <InfoForm
-          firstName={user.firstName}
-          lastName={user.surname}
-          email={user.email}
-          address={user.adress}
-          city={user.city}
-          phoneNum={user.phoneNumber}
-          zipcode={user.zipCode}
-          handleChange={handleChange}
-          country={user.country}
-        />
+        <InfoForm {...user} />
       </Box>
       <Divider />
       <Box className={pageStyle.wrapper}>
@@ -169,7 +90,9 @@ function Payment() {
         <PaymentOptionWrapper
           option={user.paymentPicker}
           handleCredit={handleCredit}
-          onCreditCardTypeChanged={onCreditCardTypeChanged}
+          onCreditCardTypeChanged={() =>
+            onCreditCardTypeChanged(type, setType, setCardImg)
+          }
           cardNum={credit.creditCard}
           cvc={credit.cvc}
           expire={credit.expire}
@@ -178,7 +101,10 @@ function Payment() {
       </Box>
       <Box className={pageStyle.btnCtn}>
         <Button
-          onClick={() => setShowModal(true)}
+          onClick={() => {
+            setShowModal(true);
+            setPaymentSuccess(true);
+          }}
           className={pageStyle.btn}
           type="submit"
         >

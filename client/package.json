@@ -15,6 +15,7 @@
     "date-fns": "^2.16.1",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.4",
+    "jsonwebtoken": "^8.5.1",
     "moment": "^2.27.0",
     "react": "^16.13.1",
     "react-cookie": "^4.0.3",
@@ -24,7 +25,8 @@
     "react-scripts": "3.4.3",
     "react-test-renderer": "^16.13.1",
     "sinon": "^9.0.3",
-    "styled-components": "^5.1.1"
+    "styled-components": "^5.1.1",
+    "uuid": "^8.3.0"
   },
   "scripts": {
     "start": "react-scripts start",

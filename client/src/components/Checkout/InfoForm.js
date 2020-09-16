@@ -6,12 +6,12 @@ import { InfoFormStyle } from "./PaymentStyles";
 
 const InfoForm = ({
   firstName,
-  address,
-  lastName,
+  street,
+  surname,
   email,
-  phoneNum,
+  phoneNumber,
   city,
-  zipcode,
+  zipCode,
   handleChange,
   country,
 }) => {
@@ -32,7 +32,7 @@ const InfoForm = ({
           label="Last name"
           onchange={handleChange}
           name="surname"
-          value={lastName}
+          value={surname}
         />
         <TextInput
           className={InfoStyle.input}
@@ -46,27 +46,12 @@ const InfoForm = ({
           label="Mobile"
           onchange={handleChange}
           name="phoneNumber"
-          value={phoneNum}
+          value={phoneNumber}
         />
 
-        <TextInput
-          label="Adress"
-          onchange={handleChange}
-          name="adress"
-          value={address}
-        />
-        <TextInput
-          label="City"
-          name="city"
-          onchange={handleChange}
-          value={city}
-        />
-        <TextInput
-          label="Zip code"
-          name="zipCode"
-          onchange={handleChange}
-          value={zipcode}
-        />
+        <TextInput label="Street" onchange={handleChange} name="street" value={street} />
+        <TextInput label="City" name="city" onchange={handleChange} value={city} />
+        <TextInput label="Zip code" name="zipCode" onchange={handleChange} value={zipCode} />
 
         <CountryDropdownList handleChange={handleChange} myCountry={country} />
       </Box>
