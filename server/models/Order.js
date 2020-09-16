@@ -1,12 +1,25 @@
 const mongoose = require("mongoose");
 const Hotel = require("./Hotel");
+// Flight = require("./Flight");
 
 const orderSchema = mongoose.Schema(
   {
-    userId: mongoose.Schema.Types.ObjectId,
-    adults: Number,
-    children: Number,
-    hotel: mongoose.Schema.Types.ObjectId,
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+    },
+    adults: {
+      type: Number,
+      required: true,
+    },
+    children: {
+      type: Number,
+      required: true,
+    },
+    hotel: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+    },
     rooms: [
       {
         price: Number,
@@ -19,11 +32,18 @@ const orderSchema = mongoose.Schema(
       start: String,
       end: String,
     },
-    bookingNumber: String,
-    totalPrice: Number,
+    bookingNumber: {
+      type: String,
+      required: true,
+    },
+    totalPrice: {
+      type: Number,
+      required: true,
+    },
+    flight: Boolean /*  || { Flight } */,
   },
   {
-    timestamp: true,
+    timestamps: true,
   }
 );
 orderSchema.pre("save", async function (next) {
