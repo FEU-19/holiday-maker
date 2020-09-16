@@ -1,8 +1,15 @@
 # Miami Agile Documentation
 
-[Go to POST](##-Controllers)
+- [E/R diagram med modeller](##-E/R-Diagram-Med-Modeller)
+- [API specifikation](##-API-specifikation)
+- [Wireframes](##-Wireframes)
+- [Beteende](##-Beteende)
+- [Burndown chart](##-Burndown-chart)
+- [UX design](##-UX-design)
 
-##ER-Diagram
+##E/R Diagram Med Modeller
+
+![Miami E/R Diagram Med Modeller](https://i.ibb.co/CJdNJQ4/Miami-E-R-diagram.jpg)
 
 # Filstruktur
 
