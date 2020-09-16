@@ -6,19 +6,19 @@ import Box from '@material-ui/core/Box';
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    width: 200,
   },
   icon: {
     fill: '#162C72',
   },
   border: {
     height: 40,
+    width: '20rem',
     borderRadius: 7,
     background: 'white',
     borderColor: '#162C72',
     display: 'flex',
-    justifyContent: 'center',
     alignItems: 'flex-end',
+    paddingLeft: 3,
   },
 }));
 
@@ -34,7 +34,6 @@ export default function DatePicker({ residentData, date, setDate }) {
   },[setDate, startDate, endDate])
 
   return (
-    <div>
       <Box className={classes.border} border={3} >
       <MuiPickersUtilsProvider className={classes.container} utils={DateFnsUtils}>
         <KeyboardDatePicker
@@ -70,6 +69,5 @@ export default function DatePicker({ residentData, date, setDate }) {
         />
       </MuiPickersUtilsProvider>
       </Box>
-    </div>
   );
 }

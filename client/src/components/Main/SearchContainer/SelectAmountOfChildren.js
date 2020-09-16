@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'flex-end',
   },
   p: {
-    fontWeight: 20, 
+    fontWeight: 20,
     fontSize: 16,
     margin: '7px 20px 7px 7px',
   }
@@ -51,7 +51,7 @@ const SelectAmountOfChildren = ({setAmountOfChildren, amountOfChildren}) => {
   };
 
   return (
-    <>   
+    <>
     <Box className={classes.border} border={3}>
         <FormControl classes={{ root: classes.root }} >
 
