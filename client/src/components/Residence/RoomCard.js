@@ -157,8 +157,13 @@ const RoomCard = ({ roomInfo, chooseRoom }) => {
         value={roomInfo.extraBed}
         control={<CustomCheckbox />}
         onChange={handleCheck}
+        disabled={roomInfo.extraBed ? false : true}
         label={
-         <p style={{ paddingRight: "10vw" }} >Extra Bed: {roomInfo.extraBed}</p>
+          roomInfo.extraBed ? (
+         <p style={{ paddingRight: "10vw" }} >Extra Bed: {roomInfo.extraBed + ":-"}</p>
+         ) : (
+          <p style={{ paddingRight: "10vw" }}>Extra Bed: {"N/A"}</p>
+         )
         }
         labelPlacement="start"
        />
