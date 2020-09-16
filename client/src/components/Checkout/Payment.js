@@ -136,12 +136,19 @@ function Payment() {
         paymentO
         open={showModal}
       >
-        {paymentSuccess ? (
+        {paymentSuccess && payOption === "Invoice" ? (
           <div className="modal__container">
             <CheckIcon className={IconStyle.checkIcon} />
             <h1>Thank you!</h1>
             <h2>for booking with Holiday Maker.</h2>
             <p>Invoice will be sent by post to the address provided.</p>
+          </div>
+        ) : paymentSuccess ? (
+          <div className="modal__container">
+            <CheckIcon className={IconStyle.checkIcon} />
+            <h1>Thank you!</h1>
+            <h2>for booking with Holiday Maker.</h2>
+            <p>Your payment is finished processing, enjoy your holiday!.</p>
           </div>
         ) : (
           <div className="modal__container">
