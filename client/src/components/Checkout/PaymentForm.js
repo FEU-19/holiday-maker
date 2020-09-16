@@ -5,12 +5,12 @@ import { Box, InputLabel } from "@material-ui/core";
 import Cleave from "cleave.js/react";
 
 export default function PaymentForms({
-  onCreditCardTypeChanged,
   handleCredit,
   cvc,
   expire,
   cardNum,
   cardImg,
+  onCreditCardTypeChanged,
 }) {
   const classes = paymentFormStyle();
 

@@ -6,13 +6,13 @@ import ErrorIcon from "@material-ui/icons/Error";
 import { iconStyle, PageStyle, BookingInfoStyle } from "./PaymentStyles";
 import Modal from "../common/Modal/Modal";
 import { Container, Button, Divider, Box, Typography } from "@material-ui/core";
+import { onCreditCardTypeChanged } from "../../utils/handleCardImage";
 
 import InfoForm from "./InfoForm";
 import BookingInfo from "./BookingInfo";
 import PaymentPicker from "./PaymentPicker";
 import PaymentOptionWrapper from "./PaymentOptionWrapper";
 import UserContext from "../../context/UserContext";
-import { onCreditCardTypeChanged } from "../../utils/handleCardImage";
 
 function Payment() {
   // styles
@@ -27,7 +27,6 @@ function Payment() {
     cvc: "",
   });
   const [cardImg, setCardImg] = useState("");
-  const [type, setType] = useState("");
   const [payOption, setPayOption] = useState("");
 
   function handleChange(e) {
@@ -111,13 +110,13 @@ function Payment() {
         <PaymentOptionWrapper
           option={payOption}
           handleCredit={handleCredit}
-          onCreditCardTypeChanged={() =>
-            onCreditCardTypeChanged(type, setType, setCardImg)
-          }
           cardNum={credit.creditCard}
           cvc={credit.cvc}
           expire={credit.expire}
           cardImg={cardImg}
+          onCreditCardTypeChanged={(type) =>
+            onCreditCardTypeChanged(type, setCardImg)
+          }
         />
       </Box>
       <Box className={pageStyle.btnCtn}>
