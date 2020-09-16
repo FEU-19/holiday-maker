@@ -86,6 +86,8 @@ const RoomCard = ({ roomInfo, chooseRoom }) => {
  const classes = useStyle();
  const [value, setValue] = useState({ selected: "selfCatering" });
  const [extraBedValue, setExtraBedValue] = useState(0);
+ 
+
  const handleChange = (e) => {
   setValue({ selected: e.target.value });
  };
@@ -137,11 +139,26 @@ const RoomCard = ({ roomInfo, chooseRoom }) => {
        <Typography className={classes.title}>Options</Typography>
        <FormControlLabel
         style = {{justifyContent: "space-between"}}
+        value={roomInfo.presentCrib}
+        control={<CustomCheckbox />}
+        onChange={handleCheck}
+        disabled={roomInfo.presentCrib ? false : true}
+        label={
+          roomInfo.presentCrib ? (
+         <p style={{ paddingRight: "10vw" }} >Crib: 100:- {roomInfo.presentCrib}</p>
+        ) : (
+          <p style={{ paddingRight: "10vw" }}>Crib: {"N/A"}</p>
+          )
+        } 
+        labelPlacement="start"
+       />
+       <FormControlLabel
+        style = {{justifyContent: "space-between"}}
         value={roomInfo.extraBed}
         control={<CustomCheckbox />}
         onChange={handleCheck}
         label={
-         <p style={{ paddingRight: "10vw" }}>Extra Bed: {roomInfo.extraBed}</p>
+         <p style={{ paddingRight: "10vw" }} >Extra Bed: {roomInfo.extraBed}</p>
         }
         labelPlacement="start"
        />

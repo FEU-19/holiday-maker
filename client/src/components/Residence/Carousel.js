@@ -74,13 +74,13 @@ const Carousel = ({images,currentPicIndex,updatePicIndex, props}) => {
         <DIV>
             {images.map((image, index) =>(
                 <DIVIMG key={index}>
-                <IMG src={image} currentPicIndex={currentPicIndex}/>
+                <IMG src={image} alt = "image of the hotel" currentPicIndex={currentPicIndex}/>
                 </DIVIMG>
             ))}
-            <IconButton className={classes.buttonLeft} onClick={leftButton}>
+            <IconButton className={classes.buttonLeft} onClick={leftButton} title = "button left">
                 <KeyboardArrowLeftIcon fontSize='large' />
              </IconButton>
-            <IconButton className={classes.buttonRight} onClick={rightButton}>
+            <IconButton className={classes.buttonRight} onClick={rightButton} title = "button right">
                 <KeyboardArrowRightIcon fontSize='large'/>
             </IconButton>
         </DIV>
