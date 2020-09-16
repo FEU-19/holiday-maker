@@ -21,7 +21,7 @@ export default function SortContainer({ filteredData, sortOn, setSortOn }) {
 
   return (
     <>
-      {searchDone && 
+      {searchDone &&
         <>
           <InputLabel id="sort">Sort by</InputLabel>
           <Select

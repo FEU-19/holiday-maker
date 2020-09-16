@@ -9,7 +9,7 @@ const SelectCity = ({ residentData, city, setCity }) => {
     let userInput = e.target.value;
 
     if (userInput === 'None') return setCity('');
-    
+
     setCity(userInput);
   }
 
@@ -26,9 +26,9 @@ const SelectCity = ({ residentData, city, setCity }) => {
       >
         {uniqueCity.map((city, i) => {
           return (
-            <MenuItem 
-              key={city + i} 
-              value={city} 
+            <MenuItem
+              key={city + i}
+              value={city}
               onChange={handleChange}
               >{city}
             </MenuItem>

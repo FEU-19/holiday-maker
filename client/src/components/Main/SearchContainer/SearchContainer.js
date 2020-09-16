@@ -16,6 +16,7 @@ import CheckboxPool from "./CheckboxPool";
 import CheckboxRestaurant from "./CheckboxRestaurant";
 import SelectDistanceCity from "./SelectDistanceCity.js";
 import SelectDistanceBeach from "./SelectDistanceBeach";
+import SaveSearch from "./SaveSearch";
 
 // Filter functions
 import filterPresentCrib from '../../../utils/filterPresentCrib';
@@ -50,7 +51,7 @@ const ButtonContainer = styled(Grid)`
   padding: 10px;
 `;
 
-const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) => {
+const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams, savedSearchQueryParams }) => {
   const [residentData, setResidentData] = useState([]);
   const [city, setCity] = useState("");
   const [checkedKidsClub, setCheckedKidsclub] = useState("none");
@@ -82,7 +83,6 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
 
   function onSubmit(e) {
     e.preventDefault();
-
     let queryParams = {
       city: city ? city : 'none',
       checkedKidsClub,
@@ -116,6 +116,7 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
     setSearching(true);
 
   }
+
 
   return (
     <Container>
@@ -159,7 +160,6 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
             />
           </Grid>
         </GridContainer>
-
         <ButtonContainer
           className="search-top"
           container
@@ -175,6 +175,9 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
             >
               Submit
             </Button>
+            {Object.keys(savedSearchQueryParams).length !== 0 &&
+              <SaveSearch savedSearchParams={savedSearchQueryParams} />
+            }
           </Grid>
         </ButtonContainer>
         <GridContainer

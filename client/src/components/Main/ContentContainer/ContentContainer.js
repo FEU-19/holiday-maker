@@ -72,6 +72,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ContentContainer = ({ filteredData, sortOn, searching, queryParams }) => {
+  console.log(filteredData);
+  console.log(queryParams);
+  
   const [sortedData, setSortedData] = useState([]);
   const classes = useStyles();
 
