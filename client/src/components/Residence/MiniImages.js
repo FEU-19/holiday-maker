@@ -2,6 +2,7 @@ import React from "react";
 import Img from "./Img";
 import { v4 as uuidv4 } from "uuid";
 
+
 const MiniImages = ({ images, index, updatePicIndex }) => {
  return (
   <>

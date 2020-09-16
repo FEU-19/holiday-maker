@@ -132,7 +132,7 @@ const GeneralInformation = ({ generalInfo }) => {
     >
      <span style={textReset}>
       This residence has {info.numberOfRooms} rooms, {info.totalBeds} Beds and{" "}
-      {info.totalExtraBeds} Extra beds.
+      20 Extra beds.
      </span>
     </Typography>
     <div
@@ -159,7 +159,7 @@ const GeneralInformation = ({ generalInfo }) => {
      >
       <span style={subTitle}>Beds</span>
       <span style={textReset}>{info.totalBeds} Beds</span>
-      <span style={textReset}>{info.totalExtraBeds} Extra beds</span>
+      <span style={textReset}>20 Extra beds</span>
      </Typography>
      <Typography component = "p"
       className="residence__generalInformationContainer__contentContainer__content"
