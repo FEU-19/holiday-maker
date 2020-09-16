@@ -9,6 +9,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import axios from 'axios';
 
  const flights = [
 {
@@ -103,11 +104,19 @@ const FlightBooking = () => {
     setOpen(false);
   };
 
+
+
+  axios
+  .get(`http://localhost:8080/api/flights`)
+  .then((res) => {
+    console.log("flights res ", res);
+  })
+
   const classes = useStyles();
 
     return (
         <div>
-          <Button onClick={handleOpen}>Open Modal</Button> 
+          <Button onClick={handleOpen}>Book Flight</Button> 
           <Modal open={open} onClose={handleClose} aria-labelledby="simple-modal-title" aria-describedby="simple-modal-description">
             <TableContainer component={Paper}>
              <Table className={classes.paper} aria-label="simple table">

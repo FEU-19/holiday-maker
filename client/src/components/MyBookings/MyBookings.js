@@ -10,6 +10,9 @@ import CardContent from "@material-ui/core/CardContent";
 import { Button } from "@material-ui/core";
 import ChangeBookingModal from "../modals/ChangeBooking/ChangeBookingModal";
 
+import FlightBooking from "../modals/FlightBooking/FlightBooking"
+import axios from "axios";
+
 const objekt = [
   {
     _id: {
@@ -156,6 +159,12 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     marginLeft: "50%",
   },
+  buttons: {
+    display: 'flex',
+    flexDirection: 'row',
+    whiteSpace: 'nowrap',
+    marginLeft: '-45px'
+  }
 }));
 
 const MyBookings = (props) => {
@@ -224,12 +233,15 @@ const MyBookings = (props) => {
                   <br />
                   {/* Extra Bed:  {myBooking.rooms[0].extraBed} */}
                 </Typography>
+                <div className={classes.buttons}>
                 <Button
                   className={classes.heading}
                   onClick={() => saveOrder(myBooking)}
                 >
                   Change Booking
                 </Button>
+                <FlightBooking />  
+                </div>                    
               </CardContent>
             </Card>
           </AccordionDetails>
