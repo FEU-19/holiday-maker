@@ -10,7 +10,6 @@ const boxContainer = {
   justifyContent: "space-between",
   alignItems: "center",
   marginBottom: "20px",
-
 };
 
 const infoContainer = {
@@ -62,7 +61,7 @@ const text = {
 
 const ResidenceInformation = ({ info }) => {
   return (
-    <div
+    <div 
       className="residence__residenceInformation__boxContainer"
       style={boxContainer}
     >

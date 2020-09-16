@@ -42,7 +42,7 @@ const RoomType = ({ roomType }) => {
    <CardHeader className={classes.header} title={roomType.type} />
    <CardMedia
     className={classes.media}
-    title={roomType.type}
+    title= "image of the room"
     image={roomType.images[0]}
    />
    <CardContent>
