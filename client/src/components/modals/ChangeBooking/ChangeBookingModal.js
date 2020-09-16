@@ -13,63 +13,23 @@ import SelectAmountOfChildren from "../../Main/SearchContainer/SelectAmountOfChi
 
 import ChildrenAgeSelects from "../../Main/SearchContainer/ChildrenAgeSelects";
 
-import RenderRooms from "./RenderRooms";
 import ChangeDates from "./ChangeDates";
+import RenderFoodOption from "./RenderFoodOption";
 
-export default function ChangeBookingModal() {
-  const [open, setOpen] = useState(true);
-  const [hotelId, setHotelId] = useState("5f5b7e5b36ac0355705b8087");
-  const [hotel, setHotel] = useState(null);
-  const [bookings, setBookings] = useState([
-    {
-      _id: {
-        // boknings nummer
-        $oid: "5f5889d8daa2064fd4eb8a42",
-      },
-      userId: {
-        // användare
-        $oid: "5f5f64fb86170a41247bdf06",
-      },
-      bookingNumber: "k7cSt78z9k9v9n261lrv5364e",
-      rooms: [
-        //   {
-        //     "_id": {
-        //         "$oid": "5f5b7e5b36ac0355705b8088"
-        //     },
-        //     "price": 0,
-        //     "option": "selfCatering",
-        //     "roomNumber": "100"
-        // },
-        {
-          _id: {
-            $oid: "5f5b7e5b36ac0355705b808c",
-          },
-          price: 531,
-          option: "halfBoard",
-          roomNumber: "103",
-        },
-        {
-          _id: {
-            $oid: "5f5b7e5b36ac0355705b8096",
-          },
-          price: 748,
-          option: "allInclusive",
-          roomNumber: "110",
-        },
-      ],
-      bookingDates: {
-        start: "2020-06-01T11:46:29.258Z",
-        end: "2020-06-15T11:47:09.886Z",
-      },
-      hotel: {
-        $oid: "5f5b7e5b36ac0355705b8087",
-      },
-      __v: 0,
-    },
-  ]); // ska få från parent
+export default function ChangeBookingModal({
+  handleClose,
+  open,
+  bookings,
+  hotelId,
+}) {
+  
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [date, setDate] = useState({start: '', end: ''});
+  const bookedRooms = bookings.rooms;
+  const [hotel, setHotel] = useState(null);
+  console.log("I GOT the Order ", bookings);
+  console.log("I GOT the FLIGHT ID  ", hotelId);
   
   (bookings.map(booking => {
     console.log(booking.bookingDates)
@@ -88,7 +48,7 @@ export default function ChangeBookingModal() {
     axios
       .get(`http://localhost:8080/api/residences/${hotelId}`)
       .then((res) => {
-        console.log(res);
+        console.log("Hotel Res ", res);
 
         setHotel(res.data.data);
       })
@@ -99,24 +59,22 @@ export default function ChangeBookingModal() {
         );
       });
   }, [hotelId]);
-  // VÄLJA MAT OPTION
-  // hitta room på room[]._id
-  // rendera ut vad rummet erbjuder
-  // skicka in datan till RenderFoodOption
 
-  // Få PUT att funka innan vi redirectar¨
-  // Sedan Redirect to={{ pathname: "/checkout", state: { rooms: chosenRooms } }}
-  // const [chosenRooms, setChosenRooms] = useState([]);
+  function findTheHotelRoomInHotel(id) {
+    // console.log( id);
+    let x;
+    const roomsInHotel = hotel.rooms;
+    roomsInHotel.map((HotelRoom) => {
+      // console.log('This is rooms in HOTEL -> ',  HotelRoom._id);
+      if (HotelRoom._id === id) {
+        // console.log("*************************************", HotelRoom._id, id);
+        // console.log(HotelRoom);
+        return (x = HotelRoom);
+      }
+    });
+    return x;
+  }
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  console.log(date)
   return (
     <Dialog
       open={open}
@@ -130,7 +88,6 @@ export default function ChangeBookingModal() {
           <DialogTitle id="form-dialog-title">{hotel.name}</DialogTitle>
           <DialogContent>
             <ChangeDates date={date} setDate={setDate} />
-            <RenderRooms bookings={bookings} hotel={hotel} />
             {/* <DatePicker />
         <SelectAmountOfAdults />
         <SelectAmountOfChildren />
@@ -138,7 +95,40 @@ export default function ChangeBookingModal() {
             {/* Extra bed */}
             {/* flight */}
             {/* Need price */}
+            {bookedRooms.map((room, index) => {
+              console.log("This is my option ", room);
 
+              const hotelRoom = findTheHotelRoomInHotel(room._id.$oid);
+              // console.log("only the matching hotelRoom ", hotelRoom);
+
+              return (
+                <React.Fragment key={index}>
+                  {/* <p>size: {hotelRoom.size}</p> */}
+                  {/* <FormControlLabel
+                value={hotelRoom.extraBed}
+                control={<Checkbox color="default" />}
+                onChange={handleCheck}
+                label={
+                  <p style={{ paddingRight: "10vw" }}>
+                    Extra Bed: {hotelRoom.extraBed}
+                  </p>
+                }
+                labelPlacement="start"
+              />
+              <RadioGroup
+                aria-label="price"
+                name="price"
+                value={selected}
+                // onChange={handleChange}
+              /> */}
+
+                  <RenderFoodOption
+                    roomInfo={hotelRoom}
+                    roomOption={room.price}
+                  />
+                </React.Fragment>
+              );
+            })}
             <RadioGroup
               aria-label="price"
               name="price"

@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import SearchContainer from "../components/Main/SearchContainer/SearchContainer";
-import ContentContainer from "../components/Main/ContentContainer/ContentContainer";
+import MyBookingComp from "../components/MyBookings/MyBookings"
 import HeaderComp from "../components/common/Header/Header";
 // stor bokstav på variabler i styled components
 const Container = styled.main`
@@ -11,7 +10,7 @@ const Container = styled.main`
   border: 2px solid black;
 `;
 
-const Main = () => {
+const MyBooking = () => {
   const [filteredData, setFilteredData] = useState([]);
 
   function setFilteredDataCB(data) {
@@ -22,11 +21,10 @@ const Main = () => {
     <>
       <HeaderComp />
       <Container>
-        <SearchContainer setFilteredDataCB={setFilteredDataCB} />
-        <ContentContainer filteredData={filteredData} />
+        <MyBookingComp />
       </Container>
     </>
   );
 };
 
-export default Main;
+export default MyBooking;
