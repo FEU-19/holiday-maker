@@ -28,6 +28,13 @@ function Payment() {
   });
   const [cardImg, setCardImg] = useState("");
   const [type, setType] = useState("");
+  const [payOption, setPayOption] = useState("");
+
+  function handleChange(e) {
+    setPayOption((payOption) => {
+      payOption = e.target.value;
+    });
+  }
 
   // flight and rooms state
   const { state } = useLocation();
@@ -88,7 +95,7 @@ function Payment() {
         <PaymentPicker handleChange={handleChange} />
 
         <PaymentOptionWrapper
-          option={user.paymentPicker}
+          option={payOption}
           handleCredit={handleCredit}
           onCreditCardTypeChanged={() =>
             onCreditCardTypeChanged(type, setType, setCardImg)
