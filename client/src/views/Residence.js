@@ -38,23 +38,17 @@ const useStyle = makeStyles(() => ({
 
 const Residence = () => {
   const classes = useStyle();
+  const [unfilteredData, updateUnfilteredData] = useState(null);
+  const {state} = useLocation();
+  const data = state.hotel;
+  //const { hotelId } = useParams();
 
-  // ********* THIS SHOULD BE UNCOMMENTED ON MERGE WITH MASTER *********
-  // const {state} = useLocation();
-  // const data = state.hotel;
-  // *******************************************************************
-
-
-
-  // **************** ALL BELOW THIS LINE SHOULD BE REMOVED ON MERGE WITH MASTER *********************
-  const [data, updateData] = useState(null);
-  const { hotelId } = useParams();
-
+ // GET unfiltered hotel object for general information
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/residences/${hotelId}`)
+      .get(`http://localhost:8080/api/residences/${data._id}`)
       .then((response) => {
-        updateData(response.data.data);
+        updateUnfilteredData(response.data.data);
       })
      .catch((error) => {
       console.error(
@@ -64,11 +58,9 @@ const Residence = () => {
      });
     }, []);
 
-    if (!data){
+    if (!data || !unfilteredData){
       return <div />
     }
-  // **************** ALL ABOVE THIS LINE SHOULD BE REMOVED ON MERGE WITH MASTER *********************
-
 
   function starRating(rating){
     let ratingArray = [];
@@ -91,7 +83,7 @@ const Residence = () => {
         <RoomCardMapper allRooms={data.rooms} />
       </div>
       <div>
-        <GeneralInformation generalInfo={data} />
+        <GeneralInformation generalInfo={unfilteredData} />
       </div>
     </div>
   );

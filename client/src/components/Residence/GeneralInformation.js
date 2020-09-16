@@ -80,9 +80,8 @@ const GeneralInformation = ({ generalInfo }) => {
    return acc + cur.beds;
   }, 0);
 
-  const totalExtraBeds = generalInfo.rooms.reduce((acc, cur) => {
-   return acc + cur.extraBed;
-  }, 0);
+  // At CT there is one extra bed available per room
+  const totalExtraBeds = generalInfo.rooms.length;
 
   const roomInfoObject = {
    numberOfRooms: roomAmount,
