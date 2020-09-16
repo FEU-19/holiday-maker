@@ -13,13 +13,15 @@ const CustomRadio = withStyles({
   checked: {},
 })((props) => <Radio color="default" {...props} />);
 
-export default function RenderFoodOptions({ roomInfo, roomOption }) {
+export default function RenderFoodOptions({ roomInfo, roomOption, saveChanges }) {
   const [value, setValue] = useState({ selected: roomOption });
 
   const { selected } = value;
   const handleChange = (e) => {
     console.log("Clicking on ", e.target.value);
-    setValue({ selected: e.target.value });
+    console.log("Clicking on ", e.target);
+
+    saveChanges(value);
   };
  
 
@@ -37,7 +39,6 @@ export default function RenderFoodOptions({ roomInfo, roomOption }) {
           value={roomInfo.allInclusive.toString()}
           control={<CustomRadio />}
           disabled={!roomInfo.allInclusive}
-          // checked={value.selected === roomInfo.allInclusive ? true : false}
           label={
             roomInfo.allInclusive ? (
               <p style={{ paddingRight: "10vw" }}>
@@ -53,7 +54,6 @@ export default function RenderFoodOptions({ roomInfo, roomOption }) {
           style={{ borderTop: "1px solid #ccd9dd" }}
           value={roomInfo.fullBoard.toString()}
           control={<CustomRadio />}
-          // checked={value.selected === roomInfo.fullBoard ? true : false}
           disabled={!roomInfo.fullBoard}
           label={
             roomInfo.fullBoard ? (
@@ -70,7 +70,6 @@ export default function RenderFoodOptions({ roomInfo, roomOption }) {
           style={{ borderTop: "1px solid #ccd9dd" }}
           value={roomInfo.halfBoard.toString()}
           control={<CustomRadio />}
-          // checked={value.selected === roomInfo.halfBoard ? true : false}
           disabled={!roomInfo.halfBoard}
           label={
             roomInfo.halfBoard ? (
@@ -87,7 +86,6 @@ export default function RenderFoodOptions({ roomInfo, roomOption }) {
           style={{ borderTop: "1px solid #ccd9dd" }}
           value={roomInfo.selfCatering.toString()}
           control={<CustomRadio />}
-          // checked={value.selected === roomInfo.selfCatering ? true : false}
           label={
             roomInfo.selfCatering || (
               <p style={{ paddingRight: "10vw" }}>

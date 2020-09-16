@@ -10,7 +10,7 @@ export default function ChangeDates({ date, setDate }) {
   const [startDate, handleStartChange] = useState(new Date('2020-06-05T00:00:00.000Z'));
   const [endDate, handleEndChange] = useState(new Date('2020-06-09T00:00:00.000Z'));
 
- console.log(date)
+//  console.log(date)
 
   // useEffect(() => {
   //   let startToISO = startDate.toISOString();

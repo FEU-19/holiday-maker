@@ -22,20 +22,63 @@ export default function ChangeBookingModal({
   bookings,
   hotelId,
 }) {
-  
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [date, setDate] = useState({start: '', end: ''});
   const bookedRooms = bookings.rooms;
   const [hotel, setHotel] = useState(null);
-  console.log("I GOT the Order ", bookings);
-  console.log("I GOT the FLIGHT ID  ", hotelId);
+  const [editOrder, setEditOrder] = useState(bookings.rooms); // Lägg ändingarna i denna
   
+
   // (bookings.map(booking => {
   //   console.log(booking.bookingDates)
   //   // setStartDate(booking.bookingDates.start)
   //   // setEndDate(booking.bookingDates.end)
   // }))
+
+  // {
+  //   _id: {
+  //     $oid: "5f5889d8daa2064fd4eb8a42",
+  //   },
+  //   userId: {
+  //     $oid: "5f61c0cab5402617c07a742a",
+  //   },
+  //   bookingNumber: "k7cSt78z9k9v9n261lrv5364e",
+  //   rooms: [
+  //     {
+  //       _id: {
+  //         $oid: "5f5b7e5b36ac0355705b808c",
+  //       },
+  //       price: {newFood},
+  //       option: "halfBoard",
+  //       roomNumber: "103",
+  //     },
+  //   ],
+  //   bookingDates: {
+  //     start: {newstartdata},
+  //     end: "2020-06-15T11:47:09.886Z",
+  //   },
+  //   hotel: {
+  //     $oid: "5f5b7e5b36ac0355705b8087",
+  //   },
+  //   flight:
+  //     "null" |
+  //     {
+  //       departureDate: "2020-06-01T11:46:29.258Z",
+  //       returnDate: "2020-06-15T11:47:09.886Z",
+  //       price: "Number",
+  //     },
+  // }
+
+
+  function saveChanges(value){
+    console.log('IAM ', value);
+    // console.log('Before change ', editOrder);
+      // const { value } = e.target;
+      // const { name } = e.target;
+      // setEditOrder({ ...editOrder, [name]: value });      
+  }
+  console.log('After change  ', editOrder);
 
   useEffect(() => {
     if(bookings){
@@ -48,8 +91,7 @@ export default function ChangeBookingModal({
     axios
       .get(`http://localhost:8080/api/residences/${hotelId}`)
       .then((res) => {
-        console.log("Hotel Res ", res);
-
+        // console.log("Hotel Res ", res);
         setHotel(res.data.data);
       })
       .catch((error) => {
@@ -88,10 +130,10 @@ export default function ChangeBookingModal({
           <DialogTitle id="form-dialog-title">{hotel.name}</DialogTitle>
           <DialogContent>
             <ChangeDates date={date} setDate={setDate} />
-            {/* <DatePicker />
+{/*             
         <SelectAmountOfAdults />
         <SelectAmountOfChildren />
-        <ChildrenAgeSelects /> */}
+        <ChildrenAgeSelects /> */} 
             {/* Extra bed */}
             {/* flight */}
             {/* Need price */}
@@ -99,7 +141,7 @@ export default function ChangeBookingModal({
               console.log("This is my option ", room);
 
               const hotelRoom = findTheHotelRoomInHotel(room._id.$oid);
-              // console.log("only the matching hotelRoom ", hotelRoom);
+              
 
               return (
                 <React.Fragment key={index}>
@@ -115,30 +157,15 @@ export default function ChangeBookingModal({
                 }
                 labelPlacement="start"
               />
-              <RadioGroup
-                aria-label="price"
-                name="price"
-                value={selected}
-                // onChange={handleChange}
-              /> */}
-
+              */}
                   <RenderFoodOption
                     roomInfo={hotelRoom}
                     roomOption={room.price}
+                    saveChanges={saveChanges}
                   />
                 </React.Fragment>
               );
             })}
-            <RadioGroup
-              aria-label="price"
-              name="price"
-              // value={selected}
-              // onChange={handleChange}
-            />
-
-            <Button onClick={handleClose} color="primary">
-              Book flight
-            </Button>
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose} color="primary">
