@@ -18,23 +18,31 @@ const routes = [
 
 const DivRoot = styled.div`
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+`;
+
+const MainContent = styled.div`
   position: relative;
+  flex-grow: 1;
 `;
 
 function AppRouter() {
   return (
     <DivRoot>
       <HeaderComp />
-      <Switch>
-        {routes.map(({ path, component }) => (
-          <Route
-            exact
-            path={path}
-            key={path + component}
-            component={component}
-          />
-        ))}
-      </Switch>
+      <MainContent>
+        <Switch>
+          {routes.map(({ path, component }) => (
+            <Route
+              exact
+              path={path}
+              key={path + component}
+              component={component}
+            />
+          ))}
+        </Switch>
+      </MainContent>
       <Footer />
     </DivRoot>
   );

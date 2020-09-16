@@ -13,10 +13,6 @@ const Container = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  position: sticky;
-  top: 0;
-  left: 0;
-  z-index: 99;
   box-shadow: 0px 3px 5px -3px rgba(0,0,0,0.5);
 `;
 
