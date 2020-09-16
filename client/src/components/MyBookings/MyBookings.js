@@ -7,7 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogTitle from "@material-ui/core/DialogTitle";
 import axios from "axios";
 
 import ContainerButtons from "./ContainerButtons";
@@ -70,41 +70,41 @@ const objekt = [
 }]
 */
 const useStyles = makeStyles((theme) => ({
-    root: {
-      width: '100%',
-    },
-    heading: {
-      fontSize: theme.typography.pxToRem(15),
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      marginLeft: '17%',
-    },
-    secondaryHeading: {
-      fontSize: theme.typography.pxToRem(15),
-      color: theme.palette.text.secondary,
-    },
-    title: {
-      fontSize: 14,
-    },
-    pos: {
-      marginBottom: 12,
-    },
-    rootTwo: {
-      minWidth: 275,
-      transform: 'translate(-50%, 0)',
-      display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginLeft: '50%',
-    },
-    flex: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginLeft: '50%',
-    },
-  }));
+  root: {
+    width: "100%",
+  },
+  heading: {
+    fontSize: theme.typography.pxToRem(15),
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    marginLeft: "17%",
+  },
+  secondaryHeading: {
+    fontSize: theme.typography.pxToRem(15),
+    color: theme.palette.text.secondary,
+  },
+  title: {
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+  },
+  rootTwo: {
+    minWidth: 275,
+    transform: "translate(-50%, 0)",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    marginLeft: "50%",
+  },
+  flex: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    marginLeft: "50%",
+  },
+}));
 
 const MyBookings = (props) => {
   const [myBookings, setMyBookings] = useState([]);
@@ -113,12 +113,9 @@ const MyBookings = (props) => {
 
   const classes = useStyles();
 
-
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/orders/", {
-        headers: { "x-auth-token": getToken() },
-      })
+      .get("http://localhost:8080/api/orders/", { withCredentials: true })
       .then((res) => {
         console.log(res);
         setMyBookings(res.data.data);
@@ -128,49 +125,54 @@ const MyBookings = (props) => {
       });
   }, [update]);
 
-  if(!myBookings){
-    return(<p>loading..</p>)
+  if (!myBookings) {
+    return <p>loading..</p>;
   }
-  
+
   return (
-    <div className={classes.root}>  
-            {myBookings.map(myBooking => 
-                <Accordion key={myBooking._id}>
-                    <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content"id="panel1a-header">
-                      <Typography className={classes.heading}>{myBooking.hotel}</Typography>
-                      <Typography className={classes.heading}>{myBooking.bookingDates.start}</Typography>
-                      <Typography className={classes.heading}>{myBooking._id}</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails >
-                        <Card className={classes.rootTwo}>
-                            <CardContent >
-                                <Typography>
-                                  Information
-                                </Typography>
-                                <Typography  className={classes.pos} color="textSecondary">
-                                  User Name/Id: {myBooking.userId}
-                                  <br></br>
-                                  Total Rooms: {myBooking.rooms.length}
-                                  <br></br>
-                                  Total People: {myBooking.adults + myBooking.children}
-                                  Departure Date: {"lmao"}
-                                  Return Date: {"lmao"}
-                                  Extra Bed:  {myBooking.rooms[0].extraBed}
-                                </Typography>
-                                <ContainerButtons 
-                                    setUpdate={setUpdate} 
-                                    update={update} 
-                                    orderId={myBooking._id} 
-                                    wholeNewObject={myBooking}
-                                  />
-                            </CardContent>
-                        </Card>
-                    </AccordionDetails>
-                </Accordion>
-                )
-            }
-        </div>
-  )
-}
+    <div className={classes.root}>
+      {myBookings.map((myBooking) => (
+        <Accordion key={myBooking._id}>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <Typography className={classes.heading}>
+              {myBooking.hotel}
+            </Typography>
+            <Typography className={classes.heading}>
+              {myBooking.bookingDates.start}
+            </Typography>
+            <Typography className={classes.heading}>{myBooking._id}</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Card className={classes.rootTwo}>
+              <CardContent>
+                <Typography>Information</Typography>
+                <Typography className={classes.pos} color="textSecondary">
+                  User Name/Id: {myBooking.userId}
+                  <br></br>
+                  Total Rooms: {myBooking.rooms.length}
+                  <br></br>
+                  Total People: {myBooking.adults + myBooking.children}
+                  Departure Date: {"lmao"}
+                  Return Date: {"lmao"}
+                  Extra Bed: {myBooking.rooms[0].extraBed}
+                </Typography>
+                <ContainerButtons
+                  setUpdate={setUpdate}
+                  update={update}
+                  orderId={myBooking._id}
+                  wholeNewObject={myBooking}
+                />
+              </CardContent>
+            </Card>
+          </AccordionDetails>
+        </Accordion>
+      ))}
+    </div>
+  );
+};
 
 export default MyBookings;

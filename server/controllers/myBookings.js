@@ -30,8 +30,8 @@ const mockData = {
     start: "2020-06-01T11:46:29.258Z",
     end: "2020-06-15T11:47:09.886Z",
   },
-  _id: "5f60813ed87e4b922de1ff72",
-  userId: "5f5f64fb86170a41247bdf06",
+  _id: "5f589c5df1c5661b60bae19b",
+  userId: "5f61c0cab5402617c07a742a",
   bookingNumber: "1eg96c85t6vk14S8ljkn4953i",
   rooms: [
     {
@@ -46,6 +46,7 @@ const mockData = {
 
 exports.changeBooking = async (req, res) => {
   const { orderId } = req.params;
+  console.log(orderId);
 
   if (!orderId) {
     res.status(400).json({
