@@ -62,9 +62,15 @@ const Form = styled.form`
 
 
 const ButtonContainer = styled(Grid)`
-  border-bottom: 1px solid grey;
   padding: 30px;
 `;
+
+const StyledDiv = styled.div`
+  width: 100%;
+  height: 1px;
+  background-color: grey;
+  margin-top: 20px;
+`
 
 const theme = createMuiTheme({
   palette: {
@@ -181,7 +187,7 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
             <Grid
               style={{
                 minHeight: 110,
-                minWidth: 210,
+                minWidth: 510,
                 marginTop: 10,
                 marginBottom: -70
               }}
@@ -201,7 +207,10 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
             spacing={1}
             justify="flex-end"
           >
-            <Grid item xs={2}>
+            <Grid item xs={2}
+              container
+              justify="flex-end"
+              >
               <Button
                 type="submit"
                 variant="contained"
@@ -211,6 +220,7 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
                 Search
             </Button>
             </Grid>
+            <StyledDiv></StyledDiv>
           </ButtonContainer>
           <Grid
             className="search-bottom"
