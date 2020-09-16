@@ -31,9 +31,8 @@ function Payment() {
   const [payOption, setPayOption] = useState("");
 
   function handleChange(e) {
-    setPayOption((payOption) => {
-      payOption = e.target.value;
-    });
+    let value = e.target.value;
+    setPayOption(value);
   }
 
   // flight and rooms state
@@ -48,6 +47,7 @@ function Payment() {
       ...credit,
       [e.target.name]: e.target.value,
     };
+    console.log(creditData);
     if (!creditData.creditCard) setCardImg("");
     setCredit(creditData);
   }

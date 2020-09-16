@@ -1,4 +1,4 @@
-import { makeStyles } from "@material-ui/core/styles";
+import { createMuiTheme, makeStyles } from "@material-ui/core/styles";
 
 //Payment page
 export const PageStyle = makeStyles(() => ({
@@ -187,7 +187,7 @@ export const BookingInfoStyle = makeStyles(() => ({
   },
 
   title: {
-    color: "#162C72",
+    color: "#4AB0BD",
     display: "flex",
     alignItems: "center",
     width: "100px",
@@ -238,7 +238,7 @@ export const BookingInfoStyle = makeStyles(() => ({
   },
 
   InfoTitle: {
-    color: "#4AB0BD",
+    color: "#f23622",
     margin: "5% auto",
   },
   TotalAmount: {
@@ -248,6 +248,13 @@ export const BookingInfoStyle = makeStyles(() => ({
   },
 }));
 
+export const radioTheme = createMuiTheme({
+  palette: {
+    primary: { main: "#162c72" }, // Purple and green play nicely together.
+    secondary: { main: "#11cb5f" }, // This is just green.A700 as hex.
+  },
+});
+
 // Payment picker
 export const paymentPicker = makeStyles(() => ({
   box: {
@@ -255,6 +262,9 @@ export const paymentPicker = makeStyles(() => ({
   },
 
   radio: {
+    "&$checked": {
+      color: "#162c72",
+    },
     border: "1px solid #162c72",
     padding: "10px 50px",
   },
