@@ -5,10 +5,36 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
+import { makeStyles } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
+
+
+
+const useStyles = makeStyles((theme) => ({
+  container: {
+    width: 200,
+  },
+  icon: {
+    fill: '#162C72',
+  },
+  border: {
+    height: 40,
+    borderRadius: 7,
+    background: 'white',
+    borderColor: '#162C72',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+  },
+}));
+
+
+
 
 export default function DatePicker({ residentData, date, setDate }) {
   const [startDate, handleStartChange] = useState(new Date(date.start));
   const [endDate, handleEndChange] = useState(new Date(date.end));
+  const classes = useStyles();
 
   useEffect(() => {
     let startToISO = startDate.toISOString();
@@ -18,16 +44,16 @@ export default function DatePicker({ residentData, date, setDate }) {
 
   return (
     <div>
-      <Grid container spacing={1}>
-      <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <Grid item xs={6}>
+      <Box className={classes.border} border={3} >
+      <MuiPickersUtilsProvider className={classes.container} utils={DateFnsUtils}>
         <KeyboardDatePicker
+          classes={{icon: classes.icon}}
           autoOk={true}
           disableToolbar
           variant="inline"
           format="MM/dd/yyyy"
           id="date-picker-inline-start"
-          label="Start"
+          label=""
           mr='10px'
           value={startDate}
           minDate={new Date('2020-06-01')}
@@ -37,15 +63,13 @@ export default function DatePicker({ residentData, date, setDate }) {
             'aria-label': 'change date',
           }}
         />
-      </Grid>
-      <Grid item xs={6}>
         <KeyboardDatePicker
           autoOk={true}
           disableToolbar
           variant="inline"
           format="MM/dd/yyyy"
           id="date-picker-inline-end"
-          label="End"
+          label=""
           value={endDate}
           minDate={startDate}
           maxDate={new Date('2020-07-31')}
@@ -54,9 +78,8 @@ export default function DatePicker({ residentData, date, setDate }) {
             'aria-label': 'change date',
           }}
         />
-      </Grid>
       </MuiPickersUtilsProvider>
-    </Grid>
+      </Box>
     </div>
   );
 }
