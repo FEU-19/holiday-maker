@@ -13,16 +13,19 @@ const CustomRadio = withStyles({
   checked: {},
 })((props) => <Radio color="default" {...props} />);
 
-export default function RenderFoodOptions({ roomInfo, roomOption, saveChanges }) {
+export default function RenderFoodOptions({ roomInfo, roomOption, newRoomOptions, setNewRoomOptions }) {
   const [value, setValue] = useState({ selected: roomOption });
+  console.log(roomInfo);
 
   const { selected } = value;
   const handleChange = (e) => {
     console.log("Clicking on ", e.target.value);
-    console.log("Clicking on ", e.target);
-
-    saveChanges(value);
+    console.log("Value is  ", value);
+    setValue({ selected: e.target.value });
+    setNewRoomOptions({...newRoomOptions, price: e.target.value });
   };
+
+  console.log('the room have this options ', newRoomOptions)
  
 
   return (

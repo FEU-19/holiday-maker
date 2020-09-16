@@ -37,20 +37,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ContainerButtons = (props) => {
-<<<<<<< HEAD
-  useEffect(() => {
-    axios
-      .get("http://localhost:8080/api/orders/", {
-        headers: { "x-auth-token": getToken() },
-      })
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-=======
   const classes = useStyles();
   const [deleteModal, setDeleteModal] = useState(false);
   const [modalStyle] = React.useState(getModalStyle);
@@ -90,7 +76,6 @@ const ContainerButtons = (props) => {
   const handleDeleteModal = () => {
     setDeleteModal(!deleteModal);
   };
->>>>>>> copa-sammankoppla
 
   const handleDelete = () => {
     console.log(props.orderId);
