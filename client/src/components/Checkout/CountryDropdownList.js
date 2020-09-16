@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Country_DropdownList({ myCountry, handleChange }) {
+function Country_DropdownList({ country, handleChange }) {
   /*  const [country, setCountry] = useState({ name: myCountry }); */
 
   const classes = useStyles();
@@ -49,7 +49,7 @@ function Country_DropdownList({ myCountry, handleChange }) {
       <ThemeProvider theme={theme}>
         <InputLabel htmlFor="country">Country</InputLabel>
       </ThemeProvider>
-      <Select name="country" native value={myCountry} onChange={handleChange}>
+      <Select name="country" native value={country} onChange={handleChange}>
         <option aria-label="None" value="" />
         <option value="Afganistan">Afghanistan</option>
         <option value="Albania">Albania</option>
@@ -80,7 +80,9 @@ function Country_DropdownList({ myCountry, handleChange }) {
         <option value="Bosnia & Herzegovina">Bosnia & Herzegovina</option>
         <option value="Botswana">Botswana</option>
         <option value="Brazil">Brazil</option>
-        <option value="British Indian Ocean Ter">British Indian Ocean Ter</option>
+        <option value="British Indian Ocean Ter">
+          British Indian Ocean Ter
+        </option>
         <option value="Brunei">Brunei</option>
         <option value="Bulgaria">Bulgaria</option>
         <option value="Burkina Faso">Burkina Faso</option>
@@ -91,7 +93,9 @@ function Country_DropdownList({ myCountry, handleChange }) {
         <option value="Canary Islands">Canary Islands</option>
         <option value="Cape Verde">Cape Verde</option>
         <option value="Cayman Islands">Cayman Islands</option>
-        <option value="Central African Republic">Central African Republic</option>
+        <option value="Central African Republic">
+          Central African Republic
+        </option>
         <option value="Chad">Chad</option>
         <option value="Channel Islands">Channel Islands</option>
         <option value="Chile">Chile</option>
@@ -282,7 +286,9 @@ function Country_DropdownList({ myCountry, handleChange }) {
         <option value="United Kingdom">United Kingdom</option>
         <option value="Ukraine">Ukraine</option>
         <option value="United Arab Erimates">United Arab Emirates</option>
-        <option value="United States of America">United States of America</option>
+        <option value="United States of America">
+          United States of America
+        </option>
         <option value="Uraguay">Uruguay</option>
         <option value="Uzbekistan">Uzbekistan</option>
         <option value="Vanuatu">Vanuatu</option>

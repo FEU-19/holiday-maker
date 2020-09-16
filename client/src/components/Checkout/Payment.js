@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 
 import { Redirect, useLocation } from "react-router-dom";
 import CheckIcon from "@material-ui/icons/CheckCircle";
@@ -41,6 +41,23 @@ function Payment() {
   // User context
   const [{ user }] = useContext(UserContext);
 
+  // User state
+  const [userInfo, setUserInfo] = useState(user);
+
+  useEffect(() => {
+    setUserInfo(user);
+  }, [user]);
+
+  function userHandler(e) {
+    let userData = {
+      ...userInfo,
+      [e.target.name]: e.target.value,
+    };
+
+    console.log(userData);
+    setUserInfo(userData);
+  }
+
   // Cleave credit
   function handleCredit(e) {
     let creditData = {
@@ -70,7 +87,6 @@ function Payment() {
     // url needs to change to booking details page
     return <Redirect to="/mybookings/" />;
   }
-
   return (
     <Container className={pageStyle.root}>
       <Typography variant="h4" className={pageStyle.pageTitle}>
@@ -83,7 +99,7 @@ function Payment() {
         <Typography variant="h5" className={style.InfoTitle}>
           Account Information
         </Typography>
-        <InfoForm {...user} />
+        <InfoForm {...userInfo} handleUser={userHandler} />
       </Box>
       <Divider />
       <Box className={pageStyle.wrapper}>
