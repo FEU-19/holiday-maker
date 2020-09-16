@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
-import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import { sortValues } from '../../../config/constants';
 import styled from "styled-components";
+
+import { sortValues } from '../../../config/constants';
 
 const Container = styled.div`
   margin-inline-start: auto;
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     margin: 1,
     color: 'black',
     '& > svg' : {
-      color: 'black',
+      color: '#162C72',
     },
     '& > .MuiSelect-select:focus' : {
       backgroundColor: 'white',
