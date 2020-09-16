@@ -34,7 +34,7 @@ function AppRouter() {
         const response = await axios.get("http://localhost:8080/api/users/", {
           headers: { "x-auth-token": token },
         });
-        console.log(response);
+        console.log(response, "RESPONSE");
 
         setContext({ token, user: response.data.user });
       } catch (error) {
@@ -49,7 +49,12 @@ function AppRouter() {
     <UserContext.Provider value={[context, setContext]}>
       <Switch>
         {routes.map(({ path, component }) => (
-          <Route exact path={path} key={path + component} component={component} />
+          <Route
+            exact
+            path={path}
+            key={path + component}
+            component={component}
+          />
         ))}
       </Switch>
     </UserContext.Provider>
