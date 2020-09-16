@@ -36,13 +36,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Country_DropdownList({ country, handleChange }) {
-  /*  const [country, setCountry] = useState({ name: myCountry }); */
-
   const classes = useStyles();
-
-  /*  const handleChange = ({ target: { name, value } }) => {
-    setCountry({ [name]: value });
-  }; */
 
   return (
     <FormControl className={classes.formControl}>

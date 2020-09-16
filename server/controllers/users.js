@@ -20,7 +20,6 @@ exports.createLogin = async (req, res) => {
     const user = await User.findOne({
       email,
     });
-
     if (!user) {
       return res.status(403).json({
         error: [{ msg: "Invalid Credentials" }],
