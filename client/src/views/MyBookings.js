@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
-import MyBookingComp from "../components/MyBookings/MyBookings"
+import MyBookingComp from "../components/MyBookings/MyBookings";
 import HeaderComp from "../components/common/Header/Header";
 // stor bokstav på variabler i styled components
 const Container = styled.main`
@@ -11,15 +11,8 @@ const Container = styled.main`
 `;
 
 const MyBooking = () => {
-  const [filteredData, setFilteredData] = useState([]);
-
-  function setFilteredDataCB(data) {
-    setFilteredData(data);
-  }
-
   return (
     <>
-      <HeaderComp />
       <Container>
         <MyBookingComp />
       </Container>

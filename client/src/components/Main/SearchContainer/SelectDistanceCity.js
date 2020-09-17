@@ -1,8 +1,51 @@
 import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 
+import Box from '@material-ui/core/Box';
+import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    justifyItems: 'space-around',
+
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 200,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+  select: {
+    background: 'white',
+    width: 40,
+  },
+  icon: {
+    fill: '#4AB0BD',
+  },
+  border: {
+    width: 235,
+    height: 30,
+    borderRadius: 7,
+    background: 'white',
+    borderColor: '#4AB0BD',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+  },
+  p: {
+    fontWeight: 20, 
+    fontSize: 16,
+    margin: '7px 20px 7px 7px',
+  }
+}));
+
+
+
 
 const distanceInterval = [
   0,
@@ -20,18 +63,23 @@ const SelectDistanceCity = ({distanceCity, setDistanceCity}) => {
   const handleChange = (e) => {
     setDistanceCity(e.target.value);
   };
+  const classes = useStyles();
 
   return (
-    <>
-      <InputLabel id="selectDistanceCity">Distance to city</InputLabel>
-      <Select
+      <Box className={classes.border} border={3}>
+        <FormControl classes={{ root: classes.root }} >
+        <p className={classes.p}>Distance to center</p>
+
+{/*       <InputLabel id="selectDistanceCity">Distance to the center</InputLabel>
+ */}      <Select
+        classes={{ icon: classes.icon }}
         aria-label="Select Distance To City"
         displayEmpty
         id="selectDistanceCity"
         value={ distanceCity }
         onChange={ handleChange }
       >
-        <MenuItem disabled>Distance</MenuItem>
+        <MenuItem disabled>No longer than:</MenuItem>
         {
           distanceInterval.map((distance, index) =>
             distance
@@ -39,9 +87,9 @@ const SelectDistanceCity = ({distanceCity, setDistanceCity}) => {
             : <MenuItem value={ distance } key={index}>None</MenuItem>
           )
         }
-
       </Select>
-    </>
+      </FormControl>
+      </Box>
   )
 };
 

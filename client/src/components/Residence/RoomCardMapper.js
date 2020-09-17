@@ -1,23 +1,23 @@
 import React, { useState } from "react";
 import RoomCard from "./RoomCard";
-import { Button, makeStyles, ThemeProvider } from "@material-ui/core";
-import { Redirect } from "react-router-dom";
+import { Button, makeStyles } from "@material-ui/core";
+import { Redirect, useLocation } from "react-router-dom";
 
 const useStyle = makeStyles({
   sticky: {
-    position: "fixed",
+    position: "absolute",
     bottom: 0,
     left: 0,
     padding: "10px 0",
     width: "100%",
     margin: "0 auto",
-    background: "#4db51d",
   },
 });
 
-const RoomCardMapper = ({ allRooms }) => {
+const RoomCardMapper = ({ allRooms, dates }) => {
   const [chosenRooms, setChosenRooms] = useState([]);
   const [redirect, setRedirect] = useState(false);
+  const { state } = useLocation();
 
   const styles = useStyle();
   console.log('the ROOMINFO is ----> ', allRooms);
@@ -38,17 +38,20 @@ const RoomCardMapper = ({ allRooms }) => {
     <div>
       {redirect && (
         <Redirect
-          to={{ pathname: "/checkout", state: { rooms: chosenRooms } }}
+          to={{
+            pathname: "/flight",
+            state: {
+              rooms: chosenRooms,
+              queryParams: state.queryParams,
+              hotel: state.hotel,
+            },
+          }}
         />
       )}
-      {allRooms.map((room) => {
-        return <RoomCard roomInfo={room} chooseRoom={chooseRoom} />;
+      {allRooms.map((room, index) => {
+        return <RoomCard key={index} roomInfo={room} chooseRoom={chooseRoom} dates={dates} />;
       })}
-      <Button
-        color="primary"
-        className={styles.sticky}
-        onClick={() => setRedirect(true)}
-      >
+      <Button color="primary" className={styles.sticky} onClick={() => setRedirect(true)}>
         CHECKOUT
       </Button>
     </div>

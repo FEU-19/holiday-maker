@@ -29,18 +29,29 @@ const Carousel = ({images,currentPicIndex,updatePicIndex, props}) => {
     const stylesForButton = makeStyles({
         buttonLeft: {
             color: 'black',
-            backgroundColor: 'darkgray',
+            backgroundColor: 'lightgrey',
+            opacity: "0.8",
             top: '50%',
             transform: 'translateY(-50%)',
             position: 'absolute',
+            "&:hover": {
+                backgroundColor: "lightgrey",
+                opacity: "1"
+                
+              },
         },
         buttonRight: {
             color: 'black',
-            backgroundColor: 'darkgray',
+            backgroundColor: "lightgrey",
+            opacity: "0.8",
             right: 0,
             top: '50%',
             transform: 'translateY(-50%)',
-            position: 'absolute'
+            position: 'absolute',
+            "&:hover": {
+                backgroundColor: "lightgrey",
+                opacity: "1",
+              },
         },
     })
 
@@ -55,21 +66,21 @@ const Carousel = ({images,currentPicIndex,updatePicIndex, props}) => {
             updatePicIndex(currentPicIndex+1)
         }
     }
-  
+
     const classes = stylesForButton();
 
     return(
         <MainDiv>
         <DIV>
-            {images.map( image =>(
-                <DIVIMG >
-                <IMG src={image} currentPicIndex={currentPicIndex}/>
+            {images.map((image, index) =>(
+                <DIVIMG key={index}>
+                <IMG src={image} alt = "image of the hotel" currentPicIndex={currentPicIndex}/>
                 </DIVIMG>
             ))}
-            <IconButton className={classes.buttonLeft} onClick={leftButton}>
+            <IconButton className={classes.buttonLeft} onClick={leftButton} title = "button left">
                 <KeyboardArrowLeftIcon fontSize='large' />
              </IconButton>
-            <IconButton className={classes.buttonRight} onClick={rightButton}>
+            <IconButton className={classes.buttonRight} onClick={rightButton} title = "button right">
                 <KeyboardArrowRightIcon fontSize='large'/>
             </IconButton>
         </DIV>

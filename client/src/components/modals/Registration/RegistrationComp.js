@@ -60,7 +60,6 @@ const RegistrationComp = (props) => {
       })
       .catch((err) => {
         console.log(err);
-        setWhatMsgToShow(err.response.data.error[0].msg);
       });
   }
 
@@ -88,16 +87,8 @@ const RegistrationComp = (props) => {
 
   return (
     <div>
-      <RenderInputs
-        handleSubmit={handleSubmit}
-        newUser={newUser}
-        handleInput={handleInput}
-      />
-      <RenderMsg
-        whatMsgToShow={whatMsgToShow}
-        handleClose={handleClose}
-        anchorEl={anchorEl}
-      />
+      <RenderInputs handleSubmit={handleSubmit} newUser={newUser} handleInput={handleInput} />
+      <RenderMsg whatMsgToShow={whatMsgToShow} handleClose={handleClose} anchorEl={anchorEl} />
     </div>
   );
 };
