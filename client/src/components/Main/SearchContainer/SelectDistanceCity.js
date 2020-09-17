@@ -87,7 +87,6 @@ const SelectDistanceCity = ({distanceCity, setDistanceCity}) => {
             : <MenuItem value={ distance } key={index}>None</MenuItem>
           )
         }
-
       </Select>
       </FormControl>
       </Box>

@@ -5,7 +5,6 @@ import SearchContainer from "../components/Main/SearchContainer/SearchContainer"
 import ContentContainer from "../components/Main/ContentContainer/ContentContainer";
 import SortContainer from "../components/Main/SortContainer/SortContainer";
 
-
 const Container = styled.main`
   display: flex;
   flex-direction: column;

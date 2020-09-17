@@ -1,5 +1,4 @@
 import React from 'react';
-
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import Box from '@material-ui/core/Box';
@@ -101,7 +100,6 @@ class ChildrenAgeSelects extends React.Component {
         </Box>
       );
     }
-
     this.setState({ selects: x, childrenAgeArr: arr });
   }
 

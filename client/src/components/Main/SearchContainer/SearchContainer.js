@@ -9,8 +9,6 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 
-
-
 // Componets
 import DatePicker from "./DatePicker";
 import SelectCity from "./SelectCity";
@@ -24,7 +22,6 @@ import CheckboxRestaurant from "./CheckboxRestaurant";
 import SelectDistanceCity from "./SelectDistanceCity.js";
 import SelectDistanceBeach from "./SelectDistanceBeach";
 
-
 // Filter functions
 import filterPresentCrib from '../../../utils/filterPresentCrib';
 import filterAmountOfTravelers from "../../../utils/filterAmountOfTravelers";
@@ -37,16 +34,13 @@ import filterDistanceBeach from "../../../utils/filterDistanceBeach";
 import filterDistanceCity from "../../../utils/filterDistanceCity";
 import filterDate from "../../../utils/filterDate";
 
-
 const useStyles = makeStyles((theme) => ({
   backgroundColor: {
     backgroundColor: '#F5F5F5',
     paddingTop: 70,
     minHeight: 350,
-  },
-
+  }
 }));
-
 
 const Form = styled.form`
   width: 100%;
@@ -73,14 +67,11 @@ const theme = createMuiTheme({
   },
 });
 
-
 const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) => {
   const [residentData, setResidentData] = useState([]);
   const [city, setCity] = useState("");
   const [checkedKidsClub, setCheckedKidsclub] = useState("none");
-  const [checkedNightEntertainment, setCheckedNightEntertainment] = useState(
-    "none"
-  );
+  const [checkedNightEntertainment, setCheckedNightEntertainment] = useState("none");
   const [checkedPool, setCheckedPool] = useState("none");
   const [checkedRestaurant, setCheckedRestaurant] = useState("none");
   const [amountOfChildren, setAmountOfChildren] = useState(0);
@@ -139,7 +130,6 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
 
     setFilteredDataCB(c);
     setSearching(true);
-
   }
 
   return (

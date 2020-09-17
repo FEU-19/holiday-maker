@@ -111,7 +111,6 @@ const ContentContainer = ({ filteredData, sortOn, searching, queryParams }) => {
   }, [filteredData])
 
   useEffect(() => {
-    // If the option 'None' was selected
     if (!sortOn) return setSortedData([...filteredData]);
 
     if (sortOn === 'Price low to high') {
