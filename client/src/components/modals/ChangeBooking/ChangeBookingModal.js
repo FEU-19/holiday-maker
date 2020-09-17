@@ -1,13 +1,12 @@
 import React, { useState, useEffect, Fragment } from "react";
 import axios from "axios";
+import { makeStyles } from "@material-ui/core/styles";
 import DialogContent from "@material-ui/core/DialogContent";
 import Typography from "@material-ui/core/Typography";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Dialog from "@material-ui/core/Dialog";
 import Button from "@material-ui/core/Button";
-// import TextField from "@material-ui/core/TextField";
 import DialogActions from "@material-ui/core/DialogActions";
-import RadioGroup from "@material-ui/core/RadioGroup";
 
 import SelectAmountOfAdults from "../../Main/SearchContainer/SelectAmountOfAdults";
 import SelectAmountOfChildren from "../../Main/SearchContainer/SelectAmountOfChildren";
@@ -17,6 +16,7 @@ import ChildrenAgeSelects from "../../Main/SearchContainer/ChildrenAgeSelects";
 import ChangeDates from "./ChangeDates";
 import RenderFoodOption from "./RenderFoodOption";
 import { DataFoodOptions } from "./DataFoodOptions";
+import {handleEdit} from '../../MyBookings/ContainerButtons';
 
 export default function ChangeBookingModal({
   handleClose,
@@ -29,6 +29,7 @@ export default function ChangeBookingModal({
   const [date, setDate] = useState({ start: "", end: "" });
   const [hotel, setHotel] = useState(null);
   const [newRoomOptions, setNewRoomOptions] = useState(bookings.rooms[0]);
+  
 
   const bookedRooms = bookings.rooms;
   console.log("****** Remove NAME before PUT *************", newRoomOptions);
@@ -67,6 +68,29 @@ export default function ChangeBookingModal({
       }
     });
     return x;
+  }
+
+  function saveChanges(){
+    console.log('Name should be remmoved  ***************** ', newRoomOptions, newRoomOptions.name);
+    setNewRoomOptions({...newRoomOptions}, delete newRoomOptions.name);
+
+    
+
+    // for(const [key, value] of Object.entries(bookings.rooms[0]) ) {
+    //   console.log('!!!!!!!!!!!!!!!!!!!!!', key, value);
+    //   if(newRoomOptions.option === key) {
+
+    //   }
+    // }
+    console.log('the hole ********************** ', bookings)
+
+    let data = {...bookings.rooms[0], ...newRoomOptions};
+    console.log('....... THE HOLE NEW ORDER ', data);
+    console.log('the hole 222222222222222222222222 ', bookings)
+
+    // console.log('REMOVED NAME ', data);
+    // console.log('Name should be remmoved  ***************** ', newRoomOptions, newRoomOptions.name);
+    // handleEdit();
   }
 
   return (
@@ -120,10 +144,10 @@ export default function ChangeBookingModal({
             })}
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose} color="primary">
+            <Button onClick={handleClose} variant="outlined" color="primary">
               Cancel changes
             </Button>
-            <Button onClick={handleClose} color="primary">
+            <Button onClick={saveChanges} variant="outlined" color="primary">
               Save changes
             </Button>
           </DialogActions>

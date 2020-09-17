@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import getToken from "../../utils/getToken";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Button from "@material-ui/core/Button";
 import styled from "styled-components";
+import getToken from "../../utils/getToken";
 
 const Container = styled.div`
   text-align: center;
@@ -130,9 +130,9 @@ const ContainerButtons = (props) => {
       >
         Delete
       </Button>
-      {/*<Button variant="outlined" color="primary" onClick={handleEdit}>
+      <Button variant="outlined" color="primary" onClick={() => props.saveOrder(props.myBooking)}>
         Change
-  </Button>*/}
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}

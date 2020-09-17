@@ -214,13 +214,13 @@ const MyBookings = (props) => {
                 <br />
                 Extra Bed:  {myBooking.rooms[0].extraBed}
               </Typography>
-              <Button 
+              {/* <Button 
                 className={classes.heading}
                 onClick={() => saveOrder(myBooking)}
               >
                 Change Booking
-              </Button>
-              <ContainerButtons />
+              </Button> */}
+              <ContainerButtons saveOrder={saveOrder} myBooking={myBooking}/>
             </CardContent>
           </Card>
         </AccordionDetails>
