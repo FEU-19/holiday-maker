@@ -15,6 +15,7 @@ import ChildrenAgeSelects from "../../Main/SearchContainer/ChildrenAgeSelects";
 
 import ChangeDates from "./ChangeDates";
 import RenderFoodOption from "./RenderFoodOption";
+import filterDate from "../../../utils/filterDate";
 
 export default function ChangeBookingModal({
   handleClose,
@@ -30,17 +31,14 @@ export default function ChangeBookingModal({
   const [hotel, setHotel] = useState(null);
   console.log("I GOT the Order ", bookings);
   console.log("I GOT the FLIGHT ID  ", hotelId);
-  
-  (bookings.map(booking => {
-    console.log(booking.bookingDates)
-    // setStartDate(booking.bookingDates.start)
-    // setEndDate(booking.bookingDates.end)
-  }))
+  const [newStartDate, setNewStartDate] = useState('')
+  const [newEndDate, setNewEndDate] = useState('');
+
+  console.log(bookings.bookingDates.start)
 
   useEffect(() => {
     if(bookings){
-      
-      setDate((prevState => ({...prevState, start: startDate, end: endDate})));
+      setDate((prevState => ({...prevState, start: bookings.bookingDates.start, end: bookings.bookingDates.end})));
     }
 }, [bookings]);
 
@@ -74,7 +72,7 @@ export default function ChangeBookingModal({
     });
     return x;
   }
-
+  
   return (
     <Dialog
       open={open}
@@ -88,10 +86,10 @@ export default function ChangeBookingModal({
           <DialogTitle id="form-dialog-title">{hotel.name}</DialogTitle>
           <DialogContent>
             <ChangeDates date={date} setDate={setDate} />
-            {/* <DatePicker />
-        <SelectAmountOfAdults />
-        <SelectAmountOfChildren />
-        <ChildrenAgeSelects /> */}
+            {/* 
+              <SelectAmountOfAdults />
+              <SelectAmountOfChildren />
+              <ChildrenAgeSelects /> */}
             {/* Extra bed */}
             {/* flight */}
             {/* Need price */}
