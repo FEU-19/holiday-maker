@@ -7,6 +7,7 @@ import DropDown from "./components/common/DropDown/DropDown";
 import Residence from "./views/Residence";
 import UserContext from "./context/userContext";
 import MyBookings from "./views/MyBookings";
+import FlightBooking from "./components/modals/FlightBooking/FlightBooking";
 
 // To add more routes use format as below and add to the routes array
 const routes = [
@@ -15,6 +16,7 @@ const routes = [
   { path: "/residence/:hotelId", component: Residence },
   { path: "/dropdown/:id", component: DropDown },
   { path: "/mybookings/", component: MyBookings },
+  { path: "/flightbooking/", component: FlightBooking },
 ];
 
 function AppRouter() {

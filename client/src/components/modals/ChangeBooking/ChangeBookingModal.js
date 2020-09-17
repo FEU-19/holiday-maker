@@ -37,10 +37,6 @@ export default function ChangeBookingModal({
 
   const bookedRooms = bookings.rooms;
 
-  //console.log('*************************************************', bookings.bookingDates.start)
-
- 
-  //console.log("****** Remove NAME before PUT *************", newRoomOptions);
 
   useEffect(() => {
     if (bookings) {
@@ -137,6 +133,7 @@ export default function ChangeBookingModal({
                 </React.Fragment>
               );
             })}
+            
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose} variant="outlined" color="primary">
