@@ -211,6 +211,8 @@ const MyBookings = (props) => {
                   <Button
                     className={classes.heading}
                     onClick={() => saveOrder(myBooking)}
+                    variant="outlined"
+                    color="primary"
                   >
                     Change Booking
                   </Button>

@@ -119,7 +119,9 @@ const FlightBooking = () => {
 
   return (
     <div>
-      <Button onClick={handleOpen}>Book Flight</Button>
+      <Button onClick={handleOpen} variant="outlined" color="primary">
+        Book Flight
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -172,7 +174,9 @@ const FlightBooking = () => {
                   <TableCell align="right">{flight.Response.seats}</TableCell>
                   <TableCell align="right">
                     <Link to="/checkout">
-                      <Button align="right">Book Flight</Button>
+                      <Button variant="outlined" color="primary" align="right">
+                        Book Flight
+                      </Button>
                     </Link>
                   </TableCell>
                 </TableRow>

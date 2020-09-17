@@ -130,9 +130,9 @@ const ContainerButtons = (props) => {
       >
         Delete
       </Button>
-      <Button variant="outlined" color="primary" onClick={() => props.saveOrder(props.myBooking)}>
+      {/* <Button variant="outlined" color="primary" onClick={() => props.saveOrder(props.myBooking)}>
         Change
-      </Button>
+      </Button> */}
       <Modal
         open={open}
         onClose={handleClose}
