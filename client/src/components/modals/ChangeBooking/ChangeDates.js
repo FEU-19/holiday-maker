@@ -9,6 +9,7 @@ import {
 export default function ChangeDates({ date, setDate }) {
   const [startDate, handleStartChange] = useState(new Date(date.start));
   const [endDate, handleEndChange] = useState(new Date(date.end));
+  // console.log('This is the date in ChangeDates ----------------->',date)
 
   useEffect(() => {
     let startToISO = startDate.toISOString();

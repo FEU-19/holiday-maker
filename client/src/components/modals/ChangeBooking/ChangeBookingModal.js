@@ -37,17 +37,17 @@ export default function ChangeBookingModal({
 
   const bookedRooms = bookings.rooms;
 
-  console.log(bookings.bookingDates.start)
+  //console.log('*************************************************', bookings.bookingDates.start)
 
  
-  console.log("****** Remove NAME before PUT *************", newRoomOptions);
+  //console.log("****** Remove NAME before PUT *************", newRoomOptions);
 
   useEffect(() => {
     if (bookings) {
       setDate((prevState) => ({
         ...prevState,
-        start: startDate,
-        end: endDate,
+        start: bookings.bookingDates.start,
+        end: bookings.bookingDates.end,
       }));
     }
   }, [bookings]);
@@ -100,7 +100,7 @@ export default function ChangeBookingModal({
             {/* Need price */}
             {bookedRooms.map((room, index) => {
               const hotelRoom = findTheHotelRoomInHotel(room._id);
-              console.log(hotelRoom);
+              //console.log(hotelRoom);
               const data = DataFoodOptions(hotelRoom);
 
               return (
