@@ -1,32 +1,35 @@
-/**
- *
- * @param {*} residents of type [Hotel]
- * @param {*} date of type occupiedDate
- */
+import getDateArray from './getDateArrayInterval';
 
-export default function filterDate(hotels, date) {
-  const s = Date.parse(date.start);
-  const e = Date.parse(date.end);
+export default function filterDate (hotels, date) {
+  let dateInterval = getDateArray(new Date(date.start), new Date(date.end));
 
-  return hotels.map((hotel) => {
-    const rooms = hotel.rooms
-      .map((room) => {
-        const occupied = room.occupiedDates.reduce((acc, { start, end }) => {
-          if (acc) return acc;
+  let result = hotels.map((hotel) => {
+    const rooms = hotel.rooms.map((room) => {
+      const occupied = room.occupiedDates.reduce((acc, { start, end }) => {
+        if (acc) return acc;
+        let temp = false;
+    
+        getDateArray(new Date(start), new Date(end))
+        .map((occ) => {
+          return dateInterval.map((uDate) => {
+            if (uDate.getDate() === occ.getDate() && uDate.getMonth() === occ.getMonth()) {
+              temp = true;
+            }
+            return false;
+          })
+        })
 
-          const pStart = Date.parse(start);
-          const pEnd = Date.parse(end);
+        if (temp) {
+          return true;
+        }
+        return false;
+      }, false);
 
-          if ((s <= pStart && pStart <= e) || (s <= pEnd && pEnd <= e)) {
-            return true;
-          }
-          return false;
-        }, false);
-
-        return occupied ? null : room;
-      }, false)
-      .filter(Boolean);
-
+      return occupied ? null : room;
+    })
+    .filter(Boolean);
     return { ...hotel, rooms };
   });
+    return result.filter(hotel => hotel.rooms.length !== 0);
 }
+
