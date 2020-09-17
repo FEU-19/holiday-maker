@@ -81,11 +81,10 @@ export default function ChangeBookingModal({
   function saveChanges(){
     console.log('THIS IS THE OLD ORDER ', bookings);
     setNewRoomOptions({...newRoomOptions}, delete newRoomOptions.name);
-
-    let data = {...bookings, ...bookedRooms.splice(0,1,newRoomOptions)};
+    bookings.bookingDates.start = date.start;
+    bookings.bookingDates.end = date.end;
+    let data = {...bookings, ...bookedRooms.splice(0,1,newRoomOptions)  };
     console.log('....... THE HOLE NEW ORDER ', data);
-    
-
   }
 
   return (
