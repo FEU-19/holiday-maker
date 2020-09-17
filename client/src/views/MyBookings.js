@@ -13,7 +13,6 @@ const Container = styled.main`
 const MyBooking = () => {
   return (
     <>
-      <HeaderComp />
       <Container>
         <MyBookingComp />
       </Container>

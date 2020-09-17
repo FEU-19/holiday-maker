@@ -71,12 +71,12 @@ const Residence = () => {
   // GET unfiltered hotel object for general information
   useEffect(() => {
     axios.defaults.withCredentials = true;
-    if (document.cookie !== null) {
-      axios.get(`http://localhost:8080/api/residences/${data._id}/user`).then((response) => {
-        const found = response.data.findIndex((hotel) => hotel === data._id);
-        updateValue(found === -1 ? 0 : 1);
-      });
-    }
+    // if (document.cookie !== null) {
+    //   axios.get(`http://localhost:8080/api/residences/${data._id}/user`).then((response) => {
+    //     const found = response.data.findIndex((hotel) => hotel === data._id);
+    //     updateValue(found === -1 ? 0 : 1);
+    //   });
+    // }
 
     axios
       .get(`http://localhost:8080/api/residences/${data._id}`)

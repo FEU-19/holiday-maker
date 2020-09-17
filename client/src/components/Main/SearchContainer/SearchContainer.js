@@ -189,9 +189,9 @@ const SearchContainer = ({
               <Button type="submit" variant="contained" color="primary" placeholder="Submit">
                 Submit
               </Button>
-              {Object.keys(savedSearchQueryParams).length !== 0 && (
+              {/* {Object.keys(savedSearchQueryParams).length !== 0 && (
                 <SaveSearch savedSearchParams={savedSearchQueryParams} />
-              )}
+              )} */}
             </Grid>
             <StyledDiv></StyledDiv>
           </ButtonContainer>
