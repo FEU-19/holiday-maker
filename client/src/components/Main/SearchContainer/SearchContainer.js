@@ -171,7 +171,7 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams, save
           spacing={1}
           justify="flex-end"
         >
-          <Grid item xs={4} style = {saveSearch}>
+          <Grid item xs={2} style = {saveSearch}>
             <Button
               type="submit"
               variant="contained"
