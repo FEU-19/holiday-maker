@@ -20,7 +20,9 @@
   - [Sprint 1](#sprint-1-2)
   - [Sprint 2](#sprint-2-2)
   - [Sprint 2 - updated](#sprint-2---updated)
-  - [Detailed Documentation](#detailed-documentation)
+  - [Detaljerad Documentation](#detaljerad-documentation)
+- [Projektmetodiker](#projektmetodiker)
+  - [Trello](#trello)
 - [UX Force](#ux-force)
   - [Färgpalett](#färgpalett)
 - [Projektmedabetare](#projektmedabetare)
@@ -386,8 +388,12 @@ Feature: betala flygbiljetter
 ![Sprint2 burndown chart](https://i.ibb.co/t2ZBtLH/burndown-chart-sprint-2-updated.png)
 
 
-## Detailed [Documentation](https://docs.google.com/spreadsheets/d/1d2xGuAfyPO9JmSgjky-BMCE0gUKNhGcccgreUTvCvmk/edit#gid=1406260916)
+## Detaljerad [Documentation](https://docs.google.com/spreadsheets/d/1d2xGuAfyPO9JmSgjky-BMCE0gUKNhGcccgreUTvCvmk/edit#gid=1406260916)
 
+<br>
+
+# Projektmetodiker
+## [Trello](https://trello.com/b/iOkswHN1/epics)
 <br>
 
 # UX Force
@@ -397,10 +403,10 @@ Feature: betala flygbiljetter
 ![Pantones](https://i.ibb.co/0JbkPHq/Pantone-jeg.png)
 
 # Projektmedabetare
-[Hampus Olsen](https://github.com/hampusolsen)
-[Daniel Reineborn](https://github.com/danielReineborn)
-[Ju-I Kuo](https://github.com/rubikuo)
-[Ada Timko](https://github.com/Hirschbaum)
-[Daniel Westin](https://github.com/Danielwestin)
-[Mohammed Motar](https://github.com/MohammedMotar00)
-[Linus Viberg](https://github.com/linuskw)
+- [Hampus Olsen](https://github.com/hampusolsen)
+- [Daniel Reineborn](https://github.com/danielReineborn)
+- [Ju-I Kuo (Rubi)](https://github.com/rubikuo)
+- [Ada Timko](https://github.com/Hirschbaum)
+- [Daniel Westin](https://github.com/Danielwestin)
+- [Mohammed Motar](https://github.com/MohammedMotar00)
+- [Linus Viberg](https://github.com/linuskw)
