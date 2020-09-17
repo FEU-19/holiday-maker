@@ -16,20 +16,20 @@ import axios from "axios";
 import ContainerButtons from "./ContainerButtons";
 import getToken from "../../utils/getToken";
 
-const objekt = [
+
+
+
+const object = [
   {
-    _id: {
-      $oid: "5f5889d8daa2064fd4eb8a42",
-    },
-    userId: {
-      $oid: "5f61c0cab5402617c07a742a",
-    },
+    _id: "5f5889d8daa2064fd4eb8a42",
+    
+    userId: "5f61c0cab5402617c07a742a",
+   
     bookingNumber: "k7cSt78z9k9v9n261lrv5364e",
     rooms: [
       {
-        _id: {
-          $oid: "5f5b7e5b36ac0355705b808c",
-        },
+        _id:  "5f5b7e5b36ac0355705b808c",
+     
         price: "531",
         option: "halfBoard",
         roomNumber: "103",
@@ -39,9 +39,8 @@ const objekt = [
       start: "2020-06-01T11:46:29.258Z",
       end: "2020-06-15T11:47:09.886Z",
     },
-    hotel: {
-      $oid: "5f5b7e5b36ac0355705b8087",
-    },
+    hotel:  "5f5b7e5b36ac0355705b8087",
+    
     flight:
       "null" |
       {
@@ -51,18 +50,15 @@ const objekt = [
       },
   },
   {
-    _id: {
-      $oid: "5f607c25f06634186cbb2cbd",
-    },
-    userId: {
-      $oid: "5f61c0cab5402617c07a742a",
-    },
+    _id:  "5f607c25f06634186cbb2cbd",
+    
+    userId: "5f61c0cab5402617c07a742a",
+    
     bookingNumber: "k7cSt78z9k9v9n261lrv5364e",
     rooms: [
       {
-        _id: {
-          $oid: "5f5b7e5b36ac0355705b8096",
-        },
+        _id: "5f5b7e5b36ac0355705b8096",
+        
         price: "748",
         option: "allInclusive",
         roomNumber: "110",
@@ -72,9 +68,8 @@ const objekt = [
       start: "2020-06-01T11:46:29.258Z",
       end: "2020-06-15T11:47:09.886Z",
     },
-    hotel: {
-      $oid: "5f5b7e5b36ac0355705b8087",
-    },
+    hotel:  "5f5b7e5b36ac0355705b8087",
+    
     flight:
       "null" |
       {
@@ -84,6 +79,7 @@ const objekt = [
       },
   },
 ];
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -142,7 +138,7 @@ const MyBookings = (props) => {
     axios
       .get("http://localhost:8080/api/orders/", { withCredentials: true })
       .then((res) => {
-        console.log(res);
+        console.log("ORDER RESPONSE", res);
         setMyBookings(res.data.data);
       })
       .catch((err) => {
@@ -150,13 +146,11 @@ const MyBookings = (props) => {
       });
   }, [update]);
 
-  if (!myBookings) {
-    return <p>loading..</p>;
-  }
+  console.log(myBookings);
 
   function saveOrder(myBooking) {
     setOrder(myBooking);
-    setHotelId(myBooking.hotel.$oid);
+    setHotelId(myBooking.hotel);
     setOpen(true);
   }
 
@@ -166,6 +160,57 @@ const MyBookings = (props) => {
     setHotelId(null);
   };
 
+  let renderBooking;
+  if (!myBookings) {
+    renderBooking = <p>loading..</p>;
+  } else {
+    renderBooking = object.map((myBooking) => (
+      <Accordion key={myBooking._id}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography className={classes.heading}>
+            {myBooking.hotel}
+          </Typography>
+          <Typography className={classes.heading}>
+            {myBooking.bookingDates.start}
+          </Typography>
+          <Typography className={classes.heading}>
+            {myBooking._id}
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Card className={classes.rootTwo}>
+            <CardContent>
+              <Typography>Information</Typography>
+              <Typography className={classes.pos} color="textSecondary">
+                User Name/Id: {myBooking.userId}
+                <br />
+                Total Rooms: {myBooking.rooms.length}
+                <br />
+                {/* Total People: {myBooking.adults + myBooking.children}
+                                <br></br>
+          Departure Date: {myBooking.flight.departureDate} */}
+                <br />
+                {/* Return Date: {myBooking.flight.returnDate} */}
+                <br />
+                Extra Bed:  {myBooking.rooms[0].extraBed}
+              </Typography>
+              {/* <Button 
+                className={classes.heading}
+                onClick={() => saveOrder(myBooking)}
+              >
+                Change Booking
+              </Button> */}
+              <ContainerButtons saveOrder={saveOrder} myBooking={myBooking}/>
+            </CardContent>
+          </Card>
+        </AccordionDetails>
+      </Accordion>
+    ));
+  }
   return (
     <div className={classes.root}>
       {order && (
@@ -174,11 +219,17 @@ const MyBookings = (props) => {
           bookings={order}
           handleClose={handleClose}
           hotelId={hotelId}
+          setOrder={setOrder}
         />
       )}
 
+<<<<<<< HEAD
       {myBookings.map((myBooking) => (
         <Accordion key={myBooking._id}>
+=======
+      {object.map((myBooking) => (
+        <Accordion key={myBooking._id.$oid}>
+>>>>>>> 261139d8ea13f9cf81d4964631e69e9121f065e7
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"

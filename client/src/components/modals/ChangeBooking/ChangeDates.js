@@ -7,18 +7,15 @@ import {
 } from '@material-ui/pickers';
 
 export default function ChangeDates({ date, setDate }) {
-  const [startDate, handleStartChange] = useState(new Date('2020-06-05T00:00:00.000Z'));
-  const [endDate, handleEndChange] = useState(new Date('2020-06-09T00:00:00.000Z'));
+  const [startDate, handleStartChange] = useState(new Date(date.start));
+  const [endDate, handleEndChange] = useState(new Date(date.end));
+  // console.log('This is the date in ChangeDates ----------------->',date)
 
- console.log(date)
-
-  // useEffect(() => {
-  //   let startToISO = startDate.toISOString();
-  //   let endToISO = endDate.toISOString();
-  //   setDate((prevState => ({...prevState, start: startToISO, end: endToISO})))
-  // },[setDate, startDate, endDate])
-
-
+  useEffect(() => {
+    let startToISO = startDate.toISOString();
+    let endToISO = endDate.toISOString();
+    setDate((prevState => ({...prevState, start: startToISO, end: endToISO})))
+  },[setDate, startDate, endDate])
 
   return (
     <div>
