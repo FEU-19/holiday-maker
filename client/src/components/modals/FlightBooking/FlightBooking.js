@@ -160,7 +160,7 @@ const FlightBooking = () => {
                   <TableCell align="right">{flight.Response.flightTimeHome}</TableCell>
                   <TableCell align="right">{flight.Response.seats}</TableCell>
                   <TableCell align="right">
-                    <Link to="/checkout">
+                    <Link to="/">
                       <Button variant="outlined" color="primary" align="right">
                         Book Flight
                       </Button>

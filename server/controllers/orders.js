@@ -53,8 +53,8 @@ exports.read = async (req, res) => {
 
   orders = await Promise.all(
     orders.map(async (o) => {
-      const { name } = await Hotel.findById(o.hotel, "name");
-      return { ...o._doc, hotel: name };
+      const hotel = await Hotel.findById(o.hotel);
+      return { ...o._doc, hotel };
     })
   );
 

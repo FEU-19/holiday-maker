@@ -80,7 +80,7 @@ const MyBookings = (props) => {
 
   function saveOrder(myBooking) {
     setOrder(myBooking);
-    setHotelId(myBooking.hotel);
+    setHotelId(myBooking.hotel._id);
     setOpen(true);
   }
 
@@ -112,11 +112,11 @@ const MyBookings = (props) => {
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
-            <Typography className={classes.heading}>{myBooking.hotel}</Typography>
+            <Typography className={classes.heading}>{myBooking.hotel.name}</Typography>
             <Typography className={classes.heading}>
               {new Date(myBooking.bookingDates.start).toLocaleString("sv-SE")}
             </Typography>
-            <Typography className={classes.heading}>{myBooking._id}</Typography>
+            <Typography className={classes.heading}>{myBooking.bookingNumber}</Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Card className={classes.rootTwo}>
@@ -124,8 +124,6 @@ const MyBookings = (props) => {
                 <Typography>Information</Typography>
                 <Typography className={classes.pos} color="textSecondary">
                   <span>Hotel</span>
-                  <br></br>
-                  User Name/Id: {myBooking.userId}
                   <br />
                   Total Rooms: {myBooking.rooms.length}
                   <br />
@@ -146,7 +144,7 @@ const MyBookings = (props) => {
                     variant="outlined"
                     color="primary"
                   >
-                    Change Booking
+                    Edit
                   </Button>
                   <FlightBooking />
                 </div>
