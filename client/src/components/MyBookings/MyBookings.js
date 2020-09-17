@@ -196,39 +196,41 @@ const MyBookings = (props) => {
         />
       )}
 
-      {objekt.map((myBooking) => (
-        <Accordion key={myBooking._id.$oid}>
+      {myBookings.map((myBooking) => (
+        <Accordion key={myBooking._id}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
             <Typography className={classes.heading}>
-              {myBooking.hotel.$oid}
+              {myBooking.hotel}
             </Typography>
             <Typography className={classes.heading}>
               {myBooking.bookingDates.start}
             </Typography>
-            <Typography className={classes.heading}>
-              {myBooking._id.$oid}
-            </Typography>
+            <Typography className={classes.heading}>{myBooking._id}</Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Card className={classes.rootTwo}>
               <CardContent>
                 <Typography>Information</Typography>
                 <Typography className={classes.pos} color="textSecondary">
-                  User Name/Id: {myBooking.userId.$oid}
+                  <span>Hotel</span>
+                  <br></br>
+                  User Name/Id: {myBooking.userId}
                   <br />
                   Total Rooms: {myBooking.rooms.length}
                   <br />
-                  {/* Total People: {myBooking.adults + myBooking.children}
-                                  <br></br>
-                                  Departure Date: {myBooking.flight.departureDate} */}
+                  Total People: {myBooking.adults + myBooking.children}
+                  <br></br>
+                  <span>Flight</span>
+                  <br></br>
+                  Departure Date: {myBooking.flight.departureDate}
                   <br />
                   Return Date: {myBooking.flight.returnDate}
                   <br />
-                  {/* Extra Bed:  {myBooking.rooms[0].extraBed} */}
+                  Extra Bed: {myBooking.rooms.extraBed}
                 </Typography>
                 <Button
                   className={classes.heading}
