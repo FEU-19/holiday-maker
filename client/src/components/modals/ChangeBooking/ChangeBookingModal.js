@@ -28,6 +28,7 @@ export default function ChangeBookingModal({
   const [date, setDate] = useState({start: '', end: ''});
   const bookedRooms = bookings.rooms;
   const [hotel, setHotel] = useState(null);
+  const [openFlight, setOpenFlight] = useState(false);
   console.log("I GOT the Order ", bookings);
   console.log("I GOT the FLIGHT ID  ", hotelId);
   
@@ -36,7 +37,6 @@ export default function ChangeBookingModal({
   //   // setStartDate(booking.bookingDates.start)
   //   // setEndDate(booking.bookingDates.end)
   // }))
-
   useEffect(() => {
     if(bookings){
       
@@ -75,6 +75,13 @@ export default function ChangeBookingModal({
     return x;
   }
 
+  // const handleOpenFlight = () => {
+  //   setOpenFlight(true);
+  // };
+  // if(setOpenFlight) {
+  //   return <FlygBooking />
+  // }
+  
   return (
     <Dialog
       open={open}
@@ -135,10 +142,6 @@ export default function ChangeBookingModal({
               // value={selected}
               // onChange={handleChange}
             />
-
-            <Button onClick={handleClose} color="primary">
-              Book flight
-            </Button>
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose} color="primary">
