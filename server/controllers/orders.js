@@ -16,7 +16,9 @@ exports.create = async (req, res) => {
   orderData.rooms = data.rooms;
   orderData.bookingDates = data.bookingDates;
   orderData.hotel = data.hotel;
-  orderData.flight = data.flight === null ? data.flight : false;
+  data.flight === null
+    ? (orderData.flight = null)
+    : (orderData.flight = data.flight);
   orderData.flight === null
     ? (orderData.totalPrice = 0)
     : (orderData.totalPrice = orderData.flight.price);
