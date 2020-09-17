@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import RoomCard from "./RoomCard";
 import { Button, makeStyles } from "@material-ui/core";
-import { Redirect } from "react-router-dom";
+import { Redirect, useLocation } from "react-router-dom";
 
 const useStyle = makeStyles({
   sticky: {
@@ -11,13 +11,13 @@ const useStyle = makeStyles({
     padding: "10px 0",
     width: "100%",
     margin: "0 auto",
-    background: "#4db51d",
   },
 });
 
 const RoomCardMapper = ({ allRooms }) => {
   const [chosenRooms, setChosenRooms] = useState([]);
   const [redirect, setRedirect] = useState(false);
+  const { state } = useLocation();
 
   const styles = useStyle();
 
@@ -35,18 +35,26 @@ const RoomCardMapper = ({ allRooms }) => {
     <div>
       {redirect && (
         <Redirect
-          to={{ pathname: "/checkout", state: { rooms: chosenRooms } }}
+          to={{
+            pathname: "/flight",
+            state: {
+              rooms: chosenRooms,
+              queryParams: state.queryParams,
+              hotel: state.hotel,
+            },
+          }}
         />
       )}
       {allRooms.map((room) => {
         return <RoomCard roomInfo={room} chooseRoom={chooseRoom} />;
       })}
       <Button
+        variant="contained"
         color="primary"
         className={styles.sticky}
-        onClick={() => setRedirect(true)}
+        onClick={() => setRedirect(!!chosenRooms.length)}
       >
-        CHECKOUT
+        {"proceed".toUpperCase()}
       </Button>
     </div>
   );

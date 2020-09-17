@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
+
+import { makeStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
+import ButtonBase from "@material-ui/core/ButtonBase";
 import { Button } from "@material-ui/core";
+import CheckIcon from "@material-ui/icons/Check";
+import StarRateIcon from "@material-ui/icons/StarRate";
+import CancelIcon from "@material-ui/icons/Cancel";
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import CancelIcon from '@material-ui/icons/Cancel';
-import StarRateIcon from '@material-ui/icons/StarRate';
 
 // Functions
 import sortRating from "../../../utils/sortRating.js";
@@ -34,8 +37,8 @@ const useStyles = makeStyles((theme) => ({
     marginRight: 30,
   },
   img: {
-    maxWidth: '100%',
-    maxHeight: '100%',
+    maxWidth: "100%",
+    maxHeight: "100%",
     borderRadius: 2,
     marginTop: 10,
   },
@@ -70,32 +73,28 @@ const useStyles = makeStyles((theme) => ({
     color: '#ffcc00',
     fontSize: 30,
   },
-
   noResult: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    margin: '0 auto',
-
-    '& > p': {
-      fontWeight: 'bold',
-      fontSize: '2em',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    margin: "0 auto",
+    "& > p": {
+      fontWeight: "bold",
+      fontSize: "2em",
     },
-
-    '& > hr': {
-      width: '200px',
-      border: '1px solid black',
+    "& > hr": {
+      width: "200px",
+      border: "1px solid black",
       marginLeft: 0,
       marginRight: 0,
-      margin: '2em',
+      margin: "2em",
     },
-
-    '& > svg': {
-      color: '#e23131',
-      fontSize: '64px',
-    }
-  }
+    "& > svg": {
+      color: "#e23131",
+      fontSize: "64px",
+    },
+  },
 }));
 
 const ContentContainer = ({ filteredData, sortOn, searching, queryParams }) => {
@@ -109,6 +108,7 @@ const ContentContainer = ({ filteredData, sortOn, searching, queryParams }) => {
     setPaginationData([...filteredData].slice(0, 20));
     // eslint-disable-next-line
   }, [filteredData])
+
 
   useEffect(() => {
     if (!sortOn) return setSortedData([...filteredData]);
@@ -270,8 +270,6 @@ const ContentContainer = ({ filteredData, sortOn, searching, queryParams }) => {
       <hr></hr>
       <CancelIcon></CancelIcon>
     </div>
-    : null }
-  </div>
- );
+  );
 };
 export default ContentContainer;

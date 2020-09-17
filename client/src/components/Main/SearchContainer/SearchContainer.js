@@ -100,13 +100,13 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
     e.preventDefault();
 
     let queryParams = {
-      city: city ? city : 'none',
+      city: city ? city : "none",
       checkedKidsClub,
       checkedNightEntertainment,
       checkedRestaurant,
       checkedPool,
-      distanceBeach: distanceBeach ? distanceBeach : 'none',
-      distanceCity: distanceCity ? distanceCity : 'none',
+      distanceBeach: distanceBeach ? distanceBeach : "none",
+      distanceCity: distanceCity ? distanceCity : "none",
       amountOfAdults,
       amountOfChildren,
       ageOfChildren,
@@ -126,7 +126,7 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
     c = filterRestaurant(c, checkedRestaurant);
     c = filterDistanceBeach(c, distanceBeach);
     c = filterDistanceCity(c, distanceCity);
-    c = filterDate(c, date)
+    c = filterDate(c, date);
 
     setFilteredDataCB(c);
     setSearching(true);

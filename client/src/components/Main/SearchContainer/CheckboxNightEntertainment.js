@@ -6,17 +6,22 @@ import { checkboxTheme, checkboxStyle } from "./CheckboxTheme";
 import { ThemeProvider } from '@material-ui/core/styles';
 
 const CheckboxNightEntertainment = ({checkedNightEntertainment, setCheckedNightEntertainment}) => {
-  const theme = checkboxStyle();
+const theme = checkboxStyle();
 
+const CheckboxNightEntertainment = ({
+  checkedNightEntertainment,
+  setCheckedNightEntertainment,
+}) => {
   useEffect(() => {
+    console.log(checkedNightEntertainment);
     if (!checkedNightEntertainment) {
-      setCheckedNightEntertainment('none');
+      setCheckedNightEntertainment("none");
     }
-  }, [checkedNightEntertainment, setCheckedNightEntertainment])
+  }, [checkedNightEntertainment, setCheckedNightEntertainment]);
 
   const handleChange = (e) => {
     setCheckedNightEntertainment(e.target.checked);
-  }
+  };
 
   return (
     <>

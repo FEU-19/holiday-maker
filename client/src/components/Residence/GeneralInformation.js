@@ -89,7 +89,7 @@ const GeneralInformation = ({ generalInfo }) => {
     }, 0);
 
     const totalExtraBeds = generalInfo.rooms.reduce((acc, cur) => {
-      return acc + cur.extraBed;
+      return acc + (!!cur.extraBed ? 1 : 0);
     }, 0);
 
     const roomInfoObject = {
@@ -118,23 +118,14 @@ const GeneralInformation = ({ generalInfo }) => {
 
   return (
     <div>
-      <div
-        className="residence__generalInformationContainer"
-        style={boxContainer}
-      >
-        <div
-          className="residence__generalInformationContainer__title"
-          style={title}
-        >
+      <div className="residence__generalInformationContainer" style={boxContainer}>
+        <div className="residence__generalInformationContainer__title" style={title}>
           <h4>Residence Overview</h4>
         </div>
-        <div
-          className="residence__generalInformationContainer__headInfo"
-          style={headInfo}
-        >
+        <div className="residence__generalInformationContainer__headInfo" style={headInfo}>
           <p style={textReset}>
-            This residence has {info.numberOfRooms} rooms, {info.totalBeds} Beds
-            and {info.totalExtraBeds} Extra beds.
+            This residence has {info.numberOfRooms} rooms, {info.totalBeds} Beds and{" "}
+            {info.totalExtraBeds} Extra beds.
           </p>
         </div>
         <div

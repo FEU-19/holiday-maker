@@ -1,17 +1,17 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
-const getCookie = require("../middleware/CookieFinder");
+const jwt = require("jsonwebtoken");
 
-exports.createLogout = async (req, res) =>{
-  const { userId } = req.body;
+exports.read = async (req, res) => {
+  res.send({ user: req.user });
+};
 
-  res.clearCookie("holidayMakerCookie", `Bearer${userId}`).end();
-}
+exports.createLogout = async (req, res) => {};
 
 exports.createLogin = async (req, res) => {
   const { email, password } = req.body.user;
   if (!email || !password) {
-    return res.status(400).json({
+    return res.status(403).json({
       error: [{ msg: "Invalid Credentials" }],
     });
   }
@@ -20,9 +20,8 @@ exports.createLogin = async (req, res) => {
     const user = await User.findOne({
       email,
     });
-
     if (!user) {
-      return res.status(400).json({
+      return res.status(403).json({
         error: [{ msg: "Invalid Credentials" }],
       });
     }
@@ -30,18 +29,18 @@ exports.createLogin = async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
-      return res.status(400).json({
+      return res.status(403).json({
         error: [{ msg: "Invalid Credentials" }],
       });
     }
 
-    res.status(200);
-    res.cookie("holidayMakerCookie", `Bearer${user.id}`, {
-      expires: new Date(Date.now() + 8 * 3600000),
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+
+    return res.json({
+      token,
+      user,
     });
-    return res.send();
   } catch (err) {
-    console.error(err.message);
     return res.status(500).send("Server error");
   }
 };
@@ -102,6 +101,7 @@ exports.create = async (req, res) => {
     user.password = await bcrypt.hash(password, salt);
 
     await user.save();
+
     return res.status(201).json({
       msg: "Account was created",
     });
@@ -111,4 +111,11 @@ exports.create = async (req, res) => {
       msg: "Server error",
     });
   }
+};
+
+exports.readOne = async (req, res) => {
+  const { userId } = req.params;
+  const user = await User.findById(userId);
+  if (!user) return res.status(404).send({ error: "Couldn't find user." });
+  return res.status(200).send({ data: user });
 };

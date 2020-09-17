@@ -5,33 +5,35 @@ const Hotel = require("../models/Hotel");
 const bookingNrGenerator = require("../utils/bookingNrGenerator");
 // {adults: N, children: N, hotel: String, rooms: Array, bookingDates: {start: String, end: String}}
 exports.create = async (req, res) => {
-  // Id will be a cookie.
-
-  const Id = req.body.user;
+  const Id = req.user._id;
   const data = req.body;
-  const orderData = {};
+  const orderData = { ...data };
 
   const user = await User.findById(Id);
-  console.log(user);
-  orderData.userId = data.userId;
-  orderData.bookingNumber = bookingNrGenerator(
-    user.first_name,
-    user.surname,
-    6
-  );
+
+  orderData.userId = user._id;
+  orderData.bookingNumber = bookingNrGenerator(user.firstName, user.surname, 6);
   orderData.rooms = data.rooms;
   orderData.bookingDates = data.bookingDates;
   orderData.hotel = data.hotel;
-
-  const order = new Order(orderData);
-  order.save((err) => {
-    if (err) res.status(500).send({ error: err.message });
-  });
+  data.flight === null
+    ? (orderData.flight = null)
+    : (orderData.flight = data.flight);
+  orderData.flight === null
+    ? (orderData.totalPrice = 0)
+    : (orderData.totalPrice = orderData.flight.price);
 
   const roomNs = [];
   data.rooms.forEach((room) => {
+    orderData.totalPrice += room.price;
     roomNs.push(room.roomNumber);
   });
+  const order = new Order(orderData);
+  try {
+    await order.save();
+  } catch (err) {
+    return res.status(409).send({ error: err.message });
+  }
 
   const hotel = await Hotel.findOne({ _id: data.hotel });
   hotel.rooms.forEach((room) => {
@@ -39,12 +41,16 @@ exports.create = async (req, res) => {
       room.occupiedDates.push(data.bookingDates);
     }
   });
-  hotel.save((err) => {
-    if (err) res.status(500).send({ error: err.message });
-    res.status(201).json(orderData);
-  });
+
+  try {
+    await hotel.save();
+  } catch (err) {
+    return res.status(500).send({ error: err.message });
+  }
+  return res.status(201).json(orderData);
 };
 
-exports.read = (_req, res) => {
-  res.send("OK");
+exports.read = async (req, res) => {
+  const orders = await Order.find({ userId: req.user });
+  res.send({ data: orders });
 };
