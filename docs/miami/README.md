@@ -23,6 +23,7 @@
   - [Detailed Documentation](#detailed-documentation)
 - [UX Force](#ux-force)
   - [Färgpalett](#färgpalett)
+- [Projektmedabetare](#projektmedabetare)
 
 <br>
 
@@ -394,3 +395,12 @@ Feature: betala flygbiljetter
 ## Färgpalett
 
 ![Pantones](https://i.ibb.co/0JbkPHq/Pantone-jeg.png)
+
+# Projektmedabetare
+[Hampus Olsen](https://github.com/hampusolsen)
+[Daniel Reineborn](https://github.com/danielReineborn)
+[Ju-I Kuo](https://github.com/rubikuo)
+[Ada Timko](https://github.com/Hirschbaum)
+[Daniel Westin](https://github.com/Danielwestin)
+[Mohammed Motar](https://github.com/MohammedMotar00)
+[Linus Viberg](https://github.com/linuskw)
