@@ -5,9 +5,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { checkboxTheme, checkboxStyle } from "./CheckboxTheme";
 import { ThemeProvider } from '@material-ui/core/styles';
 
-
 const CheckboxKidsClub = ({checkedKidsClub, setCheckedKidsclub}) => {
-
   const theme = checkboxStyle();
 
   useEffect(() => {
@@ -15,7 +13,6 @@ const CheckboxKidsClub = ({checkedKidsClub, setCheckedKidsclub}) => {
       setCheckedKidsclub('none');
     }
   }, [checkedKidsClub, setCheckedKidsclub])
-
 
   const handleChange = (e) => {
     setCheckedKidsclub(e.target.checked);

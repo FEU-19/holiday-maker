@@ -1,20 +1,15 @@
 import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
-
 import Box from '@material-ui/core/Box';
-
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
-import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from '@material-ui/core/FormControl';
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexDirection: 'row',
     alignItems: 'flex-end',
     justifyItems: 'space-around',
-
   },
   formControl: {
     margin: theme.spacing(1),
@@ -41,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'flex-end',
   },
   p: {
-    fontWeight: 20, 
+    fontWeight: 20,
     fontSize: 16,
     margin: '7px 20px 7px 7px',
   }
@@ -56,12 +51,13 @@ const SelectAmountOfChildren = ({setAmountOfChildren, amountOfChildren}) => {
   };
 
   return (
-    <>   
+    <>
     <Box className={classes.border} border={3}>
         <FormControl classes={{ root: classes.root }} >
 
        <p className={classes.p}>Children</p>
         <Select
+        classes={{ select: classes.select, icon: classes.icon }}
         value={amountOfChildren}
         onChange={handleChange}
         displayEmpty

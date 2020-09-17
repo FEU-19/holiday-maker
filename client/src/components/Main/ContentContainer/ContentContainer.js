@@ -4,7 +4,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import ButtonBase from '@material-ui/core/ButtonBase';
 import { Button } from "@material-ui/core";
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import CancelIcon from '@material-ui/icons/Cancel';
@@ -112,7 +111,6 @@ const ContentContainer = ({ filteredData, sortOn, searching, queryParams }) => {
   }, [filteredData])
 
   useEffect(() => {
-    // If the option 'None' was selected
     if (!sortOn) return setSortedData([...filteredData]);
 
     if (sortOn === 'Price low to high') {
@@ -259,7 +257,13 @@ const ContentContainer = ({ filteredData, sortOn, searching, queryParams }) => {
         </div>
       );
   })}
-  {isFetching && sortedData.length !== paginationData.length && <Typography> Fetching more hotels... </Typography>}
+  {isFetching && sortedData.length !== paginationData.length && <Typography style={{
+    fontSize: 25,
+    alignSelf: "center",
+    textAlign: "center",
+    marginBottom: 20,
+    color: "#808080",
+  }}> Fetching more hotels... </Typography>}
   {!sortedData.length && searching ?
     <div className={classes.noResult}>
       <Typography> No available hotels </Typography>

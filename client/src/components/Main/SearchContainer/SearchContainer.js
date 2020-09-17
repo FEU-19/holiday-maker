@@ -3,14 +3,10 @@ import styled from "styled-components";
 import axios from "axios";
 import Grid from "@material-ui/core/Grid";
 import { Button } from "@material-ui/core";
-import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
-
-
-
 
 // Componets
 import DatePicker from "./DatePicker";
@@ -25,7 +21,6 @@ import CheckboxRestaurant from "./CheckboxRestaurant";
 import SelectDistanceCity from "./SelectDistanceCity.js";
 import SelectDistanceBeach from "./SelectDistanceBeach";
 
-
 // Filter functions
 import filterPresentCrib from '../../../utils/filterPresentCrib';
 import filterAmountOfTravelers from "../../../utils/filterAmountOfTravelers";
@@ -37,21 +32,14 @@ import filterRestaurant from "../../../utils/filterRestaurant";
 import filterDistanceBeach from "../../../utils/filterDistanceBeach";
 import filterDistanceCity from "../../../utils/filterDistanceCity";
 import filterDate from "../../../utils/filterDate";
-/* 
-const StyledContainer = styled(Container)`
-  padding-top: 60px;
-  background-color: #F5F5F5;
-`; */
 
 const useStyles = makeStyles((theme) => ({
   backgroundColor: {
     backgroundColor: '#F5F5F5',
-    paddingTop: 70, 
+    paddingTop: 70,
     minHeight: 350,
-  },
-  
+  }
 }));
-
 
 const Form = styled.form`
   width: 100%;
@@ -60,11 +48,16 @@ const Form = styled.form`
   align-items: center;
 `;
 
-
 const ButtonContainer = styled(Grid)`
-  border-bottom: 1px solid grey;
   padding: 30px;
 `;
+
+const StyledDiv = styled.div`
+  width: 100%;
+  height: 1px;
+  background-color: grey;
+  margin-top: 20px;
+`
 
 const theme = createMuiTheme({
   palette: {
@@ -73,14 +66,11 @@ const theme = createMuiTheme({
   },
 });
 
-
 const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) => {
   const [residentData, setResidentData] = useState([]);
   const [city, setCity] = useState("");
   const [checkedKidsClub, setCheckedKidsclub] = useState("none");
-  const [checkedNightEntertainment, setCheckedNightEntertainment] = useState(
-    "none"
-  );
+  const [checkedNightEntertainment, setCheckedNightEntertainment] = useState("none");
   const [checkedPool, setCheckedPool] = useState("none");
   const [checkedRestaurant, setCheckedRestaurant] = useState("none");
   const [amountOfChildren, setAmountOfChildren] = useState(0);
@@ -139,7 +129,6 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
 
     setFilteredDataCB(c);
     setSearching(true);
-
   }
 
   return (
@@ -178,7 +167,17 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
                 amountOfChildren={amountOfChildren}
               />
             </Grid>
-            <Grid item xs={2}>
+            <Grid
+              style={{
+                minHeight: 110,
+                minWidth: 510,
+                marginTop: 10,
+                marginBottom: -70
+              }}
+              container
+              spacing={1}
+              item xs={4}
+            >
               <ChildrenAgeSelects
                 amountOfChildren={amountOfChildren}
                 setAgeOfChildren={setAgeOfChildren}
@@ -191,7 +190,10 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
             spacing={1}
             justify="flex-end"
           >
-            <Grid item xs={2}>
+            <Grid item xs={2}
+              container
+              justify="flex-end"
+              >
               <Button
                 type="submit"
                 variant="contained"
@@ -201,6 +203,7 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
                 Search
             </Button>
             </Grid>
+            <StyledDiv></StyledDiv>
           </ButtonContainer>
           <Grid
             className="search-bottom"

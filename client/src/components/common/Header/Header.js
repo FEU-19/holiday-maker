@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 // Components
 import LoginModal from "../../modals/LoginModal";
@@ -14,7 +15,9 @@ const Container = styled.div`
   align-items: center;
   justify-content: space-between;
   box-shadow: 0px 3px 5px -3px rgba(0, 0, 0, 0.5);
-  position: relative;
+  position: sticky;
+  top: 0;
+  z-index: 99;
 `;
 
 const ContainerBtns = styled.div`
@@ -25,17 +28,27 @@ const ContainerBtns = styled.div`
 
 const Logo = styled.img`
   object-fit: contain;
-  max-width: 90%;
-  max-height: 90%;
+  max-width: 100%;
+  max-height: 100%;
   width: auto;
   height: auto;
-  padding-left: 10px;
 `;
 
 const Header = () => {
   return (
     <Container>
-      <Logo src={process.env.PUBLIC_URL + "/Holidaymaker-logo-BIG.png"} />
+      <Link
+        to="/"
+        style={{
+          maxWidth: "280px",
+          maxHeight: "85px",
+          width: "auto",
+          height: "auto",
+          paddingLeft: 10,
+        }}
+      >
+        <Logo src={process.env.PUBLIC_URL + "/Holidaymaker-logo-BIG.png"} />
+      </Link>
       <ContainerBtns>
         <LoginModal />
       </ContainerBtns>
