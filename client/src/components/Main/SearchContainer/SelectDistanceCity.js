@@ -84,7 +84,7 @@ const SelectDistanceCity = ({distanceCity, setDistanceCity}) => {
           distanceInterval.map((distance, index) =>
             distance
             ? <MenuItem value={ distance } key={index}>{ "< " + distance } m</MenuItem>
-            : <MenuItem value={ distance } key={index}>N/A</MenuItem>
+            : <MenuItem value={ distance } key={index}></MenuItem>
           )
         }
 
