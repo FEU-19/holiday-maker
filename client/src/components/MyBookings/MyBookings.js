@@ -8,63 +8,12 @@ import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
+import { Button } from "@material-ui/core";
+import ChangeBookingModal from "../modals/ChangeBooking/ChangeBookingModal";
 
-const objekt = [
-  {
-    _id: "1",
-    userId: "mongoose.Schema.Types.ObjectID",
-    adults: "2",
-    children: "Number",
-    hotel: "mongoose.Schema.Types.ObjectID",
-    totalPrice: "Number",
-    rooms: [
-      {
-        _id: "mongoose.Schema.Types.ObjectID",
-        roomNumber: "String",
-        option: "String",
-        extraBed: "yes",
-        price: "2000kr",
-      },
-    ],
-    bookingDates: {
-      start: "new Date.toISOString()",
-      end: "new Date.toISOString()",
-    },
-    flight:
-      "null" |
-      {
-        departureDate: "new Date.toISOString()",
-        returnDate: "new Date.toISOString()",
-        price: "Number",
-      },
-  },
-  {
-    _id: "2",
-    userId: "mongoose.Schema.Types.ObjectID",
-    adults: "2",
-    children: "5",
-    hotel: "mongoose.Schema.Types.ObjectID",
-    totalPrice: "100$",
-    rooms: [
-      {
-        _id: "mongoose.Schema.Types.ObjectID",
-        roomNumber: "String",
-        option: "String",
-        extraBed: "yes",
-        price: "1000kr",
-      },
-    ],
-    bookingDates: {
-      start: "new Date.toISOString()",
-      end: "new Date.toISOString()",
-    },
-    flight: {
-      departureDate: "new Date.toISOString()",
-      returnDate: "new Date.toISOString()",
-      price: "Number",
-    },
-  },
-];
+import FlightBooking from "../modals/FlightBooking/FlightBooking";
+import axios from "axios";
+import ContainerButtons from "./ContainerButtons";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -101,17 +50,62 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     marginLeft: "50%",
   },
+  buttons: {
+    display: "flex",
+    flexDirection: "row",
+    whiteSpace: "nowrap",
+    marginLeft: "-45px",
+  },
 }));
 
 const MyBookings = (props) => {
-  //   const [myBookings, setMyBookings] = useState({});
-  //   const [clickedBookings, setClickedBookings] = useState(false);
+  const [myBookings, setMyBookings] = useState([]);
+  const [update, setUpdate] = useState(0);
+  const [open, setOpen] = useState(false);
+  const [order, setOrder] = useState(null);
+  const [hotelId, setHotelId] = useState(null);
 
   const classes = useStyles();
 
-  return (
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/api/orders/", { withCredentials: true })
+      .then((res) => {
+        setMyBookings(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [update]);
+
+  function saveOrder(myBooking) {
+    setOrder(myBooking);
+    setHotelId(myBooking.hotel);
+    setOpen(true);
+  }
+
+  const handleClose = () => {
+    setOpen(false);
+    setOrder(null);
+    setHotelId(null);
+  };
+
+  return !myBookings ? (
+    <p>Loading...</p>
+  ) : (
     <div className={classes.root}>
-      {objekt.map((myBooking) => (
+      {order && (
+        <ChangeBookingModal
+          open={open}
+          bookings={order}
+          handleClose={handleClose}
+          hotelId={hotelId.toString()}
+          rooms={order.rooms}
+          order={order}
+          setOrder={setOrder}
+        />
+      )}
+      {myBookings.map((myBooking) => (
         <Accordion key={myBooking._id}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -119,7 +113,9 @@ const MyBookings = (props) => {
             id="panel1a-header"
           >
             <Typography className={classes.heading}>{myBooking.hotel}</Typography>
-            <Typography className={classes.heading}>{myBooking.bookingDates.start}</Typography>
+            <Typography className={classes.heading}>
+              {new Date(myBooking.bookingDates.start).toLocaleString()}
+            </Typography>
             <Typography className={classes.heading}>{myBooking._id}</Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -127,18 +123,34 @@ const MyBookings = (props) => {
               <CardContent>
                 <Typography>Information</Typography>
                 <Typography className={classes.pos} color="textSecondary">
+                  <span>Hotel</span>
+                  <br></br>
                   User Name/Id: {myBooking.userId}
-                  <br></br>
+                  <br />
                   Total Rooms: {myBooking.rooms.length}
-                  <br></br>
+                  <br />
                   Total People: {myBooking.adults + myBooking.children}
                   <br></br>
-                  Departure Date: {myBooking.flight.departureDate}
+                  <span>Flight</span>
                   <br></br>
-                  Return Date: {myBooking.flight.returnDate}
-                  <br></br>
-                  Extra Bed: {myBooking.rooms[0].extraBed}
+                  Departure Date: {myBooking.flight.departureDate.slice(0, 10)}
+                  <br />
+                  Return Date: {myBooking.flight.returnDate.slice(0, 10)}
+                  <br />
+                  Extra Bed: {myBooking.rooms.extraBed}
                 </Typography>
+                <div className={classes.buttons}>
+                  <Button
+                    className={classes.heading}
+                    onClick={() => saveOrder(myBooking)}
+                    variant="outlined"
+                    color="primary"
+                  >
+                    Change Booking
+                  </Button>
+                  <FlightBooking />
+                </div>
+                <ContainerButtons orderId={myBooking._id} setUpdate={setUpdate} />
               </CardContent>
             </Card>
           </AccordionDetails>

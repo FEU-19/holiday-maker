@@ -20,6 +20,9 @@ const RoomCardMapper = ({ allRooms, dates }) => {
   const { state } = useLocation();
 
   const styles = useStyle();
+  console.log('the ROOMINFO is ----> ', allRooms);
+
+  console.log('CHOSEN ROOMS ARE sent to REDIRECT --->', chosenRooms);
 
   const chooseRoom = (room) => {
     setChosenRooms((rooms) => {

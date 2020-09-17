@@ -1,7 +1,6 @@
 import { createContext } from "react";
 
 export const initialUserContext = {
-  token: "",
   user: {
     email: "",
     firstName: "",
@@ -15,6 +14,6 @@ export const initialUserContext = {
   },
 };
 
-const UserContext = createContext();
+const UserContext = createContext(initialUserContext);
 
 export default UserContext;

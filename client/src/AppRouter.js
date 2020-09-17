@@ -12,6 +12,7 @@ import Flight from "./views/Flight";
 import DropDown from "./components/common/DropDown/DropDown";
 import HeaderComp from "./components/common/Header/Header";
 import Footer from "./components/common/Footer/Footer";
+import FlightBooking from "./components/modals/FlightBooking/FlightBooking";
 
 import UserContext, { initialUserContext } from "./context/UserContext";
 
@@ -22,6 +23,7 @@ const routes = [
   { path: "/dropdown/:id", component: DropDown },
   { path: "/flight/", component: Flight },
   { path: "/mybookings/", component: MyBookings },
+  { path: "/flightbooking/", component: FlightBooking },
 ];
 
 const DivRoot = styled.div`
@@ -42,21 +44,13 @@ function AppRouter() {
 
   useEffect(() => {
     const checkLoggedIn = async () => {
-      let token = localStorage.getItem("auth-token");
-
-      if (token === null) {
-        localStorage.setItem("auth-token", "");
-        token = "";
-      }
       try {
-        const response = await axios.get("http://localhost:8080/api/users/", {
-          headers: { "x-auth-token": token },
+        const user = await axios.get("http://localhost:8080/api/users/", {
+          withCredentials: true,
         });
-        console.log(response, "RESPONSE");
-
-        setContext({ token, user: response.data.user });
-      } catch (error) {
-        return console.log("user not logged in");
+        setContext((context) => ({ ...context, user }));
+      } catch (err) {
+        console.log(err);
       }
     };
 
