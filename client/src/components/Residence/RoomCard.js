@@ -19,14 +19,14 @@ import RoomPrice from "./RoomPrice";
 const CustomCheckbox = withStyles({
   root: {
    color: "#4AB0BD",
- 
+
    "&$checked": {
     color: "#4AB0BD",
    },
   },
   checked: {},
  })((props) => <Checkbox color="default" {...props} />);
- 
+
  const CustomRadio = withStyles({
   root: {
    color: "#4AB0BD",
@@ -82,11 +82,11 @@ const useStyle = makeStyles(() => ({
   },
 }));
 
-const RoomCard = ({ roomInfo, chooseRoom }) => {
+const RoomCard = ({ roomInfo, chooseRoom, dates }) => {
  const classes = useStyle();
  const [value, setValue] = useState({ selected: "selfCatering" });
  const [extraBedValue, setExtraBedValue] = useState(0);
- 
+
 
  const handleChange = (e) => {
   setValue({ selected: e.target.value });
@@ -149,7 +149,7 @@ const RoomCard = ({ roomInfo, chooseRoom }) => {
         ) : (
           <p style={{ paddingRight: "10vw" }}>Crib: {"N/A"}</p>
           )
-        } 
+        }
         labelPlacement="start"
        />
        <FormControlLabel
@@ -246,6 +246,7 @@ const RoomCard = ({ roomInfo, chooseRoom }) => {
     extraBed={extraBedValue}
     chooseRoom={chooseRoom}
     roomInfo={roomInfo}
+    dates={dates}
    />
   </Card>
  );

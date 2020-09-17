@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 // Style variables
 const boxContainer = {
   padding: "30px 30px 50px 30px",
-  width:"1305.280", 
+  width:"1305.280",
 };
 
 const title = {
@@ -37,7 +37,7 @@ const content = {
   width: "300px",
   padding: "0 20px 20px 40px",
   boxSizing: "border-box",
-  
+
 };
 
 const headInfo = {
@@ -87,9 +87,8 @@ const GeneralInformation = ({ generalInfo }) => {
    return acc + cur.beds;
   }, 0);
 
-  const totalExtraBeds = generalInfo.rooms.reduce((acc, cur) => {
-   return acc + cur.extraBed;
-  }, 0);
+  // At CT there is one extra bed available per room
+  const totalExtraBeds = generalInfo.rooms.length;
 
   const roomInfoObject = {
    numberOfRooms: roomAmount,
@@ -131,8 +130,8 @@ const GeneralInformation = ({ generalInfo }) => {
      style={headInfo}
     >
      <span style={textReset}>
-      This residence has {info.numberOfRooms} rooms, {info.totalBeds} Beds and{" "}
-      20 Extra beds.
+      This residence has {info.numberOfRooms} rooms, {info.totalBeds} beds and{" "}
+      20 extra beds.
      </span>
     </Typography>
     <div

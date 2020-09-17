@@ -6,10 +6,11 @@ import GeneralInformation from "../components/Residence/GeneralInformation";
 import HotelCarousel from "../components/Residence/HotelCarousel";
 import RoomCardMapper from "../components/Residence/RoomCardMapper";
 import StarRateIcon from '@material-ui/icons/StarRate';
-import { useParams, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Star from "../components/Residence/Star";
 import Button from '@material-ui/core/Button';
 import axios from "axios";
+import ResidenceSpinner from "../components/Residence/ResidenceSpinner";
 
 const useStyle = makeStyles(() => ({
   article: {
@@ -62,18 +63,15 @@ const useStyle = makeStyles(() => ({
 const Residence = () => {
   const classes = useStyle();
   const [value, updateValue] = useState(0);
-
-  // ********* THIS SHOULD BE UNCOMMENTED ON MERGE WITH MASTER *********
-  // const {state} = useLocation();
-  // const data = state.hotel;
-  // *******************************************************************
-
-
-
-  // **************** ALL BELOW THIS LINE SHOULD BE REMOVED ON MERGE WITH MASTER *********************
-  const [data, updateData] = useState(null);
+=======
+  const [unfilteredData, updateUnfilteredData] = useState(null);
+  const {state} = useLocation();
+  const data = state.hotel;
+  const dates = state.queryParams.date;
   const { hotelId } = useParams();
 
+
+ // GET unfiltered hotel object for general information
   useEffect(() => {
     axios.defaults.withCredentials = true
     if(document.cookie !== null){
@@ -87,9 +85,9 @@ const Residence = () => {
     }
 
     axios
-      .get(`http://localhost:8080/api/residences/${hotelId}`)
+      .get(`http://localhost:8080/api/residences/${data._id}`)
       .then((response) => {
-        updateData(response.data.data);
+        updateUnfilteredData(response.data.data);
       })
      .catch((error) => {
       console.error(
@@ -97,10 +95,10 @@ const Residence = () => {
        error
       );
      });
-    }, []);
+    },[data._id]);
 
-    if (!data){
-      return <div />
+    if (!data || !unfilteredData){
+      return <div className={classes.spinner}><ResidenceSpinner /></div>
     }
    
   // **************** ALL ABOVE THIS LINE SHOULD BE REMOVED ON MERGE WITH MASTER *********************
@@ -121,6 +119,7 @@ const Residence = () => {
     }
 }
 
+
   function starRating(rating){
     let ratingArray = [];
     for (let i = 0; i < rating; i++) {
@@ -138,6 +137,7 @@ const Residence = () => {
         </Button>
         <Star hotelId={hotelId} value={value}/>
         </div> : <span></span>}
+
       <div className={classes.titlecontainer}>
         <div className={classes.titlefavouritecontainer}>
         <Typography variant = "h3" className={classes.title}>{data.name} {starRating(data.rating)}</Typography>
@@ -148,10 +148,10 @@ const Residence = () => {
         </div>
       </div>
       <div>
-        <RoomCardMapper allRooms={data.rooms} />
+        <RoomCardMapper allRooms={data.rooms} dates={dates} />
       </div>
       <div>
-        <GeneralInformation generalInfo={data} />
+        <GeneralInformation generalInfo={unfilteredData} />
       </div>
     </div>
   );

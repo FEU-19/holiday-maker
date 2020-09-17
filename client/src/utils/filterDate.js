@@ -1,32 +1,36 @@
 import getDateArray from './getDateArrayInterval';
 
-// USAGE =  dateFilter(residents, date);
 
-export default function filterDate (residents, date) {
- let newResidents = residents;
- let dateInterval = getDateArray(new Date(date.start), new Date(date.end))
-  for (let [i, resident] of newResidents.entries()) {
-    let rooms = resident.rooms;
-    for (let [j, room] of rooms.entries()) {
-      let collisions = 0;
-      for (let occupiedDate of room.occupiedDates) {
-          let start = occupiedDate.start;
-          let end = occupiedDate.end;
-          let occupiedInterval = getDateArray(new Date(start), new Date(end))
-          for (let occDate of occupiedInterval) {
-            for (let userDate of dateInterval) {
-              if (userDate.getDate() === occDate.getDate() && userDate.getMonth() === occDate.getMonth()) {
-                collisions++;
-              }
+export default function filterDate (hotels, date) {
+  let dateInterval = getDateArray(new Date(date.start), new Date(date.end));
+
+  let result = hotels.map((hotel) => {
+    const rooms = hotel.rooms.map((room) => {
+      const occupied = room.occupiedDates.reduce((acc, { start, end }) => {
+        if (acc) return acc;
+        let temp = false;
+
+        
+        getDateArray(new Date(start), new Date(end))
+        .map((occ) => {
+          return dateInterval.map((uDate) => {
+            if (uDate.getDate() === occ.getDate() && uDate.getMonth() === occ.getMonth()) {
+              temp = true;
             }
-          }
-      }
+            return false;
+          })
+        })
 
-      if (collisions > 0) {
-        newResidents[i].rooms.splice(j, 1);
-      }
-    }
-  }
+        if (temp) {
+          return true;
+        }
+        return false;
+      }, false);
 
-  return newResidents;
+      return occupied ? null : room;
+    })
+    .filter(Boolean);
+    return { ...hotel, rooms };
+  });
+    return result.filter(hotel => hotel.rooms.length !== 0);
 }

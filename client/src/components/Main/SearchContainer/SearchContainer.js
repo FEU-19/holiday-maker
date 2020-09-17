@@ -16,9 +16,11 @@ import CheckboxPool from "./CheckboxPool";
 import CheckboxRestaurant from "./CheckboxRestaurant";
 import SelectDistanceCity from "./SelectDistanceCity.js";
 import SelectDistanceBeach from "./SelectDistanceBeach";
+import SaveSearch from "./SaveSearch";
 
 // Filter functions
-// import adultChildToBedFilter from "../../../utils/adultChildToBedFilter.js";
+import filterPresentCrib from '../../../utils/filterPresentCrib';
+import filterAmountOfTravelers from "../../../utils/filterAmountOfTravelers";
 import filterCity from "../../../utils/filterCity";
 import filterKidsClub from "../../../utils/filterKidsClub";
 import filterNightEntertainment from "../../../utils/filterNightEntertainment";
@@ -26,6 +28,7 @@ import filterPool from "../../../utils/filterPool";
 import filterRestaurant from "../../../utils/filterRestaurant";
 import filterDistanceBeach from "../../../utils/filterDistanceBeach";
 import filterDistanceCity from "../../../utils/filterDistanceCity";
+import filterDate from "../../../utils/filterDate";
 
 const Container = styled.div`
   width: 90vw;
@@ -48,8 +51,14 @@ const ButtonContainer = styled(Grid)`
   padding: 10px;
 `;
 
-const SearchContainer = ({ setFilteredDataCB }) => {
-  const [residentData, setResidentData] = useState([{}]);
+const saveSearch = {
+  display: "flex",
+  flexDirection: "row-reverse",
+  justifyContent: "space-between",
+};
+
+const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams, savedSearchQueryParams }) => {
+  const [residentData, setResidentData] = useState([]);
   const [city, setCity] = useState("");
   const [checkedKidsClub, setCheckedKidsclub] = useState("none");
   const [checkedNightEntertainment, setCheckedNightEntertainment] = useState(
@@ -58,13 +67,13 @@ const SearchContainer = ({ setFilteredDataCB }) => {
   const [checkedPool, setCheckedPool] = useState("none");
   const [checkedRestaurant, setCheckedRestaurant] = useState("none");
   const [amountOfChildren, setAmountOfChildren] = useState(0);
-
+  const [ageOfChildren, setAgeOfChildren] = useState([]);
   const [distanceCity, setDistanceCity] = useState(0);
   const [distanceBeach, setDistanceBeach] = useState(0);
   const [amountOfAdults, setAmountOfAdults] = useState(1);
   const [date, setDate] = useState({
-    start: "2020-06-02T10:30:00.000Z",
-    end: "2020-06-08T10:00:00.000Z",
+    start: "2020-06-02T00:00:00.000Z",
+    end: "2020-06-08T00:00:00.000Z",
   });
 
   useEffect(() => {
@@ -72,7 +81,6 @@ const SearchContainer = ({ setFilteredDataCB }) => {
       .get("http://localhost:8080/api/residences/")
       .then((res) => {
         setResidentData(res.data.data);
-        setFilteredDataCB(res.data.data);
       })
       .catch((err) => {
         console.error(err);
@@ -81,9 +89,26 @@ const SearchContainer = ({ setFilteredDataCB }) => {
 
   function onSubmit(e) {
     e.preventDefault();
+    let queryParams = {
+      city: city ? city : 'none',
+      checkedKidsClub,
+      checkedNightEntertainment,
+      checkedRestaurant,
+      checkedPool,
+      distanceBeach: distanceBeach ? distanceBeach : 'none',
+      distanceCity: distanceCity ? distanceCity : 'none',
+      amountOfAdults,
+      amountOfChildren,
+      ageOfChildren,
+      date,
+      presentCrib: filterPresentCrib(ageOfChildren) || false
+    };
+
+    setQueryParams(queryParams);
 
     let c = [...residentData];
 
+    c = filterAmountOfTravelers(c, amountOfAdults, ageOfChildren);
     c = filterCity(c, city);
     c = filterPool(c, checkedPool);
     c = filterNightEntertainment(c, checkedNightEntertainment);
@@ -91,9 +116,13 @@ const SearchContainer = ({ setFilteredDataCB }) => {
     c = filterRestaurant(c, checkedRestaurant);
     c = filterDistanceBeach(c, distanceBeach);
     c = filterDistanceCity(c, distanceCity);
+    c = filterDate(c, date)
 
     setFilteredDataCB(c);
+    setSearching(true);
+
   }
+
 
   return (
     <Container>
@@ -131,17 +160,19 @@ const SearchContainer = ({ setFilteredDataCB }) => {
             />
           </Grid>
           <Grid item xs={2}>
-            <ChildrenAgeSelects amountOfChildren={amountOfChildren} />
+            <ChildrenAgeSelects
+              amountOfChildren={amountOfChildren}
+              setAgeOfChildren={setAgeOfChildren}
+            />
           </Grid>
         </GridContainer>
-
         <ButtonContainer
           className="search-top"
           container
           spacing={1}
           justify="flex-end"
         >
-          <Grid item xs={2}>
+          <Grid item xs={2} style = {saveSearch}>
             <Button
               type="submit"
               variant="contained"
@@ -150,6 +181,9 @@ const SearchContainer = ({ setFilteredDataCB }) => {
             >
               Submit
             </Button>
+            {Object.keys(savedSearchQueryParams).length !== 0 &&
+              <SaveSearch savedSearchParams={savedSearchQueryParams} />
+            }
           </Grid>
         </ButtonContainer>
         <GridContainer
