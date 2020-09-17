@@ -102,6 +102,7 @@ const RoomCard = ({ roomInfo, chooseRoom, dates }) => {
  };
 
  const { selected } = value;
+
  return (
   <Card elevation={4} className={classes.card}>
    <RoomType roomType={roomInfo} />
@@ -145,7 +146,7 @@ const RoomCard = ({ roomInfo, chooseRoom, dates }) => {
         disabled={roomInfo.presentCrib ? false : true}
         label={
           roomInfo.presentCrib ? (
-         <p style={{ paddingRight: "10vw" }} >Crib: 100:- {roomInfo.presentCrib}</p>
+         <p style={{ paddingRight: "10vw" }} >Crib: 100:- / per night {roomInfo.presentCrib}</p>
         ) : (
           <p style={{ paddingRight: "10vw" }}>Crib: {"N/A"}</p>
           )
@@ -160,7 +161,7 @@ const RoomCard = ({ roomInfo, chooseRoom, dates }) => {
         disabled={roomInfo.extraBed ? false : true}
         label={
           roomInfo.extraBed ? (
-         <p style={{ paddingRight: "10vw" }} >Extra Bed: {roomInfo.extraBed + ":-"}</p>
+         <p style={{ paddingRight: "10vw" }} >Extra Bed: {roomInfo.extraBed + ":- / per night"}</p>
          ) : (
           <p style={{ paddingRight: "10vw" }}>Extra Bed: {"N/A"}</p>
          )
@@ -181,7 +182,7 @@ const RoomCard = ({ roomInfo, chooseRoom, dates }) => {
          label={
           roomInfo.allInclusive ? (
            <p style={{ paddingRight: "10vw" }}>
-            All Inclusive: {roomInfo.allInclusive + ":-"}
+            All Inclusive: {roomInfo.allInclusive + ":- / per night"}
            </p>
           ) : (
            <p style={{ paddingRight: "10vw" }}>All Inclusive: {"N/A"}</p>
@@ -197,7 +198,7 @@ const RoomCard = ({ roomInfo, chooseRoom, dates }) => {
          label={
           roomInfo.fullBoard ? (
            <p style={{ paddingRight: "10vw" }}>
-            Full Board: {roomInfo.fullBoard + ":-"}
+            Full Board: {roomInfo.fullBoard + ":- / per night"}
            </p>
           ) : (
            <p style={{ paddingRight: "10vw" }}>Full Board: {"N/A"}</p>
@@ -213,7 +214,7 @@ const RoomCard = ({ roomInfo, chooseRoom, dates }) => {
          label={
           roomInfo.halfBoard ? (
            <p style={{ paddingRight: "10vw" }}>
-            Half Board: {roomInfo.halfBoard + ":-"}
+            Half Board: {roomInfo.halfBoard + ":- / per night"}
            </p>
           ) : (
            <p style={{ paddingRight: "10vw" }}>Half Board: {"N/A"}</p>
