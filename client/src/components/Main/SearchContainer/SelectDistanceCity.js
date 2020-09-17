@@ -36,9 +36,10 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'flex-end',
+    marginBottom: 7,
   },
   p: {
-    fontWeight: 20, 
+    fontWeight: 20,
     fontSize: 16,
     margin: '7px 20px 7px 7px',
   }

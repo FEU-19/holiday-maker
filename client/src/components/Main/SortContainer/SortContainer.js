@@ -9,14 +9,14 @@ import { sortValues } from '../../../config/constants';
 
 const Container = styled.div`
   margin-inline-start: auto;
-  padding-right: 125px;
+  padding-right: 147px;
   padding-top: 25px;
 `;
 
 const useStyles = makeStyles((theme) => ({
 
   border: {
-    width: 220,
+    width: 235,
     height: 40,
     borderRadius: 7,
     borderColor: '#162C72',
