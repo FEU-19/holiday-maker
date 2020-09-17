@@ -270,6 +270,8 @@ const ContentContainer = ({ filteredData, sortOn, searching, queryParams }) => {
       <hr></hr>
       <CancelIcon></CancelIcon>
     </div>
-  );
+    : null }
+  </div>
+ );
 };
 export default ContentContainer;
