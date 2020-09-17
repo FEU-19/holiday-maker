@@ -28,7 +28,7 @@ import axios from 'axios';
     Response: {
         dateTo: 'from 10 dec, to 11 dec',
         dateHome: 'from 4 jan, to 5 jan',
-        flightNumber: '2',
+        flightNumber: '1',
         flightComany: 'AirFrance',
         destination: 'from Los Angeles, to Stockholm',
         flightTimeTo: 'from 13:00, to 21:00',
@@ -41,7 +41,7 @@ import axios from 'axios';
     Response: {
         dateTo: 'from 10 dec, to 11 dec',
         dateHome: 'from 4 jan, to 5 jan',
-        flightNumber: '2',
+        flightNumber: '3',
         flightComany: 'AirFrance',
         destination: 'from Los Angeles, to Stockholm',
         flightTimeTo: 'from 13:00, to 21:00',
@@ -53,7 +53,7 @@ import axios from 'axios';
     Response: {
         dateTo: 'from 11 dec, to 12 dec',
         dateHome: 'from 5 jan, to 6 jan',
-        flightNumber: '2',
+        flightNumber: '4',
         flightComany: 'AirFrance',
         destination: 'from Los Angeles, to Stockholm',
         flightTimeTo: 'from 13:00, to 21:00',
@@ -65,7 +65,7 @@ import axios from 'axios';
     Response: {
         dateTo: 'from 10 dec, to 11 dec',
         dateHome: 'from 4 jan, to 5 jan',
-        flightNumber: '2',
+        flightNumber: '5',
         flightComany: 'AirFrance',
         destination: 'from Los Angeles, to Stockholm',
         flightTimeTo: 'from 13:00, to 21:00',
@@ -104,13 +104,15 @@ const FlightBooking = () => {
     setOpen(false);
   };
 
+  const getRandomInt = (max) => {
+    return Math.floor(Math.random() * Math.floor(max));
+  }
 
-
-  axios
-  .get(`http://localhost:8080/api/flights`)
-  .then((res) => {
-    console.log("flights res ", res);
-  })
+  // axios
+  // .get(`http://localhost:8080/api/flights`)
+  // .then((res) => {
+  //   console.log("flights res ", res);
+  // })
 
   const classes = useStyles();
 
@@ -130,12 +132,12 @@ const FlightBooking = () => {
                   <TableCell align="right">Flight Time</TableCell>
                   <TableCell align="right">Flight Time Home</TableCell>
                   <TableCell align="right">Seats</TableCell>
-                  <Button onClick={handleClose} className={classes.button}>X</Button>
+                  <TableCell align="right"><Button onClick={handleClose} className={classes.button}>X</Button></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {flights.map((flight) => (
-                  <TableRow>
+                  <TableRow key={getRandomInt(500)}>
                     <TableCell align="right" component="th" scope="row">
                       {flight.Response.dateTo}
                     </TableCell>
@@ -146,7 +148,7 @@ const FlightBooking = () => {
                     <TableCell align="right">{flight.Response.flightTimeTo}</TableCell>
                     <TableCell align="right">{flight.Response.flightTimeHome}</TableCell>
                     <TableCell align="right">{flight.Response.seats}</TableCell>
-                    <Button align="right">Book Flight</Button>
+                    <TableCell align="right"><Button align="right">Book Flight</Button></TableCell>
                   </TableRow>
                 ))}
               </TableBody>

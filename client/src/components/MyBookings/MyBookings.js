@@ -7,11 +7,14 @@ import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
+import DialogTitle from "@material-ui/core/DialogTitle";
 import { Button } from "@material-ui/core";
 import ChangeBookingModal from "../modals/ChangeBooking/ChangeBookingModal";
 
 import FlightBooking from "../modals/FlightBooking/FlightBooking"
 import axios from "axios";
+import ContainerButtons from "./ContainerButtons";
+import getToken from "../../utils/getToken";
 
 const objekt = [
   {
@@ -30,14 +33,6 @@ const objekt = [
         price: "531",
         option: "halfBoard",
         roomNumber: "103",
-      },
-      {
-        _id: {
-          $oid: "5f5b7e5b36ac0355705b8096",
-        },
-        price: "748",
-        option: "allInclusive",
-        roomNumber: "110",
       },
     ],
     bookingDates: {
@@ -66,14 +61,6 @@ const objekt = [
     rooms: [
       {
         _id: {
-          $oid: "5f5b7e5b36ac0355705b808c",
-        },
-        price: "531",
-        option: "halfBoard",
-        roomNumber: "103",
-      },
-      {
-        _id: {
           $oid: "5f5b7e5b36ac0355705b8096",
         },
         price: "748",
@@ -96,32 +83,6 @@ const objekt = [
         price: "Number",
       },
   },
-  // {
-  //   _id: "2",
-  //   userId: "mongoose.Schema.Types.ObjectID",
-  //   adults: "2",
-  //   children: "5",
-  //   hotel: "mongoose.Schema.Types.ObjectID",
-  //   totalPrice: "100$",
-  //   rooms: [
-  //     {
-  //       _id: "mongoose.Schema.Types.ObjectID",
-  //       roomNumber: "String",
-  //       option: "String",
-  //       extraBed: "yes",
-  //       price: "1000kr",
-  //     },
-  //   ],
-  //   bookingDates: {
-  //     start: "new Date.toISOString()",
-  //     end: "new Date.toISOString()",
-  //   },
-  //   flight:  {
-  //       departureDate: 'new Date.toISOString()',
-  //       returnDate: 'new Date.toISOString()',
-  //       price: 'Number'
-  //   }
-  // }
 ];
 
 const useStyles = makeStyles((theme) => ({
@@ -168,13 +129,30 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const MyBookings = (props) => {
-  const [myBookings, setMyBookings] = useState({});
+  const [myBookings, setMyBookings] = useState([]);
   const [clickedBookings, setClickedBookings] = useState(false);
+  const [update, setUpdate] = useState(0);
   const [open, setOpen] = useState(false);
   const [order, setOrder] = useState(null);
   const [hotelId, setHotelId] = useState(null);
 
   const classes = useStyles();
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/api/orders/", { withCredentials: true })
+      .then((res) => {
+        console.log(res);
+        setMyBookings(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [update]);
+
+  if (!myBookings) {
+    return <p>loading..</p>;
+  }
 
   function saveOrder(myBooking) {
     setOrder(myBooking);

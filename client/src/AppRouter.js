@@ -21,31 +21,18 @@ const routes = [
 
 function AppRouter() {
   const [userData, setUserData] = useState({
-    token: undefined,
-    user: undefined,
+    user: {},
   });
 
   useEffect(() => {
     const checkLoggedIn = async () => {
-      let token = localStorage.getItem("auth-token");
-      console.log("heejj", token);
-      if (token === null) {
-        localStorage.setItem("auth-token", "");
-        token = "";
-      }
-      const tokenRes = await axios.post(
-        "http://localhost:8080/api/tokenIsValid/",
-        null,
-        { headers: { "x-auth-token": token } }
-      );
-      if (tokenRes.data) {
-        const userRes = await axios.get("http://localhost:8080/api/users/", {
-          headers: { "x-auth-token": token },
+      try {
+        const user = await axios.get("http://localhost:8080/api/users/", {
+          withCredentials: true,
         });
-        setUserData({
-          token,
-          user: userRes.data,
-        });
+        setUserData({ user });
+      } catch (err) {
+        console.log(err);
       }
     };
 
