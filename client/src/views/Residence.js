@@ -8,6 +8,7 @@ import RoomCardMapper from "../components/Residence/RoomCardMapper";
 import StarRateIcon from '@material-ui/icons/StarRate';
 import { useParams, useLocation } from "react-router-dom";
 import Star from "../components/Residence/Star";
+import Button from '@material-ui/core/Button';
 import axios from "axios";
 
 const useStyle = makeStyles(() => ({
@@ -51,6 +52,7 @@ const useStyle = makeStyles(() => ({
     position: 'absolute',
     display: 'flex',
     justifyContent: 'center',
+    alignItems: 'center',
     top: 36,
     right: 20,
   },
@@ -59,6 +61,7 @@ const useStyle = makeStyles(() => ({
 
 const Residence = () => {
   const classes = useStyle();
+  const [value, updateValue] = useState(0);
 
   // ********* THIS SHOULD BE UNCOMMENTED ON MERGE WITH MASTER *********
   // const {state} = useLocation();
@@ -72,6 +75,17 @@ const Residence = () => {
   const { hotelId } = useParams();
 
   useEffect(() => {
+    axios.defaults.withCredentials = true
+    if(document.cookie !== null){
+      axios.get(`http://localhost:8080/api/residences/${hotelId}/user`)
+      .then(response => {
+        const found = response.data.findIndex(hotel => hotel === hotelId)
+        updateValue(found === -1 ? 0 : 1)
+      })
+
+
+    }
+
     axios
       .get(`http://localhost:8080/api/residences/${hotelId}`)
       .then((response) => {
@@ -88,8 +102,24 @@ const Residence = () => {
     if (!data){
       return <div />
     }
+   
   // **************** ALL ABOVE THIS LINE SHOULD BE REMOVED ON MERGE WITH MASTER *********************
-
+  
+  const onClick = () =>{
+    axios.defaults.withCredentials = true
+    if(value === 0){
+    axios.post(`http://localhost:8080/api/residences/${hotelId}/user`)
+    .then(res =>{
+        updateValue(1)
+        console.log(res)
+    })}
+    else{
+      axios.delete(`http://localhost:8080/api/residences/${hotelId}/user`)
+      .then(res => {
+        updateValue(0)
+      })
+    }
+}
 
   function starRating(rating){
     let ratingArray = [];
@@ -101,10 +131,13 @@ const Residence = () => {
 
   return (
     <div className={classes.article}>
+      {document.cookie? 
       <div className={classes.favouriteDiv}>
-        <Typography variant = "p" className={classes.favourites}>Add to favourites</Typography>
-        <Star/>
-        </div>
+        <Button variant="contained" color="primary" onClick={onClick} >
+        Add to favourites
+        </Button>
+        <Star hotelId={hotelId} value={value}/>
+        </div> : <span></span>}
       <div className={classes.titlecontainer}>
         <div className={classes.titlefavouritecontainer}>
         <Typography variant = "h3" className={classes.title}>{data.name} {starRating(data.rating)}</Typography>
