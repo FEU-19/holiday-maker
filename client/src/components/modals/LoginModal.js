@@ -1,29 +1,41 @@
 import axios from "axios";
-import React, { useState, useEffect } from 'react';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from "react";
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import AppBar from "@material-ui/core/AppBar";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
+import PropTypes from "prop-types";
+import { makeStyles } from "@material-ui/core/styles";
 
 import RegistrationComp from "./Registration/RegistrationComp";
 import LoginComp from "./Login/Login";
 
-import { cookieFinder } from "../../utils/findCookie"
+import { cookieFinder } from "../../utils/findCookie";
 
-const LoginModal = () =>{
+const useStyles = makeStyles((theme) => ({
+  button: {
+    backgroundColor: "#4AB0BD",
+    color: "white",
+    margin: '5px',
+    '&:hover':{
+      backgroundColor:'#3e98a3',
+    }
+  },
+}));
+
+const LoginModal = () => {
   const [open, setOpen] = useState(false);
   const [cookie, setCookie] = useState(false);
   const [value, setValue] = useState(0);
+  const classes = useStyles();
 
   useEffect(() => {
     setCookie(cookieFinder());
-  }, [open])
+  }, [open]);
 
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -102,12 +114,14 @@ const LoginModal = () =>{
     <div>
       {!cookie ? (
         <div>
-          <Button variant="outlined" color="primary" onClick={handleModalOpen}>
+          <Button
+            className={classes.button}
+            onClick={handleModalOpen}
+          >
             Login
           </Button>
           <Button
-            variant="outlined"
-            color="primary"
+            className={classes.button}
             onClick={handleModalRegistration}
           >
             Registration

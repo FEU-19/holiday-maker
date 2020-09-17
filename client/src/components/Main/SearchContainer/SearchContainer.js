@@ -3,6 +3,11 @@ import styled from "styled-components";
 import axios from "axios";
 import Grid from "@material-ui/core/Grid";
 import { Button } from "@material-ui/core";
+import Container from '@material-ui/core/Container';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
 
 // Componets
 import DatePicker from "./DatePicker";
@@ -18,7 +23,8 @@ import SelectDistanceCity from "./SelectDistanceCity.js";
 import SelectDistanceBeach from "./SelectDistanceBeach";
 
 // Filter functions
-// import adultChildToBedFilter from "../../../utils/adultChildToBedFilter.js";
+import filterPresentCrib from '../../../utils/filterPresentCrib';
+import filterAmountOfTravelers from "../../../utils/filterAmountOfTravelers";
 import filterCity from "../../../utils/filterCity";
 import filterKidsClub from "../../../utils/filterKidsClub";
 import filterNightEntertainment from "../../../utils/filterNightEntertainment";
@@ -26,53 +32,64 @@ import filterPool from "../../../utils/filterPool";
 import filterRestaurant from "../../../utils/filterRestaurant";
 import filterDistanceBeach from "../../../utils/filterDistanceBeach";
 import filterDistanceCity from "../../../utils/filterDistanceCity";
+import filterDate from "../../../utils/filterDate";
 
-const Container = styled.div`
-  width: 90vw;
-  display: flex;
-  justify-content: center;
-`;
+const useStyles = makeStyles((theme) => ({
+  backgroundColor: {
+    backgroundColor: '#F5F5F5',
+    paddingTop: 70,
+    minHeight: 350,
+  }
+}));
 
 const Form = styled.form`
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
 
-const GridContainer = styled(Grid)`
-  padding: 20px;
-`;
-
 const ButtonContainer = styled(Grid)`
-  border-bottom: 1px solid grey;
-  padding: 10px;
+  padding: 30px;
 `;
 
-const SearchContainer = ({ setFilteredDataCB }) => {
-  const [residentData, setResidentData] = useState([{}]);
+const StyledDiv = styled.div`
+  width: 100%;
+  height: 1px;
+  background-color: grey;
+  margin-top: 20px;
+`
+
+const theme = createMuiTheme({
+  palette: {
+    primary: { main: '#F23622' },
+    secondary: { main: '#F23622' },
+  },
+});
+
+const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) => {
+  const [residentData, setResidentData] = useState([]);
   const [city, setCity] = useState("");
   const [checkedKidsClub, setCheckedKidsclub] = useState("none");
-  const [checkedNightEntertainment, setCheckedNightEntertainment] = useState(
-    "none"
-  );
+  const [checkedNightEntertainment, setCheckedNightEntertainment] = useState("none");
   const [checkedPool, setCheckedPool] = useState("none");
   const [checkedRestaurant, setCheckedRestaurant] = useState("none");
   const [amountOfChildren, setAmountOfChildren] = useState(0);
-
+  const [ageOfChildren, setAgeOfChildren] = useState([]);
   const [distanceCity, setDistanceCity] = useState(0);
   const [distanceBeach, setDistanceBeach] = useState(0);
   const [amountOfAdults, setAmountOfAdults] = useState(1);
   const [date, setDate] = useState({
-    start: "2020-06-02T10:30:00.000Z",
-    end: "2020-06-08T10:00:00.000Z",
+    start: "2020-06-02T00:00:00.000Z",
+    end: "2020-06-08T00:00:00.000Z",
   });
+  const classes = useStyles();
 
   useEffect(() => {
     axios
       .get("http://localhost:8080/api/residences/")
       .then((res) => {
         setResidentData(res.data.data);
-        setFilteredDataCB(res.data.data);
       })
       .catch((err) => {
         console.error(err);
@@ -82,8 +99,26 @@ const SearchContainer = ({ setFilteredDataCB }) => {
   function onSubmit(e) {
     e.preventDefault();
 
+    let queryParams = {
+      city: city ? city : 'none',
+      checkedKidsClub,
+      checkedNightEntertainment,
+      checkedRestaurant,
+      checkedPool,
+      distanceBeach: distanceBeach ? distanceBeach : 'none',
+      distanceCity: distanceCity ? distanceCity : 'none',
+      amountOfAdults,
+      amountOfChildren,
+      ageOfChildren,
+      date,
+      presentCrib: filterPresentCrib(ageOfChildren) || false
+    };
+
+    setQueryParams(queryParams);
+
     let c = [...residentData];
 
+    c = filterAmountOfTravelers(c, amountOfAdults, ageOfChildren);
     c = filterCity(c, city);
     c = filterPool(c, checkedPool);
     c = filterNightEntertainment(c, checkedNightEntertainment);
@@ -91,112 +126,136 @@ const SearchContainer = ({ setFilteredDataCB }) => {
     c = filterRestaurant(c, checkedRestaurant);
     c = filterDistanceBeach(c, distanceBeach);
     c = filterDistanceCity(c, distanceCity);
+    c = filterDate(c, date)
 
     setFilteredDataCB(c);
+    setSearching(true);
   }
 
   return (
-    <Container>
-      <Form onSubmit={onSubmit}>
-        <GridContainer
-          className="search-top"
-          container
-          spacing={1}
-          justify="space-around"
-        >
-          <Grid item xs={2}>
-            <SelectCity
-              residentData={residentData}
-              city={city}
-              setCity={setCity}
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <DatePicker
-              residentData={residentData}
-              date={date}
-              setDate={setDate}
-            />
-          </Grid>
-          <Grid item xs={2}>
-            <SelectAmountOfAdults
-              setAmountOfAdults={setAmountOfAdults}
-              amountOfAdults={amountOfAdults}
-            />
-          </Grid>
-          <Grid item xs={2}>
-            <SelectAmountOfChildren
-              setAmountOfChildren={setAmountOfChildren}
-              amountOfChildren={amountOfChildren}
-            />
-          </Grid>
-          <Grid item xs={2}>
-            <ChildrenAgeSelects amountOfChildren={amountOfChildren} />
-          </Grid>
-        </GridContainer>
-
-        <ButtonContainer
-          className="search-top"
-          container
-          spacing={1}
-          justify="flex-end"
-        >
-          <Grid item xs={2}>
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              placeholder="Submit"
+    <ThemeProvider theme={theme}>
+      <Container maxWidth={false} className={classes.backgroundColor} >
+        <Form onSubmit={onSubmit}>
+          <Grid
+            className="search-top"
+            container
+            spacing={1}
+            justify="space-around"
+          >
+            <Grid item xs={2}>
+              <SelectCity
+                residentData={residentData}
+                city={city}
+                setCity={setCity}
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <DatePicker
+                residentData={residentData}
+                date={date}
+                setDate={setDate}
+              />
+            </Grid>
+            <Grid item xs={2}>
+              <SelectAmountOfAdults
+                setAmountOfAdults={setAmountOfAdults}
+                amountOfAdults={amountOfAdults}
+              />
+            </Grid>
+            <Grid item xs={2}>
+              <SelectAmountOfChildren
+                setAmountOfChildren={setAmountOfChildren}
+                amountOfChildren={amountOfChildren}
+              />
+            </Grid>
+            <Grid
+              style={{
+                minHeight: 110,
+                minWidth: 510,
+                marginTop: 10,
+                marginBottom: -70
+              }}
+              container
+              spacing={1}
+              item xs={4}
             >
-              Submit
+              <ChildrenAgeSelects
+                amountOfChildren={amountOfChildren}
+                setAgeOfChildren={setAgeOfChildren}
+              />
+            </Grid>
+          </Grid>
+          <ButtonContainer
+            className="search-top"
+            container
+            spacing={1}
+            justify="flex-end"
+          >
+            <Grid item xs={2}
+              container
+              justify="flex-end"
+              >
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                placeholder="Submit"
+              >
+                Search
             </Button>
+            </Grid>
+            <StyledDiv></StyledDiv>
+          </ButtonContainer>
+          <Box width="85%" p={1} my={0.5}>
+          <Grid
+            className="search-bottom"
+            container
+            spacing={1}
+            justify="space-around"
+          >
+            <Grid item xs={2}>
+              <CheckboxRestaurant
+                checkedRestaurant={checkedRestaurant}
+                setCheckedRestaurant={setCheckedRestaurant}
+              />
+            </Grid>
+            <Grid item xs={2}>
+              <CheckboxKidsClub
+                checkedKidsClub={checkedKidsClub}
+                setCheckedKidsclub={setCheckedKidsclub}
+              />
+            </Grid>
+            <Grid item xs={2}>
+              <CheckboxNightEntertainment
+                checkedNightEntertainment={checkedNightEntertainment}
+                setCheckedNightEntertainment={setCheckedNightEntertainment}
+              />
+            </Grid>
+            <Grid item xs={2}>
+              <CheckboxPool
+                checkedPool={checkedPool}
+                setCheckedPool={setCheckedPool}
+              />
+            </Grid>
+            <Grid>
+            <Grid item xs={2}>
+              <SelectDistanceCity
+                distanceCity={distanceCity}
+                setDistanceCity={setDistanceCity}
+              />
+            </Grid>
+            <Grid item xs={2}>
+              <SelectDistanceBeach
+                distanceBeach={distanceBeach}
+                setDistanceBeach={setDistanceBeach}
+              />
+            </Grid>
+            </Grid>
           </Grid>
-        </ButtonContainer>
-        <GridContainer
-          className="search-bottom"
-          container
-          spacing={1}
-          justify="space-around"
-        >
-          <Grid item xs={2}>
-            <CheckboxRestaurant
-              checkedRestaurant={checkedRestaurant}
-              setCheckedRestaurant={setCheckedRestaurant}
-            />
-          </Grid>
-          <Grid item xs={2}>
-            <CheckboxKidsClub
-              checkedKidsClub={checkedKidsClub}
-              setCheckedKidsclub={setCheckedKidsclub}
-            />
-          </Grid>
-          <Grid item xs={2}>
-            <CheckboxNightEntertainment
-              checkedNightEntertainment={checkedNightEntertainment}
-              setCheckedNightEntertainment={setCheckedNightEntertainment}
-            />
-          </Grid>
-          <Grid item xs={2}>
-            <CheckboxPool
-              checkedPool={checkedPool}
-              setCheckedPool={setCheckedPool}
-            />
-          </Grid>
-          <Grid item xs={2}>
-            <SelectDistanceCity
-              distanceCity={distanceCity}
-              setDistanceCity={setDistanceCity}
-            />
-          </Grid>
-          <Grid item xs={2}>
-            <SelectDistanceBeach
-              distanceBeach={distanceBeach}
-              setDistanceBeach={setDistanceBeach}
-            />
-          </Grid>
-        </GridContainer>
-      </Form>
-    </Container>
+          </Box>
+        </Form>
+      </Container>
+    </ThemeProvider>
   );
 };
 
