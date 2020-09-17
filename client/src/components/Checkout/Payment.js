@@ -93,7 +93,7 @@ function Payment() {
       hotel: state.hotel._id,
       bookingDates: state.queryParams.date,
       rooms: [],
-      flight: state.flight || { price: 0 },
+      flight: state.flight || null,
     };
 
     ordData.rooms = state.rooms.map((room) => {

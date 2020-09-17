@@ -16,8 +16,10 @@ exports.create = async (req, res) => {
   orderData.rooms = data.rooms;
   orderData.bookingDates = data.bookingDates;
   orderData.hotel = data.hotel;
-  orderData.flight = data.flight;
-  orderData.totalPrice = data.flight.price || 0;
+  orderData.flight = data.flight === null ? data.flight : false;
+  orderData.flight === null
+    ? (orderData.totalPrice = 0)
+    : (orderData.totalPrice = orderData.flight.price);
 
   const roomNs = [];
   data.rooms.forEach((room) => {
