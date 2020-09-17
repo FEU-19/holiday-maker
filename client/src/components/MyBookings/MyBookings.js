@@ -188,7 +188,7 @@ const MyBookings = (props) => {
               {myBooking.hotel}
             </Typography>
             <Typography className={classes.heading}>
-              {myBooking.bookingDates.start}
+              {myBooking.bookingDates.start.slice(0, 10)}
             </Typography>
             <Typography className={classes.heading}>{myBooking._id}</Typography>
           </AccordionSummary>
@@ -207,9 +207,9 @@ const MyBookings = (props) => {
                   <br></br>
                   <span>Flight</span>
                   <br></br>
-                  Departure Date: {myBooking.flight.departureDate}
+                  Departure Date: {myBooking.flight.departureDate.slice(0, 10)}
                   <br />
-                  Return Date: {myBooking.flight.returnDate}
+                  Return Date: {myBooking.flight.returnDate.slice(0, 10)}
                   <br />
                   Extra Bed: {myBooking.rooms.extraBed}
                 </Typography>
@@ -222,7 +222,10 @@ const MyBookings = (props) => {
                   </Button>
                   <FlightBooking />
                 </div>
-                <ContainerButtons />
+                <ContainerButtons
+                  orderId={myBooking._id}
+                  setUpdate={setUpdate}
+                />
               </CardContent>
             </Card>
           </AccordionDetails>
