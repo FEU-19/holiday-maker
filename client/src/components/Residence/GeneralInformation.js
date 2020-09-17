@@ -1,50 +1,54 @@
 import React, { useState, useEffect, useCallback } from "react";
+import { Typography } from "@material-ui/core";
+import { v4 as uuidv4 } from "uuid";
 
 // Style variables
 const boxContainer = {
-  width: "600px",
   padding: "30px 30px 50px 30px",
+  width: "1305.280",
 };
 
 const title = {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  width: "200px",
+  //width: '319px',
   height: "35px",
-  backgroundColor: "lightgrey",
-  color: "#464646",
-  borderBottom: "1px solid #9a9a9a",
+  backgroundColor: "#F5F5F5",
+  color: "#F23622",
+  borderBottom: "1px solid #4AB0BD",
   borderRadius: "4px 4px 0 0",
+};
+
+const box = {
+  boxShadow: " 0 4px 2px -2px #263d69",
 };
 
 const contentContainer = {
   display: "flex",
-  alignSelf: "flex-start",
-  justifyContent: "center",
-  width: "600px",
-  backgroundColor: "#EAEAEA",
-  color: "#464646",
+  flexDirection: "row",
+  flexWrap: "nowrap",
+  justifyContent: "space-between",
+  backgroundColor: "#F5F5F5",
   borderRadius: "0 0 4px 4px",
 };
 
 const content = {
   width: "300px",
   padding: "0 20px 20px 40px",
-  color: "#464646",
   boxSizing: "border-box",
 };
 
 const headInfo = {
-  width: "600px",
   padding: "30px 40px 20px 40px",
   borderRadius: "0 4px 0 0",
-  color: "#464646",
-  backgroundColor: "#EAEAEA",
+  backgroundColor: "#F5F5F5",
   boxSizing: "border-box",
 };
 
 const textReset = {
+  display: "flex",
+  flex: "column",
   margin: "0",
   padding: "0",
 };
@@ -52,12 +56,6 @@ const textReset = {
 const subTitle = {
   margin: "0",
   padding: "0 0 10px 0",
-  fontWeight: "bold",
-};
-
-const subTitleBeds = {
-  margin: "0",
-  padding: "20px 0 10px 0",
   fontWeight: "bold",
 };
 
@@ -88,9 +86,8 @@ const GeneralInformation = ({ generalInfo }) => {
       return acc + cur.beds;
     }, 0);
 
-    const totalExtraBeds = generalInfo.rooms.reduce((acc, cur) => {
-      return acc + (!!cur.extraBed ? 1 : 0);
-    }, 0);
+    // At CT there is one extra bed available per room
+    const totalExtraBeds = generalInfo.rooms.length;
 
     const roomInfoObject = {
       numberOfRooms: roomAmount,
@@ -120,48 +117,63 @@ const GeneralInformation = ({ generalInfo }) => {
     <div>
       <div className="residence__generalInformationContainer" style={boxContainer}>
         <div className="residence__generalInformationContainer__title" style={title}>
-          <h4>Residence Overview</h4>
+          <Typography variant="h6">Residence Overview</Typography>
         </div>
-        <div className="residence__generalInformationContainer__headInfo" style={headInfo}>
-          <p style={textReset}>
-            This residence has {info.numberOfRooms} rooms, {info.totalBeds} Beds and{" "}
-            {info.totalExtraBeds} Extra beds.
-          </p>
-        </div>
-        <div
-          className="residence__generalInformationContainer__contentContainer"
-          style={contentContainer}
-        >
-          <div
-            className="residence__generalInformationContainer__contentContainer__content"
-            style={content}
+        <div className="residence__generialInformationContainer__box" style={box}>
+          <Typography
+            component="p"
+            className="residence__generalInformationContainer__headInfo"
+            style={headInfo}
           >
-            <p style={subTitle}>Type of rooms</p>
-            {info.roomTypes.map((room) => {
-              let value = info.roomsOfTypes[room];
-              return (
-                <p style={textReset}>
-                  {value} {room}s
-                </p>
-              );
-            })}
-            <p style={subTitleBeds}>Beds</p>
-            <p style={textReset}>{info.totalBeds} Beds</p>
-            <p style={textReset}>{info.totalExtraBeds} Extra beds</p>
-          </div>
+            <span style={textReset}>
+              This residence has {info.numberOfRooms} rooms, {info.totalBeds} beds and 20 extra
+              beds.
+            </span>
+          </Typography>
           <div
-            className="residence__generalInformationContainer__contentContainer__content"
-            style={content}
+            className="residence__generalInformationContainer__contentContainer"
+            style={contentContainer}
           >
-            <p style={subTitle}>Room sizes</p>
-            {info.roomSizes.map((room) => {
-              let value = info.roomsOfSizes[room];
-              return (
-                <p style={textReset}>
-                  {value} {room} rooms
-                </p>
-              );
-            })}
+            <Typography
+              component="p"
+              className="residence__generalInformationContainer__contentContainer__content"
+              style={content}
+            >
+              <span style={subTitle}>Type of rooms</span>
+              {info.roomTypes.map((room) => {
+                let value = info.roomsOfTypes[room];
+                return (
+                  <span key={uuidv4()} style={textReset}>
+                    {value} {room}s
+                  </span>
+                );
+              })}
+            </Typography>
+            <Typography
+              variant="body1"
+              component="p"
+              className="residence__generalInformationContainer__contentContainer__content"
+              style={content}
+            >
+              <span style={subTitle}>Beds</span>
+              <span style={textReset}>{info.totalBeds} Beds</span>
+              <span style={textReset}>20 Extra beds</span>
+            </Typography>
+            <Typography
+              component="p"
+              className="residence__generalInformationContainer__contentContainer__content"
+              style={content}
+            >
+              <span style={subTitle}>Room sizes</span>
+              {info.roomSizes.map((room) => {
+                let value = info.roomsOfSizes[room];
+                return (
+                  <span key={uuidv4()} style={textReset}>
+                    {value} {room} rooms
+                  </span>
+                );
+              })}
+            </Typography>
           </div>
         </div>
       </div>

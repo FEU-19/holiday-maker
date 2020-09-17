@@ -3,11 +3,11 @@ import styled from "styled-components";
 import axios from "axios";
 import Grid from "@material-ui/core/Grid";
 import { Button } from "@material-ui/core";
-import Container from '@material-ui/core/Container';
-import { createMuiTheme } from '@material-ui/core/styles';
-import { ThemeProvider } from '@material-ui/core/styles';
-import { makeStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
+import Container from "@material-ui/core/Container";
+import { createMuiTheme } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
+import Box from "@material-ui/core/Box";
 
 // Componets
 import DatePicker from "./DatePicker";
@@ -21,9 +21,10 @@ import CheckboxPool from "./CheckboxPool";
 import CheckboxRestaurant from "./CheckboxRestaurant";
 import SelectDistanceCity from "./SelectDistanceCity.js";
 import SelectDistanceBeach from "./SelectDistanceBeach";
+import SaveSearch from "./SaveSearch";
 
 // Filter functions
-import filterPresentCrib from '../../../utils/filterPresentCrib';
+import filterPresentCrib from "../../../utils/filterPresentCrib";
 import filterAmountOfTravelers from "../../../utils/filterAmountOfTravelers";
 import filterCity from "../../../utils/filterCity";
 import filterKidsClub from "../../../utils/filterKidsClub";
@@ -36,10 +37,10 @@ import filterDate from "../../../utils/filterDate";
 
 const useStyles = makeStyles((theme) => ({
   backgroundColor: {
-    backgroundColor: '#F5F5F5',
+    backgroundColor: "#F5F5F5",
     paddingTop: 70,
     minHeight: 350,
-  }
+  },
 }));
 
 const Form = styled.form`
@@ -58,16 +59,27 @@ const StyledDiv = styled.div`
   height: 1px;
   background-color: grey;
   margin-top: 20px;
-`
+`;
 
 const theme = createMuiTheme({
   palette: {
-    primary: { main: '#F23622' },
-    secondary: { main: '#F23622' },
+    primary: { main: "#F23622" },
+    secondary: { main: "#F23622" },
   },
 });
 
-const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) => {
+const saveSearch = {
+  display: "flex",
+  flexDirection: "row-reverse",
+  justifyContent: "space-between",
+};
+
+const SearchContainer = ({
+  setFilteredDataCB,
+  setSearching,
+  setQueryParams,
+  savedSearchQueryParams,
+}) => {
   const [residentData, setResidentData] = useState([]);
   const [city, setCity] = useState("");
   const [checkedKidsClub, setCheckedKidsclub] = useState("none");
@@ -98,7 +110,6 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
 
   function onSubmit(e) {
     e.preventDefault();
-
     let queryParams = {
       city: city ? city : "none",
       checkedKidsClub,
@@ -111,7 +122,7 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
       amountOfChildren,
       ageOfChildren,
       date,
-      presentCrib: filterPresentCrib(ageOfChildren) || false
+      presentCrib: filterPresentCrib(ageOfChildren) || false,
     };
 
     setQueryParams(queryParams);
@@ -134,27 +145,14 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
 
   return (
     <ThemeProvider theme={theme}>
-      <Container maxWidth={false} className={classes.backgroundColor} >
+      <Container maxWidth={false} className={classes.backgroundColor}>
         <Form onSubmit={onSubmit}>
-          <Grid
-            className="search-top"
-            container
-            spacing={1}
-            justify="space-around"
-          >
+          <Grid className="search-top" container spacing={1} justify="space-around">
             <Grid item xs={2}>
-              <SelectCity
-                residentData={residentData}
-                city={city}
-                setCity={setCity}
-              />
+              <SelectCity residentData={residentData} city={city} setCity={setCity} />
             </Grid>
             <Grid item xs={4}>
-              <DatePicker
-                residentData={residentData}
-                date={date}
-                setDate={setDate}
-              />
+              <DatePicker residentData={residentData} date={date} setDate={setDate} />
             </Grid>
             <Grid item xs={2}>
               <SelectAmountOfAdults
@@ -173,11 +171,12 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
                 minHeight: 110,
                 minWidth: 510,
                 marginTop: 10,
-                marginBottom: -70
+                marginBottom: -70,
               }}
               container
               spacing={1}
-              item xs={4}
+              item
+              xs={4}
             >
               <ChildrenAgeSelects
                 amountOfChildren={amountOfChildren}
@@ -185,73 +184,55 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
               />
             </Grid>
           </Grid>
-          <ButtonContainer
-            className="search-top"
-            container
-            spacing={1}
-            justify="flex-end"
-          >
-            <Grid item xs={2}
-              container
-              justify="flex-end"
-              >
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                placeholder="Submit"
-              >
-                Search
-            </Button>
+          <ButtonContainer className="search-top" container spacing={1} justify="flex-end">
+            <Grid item xs={2} style={saveSearch}>
+              <Button type="submit" variant="contained" color="primary" placeholder="Submit">
+                Submit
+              </Button>
+              {Object.keys(savedSearchQueryParams).length !== 0 && (
+                <SaveSearch savedSearchParams={savedSearchQueryParams} />
+              )}
             </Grid>
             <StyledDiv></StyledDiv>
           </ButtonContainer>
           <Box width="85%" p={1} my={0.5}>
-          <Grid
-            className="search-bottom"
-            container
-            spacing={1}
-            justify="space-around"
-          >
-            <Grid item xs={2}>
-              <CheckboxRestaurant
-                checkedRestaurant={checkedRestaurant}
-                setCheckedRestaurant={setCheckedRestaurant}
-              />
+            <Grid className="search-bottom" container spacing={1} justify="space-around">
+              <Grid item xs={2}>
+                <CheckboxRestaurant
+                  checkedRestaurant={checkedRestaurant}
+                  setCheckedRestaurant={setCheckedRestaurant}
+                />
+              </Grid>
+              <Grid item xs={2}>
+                <CheckboxKidsClub
+                  checkedKidsClub={checkedKidsClub}
+                  setCheckedKidsclub={setCheckedKidsclub}
+                />
+              </Grid>
+              <Grid item xs={2}>
+                <CheckboxNightEntertainment
+                  checkedNightEntertainment={checkedNightEntertainment}
+                  setCheckedNightEntertainment={setCheckedNightEntertainment}
+                />
+              </Grid>
+              <Grid item xs={2}>
+                <CheckboxPool checkedPool={checkedPool} setCheckedPool={setCheckedPool} />
+              </Grid>
+              <Grid>
+                <Grid item xs={2}>
+                  <SelectDistanceCity
+                    distanceCity={distanceCity}
+                    setDistanceCity={setDistanceCity}
+                  />
+                </Grid>
+                <Grid item xs={2}>
+                  <SelectDistanceBeach
+                    distanceBeach={distanceBeach}
+                    setDistanceBeach={setDistanceBeach}
+                  />
+                </Grid>
+              </Grid>
             </Grid>
-            <Grid item xs={2}>
-              <CheckboxKidsClub
-                checkedKidsClub={checkedKidsClub}
-                setCheckedKidsclub={setCheckedKidsclub}
-              />
-            </Grid>
-            <Grid item xs={2}>
-              <CheckboxNightEntertainment
-                checkedNightEntertainment={checkedNightEntertainment}
-                setCheckedNightEntertainment={setCheckedNightEntertainment}
-              />
-            </Grid>
-            <Grid item xs={2}>
-              <CheckboxPool
-                checkedPool={checkedPool}
-                setCheckedPool={setCheckedPool}
-              />
-            </Grid>
-            <Grid>
-            <Grid item xs={2}>
-              <SelectDistanceCity
-                distanceCity={distanceCity}
-                setDistanceCity={setDistanceCity}
-              />
-            </Grid>
-            <Grid item xs={2}>
-              <SelectDistanceBeach
-                distanceBeach={distanceBeach}
-                setDistanceBeach={setDistanceBeach}
-              />
-            </Grid>
-            </Grid>
-          </Grid>
           </Box>
         </Form>
       </Container>

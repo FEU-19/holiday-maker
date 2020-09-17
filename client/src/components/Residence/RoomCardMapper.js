@@ -5,7 +5,7 @@ import { Redirect, useLocation } from "react-router-dom";
 
 const useStyle = makeStyles({
   sticky: {
-    position: "fixed",
+    position: "absolute",
     bottom: 0,
     left: 0,
     padding: "10px 0",
@@ -14,7 +14,7 @@ const useStyle = makeStyles({
   },
 });
 
-const RoomCardMapper = ({ allRooms }) => {
+const RoomCardMapper = ({ allRooms, dates }) => {
   const [chosenRooms, setChosenRooms] = useState([]);
   const [redirect, setRedirect] = useState(false);
   const { state } = useLocation();
@@ -45,16 +45,11 @@ const RoomCardMapper = ({ allRooms }) => {
           }}
         />
       )}
-      {allRooms.map((room) => {
-        return <RoomCard roomInfo={room} chooseRoom={chooseRoom} />;
+      {allRooms.map((room, index) => {
+        return <RoomCard key={index} roomInfo={room} chooseRoom={chooseRoom} dates={dates} />;
       })}
-      <Button
-        variant="contained"
-        color="primary"
-        className={styles.sticky}
-        onClick={() => setRedirect(!!chosenRooms.length)}
-      >
-        {"proceed".toUpperCase()}
+      <Button color="primary" className={styles.sticky} onClick={() => setRedirect(true)}>
+        CHECKOUT
       </Button>
     </div>
   );
