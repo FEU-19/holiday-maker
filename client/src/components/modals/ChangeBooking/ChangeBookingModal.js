@@ -145,10 +145,10 @@ export default function ChangeBookingModal({
             
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose} className={classes.button}/*variant="outlined" color="primary"*/>
+            <Button onClick={handleClose} className={classes.button}>
               Cancel changes
             </Button>
-            <Button onClick={saveChanges} className={classes.button}/* variant="outlined" color="primary"*/>
+            <Button onClick={saveChanges} className={classes.button}>
               Save changes
             </Button>
           </DialogActions>
