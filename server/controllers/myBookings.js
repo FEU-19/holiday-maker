@@ -56,7 +56,6 @@ exports.changeBooking = async (req, res) => {
 
   const foundOrder = await Order.findOne({ _id: orderId });
 
-  console.log(foundOrder);
 
   if (!foundOrder) {
     res.status(404).json({
