@@ -9,11 +9,10 @@ const Star = ({value}) => {
         <Rating
         max={1}
         value={value}
-        disabled
+        readOnly
         />
         </>
         
- 
     )
 }
 
