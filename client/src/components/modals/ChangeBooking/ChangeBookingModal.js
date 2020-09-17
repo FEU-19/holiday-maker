@@ -17,27 +17,29 @@ import ChangeDates from "./ChangeDates";
 import RenderFoodOption from "./RenderFoodOption";
 import filterDate from "../../../utils/filterDate";
 import { DataFoodOptions } from "./DataFoodOptions";
-import {handleEdit} from '../../MyBookings/ContainerButtons';
+import { handleEdit } from "../../MyBookings/ContainerButtons";
 
 export default function ChangeBookingModal({
   handleClose,
   open,
   bookings,
   hotelId,
-  setOrder
+  rooms,
+  order,
 }) {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [date, setDate] = useState({ start: "", end: "" });
   const [hotel, setHotel] = useState(null);
-  const [newStartDate, setNewStartDate] = useState('')
-  const [newEndDate, setNewEndDate] = useState('');
+  const [newStartDate, setNewStartDate] = useState("");
+  const [newEndDate, setNewEndDate] = useState("");
   const [newRoomOptions, setNewRoomOptions] = useState(bookings.rooms[0]);
-  
+
+  console.log(hotelId);
 
   const bookedRooms = bookings.rooms;
-
-
+  console.log("Bookings", bookings);
+  console.log("rooms", bookedRooms);
   useEffect(() => {
     if (bookings) {
       setDate((prevState) => ({
@@ -65,22 +67,29 @@ export default function ChangeBookingModal({
 
   function findTheHotelRoomInHotel(id) {
     let x;
+    console.log("book", bookings);
     const roomsInHotel = hotel.rooms;
-    roomsInHotel.map((HotelRoom) => {
-      if (HotelRoom._id === id) {
-        return (x = HotelRoom);
-      }
-    });
-    return x;
+    let room = rooms.find((room) => room._id === id);
+    console.log("hotelroom", room);
+
+    // roomsInHotel.map((HotelRoom) => {
+    //   console.log("HOTELROOM ID", HotelRoom._id);
+    //   console.log("ID", id);
+    //   if (HotelRoom._id === id) {
+    //     console.log("HELOOOOOOOOOOOOOOOOOOOOOOOO");
+    //     return (x = HotelRoom);
+    //   }
+    // });
+    return room;
   }
 
-  function saveChanges(){
-    console.log('THIS IS THE OLD ORDER ', bookings);
-    setNewRoomOptions({...newRoomOptions}, delete newRoomOptions.name);
+  function saveChanges() {
+    console.log("THIS IS THE OLD ORDER ", bookings);
+    setNewRoomOptions({ ...newRoomOptions }, delete newRoomOptions.name);
     bookings.bookingDates.start = date.start;
     bookings.bookingDates.end = date.end;
-    let data = {...bookings, ...bookedRooms.splice(0,1,newRoomOptions)  };
-    console.log('....... THE HOLE NEW ORDER ', data);
+    let data = { ...bookings, ...bookedRooms.splice(0, 1, newRoomOptions) };
+    console.log("....... THE HOLE NEW ORDER ", data);
   }
 
   return (
@@ -104,8 +113,8 @@ export default function ChangeBookingModal({
             {/* flight */}
             {/* Need price */}
             {bookedRooms.map((room, index) => {
-              const hotelRoom = findTheHotelRoomInHotel(room._id);
-              //console.log(hotelRoom);
+              const hotelRoom = findTheHotelRoomInHotel(rooms[0]._id);
+
               const data = DataFoodOptions(hotelRoom);
 
               return (
@@ -124,7 +133,7 @@ export default function ChangeBookingModal({
               */}
                   <Typography> Food options</Typography>
                   <RenderFoodOption
-                    initiallySelected={room.option}
+                    initiallySelected={order.option}
                     setNewRoomOptions={setNewRoomOptions}
                     newRoomOptions={newRoomOptions}
                     data={data}
@@ -132,7 +141,6 @@ export default function ChangeBookingModal({
                 </React.Fragment>
               );
             })}
-            
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose} variant="outlined" color="primary">
