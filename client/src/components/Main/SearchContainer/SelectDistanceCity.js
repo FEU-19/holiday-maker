@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     fill: '#4AB0BD',
   },
   border: {
-    width: 230,
+    width: 235,
     height: 30,
     borderRadius: 7,
     background: 'white',
@@ -84,7 +84,7 @@ const SelectDistanceCity = ({distanceCity, setDistanceCity}) => {
           distanceInterval.map((distance, index) =>
             distance
             ? <MenuItem value={ distance } key={index}>{ "< " + distance } m</MenuItem>
-            : <MenuItem value={ distance } key={index}>N/A</MenuItem>
+            : <MenuItem value={ distance } key={index}>None</MenuItem>
           )
         }
       </Select>

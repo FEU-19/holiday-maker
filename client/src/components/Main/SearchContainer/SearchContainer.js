@@ -7,6 +7,7 @@ import Container from '@material-ui/core/Container';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
 
 // Componets
 import DatePicker from "./DatePicker";
@@ -205,6 +206,7 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
             </Grid>
             <StyledDiv></StyledDiv>
           </ButtonContainer>
+          <Box width="85%" p={1} my={0.5}>
           <Grid
             className="search-bottom"
             container
@@ -235,6 +237,7 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
                 setCheckedPool={setCheckedPool}
               />
             </Grid>
+            <Grid>
             <Grid item xs={2}>
               <SelectDistanceCity
                 distanceCity={distanceCity}
@@ -247,7 +250,9 @@ const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) =>
                 setDistanceBeach={setDistanceBeach}
               />
             </Grid>
+            </Grid>
           </Grid>
+          </Box>
         </Form>
       </Container>
     </ThemeProvider>
