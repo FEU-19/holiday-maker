@@ -79,7 +79,7 @@ export default function ChangeBookingModal({
   }
 
   function saveChanges(){
-    console.log('Name should be remmoved  ***************** ', newRoomOptions, newRoomOptions.name);
+    console.log('THIS IS THE OLD ORDER ', bookings);
     setNewRoomOptions({...newRoomOptions}, delete newRoomOptions.name);
 
     let data = {...bookings, ...bookedRooms.splice(0,1,newRoomOptions)};
