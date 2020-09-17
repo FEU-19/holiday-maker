@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Fragment } from "react";
 import axios from "axios";
 import DialogContent from "@material-ui/core/DialogContent";
+import Typography from "@material-ui/core/Typography";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Dialog from "@material-ui/core/Dialog";
 import Button from "@material-ui/core/Button";
@@ -16,6 +17,7 @@ import ChildrenAgeSelects from "../../Main/SearchContainer/ChildrenAgeSelects";
 import ChangeDates from "./ChangeDates";
 import RenderFoodOption from "./RenderFoodOption";
 import filterDate from "../../../utils/filterDate";
+import { DataFoodOptions } from "./DataFoodOptions";
 
 export default function ChangeBookingModal({
   handleClose,
@@ -23,31 +25,38 @@ export default function ChangeBookingModal({
   bookings,
   hotelId,
 }) {
-  
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
-  const [date, setDate] = useState({start: '', end: ''});
-  const bookedRooms = bookings.rooms;
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [date, setDate] = useState({ start: "", end: "" });
   const [hotel, setHotel] = useState(null);
   console.log("I GOT the Order ", bookings);
   console.log("I GOT the FLIGHT ID  ", hotelId);
   const [newStartDate, setNewStartDate] = useState('')
   const [newEndDate, setNewEndDate] = useState('');
+  const [newRoomOptions, setNewRoomOptions] = useState(bookings.rooms[0]);
+
+  const bookedRooms = bookings.rooms;
 
   console.log(bookings.bookingDates.start)
 
+ 
+  console.log("****** Remove NAME before PUT *************", newRoomOptions);
+
   useEffect(() => {
-    if(bookings){
-      setDate((prevState => ({...prevState, start: bookings.bookingDates.start, end: bookings.bookingDates.end})));
+    if (bookings) {
+      setDate((prevState) => ({
+        ...prevState,
+        start: startDate,
+        end: endDate,
+      }));
     }
-}, [bookings]);
+  }, [bookings]);
 
   useEffect(() => {
     axios
       .get(`http://localhost:8080/api/residences/${hotelId}`)
       .then((res) => {
-        console.log("Hotel Res ", res);
-
+        // console.log("Hotel Res ", res);
         setHotel(res.data.data);
       })
       .catch((error) => {
@@ -59,14 +68,10 @@ export default function ChangeBookingModal({
   }, [hotelId]);
 
   function findTheHotelRoomInHotel(id) {
-    // console.log( id);
     let x;
     const roomsInHotel = hotel.rooms;
     roomsInHotel.map((HotelRoom) => {
-      // console.log('This is rooms in HOTEL -> ',  HotelRoom._id);
       if (HotelRoom._id === id) {
-        // console.log("*************************************", HotelRoom._id, id);
-        // console.log(HotelRoom);
         return (x = HotelRoom);
       }
     });
@@ -80,28 +85,26 @@ export default function ChangeBookingModal({
       aria-labelledby="form-dialog-title"
     >
       {!hotel ? (
-        <p>Loading...</p>
+        <Typography>Loading...</Typography>
       ) : (
         <div>
           <DialogTitle id="form-dialog-title">{hotel.name}</DialogTitle>
           <DialogContent>
             <ChangeDates date={date} setDate={setDate} />
-            {/* 
-              <SelectAmountOfAdults />
-              <SelectAmountOfChildren />
-              <ChildrenAgeSelects /> */}
+            {/*             
+        <SelectAmountOfAdults />
+        <SelectAmountOfChildren />
+        <ChildrenAgeSelects /> */}
             {/* Extra bed */}
             {/* flight */}
             {/* Need price */}
             {bookedRooms.map((room, index) => {
-              console.log("This is my option ", room);
-
-              const hotelRoom = findTheHotelRoomInHotel(room._id.$oid);
-              // console.log("only the matching hotelRoom ", hotelRoom);
+              const hotelRoom = findTheHotelRoomInHotel(room._id);
+              console.log(hotelRoom);
+              const data = DataFoodOptions(hotelRoom);
 
               return (
                 <React.Fragment key={index}>
-                  {/* <p>size: {hotelRoom.size}</p> */}
                   {/* <FormControlLabel
                 value={hotelRoom.extraBed}
                 control={<Checkbox color="default" />}
@@ -113,30 +116,17 @@ export default function ChangeBookingModal({
                 }
                 labelPlacement="start"
               />
-              <RadioGroup
-                aria-label="price"
-                name="price"
-                value={selected}
-                // onChange={handleChange}
-              /> */}
-
+              */}
+                  <Typography> Food options</Typography>
                   <RenderFoodOption
-                    roomInfo={hotelRoom}
-                    roomOption={room.price}
+                    initiallySelected={room.option}
+                    setNewRoomOptions={setNewRoomOptions}
+                    newRoomOptions={newRoomOptions}
+                    data={data}
                   />
                 </React.Fragment>
               );
             })}
-            <RadioGroup
-              aria-label="price"
-              name="price"
-              // value={selected}
-              // onChange={handleChange}
-            />
-
-            <Button onClick={handleClose} color="primary">
-              Book flight
-            </Button>
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose} color="primary">
