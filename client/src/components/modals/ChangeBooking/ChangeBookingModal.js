@@ -24,13 +24,12 @@ export default function ChangeBookingModal({
   open,
   bookings,
   hotelId,
+  setOrder
 }) {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [date, setDate] = useState({ start: "", end: "" });
   const [hotel, setHotel] = useState(null);
-  console.log("I GOT the Order ", bookings);
-  console.log("I GOT the FLIGHT ID  ", hotelId);
   const [newStartDate, setNewStartDate] = useState('')
   const [newEndDate, setNewEndDate] = useState('');
   const [newRoomOptions, setNewRoomOptions] = useState(bookings.rooms[0]);
@@ -83,23 +82,10 @@ export default function ChangeBookingModal({
     console.log('Name should be remmoved  ***************** ', newRoomOptions, newRoomOptions.name);
     setNewRoomOptions({...newRoomOptions}, delete newRoomOptions.name);
 
+    let data = {...bookings, ...bookedRooms.splice(0,1,newRoomOptions)};
+    console.log('....... THE HOLE NEW ORDER ', data);
     
 
-    // for(const [key, value] of Object.entries(bookings.rooms[0]) ) {
-    //   console.log('!!!!!!!!!!!!!!!!!!!!!', key, value);
-    //   if(newRoomOptions.option === key) {
-
-    //   }
-    // }
-    console.log('the hole ********************** ', bookings)
-
-    let data = {...bookings.rooms[0], ...newRoomOptions};
-    console.log('....... THE HOLE NEW ORDER ', data);
-    console.log('the hole 222222222222222222222222 ', bookings)
-
-    // console.log('REMOVED NAME ', data);
-    // console.log('Name should be remmoved  ***************** ', newRoomOptions, newRoomOptions.name);
-    // handleEdit();
   }
 
   return (

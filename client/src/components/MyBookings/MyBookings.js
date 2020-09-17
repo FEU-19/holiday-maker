@@ -235,6 +235,7 @@ const MyBookings = (props) => {
           bookings={order}
           handleClose={handleClose}
           hotelId={hotelId}
+          setOrder={setOrder}
         />
       )}
       {renderBooking}
