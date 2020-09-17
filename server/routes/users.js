@@ -4,7 +4,7 @@ const auth = require("../middleware/auth");
 
 router.post("/register/", controllers.create);
 router.post("/login/", controllers.createLogin);
-router.post("/logout/", controllers.createLogout);
+router.delete("/logout/", controllers.deleteLogout);
 router.get("/users/", auth, controllers.read);
 
 module.exports = router;

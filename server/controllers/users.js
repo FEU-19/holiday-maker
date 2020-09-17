@@ -6,7 +6,7 @@ exports.read = async (req, res) => {
   res.send({ user: req.user });
 };
 
-exports.createLogout = async (req, res) => {
+exports.deleteLogout = async (req, res) => {
   res.clearCookie("uid").end();
 };
 
