@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import RoomCard from "./RoomCard";
 import { Button, makeStyles } from "@material-ui/core";
 import { Redirect } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
 
 const useStyle = makeStyles({
  sticky: {
@@ -16,7 +15,7 @@ const useStyle = makeStyles({
  },
 });
 
-const RoomCardMapper = ({ allRooms }) => {
+const RoomCardMapper = ({ allRooms, dates }) => {
  const [chosenRooms, setChosenRooms] = useState([]);
  const [redirect, setRedirect] = useState(false);
 
@@ -38,15 +37,15 @@ const RoomCardMapper = ({ allRooms }) => {
     <Redirect to={{ pathname: "/checkout", state: { rooms: chosenRooms } }} />
    )}
    {allRooms.map((room, index) => {
-    return <RoomCard key={index} roomInfo={room} chooseRoom={chooseRoom} />;
+    return <RoomCard key={index} roomInfo={room} chooseRoom={chooseRoom} dates={dates} />;
    })}
-   {/*<Button
+   <Button
     color="primary"
     className={styles.sticky}
     onClick={() => setRedirect(true)}
    >
     CHECKOUT
-   </Button>*/}
+   </Button>
   </div>
  );
 };
