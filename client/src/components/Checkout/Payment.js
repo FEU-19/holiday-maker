@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 
 import { Redirect, useLocation } from "react-router-dom";
+import axios from "axios";
 import CheckIcon from "@material-ui/icons/CheckCircle";
 import ErrorIcon from "@material-ui/icons/Error";
 import { iconStyle, PageStyle, BookingInfoStyle } from "./PaymentStyles";
@@ -13,6 +14,7 @@ import BookingInfo from "./BookingInfo";
 import PaymentPicker from "./PaymentPicker";
 import PaymentOptionWrapper from "./PaymentOptionWrapper";
 import UserContext from "../../context/UserContext";
+import { PORT } from "../../config/constants";
 
 function Payment() {
   // styles
@@ -52,8 +54,6 @@ function Payment() {
       ...userInfo,
       [e.target.name]: e.target.value,
     };
-
-    console.log(e.target.name, userData.country);
     setUserInfo(userData);
   }
 
@@ -63,7 +63,6 @@ function Payment() {
       ...credit,
       [e.target.name]: e.target.value,
     };
-    console.log(creditData);
     if (!creditData.creditCard) setCardImg("");
     setCredit(creditData);
   }
@@ -86,6 +85,48 @@ function Payment() {
     // url needs to change to booking details page
     return <Redirect to="/mybookings/" />;
   }
+
+  function postOrder(state) {
+    let ordData = {
+      adults: state.queryParams.amountOfAdults,
+      children: state.queryParams.amountOfChildren,
+      hotel: state.hotel._id,
+      bookingDates: state.queryParams.date,
+      rooms: [],
+      flight: state.flight || null,
+    };
+
+    ordData.rooms = state.rooms.map((room) => {
+      return {
+        price: room.price,
+        option:
+          room.allInclusive ||
+          room.halfBoard ||
+          room.fullBoard ||
+          room.selfCatering ||
+          "none",
+        roomNumber: room.roomNumber,
+        extraBed: room.extraBed ? true : false,
+      };
+    });
+
+    const token = localStorage.getItem("auth-token");
+    const options = {
+      headers: {
+        "X-Auth-Token": token,
+      },
+    };
+
+    axios
+      .post(`http://localhost:${PORT}/api/orders`, ordData, options)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.error({ error: err.message });
+      });
+  }
+
   return (
     <Container className={pageStyle.root}>
       <Typography variant="h4" className={pageStyle.pageTitle}>
@@ -124,6 +165,7 @@ function Payment() {
           onClick={() => {
             setShowModal(true);
             setPaymentSuccess(true);
+            postOrder(state);
           }}
           className={pageStyle.btn}
           type="submit"
@@ -131,11 +173,7 @@ function Payment() {
           Finish & Pay
         </Button>
       </Box>
-      <Modal
-        onClose={() => controlCloseModal(paymentSuccess)}
-        paymentO
-        open={showModal}
-      >
+      <Modal onClose={() => controlCloseModal(paymentSuccess)} open={showModal}>
         {paymentSuccess && payOption === "Invoice" ? (
           <div className="modal__container">
             <CheckIcon className={IconStyle.checkIcon} />

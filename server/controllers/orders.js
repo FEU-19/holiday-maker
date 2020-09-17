@@ -5,27 +5,27 @@ const Hotel = require("../models/Hotel");
 const bookingNrGenerator = require("../utils/bookingNrGenerator");
 // {adults: N, children: N, hotel: String, rooms: Array, bookingDates: {start: String, end: String}}
 exports.create = async (req, res) => {
-  // Id will be a cookie.
-
-  const Id = req.body.userId;
+  const Id = req.user._id;
   const data = req.body;
   const orderData = { ...data };
 
   const user = await User.findById(Id);
 
-  orderData.userId = data.userId;
+  orderData.userId = user._id;
   orderData.bookingNumber = bookingNrGenerator(user.firstName, user.surname, 6);
   orderData.rooms = data.rooms;
   orderData.bookingDates = data.bookingDates;
   orderData.hotel = data.hotel;
-  orderData.totalPrice = 0;
+  orderData.flight = data.flight === null ? data.flight : false;
+  orderData.flight === null
+    ? (orderData.totalPrice = 0)
+    : (orderData.totalPrice = orderData.flight.price);
 
   const roomNs = [];
   data.rooms.forEach((room) => {
     orderData.totalPrice += room.price;
     roomNs.push(room.roomNumber);
   });
-
   const order = new Order(orderData);
   try {
     await order.save();
