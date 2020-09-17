@@ -115,9 +115,7 @@ const Flight = (props) => {
         />
       )}
       {redirectWithoutFlight && (
-        <Redirect
-          to={{ pathname: "/checkout", state: { queryParams, hotel, rooms } }}
-        />
+        <Redirect to={{ pathname: "/checkout", state: { queryParams, hotel, rooms } }} />
       )}
       <Grid container spacing={3}>
         <Grid item xs={9}>
@@ -140,9 +138,7 @@ const Flight = (props) => {
                 </FormControl>
               </Grid>
               <Grid item xs={4}>
-                <Typography>
-                  {new Date(flightInfo.departureDate).toLocaleString()}
-                </Typography>
+                <Typography>{new Date(flightInfo.departureDate).toLocaleString()}</Typography>
               </Grid>
               <Grid item xs={2}>
                 <Typography>Adults: {amountOfAdults} </Typography>
@@ -155,16 +151,14 @@ const Flight = (props) => {
             <Box mt={4}>
               <Grid container>
                 <Grid item mt={5} xs={4}>
-                  <Grid container alignContent="center" justify="flex-start">
-                    <Grid item xs={5} style={{ marginLeft: "15px" }}>
-                      <Typography>{airportsIATA[hotel.city]}</Typography>
-                    </Grid>
+                  {/* <Grid container alignContent="center" justify="flex-start"> */}
+                  <Grid item xs={5} style={{ marginLeft: "15px" }}>
+                    <Typography>{airportsIATA[hotel.city]}</Typography>
                   </Grid>
+                  {/* </Grid> */}
                 </Grid>
                 <Grid item xs={4}>
-                  <Typography>
-                    {new Date(flightInfo.returnDate).toLocaleString()}
-                  </Typography>
+                  <Typography>{new Date(flightInfo.returnDate).toLocaleString()}</Typography>
                 </Grid>
                 <Grid item xs={2}>
                   <Typography>Adults: {amountOfAdults} </Typography>
@@ -182,10 +176,7 @@ const Flight = (props) => {
           </Paper>
         </Grid>
       </Grid>
-      <Link
-        className={style.noFlightLink}
-        onClick={() => setRedirectWithoutFlight(true)}
-      >
+      <Link className={style.noFlightLink} onClick={() => setRedirectWithoutFlight(true)}>
         Continue without flight
       </Link>
       <Button

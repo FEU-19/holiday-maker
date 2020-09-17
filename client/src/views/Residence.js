@@ -143,10 +143,10 @@ const Residence = () => {
         </div>
       </div>
       <div>
-        <RoomCardMapper allRooms={data.rooms} dates={dates} />
+        <GeneralInformation generalInfo={unfilteredData} />
       </div>
       <div>
-        <GeneralInformation generalInfo={unfilteredData} />
+        <RoomCardMapper allRooms={data.rooms} dates={dates} />
       </div>
     </div>
   );
