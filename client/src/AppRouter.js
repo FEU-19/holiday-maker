@@ -15,7 +15,6 @@ import Footer from "./components/common/Footer/Footer";
 import FlightBooking from "./components/modals/FlightBooking/FlightBooking";
 
 import UserContext, { initialUserContext } from "./context/UserContext";
-
 const routes = [
   { path: "/", component: Main },
   { path: "/checkout/", component: Checkout },
@@ -45,10 +44,10 @@ function AppRouter() {
   useEffect(() => {
     const checkLoggedIn = async () => {
       try {
-        const user = await axios.get("http://localhost:8080/api/users/", {
+        const response = await axios.get("http://localhost:8080/api/users/", {
           withCredentials: true,
         });
-        setContext((context) => ({ ...context, user }));
+        setContext((context) => ({ ...context, user: response.data.user }));
       } catch (err) {
         console.log(err);
       }

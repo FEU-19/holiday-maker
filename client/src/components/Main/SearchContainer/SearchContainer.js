@@ -21,7 +21,7 @@ import CheckboxPool from "./CheckboxPool";
 import CheckboxRestaurant from "./CheckboxRestaurant";
 import SelectDistanceCity from "./SelectDistanceCity.js";
 import SelectDistanceBeach from "./SelectDistanceBeach";
-import SaveSearch from "./SaveSearch";
+// import SaveSearch from "./SaveSearch";
 
 // Filter functions
 import filterPresentCrib from "../../../utils/filterPresentCrib";
@@ -74,12 +74,7 @@ const saveSearch = {
   justifyContent: "space-between",
 };
 
-const SearchContainer = ({
-  setFilteredDataCB,
-  setSearching,
-  setQueryParams,
-  savedSearchQueryParams,
-}) => {
+const SearchContainer = ({ setFilteredDataCB, setSearching, setQueryParams }) => {
   const [residentData, setResidentData] = useState([]);
   const [city, setCity] = useState("");
   const [checkedKidsClub, setCheckedKidsclub] = useState("none");

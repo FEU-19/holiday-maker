@@ -1,6 +1,6 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { makeStyles } from "@material-ui/core/styles";
+// import { makeStyles } from "@material-ui/core/styles";
 import DialogContent from "@material-ui/core/DialogContent";
 import Typography from "@material-ui/core/Typography";
 import DialogTitle from "@material-ui/core/DialogTitle";
@@ -8,38 +8,27 @@ import Dialog from "@material-ui/core/Dialog";
 import Button from "@material-ui/core/Button";
 import DialogActions from "@material-ui/core/DialogActions";
 
-import SelectAmountOfAdults from "../../Main/SearchContainer/SelectAmountOfAdults";
-import SelectAmountOfChildren from "../../Main/SearchContainer/SelectAmountOfChildren";
+// import SelectAmountOfAdults from "../../Main/SearchContainer/SelectAmountOfAdults";
+// import SelectAmountOfChildren from "../../Main/SearchContainer/SelectAmountOfChildren";
 
-import ChildrenAgeSelects from "../../Main/SearchContainer/ChildrenAgeSelects";
+// import ChildrenAgeSelects from "../../Main/SearchContainer/ChildrenAgeSelects";
 
 import ChangeDates from "./ChangeDates";
 import RenderFoodOption from "./RenderFoodOption";
-import filterDate from "../../../utils/filterDate";
+// import filterDate from "../../../utils/filterDate";
 import { DataFoodOptions } from "./DataFoodOptions";
-import { handleEdit } from "../../MyBookings/ContainerButtons";
+// import { handleEdit } from "../../MyBookings/ContainerButtons";
 
-export default function ChangeBookingModal({
-  handleClose,
-  open,
-  bookings,
-  hotelId,
-  rooms,
-  order,
-}) {
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+export default function ChangeBookingModal({ handleClose, open, bookings, hotelId, rooms, order }) {
+  //   const [startDate, setStartDate] = useState("");
+  //   const [endDate, setEndDate] = useState("");
   const [date, setDate] = useState({ start: "", end: "" });
   const [hotel, setHotel] = useState(null);
-  const [newStartDate, setNewStartDate] = useState("");
-  const [newEndDate, setNewEndDate] = useState("");
+  //   const [newStartDate, setNewStartDate] = useState("");
+  //   const [newEndDate, setNewEndDate] = useState("");
   const [newRoomOptions, setNewRoomOptions] = useState(bookings.rooms[0]);
 
-  console.log(hotelId);
-
   const bookedRooms = bookings.rooms;
-  console.log("Bookings", bookings);
-  console.log("rooms", bookedRooms);
   useEffect(() => {
     if (bookings) {
       setDate((prevState) => ({
@@ -58,19 +47,14 @@ export default function ChangeBookingModal({
         setHotel(res.data.data);
       })
       .catch((error) => {
-        console.error(
-          "An error occured while retrieving data from the server",
-          error
-        );
+        console.error("An error occured while retrieving data from the server", error);
       });
   }, [hotelId]);
 
   function findTheHotelRoomInHotel(id) {
-    let x;
-    console.log("book", bookings);
-    const roomsInHotel = hotel.rooms;
+    // let x;
+    // const roomsInHotel = hotel.rooms;
     let room = rooms.find((room) => room._id === id);
-    console.log("hotelroom", room);
 
     // roomsInHotel.map((HotelRoom) => {
     //   console.log("HOTELROOM ID", HotelRoom._id);
@@ -93,11 +77,7 @@ export default function ChangeBookingModal({
   }
 
   return (
-    <Dialog
-      open={open}
-      onClose={handleClose}
-      aria-labelledby="form-dialog-title"
-    >
+    <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
       {!hotel ? (
         <Typography>Loading...</Typography>
       ) : (

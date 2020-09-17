@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 
 import { Redirect, useLocation } from "react-router-dom";
 import axios from "axios";
@@ -17,12 +17,9 @@ import UserContext from "../../context/UserContext";
 import { PORT } from "../../config/constants";
 
 function Payment() {
-  // styles
   const IconStyle = iconStyle();
   const pageStyle = PageStyle();
   const style = BookingInfoStyle();
-
-  // card payment states
   const [credit, setCredit] = useState({
     creditCard: "",
     expire: "",
@@ -31,23 +28,18 @@ function Payment() {
   const [cardImg, setCardImg] = useState("");
   const [payOption, setPayOption] = useState("");
 
+  const { state } = useLocation();
+  const [{ user }] = useContext(UserContext);
+  const [userInfo, setUserInfo] = useState(user);
+
+  const [paymentSuccess, setPaymentSuccess] = useState(true);
+  const [redirect, setRedirect] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+
   function handleChange(e) {
     let value = e.target.value;
     setPayOption(value);
   }
-
-  // flight and rooms state
-  const { state } = useLocation();
-
-  // User context
-  const [{ user }] = useContext(UserContext);
-
-  // User state
-  const [userInfo, setUserInfo] = useState();
-
-  useEffect(() => {
-    setUserInfo(user);
-  }, [user]);
 
   function userHandler(e) {
     let userData = {
@@ -57,7 +49,6 @@ function Payment() {
     setUserInfo(userData);
   }
 
-  // Cleave credit
   function handleCredit(e) {
     let creditData = {
       ...credit,
@@ -66,14 +57,6 @@ function Payment() {
     if (!creditData.creditCard) setCardImg("");
     setCredit(creditData);
   }
-
-  // Check if payment confirmed
-  const [paymentSuccess, setPaymentSuccess] = useState(true);
-
-  const [redirect, setRedirect] = useState(false);
-
-  // Close modal
-  const [showModal, setShowModal] = useState(false);
 
   const controlCloseModal = () => {
     setShowModal(!showModal);
@@ -100,11 +83,7 @@ function Payment() {
       return {
         price: room.price,
         option:
-          room.allInclusive ||
-          room.halfBoard ||
-          room.fullBoard ||
-          room.selfCatering ||
-          "none",
+          room.allInclusive || room.halfBoard || room.fullBoard || room.selfCatering || "none",
         roomNumber: room.roomNumber,
         extraBed: room.extraBed ? true : false,
       };
@@ -155,9 +134,7 @@ function Payment() {
           cvc={credit.cvc}
           expire={credit.expire}
           cardImg={cardImg}
-          onCreditCardTypeChanged={(type) =>
-            onCreditCardTypeChanged(type, setCardImg)
-          }
+          onCreditCardTypeChanged={(type) => onCreditCardTypeChanged(type, setCardImg)}
         />
       </Box>
       <Box className={pageStyle.btnCtn}>

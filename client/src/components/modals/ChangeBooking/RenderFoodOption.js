@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 import { Radio, RadioGroup } from "@material-ui/core";
 
 const CustomRadio = withStyles({

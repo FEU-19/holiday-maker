@@ -11,7 +11,7 @@ import Box from "@material-ui/core/Box";
 
 import RegistrationComp from "./Registration/RegistrationComp";
 import LoginComp from "./Login/Login";
-import UserContext from "../../context/userContext";
+import UserContext from "../../context/UserContext";
 
 import { Link } from "react-router-dom";
 

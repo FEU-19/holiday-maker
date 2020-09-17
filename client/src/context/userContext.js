@@ -12,6 +12,7 @@ export const initialUserContext = {
     bookmarkedQueries: [],
     bookmarkedHotels: [],
   },
+  loggedIn: false,
 };
 
 const UserContext = createContext(initialUserContext);

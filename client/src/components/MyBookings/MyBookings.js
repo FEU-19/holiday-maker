@@ -1,5 +1,4 @@
-import React from "react";
-// import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Accordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
@@ -71,6 +70,7 @@ const MyBookings = (props) => {
     axios
       .get("http://localhost:8080/api/orders/", { withCredentials: true })
       .then((res) => {
+        console.log(res.data.data);
         setMyBookings(res.data.data);
       })
       .catch((err) => {
@@ -114,7 +114,7 @@ const MyBookings = (props) => {
           >
             <Typography className={classes.heading}>{myBooking.hotel}</Typography>
             <Typography className={classes.heading}>
-              {new Date(myBooking.bookingDates.start).toLocaleString()}
+              {new Date(myBooking.bookingDates.start).toLocaleString("sv-SE")}
             </Typography>
             <Typography className={classes.heading}>{myBooking._id}</Typography>
           </AccordionSummary>

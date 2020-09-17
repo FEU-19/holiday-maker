@@ -16,9 +16,7 @@ exports.create = async (req, res) => {
   orderData.rooms = data.rooms;
   orderData.bookingDates = data.bookingDates;
   orderData.hotel = data.hotel;
-  data.flight === null
-    ? (orderData.flight = null)
-    : (orderData.flight = data.flight);
+  data.flight === null ? (orderData.flight = null) : (orderData.flight = data.flight);
   orderData.flight === null
     ? (orderData.totalPrice = 0)
     : (orderData.totalPrice = orderData.flight.price);
@@ -51,6 +49,14 @@ exports.create = async (req, res) => {
 };
 
 exports.read = async (req, res) => {
-  const orders = await Order.find({ userId: req.user });
+  let orders = await Order.find({ userId: req.user });
+
+  orders = await Promise.all(
+    orders.map(async (o) => {
+      const { name } = await Hotel.findById(o.hotel, "name");
+      return { ...o._doc, hotel: name };
+    })
+  );
+
   res.send({ data: orders });
 };

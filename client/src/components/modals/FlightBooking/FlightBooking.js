@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
@@ -9,7 +9,6 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import axios from "axios";
 import { Link } from "react-router-dom";
 
 const flights = [
@@ -153,24 +152,12 @@ const FlightBooking = () => {
                   <TableCell align="right" component="th" scope="row">
                     {flight.Response.dateTo}
                   </TableCell>
-                  <TableCell align="right">
-                    {flight.Response.dateHome}
-                  </TableCell>
-                  <TableCell align="right">
-                    {flight.Response.flightNumber}
-                  </TableCell>
-                  <TableCell align="right">
-                    {flight.Response.flightComany}
-                  </TableCell>
-                  <TableCell align="right">
-                    {flight.Response.destination}
-                  </TableCell>
-                  <TableCell align="right">
-                    {flight.Response.flightTimeTo}
-                  </TableCell>
-                  <TableCell align="right">
-                    {flight.Response.flightTimeHome}
-                  </TableCell>
+                  <TableCell align="right">{flight.Response.dateHome}</TableCell>
+                  <TableCell align="right">{flight.Response.flightNumber}</TableCell>
+                  <TableCell align="right">{flight.Response.flightComany}</TableCell>
+                  <TableCell align="right">{flight.Response.destination}</TableCell>
+                  <TableCell align="right">{flight.Response.flightTimeTo}</TableCell>
+                  <TableCell align="right">{flight.Response.flightTimeHome}</TableCell>
                   <TableCell align="right">{flight.Response.seats}</TableCell>
                   <TableCell align="right">
                     <Link to="/checkout">

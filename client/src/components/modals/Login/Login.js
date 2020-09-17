@@ -25,7 +25,7 @@ const Container = styled.div`
 const Login = (props) => {
   const [user, setUser] = useState({ email: "", password: "" });
   const [open, setOpen] = useState(false);
-  const [errorMsg] = useState(0);
+  const [errorMsg, setErrorMsg] = useState(0);
 
   const [, setContext] = useContext(UserContext);
 
@@ -47,11 +47,8 @@ const Login = (props) => {
           { withCredentials: true }
         );
 
-        setUserData({
-          token: loginRes.data.token,
-          user: loginRes.data.user,
-        });
-        // localStorage.setItem("auth-token", loginRes.data.token);
+        setContext((context) => ({ ...context, user: loginRes.data.user }));
+
         props.handleModalClose();
       } catch (err) {
         setOpen(true);
