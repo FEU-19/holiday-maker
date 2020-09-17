@@ -8,10 +8,11 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import axios from "axios";
 import { Button } from "@material-ui/core";
 import ChangeBookingModal from "../modals/ChangeBooking/ChangeBookingModal";
 
+import FlightBooking from "../modals/FlightBooking/FlightBooking"
+import axios from "axios";
 import ContainerButtons from "./ContainerButtons";
 import getToken from "../../utils/getToken";
 
@@ -82,32 +83,6 @@ const objekt = [
         price: "Number",
       },
   },
-  {
-    _id: "2",
-    userId: "mongoose.Schema.Types.ObjectID",
-    adults: "2",
-    children: "5",
-    hotel: "mongoose.Schema.Types.ObjectID",
-    totalPrice: "100$",
-    rooms: [
-      {
-        _id: "mongoose.Schema.Types.ObjectID",
-        roomNumber: "String",
-        option: "String",
-        extraBed: "yes",
-        price: "1000kr",
-      },
-    ],
-    bookingDates: {
-      start: "new Date.toISOString()",
-      end: "new Date.toISOString()",
-    },
-    flight: {
-      departureDate: "new Date.toISOString()",
-      returnDate: "new Date.toISOString()",
-      price: "Number",
-    },
-  },
 ];
 
 const useStyles = makeStyles((theme) => ({
@@ -145,6 +120,12 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     marginLeft: "50%",
   },
+  buttons: {
+    display: 'flex',
+    flexDirection: 'row',
+    whiteSpace: 'nowrap',
+    marginLeft: '-45px'
+  }
 }));
 
 const MyBookings = (props) => {
@@ -232,13 +213,15 @@ const MyBookings = (props) => {
                   <br />
                   Extra Bed: {myBooking.rooms.extraBed}
                 </Typography>
+                <div className={classes.buttons}>
                 <Button
                   className={classes.heading}
                   onClick={() => saveOrder(myBooking)}
                 >
                   Change Booking
                 </Button>
-                <ContainerButtons />
+                <FlightBooking />  
+                </div>                    
               </CardContent>
             </Card>
           </AccordionDetails>
