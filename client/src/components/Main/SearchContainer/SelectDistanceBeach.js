@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     fill: '#4AB0BD',
   },
   border: {
-    width: 230,
+    width: 235,
     height: 30,
     borderRadius: 7,
     background: 'white',
@@ -76,7 +76,7 @@ export default function SelectDistanceBeach({
               {"< " + distance + "m"}
             </MenuItem>
           ) : (
-              <MenuItem value={distance} key={index}></MenuItem>
+              <MenuItem value={distance} key={index}>None</MenuItem>
             )
         )}
       </Select>
