@@ -8,9 +8,9 @@ import Dialog from "@material-ui/core/Dialog";
 import Button from "@material-ui/core/Button";
 import DialogActions from "@material-ui/core/DialogActions";
 
+
 import SelectAmountOfAdults from "../../Main/SearchContainer/SelectAmountOfAdults";
 import SelectAmountOfChildren from "../../Main/SearchContainer/SelectAmountOfChildren";
-
 import ChildrenAgeSelects from "../../Main/SearchContainer/ChildrenAgeSelects";
 
 import ChangeDates from "./ChangeDates";
@@ -18,6 +18,17 @@ import RenderFoodOption from "./RenderFoodOption";
 import filterDate from "../../../utils/filterDate";
 import { DataFoodOptions } from "./DataFoodOptions";
 import {handleEdit} from '../../MyBookings/ContainerButtons';
+
+const useStyles = makeStyles((theme) => ({
+  button: {
+    backgroundColor: "#4AB0BD",
+    color: "white",
+    margin: '5px',
+    '&:hover':{
+      backgroundColor:'#3e98a3',
+    }
+  },
+}));
 
 export default function ChangeBookingModal({
   handleClose,
@@ -34,9 +45,8 @@ export default function ChangeBookingModal({
   const [newEndDate, setNewEndDate] = useState('');
   const [newRoomOptions, setNewRoomOptions] = useState(bookings.rooms[0]);
   
-
   const bookedRooms = bookings.rooms;
-
+  const classes = useStyles();
 
   useEffect(() => {
     if (bookings) {
@@ -135,10 +145,10 @@ export default function ChangeBookingModal({
             
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose} variant="outlined" color="primary">
+            <Button onClick={handleClose} className={classes.button}/*variant="outlined" color="primary"*/>
               Cancel changes
             </Button>
-            <Button onClick={saveChanges} variant="outlined" color="primary">
+            <Button onClick={saveChanges} className={classes.button}/* variant="outlined" color="primary"*/>
               Save changes
             </Button>
           </DialogActions>
