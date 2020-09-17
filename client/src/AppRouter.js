@@ -6,13 +6,13 @@ import axios from "axios";
 import Main from "./views/Main";
 import Checkout from "./views/Checkout";
 import MyBookings from "./views/MyBookings";
+import FlightBooking from "./components/modals/FlightBooking/FlightBooking";
 import Residence from "./views/Residence";
 import Flight from "./views/Flight";
 
 import DropDown from "./components/common/DropDown/DropDown";
 import HeaderComp from "./components/common/Header/Header";
 import Footer from "./components/common/Footer/Footer";
-
 import UserContext, { initialUserContext } from "./context/UserContext";
 
 const routes = [
@@ -22,6 +22,7 @@ const routes = [
   { path: "/dropdown/:id", component: DropDown },
   { path: "/flight/", component: Flight },
   { path: "/mybookings/", component: MyBookings },
+  { path: "/flightbooking/", component: FlightBooking },
 ];
 
 const DivRoot = styled.div`
@@ -38,25 +39,19 @@ const MainContent = styled.div`
 `;
 
 function AppRouter() {
-  const [context, setContext] = useState(initialUserContext);
+  const [userData, setUserData] = useState({
+    user: {},
+  });
 
   useEffect(() => {
     const checkLoggedIn = async () => {
-      let token = localStorage.getItem("auth-token");
-
-      if (token === null) {
-        localStorage.setItem("auth-token", "");
-        token = "";
-      }
       try {
-        const response = await axios.get("http://localhost:8080/api/users/", {
-          headers: { "x-auth-token": token },
+        const user = await axios.get("http://localhost:8080/api/users/", {
+          withCredentials: true,
         });
-        console.log(response, "RESPONSE");
-
-        setContext({ token, user: response.data.user });
-      } catch (error) {
-        return console.log("user not logged in");
+        setUserData({ user });
+      } catch (err) {
+        console.log(err);
       }
     };
 

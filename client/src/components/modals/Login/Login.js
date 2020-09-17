@@ -39,20 +39,23 @@ const Login = (props) => {
     e.preventDefault();
     if (user) {
       try {
-        const loginRes = await axios.post("http://localhost:8080/api/login", {
-          user,
-        });
-        console.log("hej");
-        setContext({
+        const loginRes = await axios.post(
+          "http://localhost:8080/api/login/",
+          {
+            user,
+          },
+          { withCredentials: true }
+        );
+
+        setUserData({
           token: loginRes.data.token,
           user: loginRes.data.user,
         });
-        localStorage.setItem("auth-token", loginRes.data.token);
+        // localStorage.setItem("auth-token", loginRes.data.token);
         props.handleModalClose();
       } catch (err) {
         setOpen(true);
-        console.log(err);
-        // setErrorMsg(err.response.data.error[0].msg);
+        setErrorMsg(err.message);
       }
     }
   };

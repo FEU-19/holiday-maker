@@ -6,7 +6,9 @@ exports.read = async (req, res) => {
   res.send({ user: req.user });
 };
 
-exports.createLogout = async (req, res) => {};
+exports.createLogout = async (req, res) => {
+  res.clearCookie("uid").end();
+};
 
 exports.createLogin = async (req, res) => {
   const { email, password } = req.body.user;
@@ -35,11 +37,10 @@ exports.createLogin = async (req, res) => {
     }
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-
-    return res.json({
-      token,
-      user,
-    });
+    
+    res.cookie("uid", token, { httpOnly: true, secure: false });
+    console.log("cookieset", token);
+    res.json({ user });
   } catch (err) {
     return res.status(500).send("Server error");
   }
@@ -113,9 +114,6 @@ exports.create = async (req, res) => {
   }
 };
 
-exports.readOne = async (req, res) => {
-  const { userId } = req.params;
-  const user = await User.findById(userId);
-  if (!user) return res.status(404).send({ error: "Couldn't find user." });
-  return res.status(200).send({ data: user });
+exports.read = async (req, res) => {
+  res.send({ user: req.user });
 };

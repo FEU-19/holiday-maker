@@ -1,21 +1,27 @@
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
+const User = require("../models/User");
 
-const auth = async function (req, res, next) {
-  const accessToken = req.headers["x-auth-token"];
-
-  if (!accessToken) {
-    console.log("no access token in header");
-    return res.status(403).send({ error: "no access token in header" });
+const auth = async (req, res, next) => {
+  let decoded;
+  if (!req.cookies.uid) {
+    decoded = null;
+  } else {
+    decoded = jwt.verify(req.cookies.uid, process.env.JWT_SECRET);
   }
 
-  const decodedJWT = jwt.verify(accessToken, process.env.JWT_SECRET);
-  if (!decodedJWT) return next(new Error("unauthenticated"));
+  if (!decoded) {
+    return res.status(403).send("unauthorize");
+  }
 
-  const { id } = decodedJWT;
-  const user = await User.findById(id, "-password -__v");
+  const user = await User.findById(decoded.id);
+
+  if (!user) {
+    return res.status(403).send("unauthorize");
+  }
 
   req.user = user;
+  
   return next();
 };
 
