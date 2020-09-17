@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     margin: 1,
     color: 'black',
     '& > svg' : {
-      color: 'black',
+      color: '#162C72',
     },
     '& > .MuiSelect-select:focus' : {
       backgroundColor: 'white',
