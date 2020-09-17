@@ -63,25 +63,20 @@ function AppRouter() {
     checkLoggedIn();
   }, []);
 
-  return (  
-   <UserContext.Provider value={[context, setContext]}>
-    <DivRoot>
-      <HeaderComp />
-      <MainContent>
-        <Switch>
-          {routes.map(({ path, component }) => (
-            <Route
-              exact
-              path={path}
-              key={path + component}
-              component={component}
-            />
-          ))}
-        </Switch>
-      </MainContent>
-      <Footer />
-    </DivRoot>
-</UserContext.Provider>
+  return (
+    <UserContext.Provider value={[context, setContext]}>
+      <DivRoot>
+        <HeaderComp />
+        <MainContent>
+          <Switch>
+            {routes.map(({ path, component }) => (
+              <Route exact path={path} key={path + component} component={component} />
+            ))}
+          </Switch>
+        </MainContent>
+        <Footer />
+      </DivRoot>
+    </UserContext.Provider>
   );
 }
 
