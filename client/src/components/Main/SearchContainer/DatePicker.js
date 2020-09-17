@@ -1,35 +1,26 @@
 import React, { useState, useEffect } from "react";
-import Grid from "@material-ui/core/Grid";
 import DateFnsUtils from '@date-io/date-fns';
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker,
-} from '@material-ui/pickers';
+import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 
-
-
 const useStyles = makeStyles((theme) => ({
   container: {
-    width: 200,
   },
   icon: {
     fill: '#162C72',
   },
   border: {
     height: 40,
+    width: '20rem',
     borderRadius: 7,
     background: 'white',
     borderColor: '#162C72',
     display: 'flex',
-    justifyContent: 'center',
     alignItems: 'flex-end',
+    paddingLeft: 3,
   },
 }));
-
-
-
 
 export default function DatePicker({ residentData, date, setDate }) {
   const [startDate, handleStartChange] = useState(new Date(date.start));
@@ -43,7 +34,6 @@ export default function DatePicker({ residentData, date, setDate }) {
   },[setDate, startDate, endDate])
 
   return (
-    <div>
       <Box className={classes.border} border={3} >
       <MuiPickersUtilsProvider className={classes.container} utils={DateFnsUtils}>
         <KeyboardDatePicker
@@ -79,6 +69,5 @@ export default function DatePicker({ residentData, date, setDate }) {
         />
       </MuiPickersUtilsProvider>
       </Box>
-    </div>
   );
 }
