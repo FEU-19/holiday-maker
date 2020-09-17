@@ -47,7 +47,7 @@ function AppRouter() {
         const response = await axios.get("http://localhost:8080/api/users/", {
           withCredentials: true,
         });
-        setContext((context) => ({ ...context, user: response.data.user }));
+        setContext((context) => ({ ...context, user: response.data.user, loggedIn: true }));
       } catch (err) {
         console.log(err);
       }

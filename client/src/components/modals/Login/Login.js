@@ -47,7 +47,7 @@ const Login = (props) => {
           { withCredentials: true }
         );
 
-        setContext((context) => ({ ...context, user: loginRes.data.user }));
+        setContext((context) => ({ ...context, user: loginRes.data.user, loggedIn: true }));
 
         props.handleModalClose();
       } catch (err) {

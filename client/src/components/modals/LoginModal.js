@@ -73,44 +73,33 @@ const LoginModal = () => {
 
   const onLogout = (e) => {
     e.preventDefault();
-    let data = context.user;
+
     axios
-      .post(
-        "http://localhost:8080/api/logout/",
-        {
-          data,
-        },
-        { withCredentials: true }
-      )
+      .delete("http://localhost:8080/api/logout/", { withCredentials: true })
       .then(() => {
-        setContext((context) => ({ ...context, user: {} }));
+        setContext((context) => ({ ...context, user: {}, loggedIn: false }));
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  let loggedIn = 10;
-  if (context.user) {
-    loggedIn = Object.entries(context.user).length;
-  }
-
   return (
     <div>
-      {loggedIn === 0 ? (
+      {!context.loggedIn ? (
         <Wrapper>
-          <Button variant="outlined" color="primary">
+          <Button variant="contained" color="secondary">
             <Link to={{ pathname: "/" }}>Main</Link>
           </Button>
 
-          <Button className="login" variant="outlined" color="primary" onClick={handleModalOpen}>
+          <Button className="login" variant="contained" color="secondary" onClick={handleModalOpen}>
             Login
           </Button>
 
           <Button
             className="login"
-            variant="outlined"
-            color="primary"
+            variant="contained"
+            color="secondary"
             onClick={handleModalRegistration}
           >
             Registration
@@ -118,15 +107,20 @@ const LoginModal = () => {
         </Wrapper>
       ) : (
         <Wrapper>
-          <Button variant="outlined" color="primary">
+          <Button variant="contained" color="secondary">
             <Link to={{ pathname: "/" }}>Main</Link>
           </Button>
 
-          <Button variant="outlined" color="primary">
+          <Button variant="contained" color="secondary">
             <Link to={{ pathname: "/mybookings" }}>My Bookings</Link>
           </Button>
 
-          <Button className="login" variant="outlined" color="primary" onClick={(e) => onLogout(e)}>
+          <Button
+            className="login"
+            variant="contained"
+            color="secondary"
+            onClick={(e) => onLogout(e)}
+          >
             <Link to={{ pathname: "/" }}>Logout</Link>
           </Button>
         </Wrapper>
