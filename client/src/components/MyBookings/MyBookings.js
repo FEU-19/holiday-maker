@@ -11,7 +11,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { Button } from "@material-ui/core";
 import ChangeBookingModal from "../modals/ChangeBooking/ChangeBookingModal";
 
-import FlightBooking from "../modals/FlightBooking/FlightBooking"
+import FlightBooking from "../modals/FlightBooking/FlightBooking";
 import axios from "axios";
 import ContainerButtons from "./ContainerButtons";
 import getToken from "../../utils/getToken";
@@ -121,11 +121,11 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "50%",
   },
   buttons: {
-    display: 'flex',
-    flexDirection: 'row',
-    whiteSpace: 'nowrap',
-    marginLeft: '-45px'
-  }
+    display: "flex",
+    flexDirection: "row",
+    whiteSpace: "nowrap",
+    marginLeft: "-45px",
+  },
 }));
 
 const MyBookings = (props) => {
@@ -214,14 +214,15 @@ const MyBookings = (props) => {
                   Extra Bed: {myBooking.rooms.extraBed}
                 </Typography>
                 <div className={classes.buttons}>
-                <Button
-                  className={classes.heading}
-                  onClick={() => saveOrder(myBooking)}
-                >
-                  Change Booking
-                </Button>
-                <FlightBooking />  
-                </div>                    
+                  <Button
+                    className={classes.heading}
+                    onClick={() => saveOrder(myBooking)}
+                  >
+                    Change Booking
+                  </Button>
+                  <FlightBooking />
+                </div>
+                <ContainerButtons />
               </CardContent>
             </Card>
           </AccordionDetails>
