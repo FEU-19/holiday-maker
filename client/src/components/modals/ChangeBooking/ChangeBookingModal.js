@@ -15,6 +15,7 @@ import ChildrenAgeSelects from "../../Main/SearchContainer/ChildrenAgeSelects";
 
 import ChangeDates from "./ChangeDates";
 import RenderFoodOption from "./RenderFoodOption";
+import filterDate from "../../../utils/filterDate";
 import { DataFoodOptions } from "./DataFoodOptions";
 import {handleEdit} from '../../MyBookings/ContainerButtons';
 
@@ -28,18 +29,26 @@ export default function ChangeBookingModal({
   const [endDate, setEndDate] = useState("");
   const [date, setDate] = useState({ start: "", end: "" });
   const [hotel, setHotel] = useState(null);
+  console.log("I GOT the Order ", bookings);
+  console.log("I GOT the FLIGHT ID  ", hotelId);
+  const [newStartDate, setNewStartDate] = useState('')
+  const [newEndDate, setNewEndDate] = useState('');
   const [newRoomOptions, setNewRoomOptions] = useState(bookings.rooms[0]);
   
 
   const bookedRooms = bookings.rooms;
-  console.log("****** Remove NAME before PUT *************", newRoomOptions);
+
+  //console.log('*************************************************', bookings.bookingDates.start)
+
+ 
+  //console.log("****** Remove NAME before PUT *************", newRoomOptions);
 
   useEffect(() => {
     if (bookings) {
       setDate((prevState) => ({
         ...prevState,
-        start: startDate,
-        end: endDate,
+        start: bookings.bookingDates.start,
+        end: bookings.bookingDates.end,
       }));
     }
   }, [bookings]);
@@ -115,7 +124,7 @@ export default function ChangeBookingModal({
             {/* Need price */}
             {bookedRooms.map((room, index) => {
               const hotelRoom = findTheHotelRoomInHotel(room._id);
-              console.log(hotelRoom);
+              //console.log(hotelRoom);
               const data = DataFoodOptions(hotelRoom);
 
               return (
