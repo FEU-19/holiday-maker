@@ -1,65 +1,62 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import { Redirect, useLocation } from "react-router-dom";
+import axios from "axios";
+import CheckIcon from "@material-ui/icons/CheckCircle";
+import ErrorIcon from "@material-ui/icons/Error";
+import { iconStyle, PageStyle, BookingInfoStyle } from "./PaymentStyles";
+import Modal from "../common/Modal/Modal";
+import { Container, Button, Divider, Box, Typography } from "@material-ui/core";
+import { onCreditCardTypeChanged } from "../../utils/handleCardImage";
 
-import { makeStyles } from "@material-ui/core/styles";
-
-// import Modal from "../common/Modal/Modal";
-import { Modal, Box } from "@material-ui/core";
-import DoneIcon from "@material-ui/icons/Done";
-import CancelIcon from "@material-ui/icons/Cancel";
-
-import {
-  PaymentPage,
-  PaymentContainer,
-  H1,
-  HR,
-  InfoForm,
-  InputContainer,
-  PayBtn,
-} from "./PaymentStyles";
-import TextInput from "./TextInput";
-import PaymentForm from "./PaymentForm";
-import CountryDropdownList from "./CountryDropdownList";
+import InfoForm from "./InfoForm";
+import BookingInfo from "./BookingInfo";
+import PaymentPicker from "./PaymentPicker";
+import PaymentOptionWrapper from "./PaymentOptionWrapper";
+import UserContext from "../../context/UserContext";
+import { PORT } from "../../config/constants";
 
 function Payment() {
+  const IconStyle = iconStyle();
+  const pageStyle = PageStyle();
+  const style = BookingInfoStyle();
+  const [credit, setCredit] = useState({
+    creditCard: "",
+    expire: "",
+    cvc: "",
+  });
+  const [cardImg, setCardImg] = useState("");
+  const [payOption, setPayOption] = useState("");
+
   const { state } = useLocation();
+  const [{ user }] = useContext(UserContext);
+  const [userInfo, setUserInfo] = useState(user);
 
-  console.log(state);
-
-  const useStyles = makeStyles((theme) => ({
-    root: {
-      "& > *": {
-        margin: theme.spacing(1),
-        width: "25ch",
-      },
-    },
-  }));
-
-  const classes = useStyles();
-
-  //Payment States
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phoneNum, setPhoneNum] = useState("");
-  const [city, setCity] = useState("");
-  const [zipcode, setZipCode] = useState("");
-  const [adress, setAdress] = useState("");
-
-  // PaymentForm States
-  // const [cardNum, setCardNum] = useState("");
-  // const [expire, setExpire] = useState("");
-  // const [cvc, setCvc] = useState("");
-  // const [type, setType] = useState("");
-
-  // Check if payment confirmed
-  // const [paymentSuccess, setPaymentSuccess] = useState(false);
-
+  const [paymentSuccess, setPaymentSuccess] = useState(true);
   const [redirect, setRedirect] = useState(false);
-
-  // Close modal
   const [showModal, setShowModal] = useState(false);
+
+  function handleChange(e) {
+    let value = e.target.value;
+    setPayOption(value);
+  }
+
+  function userHandler(e) {
+    let userData = {
+      ...userInfo,
+      [e.target.name]: e.target.value,
+    };
+    setUserInfo(userData);
+  }
+
+  function handleCredit(e) {
+    let creditData = {
+      ...credit,
+      [e.target.name]: e.target.value,
+    };
+    if (!creditData.creditCard) setCardImg("");
+    setCredit(creditData);
+  }
 
   const controlCloseModal = () => {
     setShowModal(!showModal);
@@ -69,98 +66,114 @@ function Payment() {
 
   if (redirect) {
     // url needs to change to booking details page
-    return <Redirect to="/" />;
+    return <Redirect to="/mybookings/" />;
+  }
+
+  function postOrder(state) {
+    let ordData = {
+      adults: state.queryParams.amountOfAdults,
+      children: state.queryParams.amountOfChildren,
+      hotel: state.hotel._id,
+      bookingDates: state.queryParams.date,
+      rooms: [],
+      flight: state.flight || null,
+    };
+
+    ordData.rooms = state.rooms.map((room) => {
+      return {
+        price: room.price,
+        option:
+          room.allInclusive || room.halfBoard || room.fullBoard || room.selfCatering || "none",
+        roomNumber: room.roomNumber,
+        extraBed: room.extraBed ? true : false,
+      };
+    });
+
+    const token = localStorage.getItem("auth-token");
+    const options = {
+      headers: {
+        "X-Auth-Token": token,
+      },
+    };
+
+    axios
+      .post(`http://localhost:${PORT}/api/orders`, ordData, options)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.error({ error: err.message });
+      });
   }
 
   return (
-    <PaymentPage className={classes.root} noValidate autoComplete="off">
-      <PaymentContainer>
-        <H1>Payment</H1>
-        <InfoForm>
-          <TextInput
-            label="First name"
-            onchange={(e) => setFirstName(e.target.value)}
-            value={firstName}
-          />
-          <TextInput
-            label="Last name"
-            onchange={(e) => setLastName(e.target.value)}
-            value={lastName}
-          />
-          <TextInput
-            label="E-mail name"
-            onchange={(e) => setEmail(e.target.value)}
-            value={email}
-          />
-          <TextInput
-            label="Phone number"
-            onchange={(e) => setPhoneNum(e.target.value)}
-            value={phoneNum}
-          />
-        </InfoForm>
-        <br />
-        <HR />
+    <Container className={pageStyle.root}>
+      <Typography variant="h4" className={pageStyle.pageTitle}>
+        Payment
+      </Typography>
 
-        <InfoForm>
-          <InputContainer>
-            <CountryDropdownList />
-          </InputContainer>
+      <BookingInfo info={state} />
+      <Divider />
+      <Box className={pageStyle.wrapper}>
+        <Typography variant="h5" className={style.InfoTitle}>
+          Account Information
+        </Typography>
+        <InfoForm {...userInfo} handleUser={userHandler} />
+      </Box>
+      <Divider />
+      <Box className={pageStyle.wrapper}>
+        <Typography variant="h5" className={style.InfoTitle}>
+          Payment Method
+        </Typography>
+        <PaymentPicker handleChange={handleChange} />
 
-          <TextInput
-            label="City"
-            onchange={(e) => setCity(e.target.value)}
-            value={city}
-          />
-          <TextInput
-            label="Zip code"
-            onchange={(e) => setZipCode(e.target.value)}
-            value={zipcode}
-          />
-          <TextInput
-            label="Adress"
-            onchange={(e) => setAdress(e.target.value)}
-            value={adress}
-          />
-        </InfoForm>
-
-        <br />
-        <HR />
-
-        <PaymentForm
-        // setCardNum={setCardNum}
-        // setExpire={setExpire}
-        // setCvc={setCvc}
-        // setType={setType}
+        <PaymentOptionWrapper
+          option={payOption}
+          handleCredit={handleCredit}
+          cardNum={credit.creditCard}
+          cvc={credit.cvc}
+          expire={credit.expire}
+          cardImg={cardImg}
+          onCreditCardTypeChanged={(type) => onCreditCardTypeChanged(type, setCardImg)}
         />
-
-        <PayBtn
-          onClick={() => setShowModal(true)}
-          className="payBtn"
+      </Box>
+      <Box className={pageStyle.btnCtn}>
+        <Button
+          onClick={() => {
+            setShowModal(true);
+            setPaymentSuccess(true);
+            postOrder(state);
+          }}
+          className={pageStyle.btn}
           type="submit"
         >
           Finish & Pay
-        </PayBtn>
-      </PaymentContainer>
-
-      <Modal onClose={() => controlCloseModal()} open={showModal}>
-        <Box>
-          {true ? (
-            <div className="modal__container">
-              <DoneIcon className="doneIcon" />
-              <h1>Thank you!</h1>
-              <h2>for booking with Holiday Maker.</h2>
-              <p>Booking confirmation has been sent to your email.</p>
-            </div>
-          ) : (
-            <div className="modal__container">
-              <CancelIcon className="cancelIcon" />
-              <h1>Error!</h1>
-              <h3>Your payment hasn't been confirmed, please try again.</h3>
-            </div>
-          )}
-        </Box>
+        </Button>
+      </Box>
+      <Modal onClose={() => controlCloseModal(paymentSuccess)} open={showModal}>
+        {paymentSuccess && payOption === "Invoice" ? (
+          <div className="modal__container">
+            <CheckIcon className={IconStyle.checkIcon} />
+            <h1>Thank you!</h1>
+            <h2>for booking with Holiday Maker.</h2>
+            <p>Invoice will be sent by post to the address provided.</p>
+          </div>
+        ) : paymentSuccess ? (
+          <div className="modal__container">
+            <CheckIcon className={IconStyle.checkIcon} />
+            <h1>Thank you!</h1>
+            <h2>for booking with Holiday Maker.</h2>
+            <p>Your payment is finished processing, enjoy your holiday!.</p>
+          </div>
+        ) : (
+          <div className="modal__container">
+            <ErrorIcon className={IconStyle.errorIcon} />
+            <h1>Oops Something went wrong!</h1>
+            <h3>Your payment hasn't been confirmed, please try again.</h3>
+          </div>
+        )}
       </Modal>
-    </PaymentPage>
+    </Container>
   );
 }
 

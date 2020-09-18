@@ -1,6 +1,5 @@
 import getDateArray from './getDateArrayInterval';
 
-
 export default function filterDate (hotels, date) {
   let dateInterval = getDateArray(new Date(date.start), new Date(date.end));
 
@@ -9,8 +8,7 @@ export default function filterDate (hotels, date) {
       const occupied = room.occupiedDates.reduce((acc, { start, end }) => {
         if (acc) return acc;
         let temp = false;
-
-        
+    
         getDateArray(new Date(start), new Date(end))
         .map((occ) => {
           return dateInterval.map((uDate) => {
@@ -34,3 +32,4 @@ export default function filterDate (hotels, date) {
   });
     return result.filter(hotel => hotel.rooms.length !== 0);
 }
+

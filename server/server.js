@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
-const cookieParser = require("cookie-parser");
+const cookie = require("cookie-parser");
 
 const connectDB = require("./config/db");
 const { routers } = require("./routes/index");
@@ -21,7 +21,7 @@ const app = express();
 
 app.use(cors(corsOptions));
 app.use(express.json());
-app.use(cookieParser());
+app.use(cookie());
 
 routers.forEach((router) => app.use("/api/", router));
 

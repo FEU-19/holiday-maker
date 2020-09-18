@@ -15,6 +15,7 @@ const FooterCont = styled.footer`
   padding: 20px;
   position: relative;
   border-radius: 1px;
+  
   .MuiGrid-spacing-xs-2 > .MuiGrid-item{
       padding: 1px 10px 0px 0px;
   }

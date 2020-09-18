@@ -29,6 +29,7 @@ const DropDown = ({ extraBed, handleDropDownChange }) => {
       {extraBed > 0 ? (
         <MyFormControl>
           <InputLabel htmlFor="native-simple">Extra beds</InputLabel>
+
           <NativeSelect value={state} onChange={handleChange}>
             <option aria-label="" value="" />
             {Array.from(Array(extraBed), (_, i) => i + 1).map((val) => {

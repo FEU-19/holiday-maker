@@ -1,1 +1,0 @@
-GET http://localhost:4000/api/residents/5f4e2b500ae3bf21d48b09f2 HTTP/1.1

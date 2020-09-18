@@ -1,124 +1,271 @@
-import Cleave from "cleave.js/react";
+import { createMuiTheme, makeStyles } from "@material-ui/core/styles";
 
-import styled from "styled-components";
+//Payment page
+export const PageStyle = makeStyles(() => ({
+  wrapper: {
+    width: "80%",
+    display: "flex",
+    justifyContent: "center",
+    flexDirection: "column",
+    alignItems: "center",
+    margin: "0 auto",
+    marginBottom: 30,
+  },
+  pageTitle: {
+    color: "#162c72", // darkBlue
+    textAlign: "center",
+  },
+  btnCtn: {
+    textAlign: "center",
+  },
+  btn: {
+    backgroundColor: "#162c72", // darkBlue
+    color: "white",
+  },
+}));
 
-const PaymentPage = styled.div`
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 0;
-  box-sizing: border-box;
-`;
+// Account info Form
+export const InfoFormStyle = makeStyles(() => ({
+  form: {
+    width: "100%",
+    margin: "0 auto",
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "flex-start",
+    paddingLeft: 20,
+  },
+}));
 
-const PaymentContainer = styled.div`
-  width: 100%;
-  text-align: center;
-`;
+// TextInput style
+export const InputStyle = makeStyles(() => ({
+  input: {
+    minWidth: "180px",
+    width: "30%",
+    flex: 1,
+    margin: "10px",
+  },
+}));
 
-const H1 = styled.h1`
-  margin-bottom: 20px;
-  padding: 10px;
-`;
+// Payment Form style
 
-const HR = styled.hr`
-  border: none;
-  background-color: gray;
-  height: 2px;
-  margin: 50px 0;
-`;
+export const paymentFormStyle = makeStyles((theme) => ({
+  form: {
+    width: "350px",
+    height: "100px",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    border: "1px solid #162c72",
+    margin: "0 auto",
+    borderRadius: "10px",
+    padding: "20px",
+  },
 
-const CarNumContainer = styled.td`
-  display: flex;
-  justify-content: space-around;
-  padding: 10px 80px;
-  border: 1px solid;
-`;
+  wrapper: {
+    display: "flex",
+    width: "100%",
+    justifyContent: "space-between",
+  },
+  imgWrapper: {
+    width: "130px",
+    height: "50px",
+    display: "flex",
+    justifyContent: "flex-end",
+    marginTop: "5px",
+  },
+  image: {
+    width: "100%",
+    objectFit: "contain",
+  },
+  label: {
+    margin: "5px",
+    width: "130px",
+    maxWidth: "180px",
+    display: "flex",
+    flexDirection: "column",
+  },
+  inputCardNum: {
+    width: "160px",
+    margin: "5px 0 5px 0",
+    lineHeight: "16px",
+    fontSize: "16px",
+  },
+  inputDate: {
+    width: "60px",
+    margin: "5px 0 5px 0",
+    lineHeight: "16px",
+    fontSize: "16px",
+  },
+  inputCVC: {
+    width: "30px",
+    margin: "5px 0 5px 0",
+    lineHeight: "16px",
+    fontSize: "16px",
+  },
+}));
 
-const CardNum = styled(Cleave)`
-  border: none;
-  outline: none;
-`;
+// Modal style
+export const ModalStyle = makeStyles(() => ({
+  constainer: {
+    position: "relative",
+  },
+  content: {
+    width: "30rem",
+    height: "20rem",
+    backgroundColor: "white",
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
+    borderRadius: "5px",
+  },
+  closeBtn: {
+    width: "2rem",
+    height: "2rem",
+    position: "absolute",
+    right: "0.1rem",
+    top: "0.1rem",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "transparent",
+    border: "none",
+  },
+  closeIcon: {
+    color: "grey",
+  },
+  errorIcon: {
+    color: "red",
+    fontSize: "3rem",
+  },
+  checkIcon: {
+    color: "green",
+    fontSize: "3rem",
+  },
+}));
 
-const InfoForm = styled.form`
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 50px;
-`;
+export const InputStyles = makeStyles(() => ({
+  label: {
+    color: "#162c72",
+    "&focusedLabel": {
+      color: "#162c72",
+    },
+  },
+}));
 
-const PayForm = styled.form`
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 50px;
-`;
+// Modal icon style
+export const iconStyle = makeStyles(() => ({
+  errorIcon: {
+    color: "red",
+    fontSize: "5rem",
+  },
+  checkIcon: {
+    color: "green",
+    fontSize: "5rem",
+  },
+}));
 
-const InputContainer = styled.div`
-  flex: 1;
-  text-align: center;
-  margin: 0;
-  display: inline-block;
-`;
+// BookingInfo
+export const BookingInfoStyle = makeStyles(() => ({
+  box: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
 
-const ImgContainer = styled.div`
-  height: 50px;
-  width: 50px;
-`;
+  container: {
+    display: "flex",
+    width: "80%",
+    justifyContent: "center",
+    flexDirection: "column",
+  },
 
-const IMG = styled.img`
-  height: 100%;
-  object-fit: contain;
-  margin-left: 5px;
-`;
+  title: {
+    color: "#4AB0BD",
+    display: "flex",
+    alignItems: "center",
+    width: "100px",
+    margin: "1% 0 0 0",
+    fontWeight: "700",
+  },
 
-const Table = styled.table`
-  width: 65%;
-  border-collapse: collapse;
-`;
+  boxDiv: {
+    display: "flex",
+    flex: "1",
+    alignItems: "center",
+    flexDirection: "column",
+    marginBottom: "5%",
+    borderRadius: "10px",
+    backgroundColor: "#F5F5F5",
+    padding: "10px 15px",
+    boxShadow: "0px 1px 1px grey",
+  },
 
-const EXPCVCContainer = styled.td`
-  display: flex;
-  text-align: center;
-  padding: 10px 80px;
-  border: 1px solid;
-`;
+  ul: {
+    width: "100%",
+    display: "flex",
+    flexWrap: "wrap",
+    listStyle: "none",
+    margin: "10px auto",
+    marginTop: "0",
+  },
 
-const EXPCVCDiv = styled.div`
-  display: flex;
-  flex: 1;
-  justify-content: space-between;
-`;
+  li: {
+    width: "46%",
+    textAlign: "left",
+    marginTop: "5px",
+  },
 
-const EXPCVCInput = styled(Cleave)`
-  border: none;
-  outline: none;
-`;
+  hr: {
+    border: "none",
+    backgroundColor: "rgba(0, 0, 0, 0.2)",
+    height: "0.5px",
+    margin: "0px auto",
+    width: "90%",
+  },
 
-const PayBtn = styled.button`
-  font-size: 22px;
-  background-color: rgb(59, 27, 202);
-  border-radius: 20px;
-  padding: 10px 110px;
-  color: #fff;
-  border: 1px solid;
-  margin: 40px 0;
-  cursor: pointer;
-`;
+  p: {
+    fontWeight: "700",
+    alignSelf: "flex-end",
+    marginRight: "40px",
+    padding: " 10px 0",
+  },
 
-export {
-  PaymentPage,
-  PaymentContainer,
-  H1,
-  HR,
-  CarNumContainer,
-  CardNum,
-  InfoForm,
-  PayForm,
-  InputContainer,
-  ImgContainer,
-  IMG,
-  Table,
-  EXPCVCContainer,
-  EXPCVCDiv,
-  EXPCVCInput,
-  PayBtn,
-};
+  InfoTitle: {
+    color: "#f23622",
+    margin: "5% auto",
+  },
+  TotalAmount: {
+    fontWeight: "700",
+    alignSelf: "flex-end",
+    margin: "0 60px 10px 0px",
+  },
+}));
+
+export const radioTheme = createMuiTheme({
+  palette: {
+    primary: { main: "#162c72" }, // Purple and green play nicely together.
+    secondary: { main: "#11cb5f" }, // This is just green.A700 as hex.
+  },
+});
+
+// Payment picker
+export const paymentPicker = makeStyles(() => ({
+  box: {
+    marginBottom: "10px",
+  },
+
+  radio: {
+    "&$checked": {
+      color: "#162c72",
+    },
+    border: "1px solid #162c72",
+    padding: "10px 50px",
+  },
+}));
