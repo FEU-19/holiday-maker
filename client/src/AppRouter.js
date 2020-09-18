@@ -6,13 +6,14 @@ import axios from "axios";
 import Main from "./views/Main";
 import Checkout from "./views/Checkout";
 import MyBookings from "./views/MyBookings";
+import FlightBooking from "./components/modals/FlightBooking/FlightBooking";
 import Residence from "./views/Residence";
 import Flight from "./views/Flight";
 
 import DropDown from "./components/common/DropDown/DropDown";
 import HeaderComp from "./components/common/Header/Header";
 import Footer from "./components/common/Footer/Footer";
-import FlightBooking from "./components/modals/FlightBooking/FlightBooking";
+import UserContext, { initialUserContext } from "./context/UserContext";
 
 import UserContext, { initialUserContext } from "./context/UserContext";
 const routes = [
@@ -39,12 +40,14 @@ const MainContent = styled.div`
 `;
 
 function AppRouter() {
-  const [context, setContext] = useState(initialUserContext);
+  const [userData, setUserData] = useState({
+    user: {},
+  });
 
   useEffect(() => {
     const checkLoggedIn = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/users/", {
+        const user = await axios.get("http://localhost:8080/api/users/", {
           withCredentials: true,
         });
         setContext((context) => ({ ...context, user: response.data.user, loggedIn: true }));

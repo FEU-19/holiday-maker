@@ -47,8 +47,11 @@ const Login = (props) => {
           { withCredentials: true }
         );
 
-        setContext((context) => ({ ...context, user: loginRes.data.user, loggedIn: true }));
-
+        setUserData({
+          token: loginRes.data.token,
+          user: loginRes.data.user,
+        });
+        // localStorage.setItem("auth-token", loginRes.data.token);
         props.handleModalClose();
       } catch (err) {
         setOpen(true);
