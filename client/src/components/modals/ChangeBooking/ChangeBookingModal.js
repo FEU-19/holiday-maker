@@ -1,55 +1,68 @@
 import React, { useState, useEffect, Fragment } from "react";
 import axios from "axios";
+import { makeStyles } from "@material-ui/core/styles";
 import DialogContent from "@material-ui/core/DialogContent";
+import Typography from "@material-ui/core/Typography";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Dialog from "@material-ui/core/Dialog";
 import Button from "@material-ui/core/Button";
-// import TextField from "@material-ui/core/TextField";
 import DialogActions from "@material-ui/core/DialogActions";
-import RadioGroup from "@material-ui/core/RadioGroup";
+
 
 import SelectAmountOfAdults from "../../Main/SearchContainer/SelectAmountOfAdults";
 import SelectAmountOfChildren from "../../Main/SearchContainer/SelectAmountOfChildren";
-
 import ChildrenAgeSelects from "../../Main/SearchContainer/ChildrenAgeSelects";
 
 import ChangeDates from "./ChangeDates";
 import RenderFoodOption from "./RenderFoodOption";
+import filterDate from "../../../utils/filterDate";
+import { DataFoodOptions } from "./DataFoodOptions";
+import {handleEdit} from '../../MyBookings/ContainerButtons';
+
+const useStyles = makeStyles((theme) => ({
+  button: {
+    backgroundColor: "#4AB0BD",
+    color: "white",
+    margin: '5px',
+    '&:hover':{
+      backgroundColor:'#3e98a3',
+    }
+  },
+}));
 
 export default function ChangeBookingModal({
   handleClose,
   open,
   bookings,
   hotelId,
+  setOrder
 }) {
-  
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
-  const [date, setDate] = useState({start: '', end: ''});
-  const bookedRooms = bookings.rooms;
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [date, setDate] = useState({ start: "", end: "" });
   const [hotel, setHotel] = useState(null);
-  const [openFlight, setOpenFlight] = useState(false);
-  console.log("I GOT the Order ", bookings);
-  console.log("I GOT the FLIGHT ID  ", hotelId);
+  const [newStartDate, setNewStartDate] = useState('')
+  const [newEndDate, setNewEndDate] = useState('');
+  const [newRoomOptions, setNewRoomOptions] = useState(bookings.rooms[0]);
   
-  // (bookings.map(booking => {
-  //   console.log(booking.bookingDates)
-  //   // setStartDate(booking.bookingDates.start)
-  //   // setEndDate(booking.bookingDates.end)
-  // }))
+  const bookedRooms = bookings.rooms;
+  const classes = useStyles();
+
   useEffect(() => {
-    if(bookings){
-      
-      setDate((prevState => ({...prevState, start: startDate, end: endDate})));
+    if (bookings) {
+      setDate((prevState) => ({
+        ...prevState,
+        start: bookings.bookingDates.start,
+        end: bookings.bookingDates.end,
+      }));
     }
-}, [bookings]);
+  }, [bookings]);
 
   useEffect(() => {
     axios
       .get(`http://localhost:8080/api/residences/${hotelId}`)
       .then((res) => {
-        console.log("Hotel Res ", res);
-
+        // console.log("Hotel Res ", res);
         setHotel(res.data.data);
       })
       .catch((error) => {
@@ -61,27 +74,25 @@ export default function ChangeBookingModal({
   }, [hotelId]);
 
   function findTheHotelRoomInHotel(id) {
-    // console.log( id);
     let x;
     const roomsInHotel = hotel.rooms;
     roomsInHotel.map((HotelRoom) => {
-      // console.log('This is rooms in HOTEL -> ',  HotelRoom._id);
       if (HotelRoom._id === id) {
-        // console.log("*************************************", HotelRoom._id, id);
-        // console.log(HotelRoom);
         return (x = HotelRoom);
       }
     });
     return x;
   }
 
-  // const handleOpenFlight = () => {
-  //   setOpenFlight(true);
-  // };
-  // if(setOpenFlight) {
-  //   return <FlygBooking />
-  // }
-  
+  function saveChanges(){
+    console.log('THIS IS THE OLD ORDER ', bookings);
+    setNewRoomOptions({...newRoomOptions}, delete newRoomOptions.name);
+    bookings.bookingDates.start = date.start;
+    bookings.bookingDates.end = date.end;
+    let data = {...bookings, ...bookedRooms.splice(0,1,newRoomOptions)  };
+    console.log('....... THE HOLE NEW ORDER ', data);
+  }
+
   return (
     <Dialog
       open={open}
@@ -89,13 +100,13 @@ export default function ChangeBookingModal({
       aria-labelledby="form-dialog-title"
     >
       {!hotel ? (
-        <p>Loading...</p>
+        <Typography>Loading...</Typography>
       ) : (
         <div>
           <DialogTitle id="form-dialog-title">{hotel.name}</DialogTitle>
           <DialogContent>
             <ChangeDates date={date} setDate={setDate} />
-            {/* <DatePicker />
+            {/*             
         <SelectAmountOfAdults />
         <SelectAmountOfChildren />
         <ChildrenAgeSelects /> */}
@@ -103,14 +114,12 @@ export default function ChangeBookingModal({
             {/* flight */}
             {/* Need price */}
             {bookedRooms.map((room, index) => {
-              console.log("This is my option ", room);
-
-              const hotelRoom = findTheHotelRoomInHotel(room._id.$oid);
-              // console.log("only the matching hotelRoom ", hotelRoom);
+              const hotelRoom = findTheHotelRoomInHotel(room._id);
+              //console.log(hotelRoom);
+              const data = DataFoodOptions(hotelRoom);
 
               return (
                 <React.Fragment key={index}>
-                  {/* <p>size: {hotelRoom.size}</p> */}
                   {/* <FormControlLabel
                 value={hotelRoom.extraBed}
                 control={<Checkbox color="default" />}
@@ -122,32 +131,24 @@ export default function ChangeBookingModal({
                 }
                 labelPlacement="start"
               />
-              <RadioGroup
-                aria-label="price"
-                name="price"
-                value={selected}
-                // onChange={handleChange}
-              /> */}
-
+              */}
+                  <Typography> Food options</Typography>
                   <RenderFoodOption
-                    roomInfo={hotelRoom}
-                    roomOption={room.price}
+                    initiallySelected={room.option}
+                    setNewRoomOptions={setNewRoomOptions}
+                    newRoomOptions={newRoomOptions}
+                    data={data}
                   />
                 </React.Fragment>
               );
             })}
-            <RadioGroup
-              aria-label="price"
-              name="price"
-              // value={selected}
-              // onChange={handleChange}
-            />
+            
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose} color="primary">
+            <Button onClick={handleClose} className={classes.button}>
               Cancel changes
             </Button>
-            <Button onClick={handleClose} color="primary">
+            <Button onClick={saveChanges} className={classes.button}>
               Save changes
             </Button>
           </DialogActions>
